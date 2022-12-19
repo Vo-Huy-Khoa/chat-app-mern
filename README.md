@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-backend:
-
-cmd create ts config: npx tsc --init 
-=======
-<<<<<<< main
-=======
 You’ll need to have Node >= 14.
 
 Run Backend:
@@ -20,9 +13,6 @@ Run Frontend:
   npm install
   npm run start
   ```
-
-
-
 
 
 
@@ -130,5 +120,3 @@ src
                               (you can also lint or fix on save 😉). -->
 
 
->>>>>>> local
->>>>>>> 95a7b7e (update setup folder)
