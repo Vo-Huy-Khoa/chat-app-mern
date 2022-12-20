@@ -19,7 +19,7 @@ Run Frontend:
 
 ## Structure of the project:
 
-### BackEnd 😎
+### BackEnd
 
 ```text
 src
@@ -47,7 +47,7 @@ src
 
 
 
-### FrontEnd 😎
+### FrontEnd
 
 ```text
 src              
