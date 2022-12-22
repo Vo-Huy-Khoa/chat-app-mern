@@ -2,14 +2,14 @@ import { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
 
 interface IUser {
-  name: string;
+  username: string;
   email: string;
   password: string;
 }
 
 const userSchema = new Schema<IUser>(
   {
-    name: { type: String },
+    username: { type: String },
     email: { type: String },
     password: { type: String },
   },

@@ -12,24 +12,6 @@ class userController {
       });
   }
 
-  async login(req: Request, res: Response) {}
-
-  async register(req: Request, res: Response) {
-    const password = req.body.password;
-
-    const createUser = new UserModel({
-      name: req.body.name,
-      email: req.body.email,
-      password: password,
-    });
-    try {
-      await createUser.save();
-      res.json(createUser);
-    } catch (error) {
-      res.status(400).json(error);
-    }
-  }
-
   async profile(req: Request, res: Response) {
     await UserModel.findById({ _id: req.params.id })
       .then((user) => {
@@ -59,6 +41,16 @@ class userController {
 
   async destroy(req: Request, res: Response) {
     await UserModel.deleteOne({ _id: req.body.params })
+      .then((user) => {
+        res.status(200).json(user);
+      })
+      .catch((error) => {
+        res.status(400).json(error);
+      });
+  }
+
+  async destroyAll(req: Request, res: Response) {
+    await UserModel.deleteMany({})
       .then((user) => {
         res.status(200).json(user);
       })
