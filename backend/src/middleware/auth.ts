@@ -1,7 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import UserModel from "../models/User";
 import bcrypt from "bcrypt";
-import * as token from "./token";
+import * as Token from "./token";
+
+//authorization: uy quyen truy cap
+//authentication: xac thuc thong tin dang nhap
 
 const Register = async (req: Request, res: Response) => {
   const password = req.body.password;
@@ -10,33 +13,13 @@ const Register = async (req: Request, res: Response) => {
     email: req.body.email,
     password: bcrypt.hashSync(password, bcrypt.genSaltSync(10)),
   });
+
   try {
     await createUser.save();
     res.status(201).json(createUser);
   } catch (error) {
     res.status(400).json(error);
   }
-};
-
-const auth = async (req: Request, res: Response, next: NextFunction) => {
-    interface CustomRequest extends Request {
-        token: process.env.JWT_SECRET;
-       }
-    try {
-        const token = req.header('Authorization')?.replace('Bearer ', '');
-     
-        if (!token) {
-          throw new Error();
-        }
-     
-        const decoded = jwt.verify(token, SECRET_KEY);
-        (req as CustomRequest).token = decoded;
-     
-        next();
-      } catch (err) {
-        res.status(401).send('Please authenticate');
-      }
-    next();
 };
 
 const Login = async (req: Request, res: Response) => {
@@ -48,7 +31,8 @@ const Login = async (req: Request, res: Response) => {
   if (!account || !bcrypt.compareSync(password, account.password)) {
     res.status(400).json("Login Fail!");
   } else {
-    res.status(200).json("Login Successfully!");
+    const token = Token.createToken(account);
+    res.status(200).json({ token });
   }
 };
-export { Register, auth, Login };
+export { Register, Login };

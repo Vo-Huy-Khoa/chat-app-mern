@@ -1,13 +1,12 @@
 import jwt from "jsonwebtoken";
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, response } from "express";
 
 const createToken = (user: any) => {
   const JWT_SECRET = process.env.JWT_SECRET || "";
-  let payload = user;
+  let payload = { username: user.username, email: user.email };
   let token = null;
   try {
-    token = jwt.sign(payload, JWT_SECRET, { expiresIn: "30s" });
-    // console.log(token);
+    token = jwt.sign(payload, JWT_SECRET, { expiresIn: "15s" });
   } catch (error) {
     console.log(error);
   }
@@ -15,42 +14,36 @@ const createToken = (user: any) => {
   return token;
 };
 
-const verifyToken = (token: any) => {
-  const key = process.env.JWT_SECRET || "";
-  let data: any = null;
-
+const refreshToken = (user: any) => {
+  const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || "";
+  let payload = { username: user.username, email: user.email };
+  let token = null;
   try {
-    let decoded = jwt.verify(token, key);
-    data = decoded;
+    token = jwt.sign(payload, REFRESH_TOKEN_SECRET);
   } catch (error) {
     console.log(error);
   }
-  return data;
+
+  return token;
 };
 
-const authToken = (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-  jwt: any
-) => {
-  // const authorizationHeader = req.headers['authorization'];
-  // const token = authorizationHeader?.split(' ')[1];
-  // if (!token) {
-  //     res.status(401);
-  // }
+const authToken = (req: Request, res: Response, next: NextFunction) => {
+  const authorizationHeader = req.headers["authorization"];
+  const token = authorizationHeader?.split(" ")[1] || "";
+  if (!token) {
+    res.status(401).json({ message: "Token is not provided" });
+  }
 
   try {
-    const isVeriToken = verifyToken(jwt);
+    const key = process.env.JWT_SECRET || "";
+    let isVeriToken = jwt.verify(token, key);
     if (isVeriToken) {
       console.log(isVeriToken);
-      console.log("verify token");
-
       next();
     }
   } catch (error) {
-    res.status(401).json(error);
+    res.status(403).json(error);
   }
 };
 
-export { createToken, verifyToken };
+export { createToken, authToken };
