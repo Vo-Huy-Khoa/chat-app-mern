@@ -3,21 +3,18 @@
 ### get all users
 GET http://localhost:3001/api/users
 
-### create new users
-POST http://localhost:3001/api/users/create
-Content-Type: application/json
-{
-    "name": "new user",
-    "email": "new description"
-}
-
-### update users
-http://localhost:3001/api/users/edit/63919f5dd471e9607dd49313
+### register
+POST http://localhost:3001/api/user/register
 Content-Type: application/json
 
 {
-    "name": "new data",
-    "email": "new description"
+    "name": "huykhoa",
+    "email": "huykhoa630@gmail.com",
+    "password": "123456"
 }
+
+### profile
+http://localhost:3001/api/user/profile/6392f15164925b1b547f9c35
+
 ###  delete a users
 http://localhost:3001/api/users/delete/63919f5dd471e9607dd49313
