@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(styles);
 
-const header = () => {
+const Header = () => {
     return(
         <div className={cx('container')}>
             <h1>
@@ -13,4 +13,4 @@ const header = () => {
     )
 };
 
-export default header;
+export default Header;
