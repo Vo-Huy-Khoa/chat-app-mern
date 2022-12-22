@@ -2,6 +2,7 @@
 
 ### get all users
 GET http://localhost:3001/api/users
+Authorization: Beaer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFuaHRoeSIsImVtYWlsIjoiYW5odGh5QGdtYWlsLmNvbSIsImlhdCI6MTY3MTcyMTIwMiwiZXhwIjoxNjcxNzIxMjE3fQ.6ScSgB4QoBzJya3f4RluK1FI-jOzse3lCmDq0l-834I
 
 
 ### login
