@@ -3,18 +3,30 @@
 ### get all users
 GET http://localhost:3001/api/users
 
-### register
-POST http://localhost:3001/api/user/register
+
+### login
+POSt http://localhost:3001/api/login
 Content-Type: application/json
 
 {
-    "name": "huykhoa",
-    "email": "huykhoa630@gmail.com",
+    "username": "anhthy",
+    "password": "123456"
+}
+### register
+POST http://localhost:3001/api/register
+Content-Type: application/json
+
+{
+    "username": "anhthy",
+    "email": "anhthy@gmail.com",
     "password": "123456"
 }
 
+### Destroy All
+DELETE http://localhost:3001/api/user/destroy
+
 ### profile
-http://localhost:3001/api/user/profile/6392f15164925b1b547f9c35
+GET http://localhost:3001/api/user/profile/6392f15164925b1b547f9c35
 
 ###  delete a users
-http://localhost:3001/api/users/delete/63919f5dd471e9607dd49313
+DELETE http://localhost:3001/api/users/delete/63919f5dd471e9607dd49313
