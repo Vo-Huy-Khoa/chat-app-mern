@@ -1,15 +1,15 @@
-import styles from './footer.module.scss';
+import styles from './sidebar.module.scss';
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
 
-const Footer = ()=>{
+const Sidebar = ()=>{
     return(
         <div className="container">
-            Footer
+            Sidebar
         </div>
     )
 }
 
-export default Footer;
+export default Sidebar;

@@ -1,17 +1,24 @@
 import classNames from "classnames/bind";
-import Header from "../layouts/header";
-import Footer from "../layouts/footer";
-import styles from './DefaultLayout.module.scss'
+import styles from "./DefaultLayout.module.scss";
+import Sidebar from "../layouts/sidebar";
+import Notification from "../layouts/notification";
+
 const cx = classNames.bind(styles);
+
 type Props = {
   children: JSX.Element;
 };
+
 const DefaultLayout: React.FC<Props> = ({ children }): JSX.Element => {
   return (
     <div className={cx("container")}>
-      <Header />
+      <div className={cx('sidebar')}>
+        <Sidebar />
+      </div>
       <div className={cx("content")}>{children}</div>
-      <Footer />
+      <div className={cx('notification')}>
+        <Notification />
+      </div>
     </div>
   );
 };

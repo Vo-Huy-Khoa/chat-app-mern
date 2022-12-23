@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 1.6 rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+}
+
+button {
+    border: none;
+    outline: none;
+}
