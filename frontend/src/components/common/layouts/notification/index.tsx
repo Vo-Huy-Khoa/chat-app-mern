@@ -112,14 +112,48 @@ const Notification = () => {
           <NavLink to="">See All</NavLink>
         </div>
         <div className={cx("link-content")}>
+          <div className={cx("item")}>
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF0tM3onKtU7fAcS-EEqNDPswVRDMmEc2AOg&usqp=CAU"
               alt=""
             />
             <div className={cx("content")}>
-              <span>Banking UI kit Dark Mode</span>
-              <span>https://dribbble.com/shots...</span>
+              <span className={cx("item_heading")}>
+                Banking UI kit Dark Mode
+              </span>
+              <span className={cx("item_description")}>
+                https://dribbble.com/shots...
+              </span>
             </div>
+          </div>
+          <div className={cx("item")}>
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF0tM3onKtU7fAcS-EEqNDPswVRDMmEc2AOg&usqp=CAU"
+              alt=""
+            />
+            <div className={cx("content")}>
+              <span className={cx("item_heading")}>
+                Banking UI kit Dark Mode
+              </span>
+              <span className={cx("item_description")}>
+                https://dribbble.com/shots...
+              </span>
+            </div>
+          </div>
+          <div className={cx("item")}>
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF0tM3onKtU7fAcS-EEqNDPswVRDMmEc2AOg&usqp=CAU"
+              alt=""
+            />
+            <div className={cx("content")}>
+              <span className={cx("item_heading")}>
+                Banking UI kit Dark Mode
+              </span>
+              <span className={cx("item_description")}>
+                https://dribbble.com/shots...
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
