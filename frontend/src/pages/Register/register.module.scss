@@ -1,0 +1,41 @@
+.container{
+    width: 100%;
+    height: 950px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to top right, #61d9de, #e739f5);
+}
+
+.register{
+    width: 500px;
+    height: 800px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.heading{
+    font-size: 2rem;
+    text-align: center;
+}
+
+.form_register{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.form__item{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.link-login{
+    text-align: center;
+    font-size: 1.5rem;
+}
