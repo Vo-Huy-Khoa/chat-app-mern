@@ -3,6 +3,12 @@
     margin: 0;
     padding: 0;
 }
+:root{
+
+    --black: rgb(10,23,33);
+    --white: #ffffff;
+    --gray: #656566;
+}
 
 html {
     font-size: 62.5%;
@@ -18,4 +24,9 @@ body {
 button {
     border: none;
     outline: none;
+}
+
+a{
+    text-decoration: none;
+    color: black;
 }
