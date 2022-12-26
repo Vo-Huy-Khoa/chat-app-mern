@@ -95,4 +95,18 @@ const MenuIcon = () => {
   );
 };
 
-export { FacebookIcon, GoogleIcon, GithubIcon, MenuIcon };
+const NotificationIcon = ({ width = "32px", height = "32px" }) => {
+  return (
+   <svg
+     width={width}
+      height={height}
+      xmlns="http://www.w3.org/2000/svg"
+      data-name="Layer 1"
+      viewBox="0 0 48 48"
+    >
+      <path d="M40.62 28.34l-.87-.7a2 2 0 01-.75-1.56V18A15 15 0 0026.91 3.29a3 3 0 00-5.81 0A15 15 0 009 18v8.08a2 2 0 01-.75 1.56l-.87.7a9 9 0 00-3.38 7V37a4 4 0 004 4h8.26a8 8 0 0015.47 0H40a4 4 0 004-4v-1.64a9 9 0 00-3.38-7.02zM24 43a4 4 0 01-3.44-2h6.89A4 4 0 0124 43zm16-6H8v-1.64a5 5 0 011.88-3.9l.87-.7A6 6 0 0013 26.08V18a11 11 0 0122 0v8.08a6 6 0 002.25 4.69l.87.7A5 5 0 0140 35.36z"></path>
+    </svg>
+  );
+};
+
+export { FacebookIcon, GoogleIcon, GithubIcon, MenuIcon, NotificationIcon };

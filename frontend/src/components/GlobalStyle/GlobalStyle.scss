@@ -8,7 +8,18 @@
     --black: rgb(10,23,33);
     --white: #ffffff;
     --gray: #656566;
+    --blue: #76A9FF;
 }
+
+
+.text-white{
+    color: var(--white);
+}
+
+.text-gray{
+    color: var(--gray);
+}
+
 
 html {
     font-size: 62.5%;
