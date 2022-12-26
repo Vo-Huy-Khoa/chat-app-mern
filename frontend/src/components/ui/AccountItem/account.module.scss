@@ -1,50 +1,32 @@
-.wrapper {
-  margin-top: 15px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  gap: 20px;
-  svg {
-    background-color: var(--white);
-  }
-
-}
-
-.status {
-  .contain {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-.contain {
-  display: flex;
-  flex-direction: row;
-}
-
-
-
-.info {
-  margin-left: 12px;
+.account_item {
   display: flex;
   flex-direction: column;
+  gap: 5px;
+  .name {
+    font-size: 2rem;
+  }
 }
 
-.name {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--white);
-}
-
-.username {
-  font-size: 1.4rem;
-  color: var(--gray);
-}
-
-.text-content {
-  color: var(--gray);
-  font-size: 1.4rem;
+.account_message {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  .content {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    .name {
+      font-size: 2rem;
+    }
+    .react {
+      font-size: 1.5rem;
+    }
+    .message {
+      font-size: 1.5rem;
+    }
+  }
+  .more {
+    font-size: 2rem;
+  }
 }
