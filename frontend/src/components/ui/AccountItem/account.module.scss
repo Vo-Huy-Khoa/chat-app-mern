@@ -25,12 +25,7 @@
   flex-direction: row;
 }
 
-.avatar {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  object-fit: cover;
-}
+
 
 .info {
   margin-left: 12px;
@@ -39,7 +34,7 @@
 }
 
 .name {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: var(--white);
 }

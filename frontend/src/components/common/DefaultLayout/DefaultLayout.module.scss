@@ -1,27 +1,29 @@
 .container {
   width: 100%;
-  height: 1000px;
+  height: 100%;
   display: flex;
-  background-color: var(--black);
+
 }
 
 .sidebar {
-  padding: 20px;
+  background-color: #2A2731;
   width: 20%;
   height: 100%;
-  background-color: var(--black);
-  border-right: 1px solid var(--gray);
+  left: 0;
+  top: 0;
 }
 
 .content {
-  padding: 20px;
+  left: 20%;
+  background-color: var(--black);
   width: 60%;
   height: 100%;
-  border-right: 1px solid var(--gray);
 }
 
 .notification {
+  background-color: #2A2731;
+  right: 0;
+  top: 0;
   width: 20%;
   height: 100%;
-  padding: 20px;
 }
