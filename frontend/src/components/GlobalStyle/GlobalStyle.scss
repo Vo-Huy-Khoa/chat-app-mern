@@ -19,6 +19,11 @@ body {
     font-size: 1.6 rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
+    height: 100%;
+}
+
+.fixed{
+    position: fixed;
 }
 
 button {

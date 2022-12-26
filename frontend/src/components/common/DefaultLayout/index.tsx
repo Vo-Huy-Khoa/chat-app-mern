@@ -12,11 +12,11 @@ type Props = {
 const DefaultLayout: React.FC<Props> = ({ children }): JSX.Element => {
   return (
     <div className={cx("container")}>
-      <div className={cx('sidebar')}>
+      <div className={cx("sidebar", "fixed")}>
         <Sidebar />
       </div>
-      <div className={cx("content")}>{children}</div>
-      <div className={cx('notification')}>
+      <div className={cx("content", "fixed")}>{children}</div>
+      <div className={cx("notification", "fixed")}>
         <Notification />
       </div>
     </div>
