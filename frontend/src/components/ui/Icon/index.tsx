@@ -97,8 +97,8 @@ const MenuIcon = () => {
 
 const NotificationIcon = ({ width = "32px", height = "32px" }) => {
   return (
-   <svg
-     width={width}
+    <svg
+      width={width}
       height={height}
       xmlns="http://www.w3.org/2000/svg"
       data-name="Layer 1"
@@ -109,4 +109,54 @@ const NotificationIcon = ({ width = "32px", height = "32px" }) => {
   );
 };
 
-export { FacebookIcon, GoogleIcon, GithubIcon, MenuIcon, NotificationIcon };
+const PhoneIcon = function ({ width = "32px", height = "32px" }) {
+  return (
+    <svg
+      width={width}
+      height={height}
+      xmlns="http://www.w3.org/2000/svg"
+      data-name="Layer 1"
+      viewBox="0 0 512 512"
+    >
+      <rect width={width} height={height} fill="#29a71a"></rect>
+      <path
+        fill="#fefefe"
+        d="M127.82 378.71L153 313a125.52 125.52 0 1141.78 40.24zM200 334.34l2.27 1.42a105.31 105.31 0 10-32-30.74l1.57 2.34L155 351.48z"
+      ></path>
+      <path
+        fill="#fefefe"
+        d="M317.14 268.34c-11.59-6-23.91-11.56-24-11.61-4.24-2-7.22.23-8.14 1.56l-9.64 12c-2.6 2.28-6.22 0-6.62-.24a79.36 79.36 0 01-38.41-33.64c-2-2.56-.25-4.23.13-4.55 4-3.46 7.69-9.35 7.83-9.58 2.39-3.74.25-8.39.18-8.54l-10.35-23.95c-2.45-4.67-8-3.87-8.08-3.84h-4.11a9 9 0 00-7.49 2.26 34.85 34.85 0 00-10.8 14.28 43.77 43.77 0 005.59 38.37c17.78 28.79 34.89 40.31 35.57 40.75 24 17.54 48.08 20 49 20.08a29.94 29.94 0 004.05.27 32 32 0 0022.48-9.73c5.58-4.81 6.45-15.65 6.48-16.21.03-6.02-3.62-7.66-3.67-7.68z"
+      ></path>
+    </svg>
+  );
+};
+
+const UserAddIcon = ({ width = "32px", height = "32px" }) => {
+  return (
+    <svg
+      width={width}
+      height={height}
+      xmlns="http://www.w3.org/2000/svg"
+      enableBackground="new 0 0 1024 1024"
+      version="1.1"
+      viewBox="0 0 1024 1024"
+      xmlSpace="preserve"
+    >
+      <g>
+        <path d="M245.2 289.8c0-117.1 95.3-212.4 212.4-212.4 117.1 0 212.4 95.3 212.4 212.4 0 117.1-95.3 212.4-212.4 212.4-117.1 0-212.4-95.3-212.4-212.4z"></path>
+        <path d="M826.7 755.6v159.2c0 17.6-14.3 31.9-31.9 31.9H120.3c-17.6 0-31.9-14.3-31.9-31.9V755.6c0-59.3 23.1-115.1 65-157.1 42-42 97.7-65.1 157.1-65.2h4l3.5 2c42.3 24.1 90.6 36.9 139.6 36.9s97.3-12.8 139.6-36.9l3.5-2h4c59.3 0 115.1 23.2 157.1 65.2 41.8 42 64.9 97.8 64.9 157.1z"></path>
+        <path d="M935.6 385L935.6 425 845.6 425 845.6 515 805.6 515 805.6 425 714.6 425 714.6 385 805.6 385 805.6 294 845.6 294 845.6 385z"></path>
+      </g>
+    </svg>
+  );
+};
+
+export {
+  FacebookIcon,
+  GoogleIcon,
+  GithubIcon,
+  MenuIcon,
+  NotificationIcon,
+  PhoneIcon,
+  UserAddIcon,
+};
