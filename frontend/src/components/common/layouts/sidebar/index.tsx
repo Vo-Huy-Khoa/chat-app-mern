@@ -6,12 +6,12 @@ import { AccountItem, AccountMessage } from "../../../ui/AccountItem";
 
 const cx = classNames.bind(styles);
 
-const profile = {
-  avatar:
-    "https://bedental.vn/wp-content/uploads/2022/11/nguoi-mau-Shin-Jae-Eun.jpg",
-  name: "vo huy Khoa",
-  username: "khoavh",
-};
+// const profile = {
+//   avatar:
+//     "https://bedental.vn/wp-content/uploads/2022/11/nguoi-mau-Shin-Jae-Eun.jpg",
+//   name: "vo huy Khoa",
+//   username: "khoavh",
+// };
 
 const status = {
   avatar:

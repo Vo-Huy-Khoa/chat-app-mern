@@ -1,6 +1,20 @@
 import styles from "./home.module.scss";
 import classNames from "classnames/bind";
 import Image from "../../components/ui/Image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBookmark,
+  faCircleInfo,
+  faCircleQuestion,
+  faCopy,
+  faFileImage,
+  faFileUpload,
+  faItalic,
+  faLocation,
+  faMicrophone,
+  faStarHalfStroke,
+} from "@fortawesome/free-solid-svg-icons";
+import { NavLink } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
@@ -25,7 +39,32 @@ const Home = () => {
 
       <div className={cx("content")}></div>
 
-      <div className={cx("message", "fixed")}></div>
+      <div className={cx("message")}>
+        <div className={cx("heading")}>
+          <div className={cx("heading-content")}>
+            <NavLink to="">reply</NavLink>
+            <NavLink to="">note</NavLink>
+          </div>
+          <FontAwesomeIcon icon={faCircleQuestion} />
+        </div>
+        <input type="text" />
+        <div className={cx("more")}>
+          <div className={cx("file")}>
+            <FontAwesomeIcon icon={faFileImage} />
+            <FontAwesomeIcon icon={faBookmark} />
+            <FontAwesomeIcon icon={faCopy} />
+            <FontAwesomeIcon icon={faCircleInfo} />
+            <FontAwesomeIcon icon={faItalic} />
+            <FontAwesomeIcon icon={faLocation} />
+            <FontAwesomeIcon icon={faStarHalfStroke} />
+          </div>
+          <div className={cx("action")}>
+            <FontAwesomeIcon icon={faFileUpload} />
+            <FontAwesomeIcon icon={faMicrophone} />
+            <button>Send</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
