@@ -1,32 +1,3 @@
-<<<<<<< HEAD
-.header {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-
-    .header_content {
-        display: flex;
-    }
-
-    .header_text {
-        display: flex;
-        flex-direction: column;
-
-        span,
-        p {
-            color: var(--white);
-        }
-
-        span {
-            font-size: 3rem;
-        }
-
-        p {
-            font-size: 2rem;
-        }
-    }
-}
-=======
 .wrapper{
     .header{
         display: flex;
@@ -68,4 +39,4 @@
 
     }
 }
->>>>>>> 3c0d1fb545ed6f8df35f6a5ea90c379daf68aa37
+
