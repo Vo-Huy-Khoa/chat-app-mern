@@ -12,6 +12,7 @@ const profile = {
 };
 const Home = () => {
   return (
+<<<<<<< HEAD
     <div className={cx("container")}>
       <div className={cx("header", "fixed")}>
         <div className={cx("header_content")}>
@@ -23,6 +24,18 @@ const Home = () => {
         </div>
       </div>
 
+=======
+    <div className={cx("wrapper")}>
+      <div className={cx("header", "fixed")}>
+   <div className={cx('content')}>
+          <Image src={profile.avatar} width="60px" height="60px" />
+          <div className={cx("text")}>
+            <span>{profile.name}</span>
+            <p>{profile.username}</p>
+          </div>
+   </div>
+      </div>
+>>>>>>> 3c0d1fb545ed6f8df35f6a5ea90c379daf68aa37
       <div className={cx("content")}></div>
 
       <div className={cx("message", "fixed")}></div>

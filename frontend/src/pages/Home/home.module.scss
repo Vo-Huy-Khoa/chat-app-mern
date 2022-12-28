@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .header {
     display: flex;
     flex-direction: row;
@@ -25,3 +26,46 @@
         }
     }
 }
+=======
+.wrapper{
+    .header{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 80px;
+        background-color: var(--primary);
+        border-radius: 0 0 5px 5px;
+        .content{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+            width: 50%;
+
+            .text{
+                span{
+                    color: var(--white);
+                    font-size: 3rem;
+                }
+
+                p{
+                    color: var(--gray);
+                    font-size: 2rem;
+                }
+            }
+
+        }
+
+
+    }
+
+    .content{
+
+    }
+
+    .message{
+
+    }
+}
+>>>>>>> 3c0d1fb545ed6f8df35f6a5ea90c379daf68aa37
