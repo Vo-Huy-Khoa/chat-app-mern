@@ -36,6 +36,17 @@ input:focus {
     display: flex;
     flex-direction: column;
     gap: 50px;
+    button {
+      height: 50px;
+      border-radius: 25px;
+      background-image: linear-gradient(to right, #61d9de, #e739f5);
+      color: white;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    button:hover {
+      cursor: pointer;
+    }
   }
 
   .form__item {
@@ -49,19 +60,6 @@ input:focus {
   text-align: right;
 }
 
-
-button {
-  height: 50px;
-  border-radius: 25px;
-  background-image: linear-gradient(to right, #61d9de, #e739f5);
-  color: white;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-button:hover{
-  cursor: pointer;
-}
-
 .signup {
   display: flex;
   flex-direction: column;
@@ -69,12 +67,12 @@ button:hover{
   gap: 30px;
 }
 
-.icon{
+.icon {
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 15px;
 }
-svg:hover{
+svg:hover {
   cursor: pointer;
 }

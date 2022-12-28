@@ -1,42 +1,114 @@
-.wrapper{
-    .header{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 80px;
-        background-color: var(--primary);
-        border-radius: 0 0 5px 5px;
-        .content{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 20px;
-            width: 50%;
+.wrapper {
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    background-color: var(--primary);
+    border-radius: 0 0 5px 5px;
+    .content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+      width: 50%;
 
-            .text{
-                span{
-                    color: var(--white);
-                    font-size: 3rem;
-                }
-
-                p{
-                    color: var(--gray);
-                    font-size: 2rem;
-                }
-            }
-
+      .text {
+        span {
+          color: var(--white);
+          font-size: 3rem;
         }
 
+        p {
+          color: var(--gray);
+          font-size: 2rem;
+        }
+      }
+    }
+  }
 
+  .content {
+  }
+
+  .message {
+    position: fixed;
+    bottom: 3%;
+    width: 56%;
+    left: 22%;
+    height: 23%;
+    background-color: var(--primary);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .heading {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      font-size: 1.5rem;
+      .heading-content {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        a {
+          text-transform: uppercase;
+          color: var(--white);
+        }
+      }
+
+      svg {
+        color: var(--gray);
+        width: 25px;
+        height: 25px;
+      }
     }
 
-    .content{
-
+    input {
+      width: 100%;
+      height: 60%;
+      color: var(--white);
+      background-color: transparent;
+      font-size: 3rem;
+      font-weight: bold;
+      border: none;
     }
 
-    .message{
+    .more {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      svg {
+        width: 25px;
+        height: 25px;
+        color: var(--gray);
+      }
+      .file {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+      }
 
+      .action {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+        button {
+          width: 100px;
+          height: 40px;
+          border-radius: 20px;
+          background-color: var(--blue);
+          color: var(--black);
+          font-weight: 600;
+          font-size: 1.5rem;
+        }
+      }
     }
+  }
 }
-
