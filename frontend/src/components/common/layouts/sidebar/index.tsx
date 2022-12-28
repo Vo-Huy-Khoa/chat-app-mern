@@ -2,7 +2,7 @@ import styles from "./sidebar.module.scss";
 import classNames from "classnames/bind";
 import Image from "../../../ui/Image";
 import { NotificationIcon } from "../../../ui/Icon";
-import {AccountItem, AccountMessage} from "../../../ui/AccountItem";
+import { AccountItem, AccountMessage } from "../../../ui/AccountItem";
 
 const cx = classNames.bind(styles);
 
@@ -63,12 +63,12 @@ const Sidebar = () => {
         </div>
       </div>
       <div className={cx("message")}>
-        <AccountMessage data= {message} />
-        <AccountMessage data= {message} />
-        <AccountMessage data= {message} />
-        <AccountMessage data= {message} />
-        <AccountMessage data= {message} />
-        <AccountMessage data= {message} />
+        <AccountMessage data={message} />
+        <AccountMessage data={message} />
+        <AccountMessage data={message} />
+        <AccountMessage data={message} />
+        <AccountMessage data={message} />
+        <AccountMessage data={message} />
       </div>
     </div>
   );

@@ -83,8 +83,8 @@ const MenuIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="32"
+      width="32px"
+      height="32px"
       enableBackground="new 0 0 32 32"
       version="1.1"
       viewBox="0 0 32 32"
@@ -112,13 +112,18 @@ const NotificationIcon = ({ width = "32px", height = "32px" }) => {
 const PhoneIcon = function ({ width = "32px", height = "32px" }) {
   return (
     <svg
-      width={width}
-      height={height}
       xmlns="http://www.w3.org/2000/svg"
       data-name="Layer 1"
       viewBox="0 0 512 512"
     >
-      <rect width={width} height={height} fill="#29a71a"></rect>
+      <rect
+        width="412.22"
+        height="412.22"
+        x="49.89"
+        y="49.89"
+        fill="#29a71a"
+        rx="55.43"
+      ></rect>
       <path
         fill="#fefefe"
         d="M127.82 378.71L153 313a125.52 125.52 0 1141.78 40.24zM200 334.34l2.27 1.42a105.31 105.31 0 10-32-30.74l1.57 2.34L155 351.48z"
@@ -134,19 +139,50 @@ const PhoneIcon = function ({ width = "32px", height = "32px" }) {
 const UserAddIcon = ({ width = "32px", height = "32px" }) => {
   return (
     <svg
-      width={width}
-      height={height}
       xmlns="http://www.w3.org/2000/svg"
-      enableBackground="new 0 0 1024 1024"
-      version="1.1"
-      viewBox="0 0 1024 1024"
-      xmlSpace="preserve"
+      width="59.875"
+      height="60.031"
+      data-name="add user"
+      viewBox="0 0 59.875 60.031"
     >
-      <g>
-        <path d="M245.2 289.8c0-117.1 95.3-212.4 212.4-212.4 117.1 0 212.4 95.3 212.4 212.4 0 117.1-95.3 212.4-212.4 212.4-117.1 0-212.4-95.3-212.4-212.4z"></path>
-        <path d="M826.7 755.6v159.2c0 17.6-14.3 31.9-31.9 31.9H120.3c-17.6 0-31.9-14.3-31.9-31.9V755.6c0-59.3 23.1-115.1 65-157.1 42-42 97.7-65.1 157.1-65.2h4l3.5 2c42.3 24.1 90.6 36.9 139.6 36.9s97.3-12.8 139.6-36.9l3.5-2h4c59.3 0 115.1 23.2 157.1 65.2 41.8 42 64.9 97.8 64.9 157.1z"></path>
-        <path d="M935.6 385L935.6 425 845.6 425 845.6 515 805.6 515 805.6 425 714.6 425 714.6 385 805.6 385 805.6 294 845.6 294 845.6 385z"></path>
-      </g>
+      <path
+        d="M673.732 711.059c-.515 2.6-1.1 5.991-2.857 5.991a1.622 1.622 0 01-.568-.122c-.594 1.447-1.291 4.5-2.08 5.969a17.955 17.955 0 00-3.618 27.1H630s1.523-8.425 4.2-8.986c16.79-3.523 17.786-12.908 17.786-12.908v-4.839c-.875-1.261-1.643-4.763-2.289-6.338a1.627 1.627 0 01-.568.122c-1.759 0-2.342-3.389-2.857-5.991a6.631 6.631 0 01-.02-3.266c0-.123-.021-.248-.021-.37 0-9.285 3.642-16.34 11.773-17.321 0 0 1.306-.069 1.906-.107.44.036 2.094.107 2.094.107 8.131.981 11.773 8.036 11.773 17.321 0 .122-.019.247-.021.37a6.631 6.631 0 01-.024 3.268zM660 689.974a.672.672 0 11-.094.021c-.152-.012-.161-.021.094-.021z"
+        className="cls-1"
+        data-name="user copy"
+        transform="translate(-630 -689.969)"
+      ></path>
+      <path
+        d="M677.875 726a12 12 0 11-12 12 12 12 0 0112-12zM672 740h4v4a2 2 0 004 0v-4h4a2 2 0 000-4h-4v-4a2 2 0 00-4 0v4h-4a2 2 0 000 4z"
+        className="cls-2"
+        transform="translate(-630 -689.969)"
+      ></path>
+    </svg>
+  );
+};
+
+const MoreIcon = ({ width = "32px", height = "32px" }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="59.875"
+      height="60.031"
+      fill="none"
+      strokeWidth="1.5"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="currentColor"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M7 12.5a.5.5 0 100-1 .5.5 0 000 1zM12 12.5a.5.5 0 100-1 .5.5 0 000 1zM17 12.5a.5.5 0 100-1 .5.5 0 000 1z"
+      ></path>
+      <path
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
+      ></path>
     </svg>
   );
 };
@@ -159,4 +195,5 @@ export {
   NotificationIcon,
   PhoneIcon,
   UserAddIcon,
+  MoreIcon
 };

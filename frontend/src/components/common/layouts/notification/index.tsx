@@ -2,9 +2,13 @@ import styles from "./notification.module.scss";
 import classNames from "classnames/bind";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDeleteLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDeleteLeft,
+  faMarsAndVenus,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
 import Image from "../../../ui/Image";
-import { PhoneIcon, UserAddIcon } from "../../../ui/Icon";
+import { MoreIcon, PhoneIcon, UserAddIcon } from "../../../ui/Icon";
 const profile = {
   avatar:
     "https://bedental.vn/wp-content/uploads/2022/11/nguoi-mau-Shin-Jae-Eun.jpg",
@@ -31,10 +35,17 @@ const Notification = () => {
         <div className={cx("more")}>
           <PhoneIcon />
           <UserAddIcon />
+          <MoreIcon />
         </div>
       </div>
       <div className={cx("content")}>
-        <div className={cx("media")}></div>
+        <div className={cx("media")}>
+          <div className={cx("notification")}>
+            <Notification />
+            <h2>Notification</h2>
+            <Notification />
+          </div>
+        </div>
         <div className={cx("file")}></div>
       </div>
     </div>
