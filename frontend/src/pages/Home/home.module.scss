@@ -1,0 +1,27 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    .header_content {
+        display: flex;
+    }
+
+    .header_text {
+        display: flex;
+        flex-direction: column;
+
+        span,
+        p {
+            color: var(--white);
+        }
+
+        span {
+            font-size: 3rem;
+        }
+
+        p {
+            font-size: 2rem;
+        }
+    }
+}

@@ -97,8 +97,8 @@ const MenuIcon = () => {
 
 const NotificationIcon = ({ width = "32px", height = "32px" }) => {
   return (
-   <svg
-     width={width}
+    <svg
+      width={width}
       height={height}
       xmlns="http://www.w3.org/2000/svg"
       data-name="Layer 1"
@@ -109,4 +109,18 @@ const NotificationIcon = ({ width = "32px", height = "32px" }) => {
   );
 };
 
-export { FacebookIcon, GoogleIcon, GithubIcon, MenuIcon, NotificationIcon };
+const EditIcon = function Icon({ width = "32px", height = "32px" }) {
+  return (
+    <svg
+      width={width}
+      height={height}
+      xmlns="http://www.w3.org/2000/svg"
+      enableBackground="new 0 0 1696.162 1696.143"
+      viewBox="0 0 1696.162 1696.143"
+    >
+      <path d="M1648.016 305.367L1390.795 48.149C1359.747 17.098 1318.466 0 1274.555 0c-43.907 0-85.188 17.098-116.236 48.148L81.585 1124.866a66.06 66.06 0 00-18.75 37.833L.601 1621.186a66.067 66.067 0 0018.753 55.605 66.068 66.068 0 0055.605 18.751l458.488-62.231a66.062 66.062 0 0037.835-18.752L1648.016 537.844c31.049-31.048 48.146-72.33 48.146-116.237 0-43.911-17.098-85.192-48.146-116.24zM493.598 1505.366l-350.381 47.558 47.56-350.376L953.78 439.557l302.818 302.819-763 762.99zM1554.575 444.404l-204.536 204.533-302.821-302.818 204.535-204.532c8.22-8.218 17.814-9.446 22.802-9.446 4.988 0 14.582 1.228 22.803 9.446l257.221 257.218c8.217 8.217 9.443 17.812 9.443 22.799s-1.227 14.582-9.447 22.8z"></path>
+    </svg>
+  );
+};
+
+export { FacebookIcon, GoogleIcon, GithubIcon, MenuIcon, NotificationIcon, EditIcon };
