@@ -1,6 +1,6 @@
 import styles from "./home.module.scss";
 import classNames from "classnames/bind";
-import Image from "../../components/ui/Image";
+import Image from "../../components/Image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBookmark,

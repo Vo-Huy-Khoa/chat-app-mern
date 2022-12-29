@@ -8,12 +8,12 @@ import {
   faToggleOff,
   faToggleOn,
 } from "@fortawesome/free-solid-svg-icons";
-import Image from "../../../ui/Image";
+import Image from "../../components/Image";
 import {
   MoreIcon,
   PhoneIcon,
   UserAddIcon,
-} from "../../../ui/Icon";
+} from "../../components/Icon";
 import { NavLink } from "react-router-dom";
 const profile = {
   avatar:
@@ -44,14 +44,14 @@ const Notification = () => {
           <MoreIcon />
         </div>
       </div>
-      <div className={cx("notification")}>
-        <div className={cx("item")}>
+      <div className={cx("notification-list")}>
+        <div className={cx("notification-item")}>
           <FontAwesomeIcon icon={faBell} />
           <h2>Notifications</h2>
           <FontAwesomeIcon icon={faToggleOff} />
           {/* <FontAwesomeIcon icon={faToggleOn} /> */}
         </div>
-        <div className={cx("item")}>
+        <div className={cx("notification-item")}>
           <FontAwesomeIcon icon={faBell} />
           <h2>Bookmarks</h2>
           <button>16</button>

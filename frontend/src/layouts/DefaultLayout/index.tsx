@@ -1,7 +1,8 @@
 import classNames from "classnames/bind";
 import styles from "./DefaultLayout.module.scss";
-import Sidebar from "../layouts/sidebar";
-import Notification from "../layouts/notification";
+import Sidebar from "../sidebar";
+import Notification from "../notification";
+
 
 const cx = classNames.bind(styles);
 

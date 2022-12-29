@@ -1,8 +1,8 @@
 import styles from "./sidebar.module.scss";
 import classNames from "classnames/bind";
-import Image from "../../../ui/Image";
-import { NotificationIcon } from "../../../ui/Icon";
-import { AccountItem, AccountMessage } from "../../../ui/AccountItem";
+import Image from "../../components/Image";
+import { NotificationIcon } from "../../components/Icon";
+import { AccountItem, AccountMessage } from "../../components/AccountItem";
 
 const cx = classNames.bind(styles);
 
@@ -34,15 +34,11 @@ const Sidebar = () => {
   return (
     <div className={cx("wrapper")}>
       <div className={cx("header")}>
-        <div className={cx("header_heading")}>
-          <Image
-            width="50px"
-            height="50px"
-            src="https://bedental.vn/wp-content/uploads/2022/11/gai-xinh-nguc-bu-7.jpg"
-          />
-          <h1 className={cx("header_title")}>Vo Huy Khoa</h1>
+        <div className={cx("header-content")}>
+          <Image width="50px" height="50px" src={message.avatar} />
+          <h1 className={cx("header-title")}>Vo Huy Khoa</h1>
         </div>
-        <div className={cx("header_notification")}>
+        <div className={cx("header-notification")}>
           <NotificationIcon width="50px" height="50px" />
           <span>1</span>
         </div>
@@ -52,9 +48,9 @@ const Sidebar = () => {
         {/* <div className={cx("status_search")}>
           <input type="text" />
         </div> */}
-        <div className={cx("status_doing")}>
-          <span className={cx("status--title", "text-white")}>Favorites</span>
-          <div className={cx("status_content")}>
+        <div className={cx("status-content")}>
+          <span className={cx("status-title", "text-white")}>Favorites</span>
+          <div className={cx("status-list")}>
             <AccountItem data={status} />
             <AccountItem data={status} />
             <AccountItem data={status} />
@@ -62,7 +58,7 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-      <div className={cx("message")}>
+      <div className={cx("message-list")}>
         <AccountMessage data={message} />
         <AccountMessage data={message} />
         <AccountMessage data={message} />
