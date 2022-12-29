@@ -37,7 +37,12 @@ const Home = () => {
         </div>
       </div>
 
-      <div className={cx("content")}></div>
+      <div className={cx("content")}>
+        <div className={cx('message-item')}>
+        <Image src={profile.avatar} />
+
+        </div>
+      </div>
 
       <div className={cx("message")}>
         <div className={cx("heading")}>
