@@ -1,5 +1,5 @@
 import styles from "./login.module.scss";
-import { FacebookIcon, GoogleIcon, GithubIcon } from "../../components/ui/Icon";
+import { FacebookIcon, GoogleIcon, GithubIcon } from "../../components/Icon";
 import classNames from "classnames/bind";
 import { NavLink } from "react-router-dom";
 

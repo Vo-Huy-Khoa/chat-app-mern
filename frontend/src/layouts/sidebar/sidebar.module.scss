@@ -11,26 +11,28 @@
   align-items: center;
   height: 100px;
 
-  .header_heading {
+  .header-content {
     display: flex;
     flex-direction: row;
     gap: 10px;
     width: 80%;
 
-    .header_title {
+    .header-title {
       font-size: 3rem;
       font-weight: 600;
       color: var(--gray);
     }
   }
 
-  .header_notification {
+  .header-notification {
     position: relative;
+
     svg {
       background-color: var(--gray);
       border-radius: 50%;
       padding: 5px;
     }
+
     span {
       position: absolute;
       display: block;
@@ -50,12 +52,13 @@
 
 .status {
   margin-top: 20px;
-  .status_doing {
-    .status--title {
+
+  .status-content {
+    .status-title {
       font-size: 2rem;
     }
 
-    .status_content {
+    .status-list {
       margin-top: 10px;
       display: flex;
       flex-direction: row;
@@ -64,7 +67,7 @@
   }
 }
 
-.message{
+.message-list {
   margin-top: 80px;
   display: flex;
   flex-direction: column;
