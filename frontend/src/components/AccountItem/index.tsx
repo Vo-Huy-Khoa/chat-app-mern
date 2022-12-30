@@ -6,8 +6,8 @@ const cx = classNames.bind(styles);
 
 const AccountItem = ({ data }: any) => {
   return (
-    <div className={cx("account_item")}>
-      <Image width="80px" height="80px" src={data.avatar} />
+    <div className={cx("account-item")}>
+      <Image src={data.avatar} />
       <span className={cx("name", "text-white")}>{data.name}</span>
     </div>
   );
@@ -15,7 +15,7 @@ const AccountItem = ({ data }: any) => {
 
 const AccountMessage = ({ data }: any) => {
   return (
-    <div className={cx("account_message")}>
+    <div className={cx("account-message")}>
       <Image width="80px" height="80px" src={data.avatar} />
       <div className={cx("content")}>
         <h2 className={cx("name", "text-white")}>{data.name}</h2>

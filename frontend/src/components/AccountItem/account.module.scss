@@ -1,13 +1,18 @@
-.account_item {
+.account-item {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  img{
+    width: 60px;
+    height: 60px;
+  }
   .name {
     font-size: 2rem;
+    text-align: center;
   }
 }
 
-.account_message {
+.account-message {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
