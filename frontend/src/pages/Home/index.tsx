@@ -38,13 +38,27 @@ const Home = () => {
       </div>
 
       <div className={cx("content")}>
-        <div className={cx('message-item')}>
-        <Image src={profile.avatar} />
-
+        <div className={cx("message-list")}>
+          <div className={cx('message-item')}>
+          <div className={cx("message-chat")}>
+            <Image src={profile.avatar} />
+          </div>
+          <div className={cx("message-chat")}>
+            <Image src={profile.avatar} />
+          </div>
+          </div>
+           <div className={cx('message-item')}>
+          <div className={cx("message-chat")}>
+            <Image src={profile.avatar} />
+          </div>
+          <div className={cx("message-chat")}>
+            <Image src={profile.avatar} />
+          </div>
+          </div>
         </div>
       </div>
 
-      <div className={cx("message")}>
+      <div className={cx("message", "fixed")}>
         <div className={cx("heading")}>
           <div className={cx("heading-content")}>
             <NavLink to="">reply</NavLink>
