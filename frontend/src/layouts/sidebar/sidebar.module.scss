@@ -2,6 +2,9 @@
   padding: 20px;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .header {
@@ -30,7 +33,8 @@
     svg {
       background-color: var(--gray);
       border-radius: 50%;
-      padding: 5px;
+      padding: 10px;
+      fill: var(--white);
     }
 
     span {
@@ -51,9 +55,41 @@
 }
 
 .status {
-  margin-top: 20px;
+  .search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--black);
+    border-radius: 25px;
+    width: 100%;
+    height: 40px;
+
+    input {
+      width: 50%;
+      background-color: transparent;
+      border: none;
+      color: var(--white);
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+
+    .icon-search {
+      color: var(--white);
+    }
+
+    .icon-delete {
+      color: rgb(37, 84, 146);
+    }
+  }
 
   .status-content {
+    margin-top: 10px;
     .status-title {
       font-size: 2rem;
     }
@@ -68,8 +104,9 @@
 }
 
 .message-list {
-  margin-top: 80px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  height: 100%;
+  overflow-y: scroll;
 }

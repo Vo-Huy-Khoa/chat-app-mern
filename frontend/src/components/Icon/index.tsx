@@ -109,7 +109,7 @@ const NotificationIcon = ({ width = "32px", height = "32px" }) => {
   );
 };
 
-const PhoneIcon = function ({ width = "32px", height = "32px" }) {
+const PhoneIcon = function () {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

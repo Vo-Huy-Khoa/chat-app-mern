@@ -6,14 +6,10 @@ import {
   faDeleteLeft,
   faSearch,
   faToggleOff,
-  faToggleOn,
+  // faToggleOn,
 } from "@fortawesome/free-solid-svg-icons";
 import Image from "../../components/Image";
-import {
-  MoreIcon,
-  PhoneIcon,
-  UserAddIcon,
-} from "../../components/Icon";
+import { MoreIcon, PhoneIcon, UserAddIcon } from "../../components/Icon";
 import { NavLink } from "react-router-dom";
 const profile = {
   avatar:
@@ -26,13 +22,13 @@ const cx = classNames.bind(styles);
 const Notification = () => {
   return (
     <div className={cx("wrapper")}>
-      <div className={cx("header")}>
+      {/* <div className={cx("header")}>
         <div className={cx("search")}>
           <FontAwesomeIcon className={cx("icon-search")} icon={faSearch} />
           <input type="text" placeholder="Search" />
           <FontAwesomeIcon className={cx("icon-delete")} icon={faDeleteLeft} />
         </div>
-      </div>
+      </div> */}
       <div className={cx("profile")}>
         <Image src={profile.avatar} width="70px" height="70px" />
         <h1>{profile.name}</h1>
@@ -74,7 +70,7 @@ const Notification = () => {
             <span>share files</span>
             <NavLink to="">View all</NavLink>
           </div>
-          <div className={cx("content")}>
+          <div className={cx("file-content")}>
             <div className={cx("item")}>
               <img src={profile.avatar} alt="" />
               <div className={cx("text")}>

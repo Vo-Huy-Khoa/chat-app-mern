@@ -23,6 +23,8 @@ const profile = {
     "https://bedental.vn/wp-content/uploads/2022/11/nguoi-mau-Shin-Jae-Eun.jpg",
   name: "vo huy Khoa",
   username: "khoavh",
+  message:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia fringilla quam, vel imperdiet felis faucibus in. Quisque commodo tortor non maximus vehicula. Sed imperdiet felis a velit convallis, a elementum quam cursus.",
 };
 const Home = () => {
   return (
@@ -39,21 +41,53 @@ const Home = () => {
 
       <div className={cx("content")}>
         <div className={cx("message-list")}>
-          <div className={cx('message-item')}>
-          <div className={cx("message-chat")}>
-            <Image src={profile.avatar} />
+          <div className={cx("message-item", "item-right")}>
+              <Image src={profile.avatar} />
+            <div className={cx("me", "message-chat")}>
+              <p>{profile.message}</p>
+            </div>
           </div>
-          <div className={cx("message-chat")}>
-            <Image src={profile.avatar} />
+          <div className={cx("message-item", "item-left")}>
+              <Image src={profile.avatar} />
+            <div className={cx("your", "message-chat")}>
+              <p>{profile.message}</p>
+            </div>
           </div>
+          <div className={cx("message-item", "item-right")}>
+              <Image src={profile.avatar} />
+            <div className={cx("me", "message-chat")}>
+              <p>{profile.message}</p>
+            </div>
           </div>
-           <div className={cx('message-item')}>
-          <div className={cx("message-chat")}>
-            <Image src={profile.avatar} />
+          <div className={cx("message-item", "item-left")}>
+              <Image src={profile.avatar} />
+            <div className={cx("your", "message-chat")}>
+              <p>{profile.message}</p>
+            </div>
           </div>
-          <div className={cx("message-chat")}>
-            <Image src={profile.avatar} />
+          <div className={cx("message-item", "item-right")}>
+              <Image src={profile.avatar} />
+            <div className={cx("me", "message-chat")}>
+              <p>{profile.message}</p>
+            </div>
           </div>
+          <div className={cx("message-item", "item-left")}>
+              <Image src={profile.avatar} />
+            <div className={cx("your", "message-chat")}>
+              <p>{profile.message}</p>
+            </div>
+          </div>
+          <div className={cx("message-item", "item-right")}>
+              <Image src={profile.avatar} />
+            <div className={cx("me", "message-chat")}>
+              <p>{profile.message}</p>
+            </div>
+          </div>
+          <div className={cx("message-item", "item-left")}>
+              <Image src={profile.avatar} />
+            <div className={cx("your", "message-chat")}>
+              <p>{profile.message}</p>
+            </div>
           </div>
         </div>
       </div>
