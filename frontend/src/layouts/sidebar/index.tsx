@@ -3,7 +3,8 @@ import classNames from "classnames/bind";
 import Image from "../../components/Image";
 import { NotificationIcon } from "../../components/Icon";
 import { AccountItem, AccountMessage } from "../../components/AccountItem";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDeleteLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
 const cx = classNames.bind(styles);
 
 // const profile = {
@@ -39,15 +40,17 @@ const Sidebar = () => {
           <h1 className={cx("header-title")}>Vo Huy Khoa</h1>
         </div>
         <div className={cx("header-notification")}>
-          <NotificationIcon width="50px" height="50px" />
+          <NotificationIcon width="45px" height="45px" />
           <span>1</span>
         </div>
       </div>
 
       <div className={cx("status")}>
-        {/* <div className={cx("status_search")}>
-          <input type="text" />
-        </div> */}
+        <div className={cx("search")}>
+          <FontAwesomeIcon className={cx("icon-search")} icon={faSearch} />
+          <input type="text" placeholder="Search" />
+          <FontAwesomeIcon className={cx("icon-delete")} icon={faDeleteLeft} />
+        </div>
         <div className={cx("status-content")}>
           <span className={cx("status-title", "text-white")}>Favorites</span>
           <div className={cx("status-list")}>
@@ -59,6 +62,12 @@ const Sidebar = () => {
         </div>
       </div>
       <div className={cx("message-list")}>
+        <AccountMessage data={message} />
+        <AccountMessage data={message} />
+        <AccountMessage data={message} />
+        <AccountMessage data={message} />
+        <AccountMessage data={message} />
+        <AccountMessage data={message} />
         <AccountMessage data={message} />
         <AccountMessage data={message} />
         <AccountMessage data={message} />
