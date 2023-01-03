@@ -6,7 +6,7 @@ const createToken = (user: any) => {
   let payload = { username: user.username, email: user.email };
   let token = null;
   try {
-    token = jwt.sign(payload, JWT_SECRET, { expiresIn: "15s" });
+    token = jwt.sign(payload, JWT_SECRET, { expiresIn: "120s" });
   } catch (error) {
     console.log(error);
   }
@@ -38,7 +38,6 @@ const authToken = (req: Request, res: Response, next: NextFunction) => {
     const key = process.env.JWT_SECRET || "";
     let isVeriToken = jwt.verify(token, key);
     if (isVeriToken) {
-      console.log(isVeriToken);
       next();
     }
   } catch (error) {
