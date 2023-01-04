@@ -3,7 +3,7 @@ import Message from '../pages/Message';
 import Profile from "../pages/Profile";
 import Home from "../pages/Home";
 import DefaultLayout from "../layouts/DefaultLayout";
-import Login from "../pages/Login";
+import Login from "../pages/Login/login";
 import Register from "../pages/Register";
 
 const configRoutes = config.routes;

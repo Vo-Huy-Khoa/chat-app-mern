@@ -15,6 +15,7 @@ import {
   faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
@@ -27,6 +28,18 @@ const profile = {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia fringilla quam, vel imperdiet felis faucibus in. Quisque commodo tortor non maximus vehicula. Sed imperdiet felis a velit convallis, a elementum quam cursus.",
 };
 const Home = () => {
+  const navigate = useNavigate();
+  const token = function () {
+    const tokenString = sessionStorage.getItem("token") || "";
+    const userToken = JSON.parse(tokenString);
+    alert(userToken);
+    return userToken?.token;
+  }
+
+  alert(token)
+  // if (token !== "") {
+  //   navigate("/login");
+  // }
   return (
     <div className={cx("wrapper")}>
       <div className={cx("header", "fixed")}>
@@ -42,49 +55,49 @@ const Home = () => {
       <div className={cx("content")}>
         <div className={cx("message-list")}>
           <div className={cx("message-item", "item-right")}>
-              <Image src={profile.avatar} />
+            <Image src={profile.avatar} />
             <div className={cx("me", "message-chat")}>
               <p>{profile.message}</p>
             </div>
           </div>
           <div className={cx("message-item", "item-left")}>
-              <Image src={profile.avatar} />
+            <Image src={profile.avatar} />
             <div className={cx("your", "message-chat")}>
               <p>{profile.message}</p>
             </div>
           </div>
           <div className={cx("message-item", "item-right")}>
-              <Image src={profile.avatar} />
+            <Image src={profile.avatar} />
             <div className={cx("me", "message-chat")}>
               <p>{profile.message}</p>
             </div>
           </div>
           <div className={cx("message-item", "item-left")}>
-              <Image src={profile.avatar} />
+            <Image src={profile.avatar} />
             <div className={cx("your", "message-chat")}>
               <p>{profile.message}</p>
             </div>
           </div>
           <div className={cx("message-item", "item-right")}>
-              <Image src={profile.avatar} />
+            <Image src={profile.avatar} />
             <div className={cx("me", "message-chat")}>
               <p>{profile.message}</p>
             </div>
           </div>
           <div className={cx("message-item", "item-left")}>
-              <Image src={profile.avatar} />
+            <Image src={profile.avatar} />
             <div className={cx("your", "message-chat")}>
               <p>{profile.message}</p>
             </div>
           </div>
           <div className={cx("message-item", "item-right")}>
-              <Image src={profile.avatar} />
+            <Image src={profile.avatar} />
             <div className={cx("me", "message-chat")}>
               <p>{profile.message}</p>
             </div>
           </div>
           <div className={cx("message-item", "item-left")}>
-              <Image src={profile.avatar} />
+            <Image src={profile.avatar} />
             <div className={cx("your", "message-chat")}>
               <p>{profile.message}</p>
             </div>
