@@ -9,19 +9,23 @@ const cx = classNames.bind(styles);
 
 const Login = () => {
   const navigate = useNavigate();
-  const userRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-
+  const userRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const passwordRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const body = {
     username: userRef.current?.value,
     password: passwordRef.current?.value,
   };
-
+  
   const handleSubmit = async (e: any) => {
+    console.log({body});
     e.preventDefault();
+
     try {
       handleLogin(body).then(() => {
         navigate("/register");
+      })
+      .catch(()=>{
+        alert('Login Fail!')
       });
     } catch (err) {
       alert(err);
