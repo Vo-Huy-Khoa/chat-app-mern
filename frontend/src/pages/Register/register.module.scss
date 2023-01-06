@@ -12,6 +12,9 @@
     border-radius: 20px;
     padding: 8px;
   }
+   input:focus {
+    outline: none;
+  }
   .register {
     border-radius: 20px;
     padding: 40px;

@@ -9,6 +9,7 @@ import * as Token from "./token";
 const Register = async (req: Request, res: Response) => {
   const password = req.body.password;
   const createUser = new UserModel({
+    fullname: req.body.fullname,
     username: req.body.username,
     email: req.body.email,
     password: bcrypt.hashSync(password, bcrypt.genSaltSync(10)),
@@ -24,15 +25,21 @@ const Register = async (req: Request, res: Response) => {
 
 const Login = async (req: Request, res: Response) => {
   const password = req.body.password;
-  const account = await UserModel.findOne({
+  const user = await UserModel.findOne({
     username: req.body.username,
   });
 
-  if (!account || !bcrypt.compareSync(password, account.password)) {
+  if (!user || !bcrypt.compareSync(password, user.password)) {
     res.status(400).json("Login Fail!");
   } else {
-    const token = Token.createToken(account);
-    res.status(200).json({ token });
+    const token = Token.createToken(user);
+    res.status(200).json({
+      user: {
+        id: user.id,
+        username: user.username,
+        fullname: user.fullname
+      }, token
+    });
   }
 };
 export { Register, Login };

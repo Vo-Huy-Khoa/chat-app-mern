@@ -5,12 +5,16 @@ const headers = {
   "Access-Control-Allow-Origin": "*",
 };
 
-const handleLogin = async (body: any) => {
-    await axios.post(`api/login`, JSON.stringify(body), {
-    headers: headers,
-    withCredentials: true,
-  });
+const handleAuth = async (body: any, url: String) => {
+  await axios
+    .post(`${url}`, JSON.stringify(body), {
+      headers: headers,
+      withCredentials: true,
+    })
+    .then((response) => {
+      sessionStorage.setItem("token", response.data.token);
+      sessionStorage.setItem("user", JSON.stringify(response.data.user));
+    });
 };
 
-
-export { handleLogin };
+export { handleAuth };
