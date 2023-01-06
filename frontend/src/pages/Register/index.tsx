@@ -2,37 +2,29 @@ import styles from "./register.module.scss";
 import classNames from "classnames/bind";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useRef } from "react";
-import { handleLogin } from "../../services";
+import { handleAuth } from "../../services";
 
 const cx = classNames.bind(styles);
 
 const Register = () => {
   const navigate = useNavigate();
-  const fullNameRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const usernameRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const emailRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const passwordRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const fullNameRef = useRef<HTMLInputElement>(null);
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
-  const body = {
-    fullname: fullNameRef.current?.value,
-    username: usernameRef.current?.value,
-    email: emailRef.current?.value,
-    password: passwordRef.current?.value,
-  };
-
-  //why log is there, value of useRef have not null?
-  console.log({
-    fullNameRef,
-    usernameRef,
-    emailRef,
-    passwordRef,
-  });
   const handleSubmit = async (e: any) => {
+    const body = {
+      fullname: fullNameRef?.current?.value,
+      username: usernameRef?.current?.value,
+      email: emailRef?.current?.value,
+      password: passwordRef?.current?.value,
+    };
+    e.preventDefault();
     console.table(body);
 
-    e.preventDefault();
     try {
-      handleLogin(body)
+      handleAuth(body, 'api/register')
         .then(() => {
           navigate("/login");
         })
@@ -43,6 +35,8 @@ const Register = () => {
       console.log(error);
     }
   };
+
+  //why log is there, value of useRef have not null?
 
   return (
     <div className={cx("container")}>
@@ -88,7 +82,7 @@ const Register = () => {
             />
           </div>
 
-          <button>Register</button>
+          <button type="submit">Register</button>
         </form>
         <div className={cx("link-login")}>
           <NavLink to="/login">or Login?</NavLink>

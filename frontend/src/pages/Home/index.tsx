@@ -16,6 +16,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const cx = classNames.bind(styles);
 
@@ -28,18 +30,29 @@ const profile = {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia fringilla quam, vel imperdiet felis faucibus in. Quisque commodo tortor non maximus vehicula. Sed imperdiet felis a velit convallis, a elementum quam cursus.",
 };
 const Home = () => {
-  const navigate = useNavigate();
-  const token = function () {
-    const tokenString = sessionStorage.getItem("token") || "";
-    const userToken = JSON.parse(tokenString);
-    alert(userToken);
-    return userToken?.token;
-  }
 
-  alert(token)
-  // if (token !== "") {
-  //   navigate("/login");
-  // }
+  const token = sessionStorage.getItem("token") || "";
+  const user = sessionStorage.getItem("user") || "";
+  const id = JSON.parse(user).id;
+
+  // const [currentUser, setcurrentUser] = useState();
+
+  // const headers = {
+  //   "Content-Type": "application/json",
+  //   "Access-Control-Allow-Origin": "*",
+  //   Authorization: `Beaer ${token}`,
+  // };
+  // useEffect(() => {
+  //   axios
+  //     .get(`api/user/profile/${id}`, {
+  //       headers: headers,
+  //       withCredentials: true,
+  //     })
+  //     .then((response) => {
+  //       setcurrentUser(response.data);
+  //     });
+  // }, []);
+
   return (
     <div className={cx("wrapper")}>
       <div className={cx("header", "fixed")}>

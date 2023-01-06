@@ -2,37 +2,29 @@ import styles from "./login.module.scss";
 import { FacebookIcon, GoogleIcon, GithubIcon } from "../../components/Icon";
 import classNames from "classnames/bind";
 import { NavLink, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useState } from "react";
+import { useRef } from "react";
+import { handleAuth } from "../../services";
 
 const cx = classNames.bind(styles);
 
 const Login = () => {
-  const [username, setUser] = useState("");
-  const [password, setPwd] = useState("");
   const navigate = useNavigate();
+  const userRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
   const handleSubmit = async (e: any) => {
+    const body = {
+      username: userRef.current?.value,
+      password: passwordRef.current?.value,
+    };
     e.preventDefault();
     try {
-      const LOGIN_URL = `api/login` || "";
-      return await axios
-        .post(
-          LOGIN_URL,
-          JSON.stringify({
-            username: username,
-            password: password,
-          }),
-          {
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-            },
-            withCredentials: true,
-          }
-        )
+      await handleAuth(body, "api/login")
         .then(() => {
-          alert("hello");
-          navigate("/register");
+          navigate("/");
+        })
+        .catch(() => {
+          alert("Login Fail!");
         });
     } catch (err) {
       alert(err);
@@ -49,21 +41,19 @@ const Login = () => {
             <div className={cx("form__item")}>
               <label htmlFor="username">username</label>
               <input
-                onChange={(e) => setUser(e.target.value)}
+                ref={userRef}
                 id="username"
                 type="text"
                 placeholder="Type your username..."
-                value={username}
               />
             </div>
             <div className={cx("form__item")}>
               <label htmlFor="password">password</label>
               <input
-                onChange={(e) => setPwd(e.target.value)}
+                ref={passwordRef}
                 id="password"
                 type="password"
                 placeholder="Type your password..."
-                value={password}
               />
             </div>
             <NavLink className={cx("form--forget-password")} to="">

@@ -5,6 +5,8 @@ import { NotificationIcon } from "../../components/Icon";
 import { AccountItem, AccountMessage } from "../../components/AccountItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDeleteLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
+import axios from "axios";
 const cx = classNames.bind(styles);
 
 // const profile = {
@@ -32,12 +34,35 @@ const message = {
 };
 
 const Sidebar = () => {
+  const token = sessionStorage.getItem("token") || "";
+  const user = sessionStorage.getItem("user") || "";
+  const id = JSON.parse(user).id;
+
+  const [currentUser, setcurrentUser] = useState() || "";
+
+  console.table( currentUser);
+
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    Authorization: `Beaer ${token}`,
+  };
+  useEffect(() => {
+    axios
+      .get(`api/user/profile/${id}`, {
+        headers: headers,
+        withCredentials: true,
+      })
+      .then((response) => {
+        setcurrentUser(response.data);
+      });
+  }, []);
   return (
     <div className={cx("wrapper")}>
       <div className={cx("header")}>
         <div className={cx("header-content")}>
           <Image width="50px" height="50px" src={message.avatar} />
-          <h1 className={cx("header-title")}>Vo Huy Khoa</h1>
+          <h1 className={cx("header-title")}>{currentUser}</h1>
         </div>
         <div className={cx("header-notification")}>
           <NotificationIcon width="45px" height="45px" />

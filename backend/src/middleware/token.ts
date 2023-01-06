@@ -3,7 +3,7 @@ import { Request, Response, NextFunction, response } from "express";
 
 const createToken = (user: any) => {
   const JWT_SECRET = process.env.JWT_SECRET || "";
-  let payload = { username: user.username, email: user.email };
+  let payload = { id: user.id, username: user.username, email: user.email };
   let token = null;
   try {
     token = jwt.sign(payload, JWT_SECRET, { expiresIn: "120s" });
