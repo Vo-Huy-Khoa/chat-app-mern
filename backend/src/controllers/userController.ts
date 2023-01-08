@@ -39,6 +39,18 @@ class userController {
       });
   }
 
+  async search(req: Request, res: Response) {
+    await UserModel.find({
+      username: new RegExp("^" + req.body.username + "$", "i"),
+    })
+      .then((user) => {
+        res.status(200).json(user);
+      })
+      .catch((error) => {
+        res.status(400).json(error);
+      });
+  }
+
   async destroy(req: Request, res: Response) {
     await UserModel.deleteOne({ _id: req.body.params })
       .then((user) => {

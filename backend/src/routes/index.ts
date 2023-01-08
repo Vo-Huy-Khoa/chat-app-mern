@@ -7,7 +7,9 @@ const router = Router();
 const initRoute = (app: express.Application) => {
   router.get("/users", Token.authToken, userController.get);
   router.post("/login", Auth.Login);
+  router.post('/refreshToken', Auth.RefreshToken)
   router.post("/register", Auth.Register);
+  router.post("/user/search", Token.authToken, userController.search)
   router.get("/user/profile/:id", Token.authToken, userController.profile);
   router.put("/user/update/:id", Token.authToken, userController.update);
   router.delete("/user/delete/:id", Token.authToken, userController.destroy);

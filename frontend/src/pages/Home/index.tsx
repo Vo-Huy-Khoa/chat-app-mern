@@ -33,7 +33,11 @@ const Home = () => {
 
   const token = sessionStorage.getItem("token") || "";
   const user = sessionStorage.getItem("user") || "";
-  const id = JSON.parse(user).id;
+  let id: null = null;
+  if (user !== "") {
+    id = JSON.parse(user).id;
+  }
+
 
   // const [currentUser, setcurrentUser] = useState();
 

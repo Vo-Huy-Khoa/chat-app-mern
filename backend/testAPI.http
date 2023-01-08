@@ -2,17 +2,36 @@
 
 ### get all users
 GET http://localhost:3001/api/users
-Authorization: Beaer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imtob2F2aCIsImVtYWlsIjoiaHV5a2hvYTYzMEBnbWFpbC5jb20iLCJpYXQiOjE2NzI5OTE0MjQsImV4cCI6MTY3Mjk5MTU0NH0.XQKd2lzCmMn7K5WADhyfJHM1Q6loi4PZoB8NhtT_WKs
+Authorization: Beaer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjkzYTdhNGIxYWRmMWU2OWI1NzQyZCIsInVzZXJuYW1lIjoidGhhbmh0aHV5IiwiZW1haWwiOiJ0aGFuaHRodXlAZ21haWwuY29tIiwiaWF0IjoxNjczMTc2NjI3LCJleHAiOjE2NzMxNzY4Njd9.9MYjd4qCKdbMBJ5wbYGhCAFgsta8Js3lkXqw-iQluQw
 
 
 
 ### login
-POSt http://localhost:3001/api/login
+POST http://localhost:3001/api/login
 Content-Type: application/json
 
 {
-    "username": "anhthy",
-    "password": "123456"
+    "username": "thanhthuy",
+    "password": "1"
+}
+
+### refreshToken
+POST http://localhost:3001/refreshToken
+Content-Type: application/json
+
+{
+    "id": "63b93a7a4b1adf1e69b5742d",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRoYW5odGh1eSIsImlhdCI6MTY3MzE3NjIzNH0.HqDoosG8BFlyenF4xhHRYhCwGoCywuEd3aTCk8PjMEU",
+}
+
+
+### search
+POST http://localhost:3001/api/user/search
+Authorization: Beaer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTQyODI0OTgxZTBiNzgxMjFmOWUxMCIsInVzZXJuYW1lIjoiYW5odGh5IiwiZW1haWwiOiJhbmh0aHlAZ21haWwuY29tIiwiaWF0IjoxNjczMDg3MjY2LCJleHAiOjE2NzMwODc1MDZ9.pVFdQp1jFbsmvzksfTIXptf5LcbKpbchE-r7EescbVw
+Content-Type: application/json
+
+{
+    "username": "khoa"
 }
 ### register
 POST http://localhost:3001/api/register
@@ -34,5 +53,5 @@ Authorization: Beaer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imtob2
 
 
 ###  delete a users
-DELETE http://localhost:3001/api/users/delete/63b673f6f878cb9c68675fe6
-Authorization: Beaer
+DELETE http://localhost:3001/api/users/delete/63baa329b593996a69735666
+Authorization: Beaer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjkzYTdhNGIxYWRmMWU2OWI1NzQyZCIsInVzZXJuYW1lIjoidGhhbmh0aHV5IiwiZW1haWwiOiJ0aGFuaHRodXlAZ21haWwuY29tIiwiaWF0IjoxNjczMTc2NjI3LCJleHAiOjE2NzMxNzY4Njd9.9MYjd4qCKdbMBJ5wbYGhCAFgsta8Js3lkXqw-iQluQw
