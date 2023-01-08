@@ -8,7 +8,7 @@ const AccountItem = ({ data }: any) => {
   return (
     <div className={cx("account-item")}>
       <Image src={data.avatar} />
-      <span className={cx("name", "text-white")}>{data.name}</span>
+      <span className={cx("name", "text-white")}>{data.username}</span>
     </div>
   );
 };
@@ -18,7 +18,7 @@ const AccountMessage = ({ data }: any) => {
     <div className={cx("account-message")}>
       <Image width="80px" height="80px" src={data.avatar} />
       <div className={cx("content")}>
-        <h2 className={cx("name", "text-white")}>{data.name}</h2>
+        <h2 className={cx("name", "text-white")}>{data.username}</h2>
         <span className={cx("react", "text-white")}>{data.react}</span>
         <p className={cx("message", "text-gray")}>{data.message}</p>
       </div>

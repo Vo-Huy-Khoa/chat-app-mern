@@ -6,7 +6,7 @@ const createToken = (user: any) => {
   let payload = { id: user.id, username: user.username, email: user.email };
   let token = null;
   try {
-    token = jwt.sign(payload, JWT_SECRET, { expiresIn: "120s" });
+    token = jwt.sign(payload, JWT_SECRET, { expiresIn: "240s" });
   } catch (error) {
     console.log(error);
   }
@@ -14,10 +14,9 @@ const createToken = (user: any) => {
   return token;
 };
 
-const refreshToken = (user: any) => {
+const refreshToken = (data: any, token: string) => {
   const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || "";
-  let payload = { username: user.username, email: user.email };
-  let token = null;
+  let payload = { username: data.username};
   try {
     token = jwt.sign(payload, REFRESH_TOKEN_SECRET);
   } catch (error) {
@@ -45,4 +44,4 @@ const authToken = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { createToken, authToken };
+export { createToken, authToken, refreshToken };

@@ -1,7 +1,7 @@
 import styles from "./register.module.scss";
 import classNames from "classnames/bind";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { handleAuth } from "../../services";
 
 const cx = classNames.bind(styles);
@@ -12,19 +12,25 @@ const Register = () => {
   const usernameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const [avatar, setAvatar] = useState("");
 
-  const handleSubmit = async (e: any) => {
+  // const handleChangeImage = (e: any) => {
+  //   return setAvatar(URL.createObjectURL(e.target.files[0]));
+  // };
+
+  async function handleSubmit(e: any) {
     const body = {
       fullname: fullNameRef?.current?.value,
       username: usernameRef?.current?.value,
       email: emailRef?.current?.value,
       password: passwordRef?.current?.value,
+      avatar: avatar,
     };
     e.preventDefault();
     console.table(body);
 
     try {
-      handleAuth(body, 'api/register')
+      handleAuth(body, "api/register")
         .then(() => {
           navigate("/login");
         })
@@ -34,12 +40,20 @@ const Register = () => {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  //why log is there, value of useRef have not null?
+  }
 
   return (
     <div className={cx("container")}>
+      <div className={cx("avatar")}>
+        <input
+          type="text"
+          onChange={(e) => {
+            setAvatar(e.currentTarget.value);
+          }}
+          placeholder="URL avatar"
+        />
+        <img src={avatar} alt="" />
+      </div>
       <div className={cx("register")}>
         <div className={cx("heading")}>
           <h1>Register</h1>
