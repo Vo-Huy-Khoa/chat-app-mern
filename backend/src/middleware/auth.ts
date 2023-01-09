@@ -36,7 +36,7 @@ const Login = async (req: Request, res: Response) => {
   } else {
     const token = Token.createToken(user) || "";
     const refreshToken = Token.refreshToken(user, token);
-    await UserModel.findOne(
+    await UserModel.updateOne(
       {
         username: user.username,
       },
@@ -55,18 +55,34 @@ const Login = async (req: Request, res: Response) => {
   }
 };
 
-const RefreshToken = (req: Request, res: Response) => {
-  const jwt_freshToken = process.env.REFRESH_TOKEN_SECRET || "";
+const RefreshToken = async (req: Request, res: Response) => {
+  const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || "";
+  const JWT_SECRET = process.env.JWT_SECRET || "";
   const refreshToken = req.body.token;
   const userId = req.body.id;
   if (!refreshToken || !userId) res.sendStatus(401);
-  UserModel.findById({ _id: userId }).then((data) => {
+  await UserModel.findById({ _id: userId }).then((data) => {
     if (!data?.refreshToken === refreshToken) res.sendStatus(403);
-    jwt.verify(refreshToken, jwt_freshToken, (err: any, data: any) => {
+    jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (err: any, data: any) => {
+      console.log(data);
+
       if (err) res.sendStatus(403);
-      const accessToken = jwt.sign({ username: data.username }, jwt_freshToken);
-      res.status(201).json(accessToken);
+      const accessToken = jwt.sign(
+        { id: userId, username: data.username },
+        JWT_SECRET,
+        { expiresIn: "3600s" }
+      );
+      res.status(201).json({ token: accessToken});
     });
   });
 };
-export { Register, Login, RefreshToken };
+
+const Logout = async (req: Request, res: Response) => {
+  const userId = req.body.id;
+  await UserModel.updateOne(
+    { _id: userId }, { refreshToken: "" }
+  ).then(() => {
+    res.sendStatus(200);
+  });
+};
+export { Register, Login, RefreshToken, Logout };
