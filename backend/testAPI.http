@@ -1,8 +1,6 @@
 # I. User
-@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRoYW5odGh1eSIsImlhdCI6MTY3MzI1NDY0NX0.csSCiNpQMtCfJIrVbO8VjYh0xq-GTIC3_VT2nNhr-lk
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjkzYTdhNGIxYWRmMWU2OWI1NzQyZCIsInVzZXJuYW1lIjoidGhhbmh0aHV5IiwiZW1haWwiOiJ0aGFuaHRodXlAZ21haWwuY29tIiwiaWF0IjoxNjczMjU0NjQ1LCJleHAiOjE2NzMyNTQ3NjV9.Gt0XYPL8kcJEB4h8E6ufT0TBjBZkEfSvfNCrCRk-dps
-
-### get all users
+@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRoYW5odGh1eSIsImlhdCI6MTY3MzI2MDA0N30.eEEexvNVRLx8qhx1ctIOisynPMIJm1tfOEK0Ay-Sk5I
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjkzYTdhNGIxYWRmMWU2OWI1NzQyZCIsInVzZXJuYW1lIjoidGhhbmh0aHV5IiwiaWF0IjoxNjczMjYwMTkzLCJleHAiOjE2NzMyNjM3OTN9.zzHgVkvO0su6QP9YNbfVRs7Gn_6iy5C6B3TlpPNcyg4
 GET http://localhost:3001/api/users
 Authorization: Beaer {{token}}
 
@@ -13,6 +11,13 @@ Content-Type: application/json
 {
     "username": "thanhthuy",
     "password": "1"
+}
+### logout
+POST http://localhost:3001/api/logout
+Content-Type: application/json
+
+{
+    "id": "63b93a7a4b1adf1e69b5742d"
 }
 
 ### refreshToken
