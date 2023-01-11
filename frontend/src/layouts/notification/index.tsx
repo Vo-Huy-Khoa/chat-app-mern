@@ -10,7 +10,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Image from "../../components/Image";
 import { MoreIcon, PhoneIcon, UserAddIcon } from "../../components/Icon";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 const profile = {
   avatar:
     "https://bedental.vn/wp-content/uploads/2022/11/nguoi-mau-Shin-Jae-Eun.jpg",
@@ -18,8 +20,60 @@ const profile = {
   username: "khoavh",
 };
 const cx = classNames.bind(styles);
-
+interface User {
+  fullname: string;
+  username: string;
+  email: string;
+  avatar: "";
+}
 const Notification = () => {
+  const navigate = useNavigate();
+  const token = sessionStorage.getItem("token") || "";
+  const user = sessionStorage.getItem("user") || "";
+  let id: null = null;
+  const [currentUser, setCurrentUser] = useState<User>({
+    fullname: "",
+    username: "",
+    email: "",
+    avatar: "",
+  });
+  useEffect(() => {
+    if (token === "") {
+      navigate("/login");
+    }
+  }, [token]);
+  if (user !== "") {
+    id = JSON.parse(user).id;
+  }
+
+
+  console.log("re render Notification");
+
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    Authorization: `Beaer ${token}`,
+  };
+  useEffect(() => {
+    if (id === null) {
+      return;
+    }
+    console.log("re render Notification Profile");
+
+    axios
+      .get(`api/user/profile/${id}`, {
+        headers: headers,
+        withCredentials: true,
+      })
+      .then((response) => {
+        setCurrentUser(response.data);
+      }).catch(()=>{
+        sessionStorage.clear();
+      })
+      ;
+  }, [id]);
+
+
   return (
     <div className={cx("wrapper")}>
       {/* <div className={cx("header")}>
@@ -30,9 +84,9 @@ const Notification = () => {
         </div>
       </div> */}
       <div className={cx("profile")}>
-        <Image src={profile.avatar} width="70px" height="70px" />
-        <h1>{profile.name}</h1>
-        <h2>{profile.username}</h2>
+        <Image src={currentUser.avatar} width="70px" height="70px" />
+        <h1>{currentUser.username}</h1>
+        <h2>{currentUser.fullname}</h2>
 
         <div className={cx("more")}>
           <PhoneIcon />

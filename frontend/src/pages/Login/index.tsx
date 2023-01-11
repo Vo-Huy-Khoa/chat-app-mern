@@ -2,16 +2,22 @@ import styles from "./login.module.scss";
 import { FacebookIcon, GoogleIcon, GithubIcon } from "../../components/Icon";
 import classNames from "classnames/bind";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { handleAuth } from "../../services";
 
 const cx = classNames.bind(styles);
 
 const Login = () => {
   const navigate = useNavigate();
+  const token = sessionStorage.getItem("token") || "";
   const userRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    if (token !== "") {
+      navigate("/");
+    }
+  }, [token]);
   const handleSubmit = async (e: any) => {
     const body = {
       username: userRef.current?.value,
