@@ -1,15 +1,31 @@
 .account-item {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
-  img{
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  color: var(--white);
+  img {
     width: 60px;
     height: 60px;
   }
-  .name {
-    font-size: 2rem;
-    text-align: center;
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .username {
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .fullname {
+    }
   }
+}
+
+.account-item:hover {
+  cursor: pointer;
+  background-color: #3c3844;
+  border-radius: 20px;
 }
 
 .account-message {
@@ -21,6 +37,7 @@
     width: 60%;
     display: flex;
     flex-direction: column;
+    padding-left: 10px;
     .name {
       font-size: 2rem;
     }

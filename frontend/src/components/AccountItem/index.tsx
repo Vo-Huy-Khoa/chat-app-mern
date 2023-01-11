@@ -8,7 +8,10 @@ const AccountItem = ({ data }: any) => {
   return (
     <div className={cx("account-item")}>
       <Image src={data.avatar} />
-      <span className={cx("name", "text-white")}>{data.username}</span>
+      <div className={cx("content")}>
+        <span className={cx("username")}>{data.username}</span>
+        <span className={cx("fullname")}>{data.fullname}</span>
+      </div>
     </div>
   );
 };
@@ -16,14 +19,14 @@ const AccountItem = ({ data }: any) => {
 const AccountMessage = ({ data }: any) => {
   return (
     <div className={cx("account-message")}>
-      <Image width="80px" height="80px" src={data.avatar} />
+      <Image width="60px" height="60px" src={data.avatar} />
       <div className={cx("content")}>
         <h2 className={cx("name", "text-white")}>{data.username}</h2>
         <span className={cx("react", "text-white")}>{data.react}</span>
         <p className={cx("message", "text-gray")}>{data.message}</p>
       </div>
       <div className={cx("more")}>
-        <span className={cx('text-gray')}>{data.time}</span>
+        <span className={cx("text-gray")}>{data.time}</span>
       </div>
     </div>
   );

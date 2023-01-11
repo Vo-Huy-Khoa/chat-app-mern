@@ -29,42 +29,69 @@ const profile = {
   message:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia fringilla quam, vel imperdiet felis faucibus in. Quisque commodo tortor non maximus vehicula. Sed imperdiet felis a velit convallis, a elementum quam cursus.",
 };
-const Home = () => {
 
+interface User {
+  fullname: string;
+  username: string;
+  email: string;
+  avatar: "";
+}
+
+const Home = () => {
+  const navigate = useNavigate();
   const token = sessionStorage.getItem("token") || "";
   const user = sessionStorage.getItem("user") || "";
   let id: null = null;
+  const [currentUser, setCurrentUser] = useState<User>({
+    fullname: "",
+    username: "",
+    email: "",
+    avatar: "",
+  });
+  useEffect(() => {
+    if (token === "") {
+      navigate("/login");
+    }
+  }, [token]);
   if (user !== "") {
     id = JSON.parse(user).id;
   }
 
 
-  // const [currentUser, setcurrentUser] = useState();
+  console.log("re render Home");
 
-  // const headers = {
-  //   "Content-Type": "application/json",
-  //   "Access-Control-Allow-Origin": "*",
-  //   Authorization: `Beaer ${token}`,
-  // };
-  // useEffect(() => {
-  //   axios
-  //     .get(`api/user/profile/${id}`, {
-  //       headers: headers,
-  //       withCredentials: true,
-  //     })
-  //     .then((response) => {
-  //       setcurrentUser(response.data);
-  //     });
-  // }, []);
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    Authorization: `Beaer ${token}`,
+  };
+  useEffect(() => {
+    if (id === null) {
+      return;
+    }
+    console.log("re render API Profile Home");
+
+    axios
+      .get(`api/user/profile/${id}`, {
+        headers: headers,
+        withCredentials: true,
+      })
+      .then((response) => {
+        setCurrentUser(response.data);
+      }).catch(()=>{
+        sessionStorage.clear();
+      })
+      ;
+  }, [id]);
 
   return (
     <div className={cx("wrapper")}>
       <div className={cx("header", "fixed")}>
         <div className={cx("content")}>
-          <Image src={profile.avatar} width="60px" height="60px" />
+          <Image src={currentUser.avatar} width="60px" height="60px" />
           <div className={cx("text")}>
-            <span>{profile.name}</span>
-            <p>{profile.username}</p>
+            <span>{currentUser.username}</span>
+            <p>{currentUser.fullname}</p>
           </div>
         </div>
       </div>
