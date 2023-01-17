@@ -6,11 +6,13 @@ import { NotificationIcon } from "../../components/Icon";
 import { AccountItem, AccountMessage } from "../../components/AccountItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDeleteLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDebounce } from "../../hooks";
 import { Wrapper as PopperWrapper } from "../../components/Popper";
+import { useContext } from "react";
+import { UserContext } from "../../providers";
+import { handleSearch } from "../../services";
 
-import axios from "axios";
 const cx = classNames.bind(styles);
 
 const message = {
@@ -21,71 +23,25 @@ const message = {
   message: "chat bot",
   time: "9:50",
 };
-interface User {
-  fullname: string;
-  username: string;
-  email: string;
-  avatar: "";
-}
 
 const Sidebar = () => {
-  const [currentUser, setcurrentUser] = useState<User>({
-    fullname: "",
-    username: "",
-    email: "",
-    avatar: "",
-  });
-  // console.log(currentUser);
+  const currentUser = useContext(UserContext);
 
   const [valueSearch, setValueSearch] = useState("");
   const debounceValue = useDebounce(valueSearch, 500);
   const [listUserSearch, setListSearch] = useState([]);
-  const token = sessionStorage.getItem("token") || "";
-  const user = sessionStorage.getItem("user") || "";
-  let id: null = null;
-  if (user !== "") {
-    id = JSON.parse(user).id;
-  }
-
-  console.log("re render component");
-
-  const headers = {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-    Authorization: `Beaer ${token}`,
-  };
-  useEffect(() => {
-    if (id === null) {
-      return;
-    }
-    console.log("re render profile");
-
-    axios
-      .get(`api/user/profile/${id}`, {
-        headers: headers,
-        withCredentials: true,
-      })
-      .then((response) => {
-        setcurrentUser(response.data);
-      });
-  }, [id]);
 
   useEffect(() => {
     if (!debounceValue.trim()) {
       return;
     }
-    axios
-      .post(`api/user/search`, JSON.stringify({ username: debounceValue }), {
-        headers: headers,
-        withCredentials: true,
-      })
+    handleSearch(debounceValue)
       .then((response) => {
-        setListSearch(response.data);
+        setListSearch(response);
       })
       .catch((error) => {
         console.log(error);
       });
-    console.log("re render list");
   }, [debounceValue]);
 
   return (
