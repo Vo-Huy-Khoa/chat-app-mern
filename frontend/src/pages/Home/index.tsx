@@ -1,8 +1,6 @@
 import styles from "./home.module.scss";
 import classNames from "classnames/bind";
 import Image from "../../components/Image";
-import { IUser } from "../../models";
-import { getProfile } from "../../services";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBookmark,

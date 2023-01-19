@@ -37,7 +37,7 @@ const Sidebar = () => {
     }
     handleSearch(debounceValue)
       .then((response) => {
-        setListSearch(response);
+        setListSearch(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -57,6 +57,7 @@ const Sidebar = () => {
         </div>
       </div>
       <HeadlessTippy
+        trigger="click"
         appendTo={document.body}
         interactive
         placement="bottom"

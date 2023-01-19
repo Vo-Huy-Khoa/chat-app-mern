@@ -25,9 +25,14 @@ const Login = () => {
     };
     e.preventDefault();
     try {
-      await handleAuth(body, "api/login")
-        .then(() => {
+      await handleAuth(body, "login")
+        .then((response) => {
           navigate("/");
+          console.log(response);
+
+          sessionStorage.setItem("token", response.data.token);
+          sessionStorage.setItem("refreshToken", response.data.refreshToken);
+          sessionStorage.setItem("user", JSON.stringify(response.data.user));
         })
         .catch(() => {
           alert("Login Fail!");
