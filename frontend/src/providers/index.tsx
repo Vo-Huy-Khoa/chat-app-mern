@@ -21,14 +21,16 @@ function UserProvider({ children }: any) {
   useEffect(() => {
     getProfile()
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.data);
       })
-      .catch(() => {
-        sessionStorage.clear();
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
   return (
-    <UserContext.Provider value={currentUser}>{children}</UserContext.Provider>
+    <UserContext.Provider value={currentUser}>
+      <div>{children}</div>
+    </UserContext.Provider>
   );
 }
 

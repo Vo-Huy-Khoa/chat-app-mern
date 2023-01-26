@@ -15,7 +15,7 @@ type Props = {
 const DefaultLayout: React.FC<Props> = ({ children }): any => {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token") || "";
-
+  const refreshToken = sessionStorage.getItem("refreshToken") || "";
   useEffect(() => {
     if (token === "") {
       navigate("/login");

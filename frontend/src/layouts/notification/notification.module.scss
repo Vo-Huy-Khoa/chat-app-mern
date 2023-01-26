@@ -1,3 +1,23 @@
+.popper {
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popper-wrapper {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  ul {
+    list-style-type: none;
+
+    li:hover {
+      cursor: pointer;
+    }
+  }
+  color: var(--white) !important;
+}
 .wrapper {
   padding: 40px;
   height: 100%;
@@ -43,6 +63,9 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
+    img:hover {
+      cursor: pointer;
+    }
 
     h1 {
       color: var(--white);
@@ -191,7 +214,4 @@
       }
     }
   }
-
-
-
 }

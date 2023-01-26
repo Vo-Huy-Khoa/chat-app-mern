@@ -1,5 +1,6 @@
 import styles from "./notification.module.scss";
 import classNames from "classnames/bind";
+import HeadlessTippy from "@tippyjs/react/headless";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBell,
@@ -8,19 +9,58 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Image from "../../components/Image";
 import { MoreIcon, PhoneIcon, UserAddIcon } from "../../components/Icon";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../providers";
-
+import { Wrapper as PopperWrapper } from "../../components/Popper";
+import { handleLogout } from "../../services/auth";
 const cx = classNames.bind(styles);
 
 const Notification = () => {
   const currentUser = useContext(UserContext);
-
+  const navigate = useNavigate();
   return (
     <div className={cx("wrapper")}>
       <div className={cx("profile")}>
-        <Image src={currentUser.avatar} width="70px" height="70px" />
+        <HeadlessTippy
+          trigger="click"
+          appendTo={document.body}
+          interactive
+          placement="bottom"
+          render={(attrs) => (
+            <div className={cx("popper")} tabIndex={1} {...attrs}>
+              <PopperWrapper className={cx("popper-wrapper")}>
+                <ul>
+                  <li>Profile</li>
+                  <li>Settings</li>
+                  <li>Report</li>
+                  <li
+                    onClick={() => {
+                      try {
+                        handleLogout().then(() => {
+                          navigate("/login");
+                        });
+                      } catch (error) {
+                        console.log(error);
+                      }
+                    }}
+                  >
+                    Logout
+                  </li>
+                </ul>
+              </PopperWrapper>
+            </div>
+          )}
+        >
+          <div>
+            <Image
+              className={cx("profile-avatar")}
+              src={currentUser.avatar}
+              width="70px"
+              height="70px"
+            />
+          </div>
+        </HeadlessTippy>
         <h1>{currentUser.username}</h1>
         <h2>{currentUser.fullname}</h2>
         <div className={cx("more")}>
@@ -29,6 +69,7 @@ const Notification = () => {
           <MoreIcon />
         </div>
       </div>
+
       <div className={cx("notification-list")}>
         <div className={cx("notification-item")}>
           <FontAwesomeIcon icon={faBell} />
