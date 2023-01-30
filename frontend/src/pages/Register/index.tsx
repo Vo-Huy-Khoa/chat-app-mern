@@ -1,8 +1,8 @@
 import styles from "./register.module.scss";
 import classNames from "classnames/bind";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
-import { handleAuth } from "../../services";
+import { useRef, useState } from "react";
+import { handleRegister } from "../../services/auth";
 
 const cx = classNames.bind(styles);
 
@@ -30,7 +30,7 @@ const Register = () => {
     console.table(body);
 
     try {
-      handleAuth(body, "api/register")
+      handleRegister(body)
         .then(() => {
           navigate("/login");
         })

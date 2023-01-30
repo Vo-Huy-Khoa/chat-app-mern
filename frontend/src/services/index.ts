@@ -1,16 +1,12 @@
 import instanceAxios from "./AxiosClient";
 
-const handleAuth = async (body: any, url: String) => {
-  const response = await instanceAxios.post(`${url}`, JSON.stringify(body));
-  return response;
-};
-
 const getProfile = async () => {
   let id: null = null;
   const user = sessionStorage.getItem("user") || "";
   if (user !== "") {
     id = JSON.parse(user).id;
   }
+
   const response = await instanceAxios.get(`user/profile/${id}`);
   return response;
 };
@@ -23,4 +19,15 @@ const handleSearch = async (username: string) => {
   return response;
 };
 
-export { handleAuth, getProfile, handleSearch };
+const getListMessage = async () => {
+  let userId: null = null;
+  const user = sessionStorage.getItem("user") || "";
+  if (user !== "") userId = JSON.parse(user).id;
+  const response = await instanceAxios.post(
+    `listMessage`,
+    JSON.stringify({ senderID: userId })
+  );
+  return response;
+};
+
+export { getProfile, handleSearch, getListMessage };

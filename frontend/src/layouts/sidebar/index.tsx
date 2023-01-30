@@ -11,18 +11,9 @@ import { useDebounce } from "../../hooks";
 import { Wrapper as PopperWrapper } from "../../components/Popper";
 import { useContext } from "react";
 import { UserContext } from "../../providers";
-import { handleSearch } from "../../services";
+import { handleSearch, getListMessage } from "../../services";
 
 const cx = classNames.bind(styles);
-
-const message = {
-  avatar:
-    "https://cdn.24h.com.vn/upload/3-2021/images/2021-09-21/anh-2-1632216610-256-width650height867.jpg",
-  name: "Anh Thy",
-  react: "haha",
-  message: "chat bot",
-  time: "9:50",
-};
 
 const Sidebar = () => {
   const currentUser = useContext(UserContext);
@@ -30,6 +21,7 @@ const Sidebar = () => {
   const [valueSearch, setValueSearch] = useState("");
   const debounceValue = useDebounce(valueSearch, 500);
   const [listUserSearch, setListSearch] = useState([]);
+  const [listMessage, setListMessage] = useState([]);
 
   useEffect(() => {
     if (!debounceValue.trim()) {
@@ -43,6 +35,16 @@ const Sidebar = () => {
         console.log(error);
       });
   }, [debounceValue]);
+
+  useEffect(() => {
+    getListMessage()
+      .then((response) => {
+        setListMessage(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div className={cx("wrapper")}>
@@ -98,18 +100,9 @@ const Sidebar = () => {
         </div>
       </HeadlessTippy>
       <div className={cx("message-list")}>
-        <AccountMessage data={message} />
-        <AccountMessage data={message} />
-        <AccountMessage data={message} />
-        <AccountMessage data={message} />
-        <AccountMessage data={message} />
-        <AccountMessage data={message} />
-        <AccountMessage data={message} />
-        <AccountMessage data={message} />
-        <AccountMessage data={message} />
-        <AccountMessage data={message} />
-        <AccountMessage data={message} />
-        <AccountMessage data={message} />
+        {listMessage.map((message, index) => {
+          return <AccountMessage key={index} data={message} />;
+        })}
       </div>
     </div>
   );

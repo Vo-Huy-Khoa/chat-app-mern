@@ -1,6 +1,7 @@
 import express from "express";
 import Router from "express";
 import userController from "../controllers/userController";
+import messageController from "../controllers/messageController";
 import * as Auth from "../middleware/auth";
 import * as Token from "../middleware/token";
 const router = Router();
@@ -15,6 +16,17 @@ const initRoute = (app: express.Application) => {
   router.put("/user/update/:id", Token.authToken, userController.update);
   router.delete("/user/delete/:id", Token.authToken, userController.destroy);
   router.delete("/user/destroy", Token.authToken, userController.destroyAll);
+  router.post(
+    "/listMessage",
+    Token.authToken,
+    messageController.getListOfUsers
+  );
+  router.post("/message", Token.authToken, messageController.getMessage);
+  router.post(
+    "/createMessage",
+    Token.authToken,
+    messageController.createMessage
+  );
 
   return app.use("/api", router);
 };
