@@ -2,11 +2,10 @@
   width: 100%;
   height: 100%;
   display: flex;
-
 }
 
 .sidebar {
-  background-color: #2A2731;
+  background-color: var(--primary);
   width: 20%;
   height: 100%;
   left: 0;
@@ -21,7 +20,7 @@
 }
 
 .notification {
-  background-color: #2A2731;
+  background-color: var(--primary);
   right: 0;
   top: 0;
   width: 20%;

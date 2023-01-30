@@ -72,16 +72,14 @@ const RefreshToken = async (req: Request, res: Response) => {
         JWT_SECRET,
         { expiresIn: "3600s" }
       );
-      res.status(201).json({ token: accessToken});
+      res.status(201).json({ token: accessToken });
     });
   });
 };
 
 const Logout = async (req: Request, res: Response) => {
   const userId = req.body.id;
-  await UserModel.updateOne(
-    { _id: userId }, { refreshToken: "" }
-  ).then(() => {
+  await UserModel.updateOne({ _id: userId }, { refreshToken: "" }).then(() => {
     res.sendStatus(200);
   });
 };

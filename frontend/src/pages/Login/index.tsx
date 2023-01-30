@@ -3,7 +3,7 @@ import { FacebookIcon, GoogleIcon, GithubIcon } from "../../components/Icon";
 import classNames from "classnames/bind";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
-import { handleAuth } from "../../services";
+import { handleLogin } from "../../services/auth";
 
 const cx = classNames.bind(styles);
 
@@ -18,23 +18,20 @@ const Login = () => {
       navigate("/");
     }
   }, [token]);
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = (e: any) => {
     const body = {
       username: userRef.current?.value,
       password: passwordRef.current?.value,
     };
     e.preventDefault();
     try {
-      await handleAuth(body, "login")
+      handleLogin(body)
         .then((response) => {
           navigate("/");
-          console.log(response);
-
-          sessionStorage.setItem("token", response.data.token);
-          sessionStorage.setItem("refreshToken", response.data.refreshToken);
-          sessionStorage.setItem("user", JSON.stringify(response.data.user));
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log(error);
+
           alert("Login Fail!");
         });
     } catch (err) {

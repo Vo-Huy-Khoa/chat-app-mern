@@ -38,6 +38,7 @@ const Notification = () => {
                     onClick={() => {
                       try {
                         handleLogout().then(() => {
+                          sessionStorage.clear();
                           navigate("/login");
                         });
                       } catch (error) {

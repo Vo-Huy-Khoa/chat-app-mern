@@ -11,18 +11,28 @@ const refreshToken = () => {
   instanceAxios.post("refreshToken", JSON.stringify(body));
 };
 
+const handleRegister = async (body: any) => {
+  const response = await instanceAxios.post(`register`, JSON.stringify(body));
+  return response;
+};
+
+const handleLogin = async (body: any) => {
+  const response = await instanceAxios
+    .post(`login`, JSON.stringify(body))
+    .then((response) => {
+      sessionStorage.setItem("token", response.data.token);
+      sessionStorage.setItem("refreshToken", response.data.refreshToken);
+      sessionStorage.setItem("user", JSON.stringify(response.data.user));
+    });
+  return response;
+};
+
 const handleLogout = async () => {
   const userID = JSON.parse(sessionStorage.getItem("user") || "")?.id;
   const body = {
     id: userID,
   };
-  const response = await instanceAxios
-    .post("logout", JSON.stringify(body))
-    .then(() => {
-      sessionStorage.clear();
-    });
-
-  return response;
+  return await instanceAxios.post("logout", JSON.stringify(body));
 };
 
-export { refreshToken, handleLogout };
+export { refreshToken, handleLogout, handleLogin, handleRegister };
