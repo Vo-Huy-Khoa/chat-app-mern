@@ -35,9 +35,9 @@ const Home = () => {
   return (
     <div className={cx("wrapper")}>
       <div className={cx("header", "fixed")}>
-        <div className={cx("content")}>
+        <div className={cx("header__content")}>
           <Image src={currentUser.avatar} width="60px" height="60px" />
-          <div className={cx("text")}>
+          <div className={cx("header__content__text")}>
             <span>{currentUser.username}</span>
             <p>{currentUser.fullname}</p>
           </div>
@@ -45,52 +45,52 @@ const Home = () => {
       </div>
 
       <div className={cx("content")}>
-        <div className={cx("message-list")}>
-          <div className={cx("message-item", "item-right")}>
+        <div className={cx("content__message")}>
+          <div className={cx("content__message__item", "item-right")}>
             <Image src={profile.avatar} />
-            <div className={cx("me", "message-chat")}>
+            <div className={cx("me", "content__message__item__chat")}>
               <p>{profile.message}</p>
             </div>
           </div>
-          <div className={cx("message-item", "item-left")}>
+          <div className={cx("content__message__item", "item-left")}>
             <Image src={profile.avatar} />
-            <div className={cx("your", "message-chat")}>
+            <div className={cx("your", "content__message__item__chat")}>
               <p>{profile.message}</p>
             </div>
           </div>
-          <div className={cx("message-item", "item-right")}>
+          <div className={cx("content__message__item", "item-right")}>
             <Image src={profile.avatar} />
-            <div className={cx("me", "message-chat")}>
+            <div className={cx("me", "content__message__item__chat")}>
               <p>{profile.message}</p>
             </div>
           </div>
-          <div className={cx("message-item", "item-left")}>
+          <div className={cx("content__message__item", "item-left")}>
             <Image src={profile.avatar} />
-            <div className={cx("your", "message-chat")}>
+            <div className={cx("your", "content__message__item__chat")}>
               <p>{profile.message}</p>
             </div>
           </div>
-          <div className={cx("message-item", "item-right")}>
+          <div className={cx("content__message__item", "item-right")}>
             <Image src={profile.avatar} />
-            <div className={cx("me", "message-chat")}>
+            <div className={cx("me", "content__message__item__chat")}>
               <p>{profile.message}</p>
             </div>
           </div>
-          <div className={cx("message-item", "item-left")}>
+          <div className={cx("content__message__item", "item-left")}>
             <Image src={profile.avatar} />
-            <div className={cx("your", "message-chat")}>
+            <div className={cx("your", "content__message__item__chat")}>
               <p>{profile.message}</p>
             </div>
           </div>
-          <div className={cx("message-item", "item-right")}>
+          <div className={cx("content__message__item", "item-right")}>
             <Image src={profile.avatar} />
-            <div className={cx("me", "message-chat")}>
+            <div className={cx("me", "content__message__item__chat")}>
               <p>{profile.message}</p>
             </div>
           </div>
-          <div className={cx("message-item", "item-left")}>
+          <div className={cx("content__message__item", "item-left")}>
             <Image src={profile.avatar} />
-            <div className={cx("your", "message-chat")}>
+            <div className={cx("your", "content__message__item__chat")}>
               <p>{profile.message}</p>
             </div>
           </div>
@@ -98,16 +98,16 @@ const Home = () => {
       </div>
 
       <div className={cx("message", "fixed")}>
-        <div className={cx("heading")}>
-          <div className={cx("heading-content")}>
+        <div className={cx("message__heading")}>
+          <div className={cx("message__heading__content")}>
             <NavLink to="">reply</NavLink>
             <NavLink to="">note</NavLink>
           </div>
           <FontAwesomeIcon icon={faCircleQuestion} />
         </div>
         <input type="text" />
-        <div className={cx("more")}>
-          <div className={cx("file")}>
+        <div className={cx("message__more")}>
+          <div className={cx("message__more__file")}>
             <FontAwesomeIcon icon={faFileImage} />
             <FontAwesomeIcon icon={faBookmark} />
             <FontAwesomeIcon icon={faCopy} />
@@ -116,7 +116,7 @@ const Home = () => {
             <FontAwesomeIcon icon={faLocation} />
             <FontAwesomeIcon icon={faStarHalfStroke} />
           </div>
-          <div className={cx("action")}>
+          <div className={cx("message__more__action")}>
             <FontAwesomeIcon icon={faFileUpload} />
             <FontAwesomeIcon icon={faMicrophone} />
             <button>Send</button>
