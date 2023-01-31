@@ -5,7 +5,7 @@
   align-items: center;
 }
 
-.popper-wrapper {
+.popper--wrapper {
   height: 150px;
   display: flex;
   align-items: center;
@@ -63,7 +63,7 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
-    img:hover {
+    &--avatar:hover {
       cursor: pointer;
     }
 
@@ -77,7 +77,7 @@
       font-size: 2rem;
     }
 
-    .more {
+    &more {
       width: 60%;
       display: flex;
       flex-direction: row;
@@ -90,7 +90,7 @@
     }
   }
 
-  .notification-list {
+  .notification {
     margin-top: 50px;
     display: flex;
     flex-direction: column;
@@ -99,7 +99,7 @@
     gap: 30px;
     height: 50px;
 
-    .notification-item {
+    &__item {
       width: 100%;
       display: flex;
       flex-direction: row;
@@ -149,12 +149,12 @@
   .content {
     margin-top: 70px;
 
-    .media {
+    &__media {
       display: flex;
       flex-direction: column;
       align-items: center;
 
-      .item {
+      &__item {
         margin-top: 10px;
         display: flex;
         flex-direction: row;
@@ -171,11 +171,11 @@
       }
     }
 
-    .file {
+    &__file {
       margin-top: 30px;
       width: 100%;
 
-      .file-content {
+      &__content {
         margin-top: 10px;
         width: 100%;
         display: flex;

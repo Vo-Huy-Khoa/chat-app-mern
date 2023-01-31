@@ -49,11 +49,13 @@ const Sidebar = () => {
   return (
     <div className={cx("wrapper")}>
       <div className={cx("header")}>
-        <div className={cx("header-content")}>
+        <div className={cx("header__content")}>
           <Image width="50px" height="50px" src={currentUser.avatar} />
-          <h1 className={cx("header-title")}>{currentUser.username}</h1>
+          <h1 className={cx("header__content--title")}>
+            {currentUser.username}
+          </h1>
         </div>
-        <div className={cx("header-notification")}>
+        <div className={cx("header__notification")}>
           <NotificationIcon width="45px" height="45px" />
           <span>1</span>
         </div>
@@ -75,8 +77,11 @@ const Sidebar = () => {
         )}
       >
         <div className={cx("status")}>
-          <div className={cx("search")}>
-            <FontAwesomeIcon className={cx("icon-search")} icon={faSearch} />
+          <div className={cx("status__search")}>
+            <FontAwesomeIcon
+              className={cx("status__search--icon-search")}
+              icon={faSearch}
+            />
             <input
               onChange={(e) => {
                 setValueSearch(e.currentTarget.value);
@@ -85,13 +90,13 @@ const Sidebar = () => {
               placeholder="Search"
             />
             <FontAwesomeIcon
-              className={cx("icon-delete")}
+              className={cx("status__search--icon-delete")}
               icon={faDeleteLeft}
             />
           </div>
-          {/* <div className={cx("status-content")}>
-            <span className={cx("status-title", "text-white")}>Favorites</span>
-            <div className={cx("status-list")}>
+          {/* <div className={cx("status__content")}>
+            <span className={cx("status__content--title", "text-white")}>Favorites</span>
+            <div className={cx("status__list")}>
               {listUserSearch.map((user, key) => {
                 return <AccountItem key={key} data={user} />;
               })}
@@ -99,7 +104,7 @@ const Sidebar = () => {
           </div> */}
         </div>
       </HeadlessTippy>
-      <div className={cx("message-list")}>
+      <div className={cx("message__list")}>
         {listMessage.map((message, index) => {
           return <AccountMessage key={index} data={message} />;
         })}

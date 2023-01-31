@@ -2,6 +2,7 @@ import moment from "moment";
 import styles from "./account.module.scss";
 import classNames from "classnames/bind";
 import Image from "../Image";
+import { createContext, useState } from "react";
 
 const cx = classNames.bind(styles);
 
@@ -10,14 +11,27 @@ const AccountItem = ({ data }: any) => {
     <div className={cx("account-item")}>
       <Image src={data?.avatar} />
       <div className={cx("content")}>
-        <span className={cx("username")}>{data.username}</span>
-        <span className={cx("fullname")}>{data.fullname}</span>
+        <span className={cx("username")}>{data?.username}</span>
+        <span className={cx("fullname")}>{data?.fullname}</span>
       </div>
     </div>
   );
 };
+const UserContext = createContext({
+  avatar: "",
+  fullname: "",
+  username: "",
+  email: "",
+});
+
+function CountProvider({ props }: any) {
+  const [count, setCount] = useState(0);
+  const value = [count, setCount];
+  return <UserContext.Provider value={value} {...props} />;
+}
 
 const AccountMessage = ({ data }: any) => {
+  console.log(data);
   return (
     <div className={cx("account-message")}>
       <Image width="60px" height="60px" src={data?.receiverID?.avatar} />
@@ -26,7 +40,7 @@ const AccountMessage = ({ data }: any) => {
           {data?.receiverID?.username}
         </h2>
         <span className={cx("react", "text-white")}>{data?.react}</span>
-        <p className={cx("message", "text-gray")}>{data.message}</p>
+        <p className={cx("message", "text-gray")}>{data?.message}</p>
       </div>
       <div className={cx("more")}>
         <span className={cx("text-gray")}>
