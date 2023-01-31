@@ -86,7 +86,7 @@ const Notification = () => {
       </div>
       <div className={cx("content")}>
         <div className={cx("content__media")}>
-          <div className={cx("content__media__heading")}>
+          <div className={cx("content__heading")}>
             <span>share medias</span>
             <NavLink to="">View all</NavLink>
           </div>
@@ -97,28 +97,28 @@ const Notification = () => {
           </div>
         </div>
         <div className={cx("content__file")}>
-          <div className={cx("content__file__heading")}>
+          <div className={cx("content__heading")}>
             <span>share files</span>
             <NavLink to="">View all</NavLink>
           </div>
           <div className={cx("content__file__content")}>
-            <div className={cx("item")}>
+            <div className={cx("content__file__content__item")}>
               <img src={currentUser.avatar} alt="" />
-              <div className={cx("text")}>
+              <div className={cx("content__file__content__item__text")}>
                 <span>{currentUser.fullname}</span>
                 <p>{currentUser.username}</p>
               </div>
             </div>
-            <div className={cx("item")}>
+            <div className={cx("content__file__content__item")}>
               <img src={currentUser.avatar} alt="" />
-              <div className={cx("text")}>
+              <div className={cx("content__file__content__item__text")}>
                 <span>{currentUser.fullname}</span>
                 <p>{currentUser.username}</p>
               </div>
             </div>
-            <div className={cx("item")}>
+            <div className={cx("content__file__content__item")}>
               <img src={currentUser.avatar} alt="" />
-              <div className={cx("text")}>
+              <div className={cx("content__file__content__item__text")}>
                 <span>{currentUser.fullname}</span>
                 <p>{currentUser.username}</p>
               </div>

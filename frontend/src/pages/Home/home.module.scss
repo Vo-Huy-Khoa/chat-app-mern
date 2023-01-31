@@ -10,7 +10,7 @@
     background-color: var(--primary);
     border-radius: 0 0 5px 5px;
 
-    .content {
+    &__content {
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -20,7 +20,7 @@
       height: 100%;
       background-color: transparent;
 
-      .text {
+      &__text {
         span {
           color: var(--white);
           font-size: 3rem;
@@ -39,7 +39,7 @@
     height: 100vh;
     background-color: #17151c;
 
-    .message-list {
+    &__message {
       margin-top: 80px;
       padding: 40px;
       width: 100%;
@@ -48,32 +48,31 @@
       flex-direction: column;
       gap: 20px;
       overflow-y: scroll;
-    }
+      &__item {
+        width: 100%;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        gap: 10px;
 
-    .message-item {
-      width: 100%;
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-      gap: 10px;
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
 
-      img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        object-fit: cover;
+        &__chat {
+          padding: 10px;
+          max-width: 60%;
+          height: 100%;
+          font-size: 2rem;
+          display: flex;
+          align-items: flex-end;
+          gap: 20px;
+          border-radius: 15px;
+        }
       }
-    }
-
-    .message-chat {
-      padding: 10px;
-      max-width: 60%;
-      height: 100%;
-      font-size: 2rem;
-      display: flex;
-      align-items: flex-end;
-      gap: 20px;
-      border-radius: 15px;
     }
 
     .item-right {
@@ -140,14 +139,14 @@
     flex-direction: column;
     justify-content: space-between;
 
-    .heading {
+    &__heading {
       width: 100%;
       display: flex;
       justify-content: space-between;
       width: 100%;
       font-size: 1.5rem;
 
-      .heading-content {
+      &__content {
         display: flex;
         flex-direction: row;
         gap: 20px;
@@ -175,7 +174,7 @@
       border: none;
     }
 
-    .more {
+    &__more {
       width: 100%;
       display: flex;
       flex-direction: row;
@@ -188,13 +187,13 @@
         color: var(--gray);
       }
 
-      .file {
+      &__file {
         display: flex;
         flex-direction: row;
         gap: 15px;
       }
 
-      .action {
+      &__action {
         display: flex;
         flex-direction: row;
         align-items: center;
