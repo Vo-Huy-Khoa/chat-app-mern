@@ -23,6 +23,7 @@ const getListMessage = async () => {
   let userId: null = null;
   const user = sessionStorage.getItem("user") || "";
   if (user !== "") userId = JSON.parse(user).id;
+
   const response = await instanceAxios.post(
     `listMessage`,
     JSON.stringify({ senderID: userId })

@@ -29,7 +29,7 @@ const Notification = () => {
           placement="bottom"
           render={(attrs) => (
             <div className={cx("popper")} tabIndex={1} {...attrs}>
-              <PopperWrapper className={cx("popper-wrapper")}>
+              <PopperWrapper className={cx("popper--wrapper")}>
                 <ul>
                   <li>Profile</li>
                   <li>Settings</li>
@@ -55,7 +55,7 @@ const Notification = () => {
         >
           <div>
             <Image
-              className={cx("profile-avatar")}
+              className={cx("profile--avatar")}
               src={currentUser.avatar}
               width="70px"
               height="70px"
@@ -64,44 +64,44 @@ const Notification = () => {
         </HeadlessTippy>
         <h1>{currentUser.username}</h1>
         <h2>{currentUser.fullname}</h2>
-        <div className={cx("more")}>
+        <div className={cx("profile__more")}>
           <PhoneIcon />
           <UserAddIcon />
           <MoreIcon />
         </div>
       </div>
 
-      <div className={cx("notification-list")}>
-        <div className={cx("notification-item")}>
+      <div className={cx("notification")}>
+        <div className={cx("notification__item")}>
           <FontAwesomeIcon icon={faBell} />
           <h2>Notifications</h2>
           <FontAwesomeIcon icon={faToggleOff} />
           {/* <FontAwesomeIcon icon={faToggleOn} /> */}
         </div>
-        <div className={cx("notification-item")}>
+        <div className={cx("notification__item")}>
           <FontAwesomeIcon icon={faBell} />
           <h2>Bookmarks</h2>
           <button>16</button>
         </div>
       </div>
       <div className={cx("content")}>
-        <div className={cx("media")}>
-          <div className={cx("heading")}>
+        <div className={cx("content__media")}>
+          <div className={cx("content__media__heading")}>
             <span>share medias</span>
             <NavLink to="">View all</NavLink>
           </div>
-          <div className={cx("item")}>
+          <div className={cx("content__media__item")}>
             <Image src={currentUser.avatar} />
             <Image src={currentUser.avatar} />
             <Image src={currentUser.avatar} />
           </div>
         </div>
-        <div className={cx("file")}>
-          <div className={cx("heading")}>
+        <div className={cx("content__file")}>
+          <div className={cx("content__file__heading")}>
             <span>share files</span>
             <NavLink to="">View all</NavLink>
           </div>
-          <div className={cx("file-content")}>
+          <div className={cx("content__file__content")}>
             <div className={cx("item")}>
               <img src={currentUser.avatar} alt="" />
               <div className={cx("text")}>
