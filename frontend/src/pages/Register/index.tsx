@@ -55,11 +55,11 @@ const Register = () => {
         <img src={avatar} alt="" />
       </div>
       <div className={cx("register")}>
-        <div className={cx("heading")}>
+        <div className={cx("register__heading")}>
           <h1>Register</h1>
         </div>
-        <form className={cx("form_register")} onSubmit={handleSubmit}>
-          <div className={cx("form__item")}>
+        <form className={cx("register__form")} onSubmit={handleSubmit}>
+          <div className={cx("register__form__item")}>
             <label htmlFor="">Full Name</label>
             <input
               ref={fullNameRef}
@@ -68,7 +68,7 @@ const Register = () => {
               placeholder="Enter your name"
             />
           </div>
-          <div className={cx("form__item")}>
+          <div className={cx("register__form__item")}>
             <label htmlFor="">User Name</label>
             <input
               ref={usernameRef}
@@ -77,7 +77,7 @@ const Register = () => {
               placeholder="Enter your user name"
             />
           </div>
-          <div className={cx("form__item")}>
+          <div className={cx("register__form__item")}>
             <label htmlFor="">Email</label>
             <input
               ref={emailRef}
@@ -86,7 +86,7 @@ const Register = () => {
               placeholder="Enter your email"
             />
           </div>
-          <div className={cx("form__item")}>
+          <div className={cx("register__form__item")}>
             <label htmlFor="">Password</label>
             <input
               ref={passwordRef}
@@ -98,7 +98,7 @@ const Register = () => {
 
           <button type="submit">Register</button>
         </form>
-        <div className={cx("link-login")}>
+        <div className={cx("register__link")}>
           <NavLink to="/login">or Login?</NavLink>
         </div>
       </div>

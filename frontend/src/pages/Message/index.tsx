@@ -4,7 +4,7 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 const Message = () => {
-  return <div>Message</div>;
+  return <div className={cx("")}>Message</div>;
 };
 
 export default Message;
