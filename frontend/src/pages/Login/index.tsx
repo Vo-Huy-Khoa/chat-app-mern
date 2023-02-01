@@ -1,8 +1,8 @@
-import styles from "./login.module.scss";
-import { FacebookIcon, GoogleIcon, GithubIcon } from "../../components/Icon";
 import classNames from "classnames/bind";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import { FacebookIcon, GoogleIcon, GithubIcon } from "../../components/Icon";
+import styles from "./login.module.scss";
 import { handleLogin } from "../../services/auth";
 
 const cx = classNames.bind(styles);
@@ -26,12 +26,11 @@ const Login = () => {
     e.preventDefault();
     try {
       handleLogin(body)
-        .then((response) => {
+        .then(() => {
           navigate("/");
         })
         .catch((error) => {
           console.log(error);
-
           alert("Login Fail!");
         });
     } catch (err) {
@@ -44,9 +43,9 @@ const Login = () => {
         <div className={cx("login__heading")}>
           <h1>Login</h1>
         </div>
-        <div className={cx("login__form")}>
-          <form className={cx("form_login")} onSubmit={handleSubmit}>
-            <div className={cx("form__item")}>
+        <div className={cx("login__content")}>
+          <form className={cx("login__content__main")} onSubmit={handleSubmit}>
+            <div className={cx("login__content__main__item")}>
               <label htmlFor="username">username</label>
               <input
                 ref={userRef}
@@ -55,7 +54,7 @@ const Login = () => {
                 placeholder="Type your username..."
               />
             </div>
-            <div className={cx("form__item")}>
+            <div className={cx("login__content__main__item")}>
               <label htmlFor="password">password</label>
               <input
                 ref={passwordRef}
@@ -64,15 +63,15 @@ const Login = () => {
                 placeholder="Type your password..."
               />
             </div>
-            <NavLink className={cx("form--forget-password")} to="">
+            <NavLink className={cx("login__content__main__forget")} to="">
               <span>Forget password?</span>
             </NavLink>
             <button>Login</button>
           </form>
         </div>
-        <div className={cx("signup")}>
+        <div className={cx("login__signup")}>
           <span>Or sign up using</span>
-          <div className={cx("icon")}>
+          <div className={cx("login__signup__icon")}>
             <FacebookIcon />
             <GoogleIcon />
             <GithubIcon />

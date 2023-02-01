@@ -1,16 +1,11 @@
-import styles from './profile.module.scss';
+import styles from "./profile.module.scss";
 
-import classNames from 'classnames/bind';
+import classNames from "classnames/bind";
 
 const cx = classNames.bind(styles);
 
-
-const Profile = ()=>{
-    return(
-        <div className="container">
-            profile
-        </div>
-    )
-}
+const Profile = () => {
+  return <div className={cx("container")}>profile</div>;
+};
 
 export default Profile;

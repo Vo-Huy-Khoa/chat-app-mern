@@ -15,8 +15,8 @@ import {
   faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
-import { UserContext } from "../../providers";
+import { useContext, useEffect, useState } from "react";
+import { UserContext, ListMessageContext } from "../../providers";
 
 const cx = classNames.bind(styles);
 
@@ -31,6 +31,8 @@ const profile = {
 
 const Home = () => {
   const currentUser = useContext(UserContext);
+  const listMessage = useContext(ListMessageContext);
+  console.log(listMessage);
 
   return (
     <div className={cx("wrapper")}>
