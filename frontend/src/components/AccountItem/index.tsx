@@ -17,21 +17,10 @@ const AccountItem = ({ data }: any) => {
     </div>
   );
 };
-const UserContext = createContext({
-  avatar: "",
-  fullname: "",
-  username: "",
-  email: "",
-});
 
-function CountProvider({ props }: any) {
-  const [count, setCount] = useState(0);
-  const value = [count, setCount];
-  return <UserContext.Provider value={value} {...props} />;
-}
+const messageContext = createContext();
 
 const AccountMessage = ({ data }: any) => {
-  console.log(data);
   return (
     <div className={cx("account-message")}>
       <Image width="60px" height="60px" src={data?.receiverID?.avatar} />

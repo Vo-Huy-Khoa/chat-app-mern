@@ -31,4 +31,12 @@ const getListMessage = async () => {
   return response;
 };
 
-export { getProfile, handleSearch, getListMessage };
+const getMessage = async ({ senderID, receiverID }: any) => {
+  const response = await instanceAxios.post(
+    `message`,
+    JSON.stringify({ senderID, receiverID })
+  );
+  return response;
+};
+
+export { getProfile, handleSearch, getListMessage, getMessage };

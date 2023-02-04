@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { IUser } from "../models";
+import { IUser } from "../types";
 import { getProfile } from "../services";
 
 const UserContext = createContext({
