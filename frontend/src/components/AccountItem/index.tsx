@@ -3,6 +3,7 @@ import styles from "./account.module.scss";
 import classNames from "classnames/bind";
 import Image from "../Image";
 import { createContext, useState } from "react";
+import { getMessage } from "../../services";
 
 const cx = classNames.bind(styles);
 
@@ -18,11 +19,18 @@ const AccountItem = ({ data }: any) => {
   );
 };
 
-const messageContext = createContext();
-
 const AccountMessage = ({ data }: any) => {
+  const senderID = data.senderID;
+  const receiverID = data.receiverID._id;
+  const [message, setMessage] = useState([]);
+  const handleSubmit = () => {
+    getMessage(senderID, receiverID).then((response) => {
+      setMessage(response.data);
+    });
+  };
+
   return (
-    <div className={cx("account-message")}>
+    <div className={cx("account-message")} onClick={handleSubmit}>
       <Image width="60px" height="60px" src={data?.receiverID?.avatar} />
       <div className={cx("content")}>
         <h2 className={cx("name", "text-white")}>

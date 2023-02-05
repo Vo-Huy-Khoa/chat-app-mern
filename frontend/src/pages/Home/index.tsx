@@ -14,7 +14,7 @@ import {
   faMicrophone,
   faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../providers";
 
@@ -123,6 +123,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Outlet />
     </div>
   );
 };

@@ -12,6 +12,7 @@ import { Wrapper as PopperWrapper } from "../../components/Popper";
 import { useContext } from "react";
 import { UserContext } from "../../providers";
 import { handleSearch, getListMessage } from "../../services";
+import { Outlet } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 

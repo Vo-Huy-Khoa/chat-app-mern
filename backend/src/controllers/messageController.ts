@@ -36,10 +36,8 @@ class MessageController {
     try {
       const message = await MessageModel.find(
         {
-          $or: [
-            { senderID: req.body.senderID },
-            { receiverID: req.body.receiverID },
-          ],
+          senderID: req.body.senderID,
+          receiverID: req.body.receiverID,
         },
         {
           _id: false,
