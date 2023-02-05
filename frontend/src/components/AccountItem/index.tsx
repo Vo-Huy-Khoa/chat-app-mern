@@ -19,30 +19,31 @@ const AccountItem = ({ data }: any) => {
   );
 };
 
-const AccountMessage = ({ data }: any) => {
-  const senderID = data.senderID;
-  const receiverID = data.receiverID._id;
-  const [message, setMessage] = useState([]);
+const AccountMessage = ({ ...rest }) => {
+  const { listMessage, message } = rest;
+  const senderID = message.senderID;
+  const receiverID = message.receiverID._id;
   const handleSubmit = () => {
-    getMessage(senderID, receiverID).then((response) => {
-      setMessage(response.data);
+    const selectMessage = listMessage.find((message: any) => {
+      return message.senderID === senderID && message.receiverID === receiverID;
     });
+    console.log(selectMessage);
   };
 
   return (
     <div className={cx("account-message")} onClick={handleSubmit}>
-      <Image width="60px" height="60px" src={data?.receiverID?.avatar} />
+      <Image width="60px" height="60px" src={message?.receiverID?.avatar} />
       <div className={cx("content")}>
         <h2 className={cx("name", "text-white")}>
-          {data?.receiverID?.username}
+          {message?.receiverID?.username}
         </h2>
-        <span className={cx("react", "text-white")}>{data?.react}</span>
-        <p className={cx("message", "text-gray")}>{data?.message}</p>
+        <span className={cx("react", "text-white")}>{message?.react}</span>
+        <p className={cx("message", "text-gray")}>{message?.message}</p>
       </div>
       <div className={cx("more")}>
         <span className={cx("text-gray")}>
           {/* {moment(data?.updateAt).format("YYYY-MM-DD HH:mm:ss")} */}
-          {moment(data?.updateAt).format("HH:mm")}
+          {moment(message?.updateAt).format("HH:mm")}
         </span>
       </div>
     </div>
