@@ -2,9 +2,10 @@ import classNames from "classnames/bind";
 import styles from "./DefaultLayout.module.scss";
 import Sidebar from "../sidebar";
 import Notification from "../notification";
-import { useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserProvider } from "../../providers";
+import { MessageProvider } from "../../providers";
 
 const cx = classNames.bind(styles);
 
@@ -27,7 +28,9 @@ const DefaultLayout: React.FC<Props> = ({ children }): any => {
         <div className={cx("sidebar", "fixed")}>
           <Sidebar />
         </div>
-        <div className={cx("content", "fixed")}>{children}</div>
+        <MessageProvider>
+          <div className={cx("content", "fixed")}>{children}</div>
+        </MessageProvider>
         <div className={cx("notification", "fixed")}>
           <Notification />
         </div>

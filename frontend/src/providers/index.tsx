@@ -9,28 +9,6 @@ const UserContext = createContext({
   email: "",
 });
 
-const ListMessageContext = createContext([]);
-
-function ListMessageProvider({ children }: any) {
-  const [listMessage, setListMessage] = useState([]);
-
-  useEffect(() => {
-    getProfile()
-      .then((res) => {
-        setListMessage(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  return (
-    <ListMessageContext.Provider value={listMessage}>
-      <div>{children}</div>
-    </ListMessageContext.Provider>
-  );
-}
-
 function UserProvider({ children }: any) {
   const [currentUser, setCurrentUser] = useState<IUser>({
     avatar: "",
@@ -56,4 +34,16 @@ function UserProvider({ children }: any) {
   );
 }
 
-export { UserContext, UserProvider, ListMessageContext, ListMessageProvider };
+const MessageContext = createContext([]);
+
+function MessageProvider({ children }: any) {
+  const [selectMessage, getSelectMessage] = useState<never[]>([]);
+
+  return (
+    <MessageContext.Provider value={selectMessage}>
+      <div>{children}</div>
+    </MessageContext.Provider>
+  );
+}
+
+export { UserContext, UserProvider, MessageContext, MessageProvider };
