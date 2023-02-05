@@ -24,6 +24,14 @@ const Sidebar = () => {
   const [listUserSearch, setListSearch] = useState([]);
   const [listMessage, setListMessage] = useState([]);
 
+  let uniquelistMessage = Array.from(
+    new Map(
+      listMessage.map((item: any) => [item.receiverID._id, item])
+    ).values()
+  );
+
+  console.log(uniquelistMessage);
+
   useEffect(() => {
     if (!debounceValue.trim()) {
       return;
@@ -106,8 +114,14 @@ const Sidebar = () => {
         </div>
       </HeadlessTippy>
       <div className={cx("message__list")}>
-        {listMessage.map((message, index) => {
-          return <AccountMessage key={index} data={message} />;
+        {uniquelistMessage.map((message: any, index) => {
+          return (
+            <AccountMessage
+              key={index}
+              listMessage={listMessage}
+              message={message}
+            />
+          );
         })}
       </div>
     </div>
