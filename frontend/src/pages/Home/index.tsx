@@ -16,7 +16,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink, Outlet } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../../providers";
+import { UserContext, MessageContext } from "../../providers";
 
 const cx = classNames.bind(styles);
 
@@ -31,6 +31,8 @@ const profile = {
 
 const Home = () => {
   const currentUser = useContext(UserContext);
+  const { selectMessage } = useContext(MessageContext);
+  console.log(selectMessage);
 
   return (
     <div className={cx("wrapper")}>
@@ -46,54 +48,24 @@ const Home = () => {
 
       <div className={cx("content")}>
         <div className={cx("content__message")}>
-          <div className={cx("content__message__item", "item-right")}>
-            <Image src={profile.avatar} />
-            <div className={cx("me", "content__message__item__chat")}>
-              <p>{profile.message}</p>
-            </div>
-          </div>
-          <div className={cx("content__message__item", "item-left")}>
-            <Image src={profile.avatar} />
-            <div className={cx("your", "content__message__item__chat")}>
-              <p>{profile.message}</p>
-            </div>
-          </div>
-          <div className={cx("content__message__item", "item-right")}>
-            <Image src={profile.avatar} />
-            <div className={cx("me", "content__message__item__chat")}>
-              <p>{profile.message}</p>
-            </div>
-          </div>
-          <div className={cx("content__message__item", "item-left")}>
-            <Image src={profile.avatar} />
-            <div className={cx("your", "content__message__item__chat")}>
-              <p>{profile.message}</p>
-            </div>
-          </div>
-          <div className={cx("content__message__item", "item-right")}>
-            <Image src={profile.avatar} />
-            <div className={cx("me", "content__message__item__chat")}>
-              <p>{profile.message}</p>
-            </div>
-          </div>
-          <div className={cx("content__message__item", "item-left")}>
-            <Image src={profile.avatar} />
-            <div className={cx("your", "content__message__item__chat")}>
-              <p>{profile.message}</p>
-            </div>
-          </div>
-          <div className={cx("content__message__item", "item-right")}>
-            <Image src={profile.avatar} />
-            <div className={cx("me", "content__message__item__chat")}>
-              <p>{profile.message}</p>
-            </div>
-          </div>
-          <div className={cx("content__message__item", "item-left")}>
-            <Image src={profile.avatar} />
-            <div className={cx("your", "content__message__item__chat")}>
-              <p>{profile.message}</p>
-            </div>
-          </div>
+          {selectMessage.map((message) => {
+            return (
+              <>
+                <div className={cx("content__message__item", "item-left")}>
+                  <Image src={message.receiverID.avatar} />
+                  <div className={cx("your", "content__message__item__chat")}>
+                    <p>{message.message}</p>
+                  </div>
+                </div>
+                <div className={cx("content__message__item", "item-right")}>
+                  <Image src={message.receiverID.avatar} />
+                  <div className={cx("me", "content__message__item__chat")}>
+                    <p>{message.message}</p>
+                  </div>
+                </div>
+              </>
+            );
+          })}
         </div>
       </div>
 

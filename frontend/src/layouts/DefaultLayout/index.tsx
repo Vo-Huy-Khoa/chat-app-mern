@@ -24,17 +24,18 @@ const DefaultLayout: React.FC<Props> = ({ children }): any => {
 
   return (
     <UserProvider>
-      <div className={cx("container")}>
-        <div className={cx("sidebar", "fixed")}>
-          <Sidebar />
-        </div>
-        <MessageProvider>
+      <MessageProvider>
+        <div className={cx("container")}>
+          <div className={cx("sidebar", "fixed")}>
+            <Sidebar />
+          </div>
+
           <div className={cx("content", "fixed")}>{children}</div>
-        </MessageProvider>
-        <div className={cx("notification", "fixed")}>
-          <Notification />
+          <div className={cx("notification", "fixed")}>
+            <Notification />
+          </div>
         </div>
-      </div>
+      </MessageProvider>
     </UserProvider>
   );
 };

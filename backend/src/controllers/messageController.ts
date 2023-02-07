@@ -2,9 +2,15 @@ import MessageModel from "../models/Message";
 import { Request, Response } from "express";
 
 class MessageController {
-  async getListOfUsers(req: Request, res: Response) {
+  async getListMessage(req: Request, res: Response) {
     try {
-      await MessageModel.find({ senderID: req.body.senderID })
+      await MessageModel.find({
+        $or: [
+          { senderID: req.body.senderID },
+          { receiverID: req.body.receiverID },
+        ],
+      })
+
         .populate("receiverID")
         .then((listMessage) => {
           res.status(200).json(listMessage);

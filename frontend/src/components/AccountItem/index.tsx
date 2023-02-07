@@ -2,8 +2,8 @@ import moment from "moment";
 import styles from "./account.module.scss";
 import classNames from "classnames/bind";
 import Image from "../Image";
-import { createContext, useState } from "react";
-import { getMessage } from "../../services";
+import { createContext, useContext, useState } from "react";
+import { MessageContext } from "../../providers";
 
 const cx = classNames.bind(styles);
 
@@ -20,14 +20,18 @@ const AccountItem = ({ data }: any) => {
 };
 
 const AccountMessage = ({ ...rest }) => {
+  const { getSelectMessage } = useContext(MessageContext);
   const { listMessage, message } = rest;
   const senderID = message.senderID;
   const receiverID = message.receiverID._id;
   const handleSubmit = () => {
-    const selectMessage = listMessage.find((message: any) => {
-      return message.senderID === senderID && message.receiverID === receiverID;
+    const Message = listMessage.filter((message: any) => {
+      return (
+        message.senderID === senderID && message.receiverID._id === receiverID
+      );
     });
-    console.log(selectMessage);
+
+    getSelectMessage(Message);
   };
 
   return (
