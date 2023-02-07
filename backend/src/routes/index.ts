@@ -19,7 +19,7 @@ const initRoute = (app: express.Application) => {
   router.post(
     "/listMessage",
     Token.authToken,
-    messageController.getListOfUsers
+    messageController.getListMessage
   );
   router.post("/message", Token.authToken, messageController.getMessage);
   router.post(

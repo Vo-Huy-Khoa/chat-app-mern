@@ -1,6 +1,36 @@
 # I. User
 @refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRoYW5odGh1eSIsImlhdCI6MTY3NDcyNTI2MX0.WttXYRfnVlQuZTPqlE9JSdpwsu91t_xYvdYOyQzI7wo
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjkzYTdhNGIxYWRmMWU2OWI1NzQyZCIsInVzZXJuYW1lIjoidGhhbmh0aHV5IiwiZW1haWwiOiJ0aGFuaHRodXlAZ21haWwuY29tIiwiaWF0IjoxNjc1NTczMzIyLCJleHAiOjE2NzU1NzM0NDJ9._159bF_duNIjM1qeMdq28xQ0DT9kjL-0MdeG3BNBF-c
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjkzYTdhNGIxYWRmMWU2OWI1NzQyZCIsInVzZXJuYW1lIjoidGhhbmh0aHV5IiwiZW1haWwiOiJ0aGFuaHRodXlAZ21haWwuY29tIiwiaWF0IjoxNjc1NzgxOTQ5LCJleHAiOjE2NzU3ODIwNjl9.FTzuWNwlKZWEplzDVRJt95J1Fud7EVPZDYnsPLV_YxI
+
+### login
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+    "username": "thanhthuy",
+    "password": "1"
+}
+### logout
+POST http://localhost:3001/api/logout
+Content-Type: application/json
+
+{
+    "id": "63b93a7a4b1adf1e69b5742d"
+}
+
+### register
+POST http://localhost:3001/api/register
+Content-Type: application/json
+
+{
+    "username": "khoavh",
+    "email": "khoavh@gmail.com",
+    "password": "1",
+    "avatar": "https://cdn.diemnhangroup.com/seoulcenter/2022/11/gai-xinh-2.jpg"
+}
+
+### List All USer
+GET http://localhost:3001/api/users
 Authorization: Beaer {{token}}
 
 
@@ -24,20 +54,16 @@ Content-Type: application/json
     "senderID": "63b93a7a4b1adf1e69b5742d",
     "receiverID": "63d5360bbfe103866f4ee972"
 }
-### login
-POST http://localhost:3001/api/login
+
+###  Create Message
+POST http://localhost:3001/api/createMessage
+Authorization: Beaer {{token}}
 Content-Type: application/json
 
 {
-    "username": "thanhthuy",
-    "password": "1"
-}
-### logout
-POST http://localhost:3001/api/logout
-Content-Type: application/json
-
-{
-    "id": "63b93a7a4b1adf1e69b5742d"
+    "message": "Khoa gui",
+    "senderID": "63d5360bbfe103866f4ee972",
+    "receiverID": "63b93a7a4b1adf1e69b5742d"
 }
 
 ### refreshToken
@@ -58,16 +84,7 @@ Content-Type: application/json
 {
     "username": "khoavh"
 }
-### register
-POST http://localhost:3001/api/register
-Content-Type: application/json
 
-{
-    "username": "khoavh",
-    "email": "khoavh@gmail.com",
-    "password": "1",
-    "avatar": "https://cdn.diemnhangroup.com/seoulcenter/2022/11/gai-xinh-2.jpg"
-}
 
 ### Destroy All
 DELETE http://localhost:3001/api/user/destroy

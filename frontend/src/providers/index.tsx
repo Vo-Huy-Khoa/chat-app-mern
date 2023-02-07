@@ -34,13 +34,34 @@ function UserProvider({ children }: any) {
   );
 }
 
-const MessageContext = createContext([]);
+interface User {
+  id: string;
+  avatar: string;
+  username: String;
+}
+interface selectMessage {
+  id: number;
+  message: string;
+  receiverID: User;
+}
+
+interface selectMessageType extends Array<selectMessage> {}
+
+interface MessageContextValue {
+  selectMessage: selectMessageType;
+  getSelectMessage: React.Dispatch<React.SetStateAction<selectMessageType>>;
+}
+
+const MessageContext = createContext<MessageContextValue>({
+  selectMessage: [],
+  getSelectMessage: () => {},
+});
 
 function MessageProvider({ children }: any) {
-  const [selectMessage, getSelectMessage] = useState<never[]>([]);
+  const [selectMessage, getSelectMessage] = useState<selectMessageType>([]);
 
   return (
-    <MessageContext.Provider value={selectMessage}>
+    <MessageContext.Provider value={{ selectMessage, getSelectMessage }}>
       <div>{children}</div>
     </MessageContext.Provider>
   );
