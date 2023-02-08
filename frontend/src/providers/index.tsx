@@ -1,8 +1,9 @@
 import { createContext, useEffect, useState } from "react";
-import { IUser } from "../types";
+import { IUser, MessageContextValue, selectMessageType } from "../types";
 import { getProfile } from "../services";
 
 const UserContext = createContext({
+  _id: "",
   avatar: "",
   fullname: "",
   username: "",
@@ -11,6 +12,7 @@ const UserContext = createContext({
 
 function UserProvider({ children }: any) {
   const [currentUser, setCurrentUser] = useState<IUser>({
+    _id: "",
     avatar: "",
     fullname: "",
     username: "",
@@ -32,24 +34,6 @@ function UserProvider({ children }: any) {
       <div>{children}</div>
     </UserContext.Provider>
   );
-}
-
-interface User {
-  id: string;
-  avatar: string;
-  username: String;
-}
-interface selectMessage {
-  id: number;
-  message: string;
-  receiverID: User;
-}
-
-interface selectMessageType extends Array<selectMessage> {}
-
-interface MessageContextValue {
-  selectMessage: selectMessageType;
-  getSelectMessage: React.Dispatch<React.SetStateAction<selectMessageType>>;
 }
 
 const MessageContext = createContext<MessageContextValue>({

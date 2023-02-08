@@ -10,7 +10,7 @@ class MessageController {
           { receiverID: req.body.receiverID },
         ],
       })
-
+        .populate("senderID")
         .populate("receiverID")
         .then((listMessage) => {
           res.status(200).json(listMessage);

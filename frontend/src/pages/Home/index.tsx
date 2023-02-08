@@ -20,19 +20,9 @@ import { UserContext, MessageContext } from "../../providers";
 
 const cx = classNames.bind(styles);
 
-const profile = {
-  avatar:
-    "https://bedental.vn/wp-content/uploads/2022/11/nguoi-mau-Shin-Jae-Eun.jpg",
-  name: "vo huy Khoa",
-  username: "khoavh",
-  message:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacinia fringilla quam, vel imperdiet felis faucibus in. Quisque commodo tortor non maximus vehicula. Sed imperdiet felis a velit convallis, a elementum quam cursus.",
-};
-
 const Home = () => {
   const currentUser = useContext(UserContext);
   const { selectMessage } = useContext(MessageContext);
-  console.log(selectMessage);
 
   return (
     <div className={cx("wrapper")}>
@@ -58,7 +48,7 @@ const Home = () => {
                   </div>
                 </div>
                 <div className={cx("content__message__item", "item-right")}>
-                  <Image src={message.receiverID.avatar} />
+                  <Image src={message.senderID.avatar} />
                   <div className={cx("me", "content__message__item__chat")}>
                     <p>{message.message}</p>
                   </div>
