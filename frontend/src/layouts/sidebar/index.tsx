@@ -12,24 +12,33 @@ import { Wrapper as PopperWrapper } from "../../components/Popper";
 import { useContext } from "react";
 import { UserContext } from "../../providers";
 import { handleSearch, getListMessage } from "../../services";
+import { IMessage } from "../../types";
 
 const cx = classNames.bind(styles);
 
 const Sidebar = () => {
   const currentUser = useContext(UserContext);
-
   const [valueSearch, setValueSearch] = useState("");
   const debounceValue = useDebounce(valueSearch, 500);
   const [listUserSearch, setListSearch] = useState([]);
   const [listMessage, setListMessage] = useState([]);
 
+  const receiverID = listMessage.filter((message: IMessage) => {
+    return message.receiverID._id === currentUser?._id;
+  });
+  const senderID = listMessage.filter((message: IMessage) => {
+    return message?.senderID._id === currentUser?._id;
+  });
+  const uniMessageUser = [...receiverID, ...senderID];
   let uniqueListMessage = Array.from(
     new Map(
-      listMessage.map((item: any) => [item.receiverID._id, item])
+      uniMessageUser.map((item: any) => [item.receiverID._id, item])
     ).values()
   );
 
-  console.log(listMessage);
+  const uniqueListMessage2 = uniqueListMessage.filter((message: IMessage) => {
+    return message.receiverID._id !== currentUser?._id;
+  });
 
   useEffect(() => {
     if (!debounceValue.trim()) {
@@ -113,11 +122,12 @@ const Sidebar = () => {
         </div>
       </HeadlessTippy>
       <div className={cx("message__list")}>
-        {uniqueListMessage.map((message: any, index) => {
+        {uniqueListMessage2.map((message: any, index) => {
           return (
             <AccountMessage
+              className={cx("message-item")}
               key={index}
-              listMessage={listMessage}
+              listMessage={uniMessageUser}
               message={message}
             />
           );
