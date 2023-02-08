@@ -23,6 +23,7 @@ const cx = classNames.bind(styles);
 const Home = () => {
   const currentUser = useContext(UserContext);
   const { selectMessage } = useContext(MessageContext);
+  console.log(selectMessage);
 
   return (
     <div className={cx("wrapper")}>
@@ -39,22 +40,25 @@ const Home = () => {
       <div className={cx("content")}>
         <div className={cx("content__message")}>
           {selectMessage.map((message) => {
-            return (
-              <>
+            if (message.senderID._id !== currentUser._id) {
+              return (
                 <div className={cx("content__message__item", "item-left")}>
-                  <Image src={message.receiverID.avatar} />
+                  <Image src={message.senderID.avatar} />
                   <div className={cx("your", "content__message__item__chat")}>
                     <p>{message.message}</p>
                   </div>
                 </div>
+              );
+            } else {
+              return (
                 <div className={cx("content__message__item", "item-right")}>
                   <Image src={message.senderID.avatar} />
                   <div className={cx("me", "content__message__item__chat")}>
                     <p>{message.message}</p>
                   </div>
                 </div>
-              </>
-            );
+              );
+            }
           })}
         </div>
       </div>
