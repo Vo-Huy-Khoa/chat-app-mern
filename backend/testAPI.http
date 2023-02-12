@@ -1,13 +1,13 @@
 # I. User
 @refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRoYW5odGh1eSIsImlhdCI6MTY3NDcyNTI2MX0.WttXYRfnVlQuZTPqlE9JSdpwsu91t_xYvdYOyQzI7wo
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjkzYTdhNGIxYWRmMWU2OWI1NzQyZCIsInVzZXJuYW1lIjoidGhhbmh0aHV5IiwiZW1haWwiOiJ0aGFuaHRodXlAZ21haWwuY29tIiwiaWF0IjoxNjc1NzgxOTQ5LCJleHAiOjE2NzU3ODIwNjl9.FTzuWNwlKZWEplzDVRJt95J1Fud7EVPZDYnsPLV_YxI
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjkzYTdhNGIxYWRmMWU2OWI1NzQyZCIsInVzZXJuYW1lIjoiYW5odGh5IiwiZW1haWwiOiJhbmh0aHlAZ21haWwuY29tIiwiaWF0IjoxNjc2MDk2Njg4LCJleHAiOjE2NzYwOTY4MDh9.kRWaC_2Kqdki66XN-L4E6-Tn6pNZj7iuMh5J6UiCtLI
 
 ### login
 POST http://localhost:3001/api/login
 Content-Type: application/json
 
 {
-    "username": "thanhthuy",
+    "username": "anhthy",
     "password": "1"
 }
 ### logout
@@ -55,16 +55,51 @@ Content-Type: application/json
     "receiverID": "63d5360bbfe103866f4ee972"
 }
 
-###  Create Message
+###  Create Message Thy
 POST http://localhost:3001/api/createMessage
 Authorization: Beaer {{token}}
 Content-Type: application/json
 
 {
-    "message": "Khoa gui",
+    "message": "Khoa van khoe chu?",
+    "senderID": "63b93a7a4b1adf1e69b5742d",
+    "receiverID": "63d5360bbfe103866f4ee972"
+}
+
+###  Create Message Khoa
+POST http://localhost:3001/api/createMessage
+Authorization: Beaer {{token}}
+Content-Type: application/json
+
+{
+    "message": "Van khoe, con Thy thi sao",
     "senderID": "63d5360bbfe103866f4ee972",
     "receiverID": "63b93a7a4b1adf1e69b5742d"
 }
+
+
+###  Create Message Thy
+POST http://localhost:3001/api/createMessage
+Authorization: Beaer {{token}}
+Content-Type: application/json
+
+{
+    "message": "Hello Khue",
+    "senderID": "63b93a7a4b1adf1e69b5742d",
+    "receiverID": "63d535fabfe103866f4ee970"
+}
+
+###  Create Message Khue
+POST http://localhost:3001/api/createMessage
+Authorization: Beaer {{token}}
+Content-Type: application/json
+
+{
+    "message": "Thy sao roi, khoe chu?",
+    "senderID": "63d535fabfe103866f4ee970",
+    "receiverID": "63b93a7a4b1adf1e69b5742d"
+}
+
 
 ### refreshToken
 POST http://localhost:3001/api/refreshToken

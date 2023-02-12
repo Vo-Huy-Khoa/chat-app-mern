@@ -11,6 +11,7 @@ export interface IMessage {
   senderID: IUser;
   receiverID: IUser;
   message: string;
+  createdAt: string;
 }
 
 export interface selectMessage {

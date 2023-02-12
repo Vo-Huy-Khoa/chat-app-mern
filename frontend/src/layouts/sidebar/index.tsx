@@ -29,10 +29,15 @@ const Sidebar = () => {
   const senderID = listMessage.filter((message: IMessage) => {
     return message?.senderID._id === currentUser?._id;
   });
-  const uniMessageUser = [...receiverID, ...senderID];
+
+  const uniMessageCurrentUser = [...receiverID, ...senderID];
+
   let uniqueListMessage = Array.from(
     new Map(
-      uniMessageUser.map((item: any) => [item.receiverID._id, item])
+      uniMessageCurrentUser.map((message: IMessage) => [
+        message.receiverID._id,
+        message,
+      ])
     ).values()
   );
 
@@ -122,12 +127,12 @@ const Sidebar = () => {
         </div>
       </HeadlessTippy>
       <div className={cx("message__list")}>
-        {uniqueListMessage2.map((message: any, index) => {
+        {uniqueListMessage2.map((message: IMessage, index) => {
           return (
             <AccountMessage
               className={cx("message-item")}
               key={index}
-              listMessage={uniMessageUser}
+              listMessage={uniMessageCurrentUser}
               message={message}
             />
           );

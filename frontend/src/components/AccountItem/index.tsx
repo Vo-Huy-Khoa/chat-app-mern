@@ -4,6 +4,7 @@ import classNames from "classnames/bind";
 import Image from "../Image";
 import { useContext } from "react";
 import { MessageContext } from "../../providers";
+import { IMessage } from "../../types";
 
 const cx = classNames.bind(styles);
 
@@ -22,8 +23,32 @@ const AccountItem = ({ data }: any) => {
 const AccountMessage = ({ ...rest }) => {
   const { getSelectMessage } = useContext(MessageContext);
   const { listMessage, message } = rest;
+
+  const receiverID = message?.receiverID?._id;
+  const senderID = message?.senderID?._id;
+
+  const listSenderID = listMessage.filter((message: IMessage) => {
+    return (
+      message.senderID._id === senderID && message.receiverID._id === receiverID
+    );
+  });
+
+  const listReceiverID = listMessage.filter((message: IMessage) => {
+    return (
+      message.senderID._id === receiverID && message.receiverID._id === senderID
+    );
+  });
+
+  const currentMessage = [...listSenderID, ...listReceiverID];
+
+  currentMessage.sort(
+    (a: IMessage, b: IMessage) =>
+      Date.parse(a.createdAt) - Date.parse(b.createdAt)
+  );
+  console.log(currentMessage);
+
   const handleSubmit = () => {
-    getSelectMessage(listMessage);
+    getSelectMessage(currentMessage);
   };
 
   return (
