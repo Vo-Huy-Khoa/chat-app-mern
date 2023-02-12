@@ -15,15 +15,23 @@ import {
   faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink, Outlet } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { UserContext, MessageContext } from "../../providers";
+import { IMessage } from "../../types";
 
 const cx = classNames.bind(styles);
 
 const Home = () => {
   const currentUser = useContext(UserContext);
   const { selectMessage } = useContext(MessageContext);
-  console.log(selectMessage);
+  const messageRef = useRef<HTMLInputElement>(null);
+  const currentMessage = messageRef.current?.value;
+  const handleCreateMessage = () => {
+    console.log(messageRef.current?.value);
+  };
+  useEffect(() => {
+    return () => {};
+  }, [currentMessage]);
 
   return (
     <div className={cx("wrapper")}>
@@ -39,10 +47,13 @@ const Home = () => {
 
       <div className={cx("content")}>
         <div className={cx("content__message")}>
-          {selectMessage.map((message) => {
+          {selectMessage.map((message, index) => {
             if (message.senderID._id !== currentUser._id) {
               return (
-                <div className={cx("content__message__item", "item-left")}>
+                <div
+                  key={index}
+                  className={cx("content__message__item", "item-left")}
+                >
                   <Image src={message.senderID.avatar} />
                   <div className={cx("your", "content__message__item__chat")}>
                     <p>{message.message}</p>
@@ -51,7 +62,10 @@ const Home = () => {
               );
             } else {
               return (
-                <div className={cx("content__message__item", "item-right")}>
+                <div
+                  key={index}
+                  className={cx("content__message__item", "item-right")}
+                >
                   <Image src={message.senderID.avatar} />
                   <div className={cx("me", "content__message__item__chat")}>
                     <p>{message.message}</p>
@@ -71,7 +85,7 @@ const Home = () => {
           </div>
           <FontAwesomeIcon icon={faCircleQuestion} />
         </div>
-        <input type="text" />
+        <input ref={messageRef} type="text" />
         <div className={cx("message__more")}>
           <div className={cx("message__more__file")}>
             <FontAwesomeIcon icon={faFileImage} />
@@ -85,7 +99,7 @@ const Home = () => {
           <div className={cx("message__more__action")}>
             <FontAwesomeIcon icon={faFileUpload} />
             <FontAwesomeIcon icon={faMicrophone} />
-            <button>Send</button>
+            <button onClick={handleCreateMessage}>Send</button>
           </div>
         </div>
       </div>
