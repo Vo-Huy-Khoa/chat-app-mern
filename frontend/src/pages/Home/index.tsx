@@ -15,9 +15,9 @@ import {
   faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink, Outlet } from "react-router-dom";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useRef } from "react";
 import { UserContext, MessageContext } from "../../providers";
-import { IMessage } from "../../types";
+import { createMessage } from "../../services";
 
 const cx = classNames.bind(styles);
 
@@ -25,13 +25,19 @@ const Home = () => {
   const currentUser = useContext(UserContext);
   const { selectMessage } = useContext(MessageContext);
   const messageRef = useRef<HTMLInputElement>(null);
-  const currentMessage = messageRef.current?.value;
+  const currentSenderID = currentUser?._id;
+  const ReceiverUser = selectMessage.find((message) => {
+    return message?.senderID?._id === currentSenderID;
+  });
+  const currentReceiverID = ReceiverUser?.receiverID?._id;
   const handleCreateMessage = () => {
-    console.log(messageRef.current?.value);
+    const message = messageRef.current?.value || "";
+    createMessage(currentSenderID, currentReceiverID, message).then(
+      (response) => {
+        console.log(response.data);
+      }
+    );
   };
-  useEffect(() => {
-    return () => {};
-  }, [currentMessage]);
 
   return (
     <div className={cx("wrapper")}>

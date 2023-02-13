@@ -29,13 +29,15 @@ const AccountMessage = ({ ...rest }) => {
 
   const listSenderID = listMessage.filter((message: IMessage) => {
     return (
-      message.senderID._id === senderID && message.receiverID._id === receiverID
+      message?.senderID?._id === senderID &&
+      message?.receiverID?._id === receiverID
     );
   });
 
   const listReceiverID = listMessage.filter((message: IMessage) => {
     return (
-      message.senderID._id === receiverID && message.receiverID._id === senderID
+      message?.senderID?._id === receiverID &&
+      message?.receiverID?._id === senderID
     );
   });
 
@@ -45,7 +47,6 @@ const AccountMessage = ({ ...rest }) => {
     (a: IMessage, b: IMessage) =>
       Date.parse(a.createdAt) - Date.parse(b.createdAt)
   );
-  console.log(currentMessage);
 
   const handleSubmit = () => {
     getSelectMessage(currentMessage);

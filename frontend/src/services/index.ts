@@ -39,4 +39,12 @@ const getMessage = async (senderID: any, receiverID: any) => {
   return response;
 };
 
-export { getProfile, handleSearch, getListMessage, getMessage };
+const createMessage = async (senderID: any, receiverID: any, message: any) => {
+  const response = await instanceAxios.post(
+    `createMessage`,
+    JSON.stringify({ senderID, receiverID, message })
+  );
+  return response;
+};
+
+export { getProfile, handleSearch, getListMessage, getMessage, createMessage };
