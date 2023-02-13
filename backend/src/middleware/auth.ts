@@ -64,8 +64,6 @@ const RefreshToken = async (req: Request, res: Response) => {
   await UserModel.findById({ _id: userId }).then((data) => {
     if (!data?.refreshToken === refreshToken) res.sendStatus(403);
     jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (err: any, data: any) => {
-      console.log(data);
-
       if (err) res.sendStatus(403);
       const accessToken = jwt.sign(
         { id: userId, username: data.username },

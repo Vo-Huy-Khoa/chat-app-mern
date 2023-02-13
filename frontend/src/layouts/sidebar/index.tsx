@@ -24,10 +24,10 @@ const Sidebar = () => {
   const [listMessage, setListMessage] = useState([]);
 
   const receiverID = listMessage.filter((message: IMessage) => {
-    return message.receiverID._id === currentUser?._id;
+    return message.receiverID?._id === currentUser?._id;
   });
   const senderID = listMessage.filter((message: IMessage) => {
-    return message?.senderID._id === currentUser?._id;
+    return message?.senderID?._id === currentUser?._id;
   });
 
   const uniMessageCurrentUser = [...receiverID, ...senderID];
@@ -35,14 +35,14 @@ const Sidebar = () => {
   let uniqueListMessage = Array.from(
     new Map(
       uniMessageCurrentUser.map((message: IMessage) => [
-        message.receiverID._id,
+        message?.receiverID?._id,
         message,
       ])
     ).values()
   );
 
   const uniqueListMessage2 = uniqueListMessage.filter((message: IMessage) => {
-    return message.receiverID._id !== currentUser?._id;
+    return message?.receiverID?._id !== currentUser?._id;
   });
 
   useEffect(() => {
