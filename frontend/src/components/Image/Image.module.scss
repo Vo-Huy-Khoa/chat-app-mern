@@ -1,6 +1,8 @@
 .image {
-    border-radius: 50%;
-    object-fit: cover;
-
+  border-radius: 50%;
+  object-fit: cover;
 }
 
+.image:hover {
+  cursor: pointer;
+}

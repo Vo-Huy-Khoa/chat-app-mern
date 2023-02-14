@@ -25,6 +25,9 @@
       }
     }
 
+    &__notification:hover {
+      cursor: pointer;
+    }
     &__notification {
       position: relative;
 
@@ -76,13 +79,18 @@
         width: 25px;
         height: 25px;
       }
-
+      &--icon-search:hover {
+        cursor: pointer;
+      }
       &--icon-search {
         color: var(--white);
       }
 
       &--icon-delete {
         color: rgb(37, 84, 146);
+      }
+      &--icon-delete:hover {
+        cursor: pointer;
       }
     }
 

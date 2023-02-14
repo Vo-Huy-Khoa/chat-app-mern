@@ -14,43 +14,60 @@ import {
   faMicrophone,
   faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useContext, useRef } from "react";
 import { UserContext, MessageContext } from "../../providers";
 import { createMessage } from "../../services";
+import { IMessage } from "../../types";
 
 const cx = classNames.bind(styles);
 
 const Home = () => {
   const currentUser = useContext(UserContext);
-  const { selectMessage } = useContext(MessageContext);
+  const { selectMessage, getSelectMessage } = useContext(MessageContext);
+  const countMessage = selectMessage.length > 0 ? selectMessage.length : null;
   const messageRef = useRef<HTMLInputElement>(null);
   const currentSenderID = currentUser?._id;
   const ReceiverUser = selectMessage.find((message) => {
     return message?.senderID?._id === currentSenderID;
   });
   const currentReceiverID = ReceiverUser?.receiverID?._id;
-  const handleCreateMessage = () => {
+  const handleCreateMessage = (event: any) => {
+    event.preventDefault();
     const message = messageRef.current?.value || "";
     createMessage(currentSenderID, currentReceiverID, message).then(
       (response) => {
-        console.log(response.data);
+        const listMessage = response.data;
+        listMessage.sort(
+          (a: IMessage, b: IMessage) =>
+            Date.parse(a.createdAt) - Date.parse(b.createdAt)
+        );
+        getSelectMessage(listMessage);
       }
     );
+    messageRef.current?.focus();
+    if (messageRef.current) {
+      messageRef.current.value = "";
+    }
   };
 
   return (
     <div className={cx("wrapper")}>
       <div className={cx("header", "fixed")}>
-        <div className={cx("header__content")}>
-          <Image src={currentUser.avatar} width="60px" height="60px" />
-          <div className={cx("header__content__text")}>
-            <span>{currentUser.username}</span>
-            <p>{currentUser.fullname}</p>
+        {countMessage !== null && (
+          <div className={cx("header__content")}>
+            <Image
+              src={ReceiverUser?.receiverID.avatar}
+              width="60px"
+              height="60px"
+            />
+            <div className={cx("header__content__text")}>
+              <span>{ReceiverUser?.receiverID.username}</span>
+              <p>{ReceiverUser?.receiverID.fullname}</p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
-
       <div className={cx("content")}>
         <div className={cx("content__message")}>
           {selectMessage.map((message, index) => {
@@ -82,34 +99,36 @@ const Home = () => {
           })}
         </div>
       </div>
-
-      <div className={cx("message", "fixed")}>
-        <div className={cx("message__heading")}>
-          <div className={cx("message__heading__content")}>
-            <NavLink to="">reply</NavLink>
-            <NavLink to="">note</NavLink>
+      (
+      {countMessage !== null && (
+        <div className={cx("message", "fixed")}>
+          <div className={cx("message__heading")}>
+            <div className={cx("message__heading__content")}>
+              <NavLink to="">reply</NavLink>
+              <NavLink to="">note</NavLink>
+            </div>
+            <FontAwesomeIcon icon={faCircleQuestion} />
           </div>
-          <FontAwesomeIcon icon={faCircleQuestion} />
+          <input ref={messageRef} type="text" />
+          <div className={cx("message__more")}>
+            <div className={cx("message__more__file")}>
+              <FontAwesomeIcon icon={faFileImage} />
+              <FontAwesomeIcon icon={faBookmark} />
+              <FontAwesomeIcon icon={faCopy} />
+              <FontAwesomeIcon icon={faCircleInfo} />
+              <FontAwesomeIcon icon={faItalic} />
+              <FontAwesomeIcon icon={faLocation} />
+              <FontAwesomeIcon icon={faStarHalfStroke} />
+            </div>
+            <div className={cx("message__more__action")}>
+              <FontAwesomeIcon icon={faFileUpload} />
+              <FontAwesomeIcon icon={faMicrophone} />
+              <button onClick={handleCreateMessage}>Send</button>
+            </div>
+          </div>
         </div>
-        <input ref={messageRef} type="text" />
-        <div className={cx("message__more")}>
-          <div className={cx("message__more__file")}>
-            <FontAwesomeIcon icon={faFileImage} />
-            <FontAwesomeIcon icon={faBookmark} />
-            <FontAwesomeIcon icon={faCopy} />
-            <FontAwesomeIcon icon={faCircleInfo} />
-            <FontAwesomeIcon icon={faItalic} />
-            <FontAwesomeIcon icon={faLocation} />
-            <FontAwesomeIcon icon={faStarHalfStroke} />
-          </div>
-          <div className={cx("message__more__action")}>
-            <FontAwesomeIcon icon={faFileUpload} />
-            <FontAwesomeIcon icon={faMicrophone} />
-            <button onClick={handleCreateMessage}>Send</button>
-          </div>
-        </div>
-      </div>
-      <Outlet />
+      )}
+      )
     </div>
   );
 };

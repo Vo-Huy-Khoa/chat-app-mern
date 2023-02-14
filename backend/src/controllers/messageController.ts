@@ -32,30 +32,21 @@ class MessageController {
 
     try {
       await createMessage.save();
-      const listMessage = await MessageModel.find({
-        $or: [
-          { senderID: req.body.senderID },
-          { receiverID: req.body.receiverID },
-        ],
-      });
+      const messageSender = await MessageModel.find({
+        senderID: req.body.senderID,
+        receiverID: req.body.receiverID,
+      })
+        .populate("senderID")
+        .populate("receiverID");
+      const messageReceiver = await MessageModel.find({
+        senderID: req.body.receiverID,
+        receiverID: req.body.senderID,
+      })
+        .populate("senderID")
+        .populate("receiverID");
 
-      const listSenderID = listMessage.filter((message) => {
-        return (
-          message?.senderID === req.body.senderID &&
-          message?.receiverID === req.body.receiverID
-        );
-      });
-      const listReceiverID = listMessage.filter((message) => {
-        return (
-          message?.senderID === req.body.receiverID &&
-          message?.receiverID === req.body.senderID
-        );
-      });
-      const currentMessage = [...listSenderID, ...listReceiverID];
-
-      console.log(currentMessage);
-
-      res.status(201).json(currentMessage);
+      const message = [...messageSender, ...messageReceiver];
+      res.status(201).json(message);
     } catch (error) {
       res.status(400).json(error);
     }
