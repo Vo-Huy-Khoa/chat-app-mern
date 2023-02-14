@@ -91,8 +91,17 @@ const Sidebar = () => {
           <div className={cx("search-result")} tabIndex={1} {...attrs}>
             <PopperWrapper>
               <h4 className={cx("search-title")}>accounts</h4>
-              {listUserSearch.map((item, index) => {
-                return <AccountItem key={index} data={item} />;
+              {listUserSearch.map((user, index) => {
+                return (
+                  <AccountItem
+                    onClick={() => {
+                      alert("hello!");
+                    }}
+                    key={index}
+                    listMessage={uniMessageCurrentUser}
+                    searchUser={user}
+                  />
+                );
               })}
             </PopperWrapper>
           </div>
@@ -108,12 +117,16 @@ const Sidebar = () => {
               onChange={(e) => {
                 setValueSearch(e.currentTarget.value);
               }}
+              value={valueSearch}
               type="text"
               placeholder="Search"
             />
             <FontAwesomeIcon
               className={cx("status__search--icon-delete")}
               icon={faDeleteLeft}
+              onClick={() => {
+                setValueSearch("");
+              }}
             />
           </div>
           {/* <div className={cx("status__content")}>

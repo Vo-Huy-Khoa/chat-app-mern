@@ -55,7 +55,7 @@ const Notification = () => {
         >
           <div>
             <Image
-              className={cx("profile--avatar")}
+              className={cx("profile__avatar")}
               src={currentUser.avatar}
               width="70px"
               height="70px"

@@ -3,18 +3,50 @@ import styles from "./account.module.scss";
 import classNames from "classnames/bind";
 import Image from "../Image";
 import { useContext } from "react";
-import { MessageContext } from "../../providers";
+import { MessageContext, UserContext } from "../../providers";
 import { IMessage } from "../../types";
 
 const cx = classNames.bind(styles);
 
-const AccountItem = ({ data }: any) => {
+const AccountItem = ({ ...rest }) => {
+  const { listMessage, searchUser } = rest;
+  const { getSelectMessage } = useContext(MessageContext);
+  const currentUser = useContext(UserContext);
+
+  const receiverID = searchUser?._id;
+  const senderID = currentUser?._id;
+
+  const listSenderID = listMessage.filter((message: IMessage) => {
+    return (
+      message?.senderID?._id === senderID &&
+      message?.receiverID?._id === receiverID
+    );
+  });
+
+  const listReceiverID = listMessage.filter((message: IMessage) => {
+    return (
+      message?.senderID?._id === receiverID &&
+      message?.receiverID?._id === senderID
+    );
+  });
+
+  const currentMessage = [...listSenderID, ...listReceiverID];
+
+  currentMessage.sort(
+    (a: IMessage, b: IMessage) =>
+      Date.parse(a.createdAt) - Date.parse(b.createdAt)
+  );
+
+  const handleSubmit = () => {
+    getSelectMessage(currentMessage);
+  };
+
   return (
-    <div className={cx("account-item")}>
-      <Image src={data?.avatar} />
+    <div className={cx("account-item")} onClick={handleSubmit}>
+      <Image src={searchUser?.avatar} />
       <div className={cx("content")}>
-        <span className={cx("username")}>{data?.username}</span>
-        <span className={cx("fullname")}>{data?.fullname}</span>
+        <span className={cx("username")}>{searchUser?.username}</span>
+        <span className={cx("fullname")}>{searchUser?.fullname}</span>
       </div>
     </div>
   );

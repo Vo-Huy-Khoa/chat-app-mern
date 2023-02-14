@@ -29,6 +29,10 @@
   border-radius: 20px;
 }
 
+.account-message:hover {
+  cursor: pointer;
+}
+
 .account-message {
   display: flex;
   flex-direction: row;
