@@ -20,7 +20,9 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.0",
     "morgan": "^1.10.0",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "@types/cors": "^2.8.13",
+    "@types/socket.io": "^3.0.2"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
