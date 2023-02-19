@@ -24,7 +24,7 @@ class MessageController {
     }
   }
 
-  async createMessage(data: any, io: any) {
+  async createMessage(data: any, io: any, socket: any, listSocketID: any) {
     const createMessage = new MessageModel({
       senderID: data.senderID,
       receiverID: data.receiverID,
@@ -51,8 +51,10 @@ class MessageController {
       const user = await UserModel.findById({ _id: data.receiverID });
 
       // Send the message to the other client
-      io.to(`${user?.socketID}`).emit("message", message);
-      // io.emit("message", message);
+      if (listSocketID.includes(user?.socketID)) {
+        io.to(`${user?.socketID}`).emit("message", message);
+      }
+      socket.emit("message", message);
 
       // res.status(201).json(message);
     } catch (error) {

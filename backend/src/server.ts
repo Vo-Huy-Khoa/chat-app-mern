@@ -29,17 +29,19 @@ app.use(express.urlencoded({ extended: true }));
 routes(app);
 connect();
 
+const listSocketID: any = [];
 io.on("connection", (socket) => {
   console.log(`Client connected with socket id ${socket.id}`);
 
   // Handle user login
   socket.on("login", async (userId) => {
+    listSocketID.push(socket.id);
     console.log(`User ${userId} logged in with socket id ${socket.id}`);
     // Store the socket ID for the user in the database
-    await UserModel.findById(
+    await UserModel.findOneAndUpdate(
       { _id: userId },
       {
-        socketId: socket.id,
+        socketID: socket.id,
       }
     );
 
@@ -47,12 +49,13 @@ io.on("connection", (socket) => {
     socket.emit("login_success", { userId, socketId: socket.id });
   });
   socket.on("logout", async (userId) => {
+    listSocketID.pop(socket.id);
     console.log(`User ${userId} logged in with socket id ${socket.id}`);
     // Store the socket ID for the user in the database
-    await UserModel.findById(
+    await UserModel.findOneAndUpdate(
       { _id: userId },
       {
-        socketId: "",
+        socketID: "",
       }
     );
 
@@ -61,14 +64,7 @@ io.on("connection", (socket) => {
   });
   // Handle incoming messages
   socket.on("message", async (data) => {
-    await UserModel.findOneAndUpdate(
-      { _id: data.senderID },
-      {
-        socketID: socket.id,
-      }
-    );
-
-    await messageController.createMessage(data, io);
+    await messageController.createMessage(data, io, socket, listSocketID);
   });
 });
 server.listen(PORT, () => {
