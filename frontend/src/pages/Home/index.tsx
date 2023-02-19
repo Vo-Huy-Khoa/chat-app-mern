@@ -57,7 +57,6 @@ const Home = () => {
       senderID: currentSenderID,
       receiverID: currentReceiverID,
       message: message,
-      targetSocketId: currentReceiverID,
     };
     socket.emit("message", data);
 

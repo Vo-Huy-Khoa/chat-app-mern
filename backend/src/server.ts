@@ -61,6 +61,13 @@ io.on("connection", (socket) => {
   });
   // Handle incoming messages
   socket.on("message", async (data) => {
+    await UserModel.findOneAndUpdate(
+      { _id: data.senderID },
+      {
+        socketID: socket.id,
+      }
+    );
+
     await messageController.createMessage(data, io);
   });
 });

@@ -8,7 +8,7 @@ interface IUser {
   password: string;
   avatar: string;
   refreshToken: string;
-  socketId: string;
+  socketID: string;
 }
 
 const userSchema = new Schema<IUser>(
@@ -19,7 +19,7 @@ const userSchema = new Schema<IUser>(
     password: { type: String },
     avatar: { type: String },
     refreshToken: { type: String },
-    socketId: { type: String },
+    socketID: { type: String },
   },
   {
     timestamps: true,
