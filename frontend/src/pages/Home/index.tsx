@@ -1,4 +1,5 @@
 import styles from "./home.module.scss";
+import socket from "../../socket";
 import classNames from "classnames/bind";
 import Image from "../../components/Image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,12 +16,19 @@ import {
   faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { UserContext, MessageContext } from "../../providers";
 import { createMessage } from "../../services";
 import { IMessage } from "../../types";
 
 const cx = classNames.bind(styles);
+
+// useEffect(() => {
+//   // Handle incoming messages
+//   socket.on('message', (data) => {
+//     setMessages((messages) => [...messages, data]);
+//   });
+// }, []);
 
 const Home = () => {
   const currentUser = useContext(UserContext);
@@ -35,21 +43,42 @@ const Home = () => {
   const handleCreateMessage = (event: any) => {
     event.preventDefault();
     const message = messageRef.current?.value || "";
-    createMessage(currentSenderID, currentReceiverID, message).then(
-      (response) => {
-        const listMessage = response.data;
-        listMessage.sort(
-          (a: IMessage, b: IMessage) =>
-            Date.parse(a.createdAt) - Date.parse(b.createdAt)
-        );
-        getSelectMessage(listMessage);
-      }
-    );
+    // createMessage(currentSenderID, currentReceiverID, message).then(
+    //   (response) => {
+    //     const listMessage = response.data;
+    //     listMessage.sort(
+    //       (a: IMessage, b: IMessage) =>
+    //         Date.parse(a.createdAt) - Date.parse(b.createdAt)
+    //     );
+    //     getSelectMessage(listMessage);
+    //   }
+    // );
+    const data = {
+      senderID: currentSenderID,
+      receiverID: currentReceiverID,
+      message: message,
+      targetSocketId: currentReceiverID,
+    };
+    socket.emit("message", data);
+
     messageRef.current?.focus();
     if (messageRef.current) {
       messageRef.current.value = "";
     }
   };
+
+  useEffect(() => {
+    // Handle incoming messages
+    socket.on("message", (data) => {
+      console.log(data);
+      const listMessage = data;
+      listMessage.sort(
+        (a: IMessage, b: IMessage) =>
+          Date.parse(a.createdAt) - Date.parse(b.createdAt)
+      );
+      getSelectMessage(listMessage);
+    });
+  }, []);
 
   return (
     <div className={cx("wrapper")}>

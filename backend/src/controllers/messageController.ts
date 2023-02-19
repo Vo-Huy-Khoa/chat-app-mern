@@ -23,32 +23,37 @@ class MessageController {
     }
   }
 
-  async createMessage(req: Request, res: Response) {
+  async createMessage(data: any, io: any) {
     const createMessage = new MessageModel({
-      senderID: req.body.senderID,
-      receiverID: req.body.receiverID,
-      message: req.body.message,
+      senderID: data.senderID,
+      receiverID: data.receiverID,
+      message: data.message,
     });
 
     try {
       await createMessage.save();
       const messageSender = await MessageModel.find({
-        senderID: req.body.senderID,
-        receiverID: req.body.receiverID,
+        senderID: data.senderID,
+        receiverID: data.receiverID,
       })
         .populate("senderID")
         .populate("receiverID");
       const messageReceiver = await MessageModel.find({
-        senderID: req.body.receiverID,
-        receiverID: req.body.senderID,
+        senderID: data.receiverID,
+        receiverID: data.senderID,
       })
         .populate("senderID")
         .populate("receiverID");
 
       const message = [...messageSender, ...messageReceiver];
-      res.status(201).json(message);
+
+      // Send the message to the other client
+      io.to("").emit("message", data);
+      // io.emit("message", message);
+
+      // res.status(201).json(message);
     } catch (error) {
-      res.status(400).json(error);
+      // res.status(400).json(error);
     }
   }
 
