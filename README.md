@@ -1,21 +1,26 @@
 You’ll need to have Node >= 14.
 
+setup backend express & typescript
+
+1.  express typescript: npm i -D typescript @types/express @types/node
+2.  config file ts: npx tsc --init
+3.  Watching file change and build directory: npm install -D concurrently nodemon
+
 Run Backend:
-  ```bash
-  cd backend
-  npm install
-  npm run dev
-  ```
+
+```bash
+cd backend
+npm install
+npm run dev
+```
 
 Run Frontend:
-  ```bash
-  cd frontend
-  npm install
-  npm run start
-  ```
 
-
-
+```bash
+cd frontend
+npm install
+npm run start
+```
 
 ## Structure of the project:
 
@@ -24,65 +29,62 @@ Run Frontend:
 ```text
 src
 |
-├── configs     
-|   ├── index.ts          
+├── configs
+|   ├── index.ts
 │   └── ...
-├── controllers    
-|   ├── UserController.ts    
+├── controllers
+|   ├── UserController.ts
 │   └── ...
-├── models    
-|   ├── User.ts    
+├── models
+|   ├── User.ts
 │   └── ...
-├── routes     
-|   ├── index.ts             
+├── routes
+|   ├── index.ts
 │   └── ...
-├── services     
-|   ├── index.ts              
+├── services
+|   ├── index.ts
 │   └── ...
-├── utils   
-|   ├── index.ts              
+├── utils
+|   ├── index.ts
 │   └── ...
-└── server.ts                 
+└── server.ts
 ```
-
-
 
 ### FrontEnd
 
 ```text
-src              
-├── assets                  
+src
+├── assets
 │   └── ...
-├── configs                
-│   └── ...        
-├── components                  
-│   └── ui             
-│       └── Button       
+├── configs
+│   └── ...
+├── components
+│   └── ui
+│       └── Button
 │           └── button.tsx
 │           └── actions.module.scss
 |       └── ...
-│   └── layout             
-│       └── header       
+│   └── layout
+│       └── header
 │           └── header.tsx
 │           └── header.module.scss
 |       └── ...
-├── hooks                       
+├── hooks
 │   └── ...
-├── pages                       
+├── pages
 │   └── ...
-├── routes                       
+├── routes
 │   └── ...
-├── services    
-│   └── ...    
-├── utils                   
+├── services
 │   └── ...
-├── pages                  
+├── utils
 │   └── ...
-├── App.tsx   
-└── index.tsx                
-                              
-```
+├── pages
+│   └── ...
+├── App.tsx
+└── index.tsx
 
+```
 
 <!-- Folder structure is based on productivity and some personal preferences:
 
@@ -118,5 +120,3 @@ src
 │   └── ...
 └── .vscode                 * VS Code workspace settings to work with ESLint rules and formatting
                               (you can also lint or fix on save 😉). -->
-
-

@@ -1,3 +1,4 @@
+import socket from "../socket";
 import instanceAxios from "./AxiosClient";
 
 const refreshToken = () => {
@@ -23,6 +24,9 @@ const handleLogin = async (body: any) => {
       sessionStorage.setItem("token", response.data.token);
       sessionStorage.setItem("refreshToken", response.data.refreshToken);
       sessionStorage.setItem("user", JSON.stringify(response.data.user));
+      console.log(response.data.user);
+
+      socket.emit("login", response.data.user.id);
     });
   return response;
 };
@@ -32,6 +36,8 @@ const handleLogout = async () => {
   const body = {
     id: userID,
   };
+  socket.emit("logout", userID);
+
   return await instanceAxios.post("logout", JSON.stringify(body));
 };
 
