@@ -1,5 +1,6 @@
 import MessageModel from "../models/Message";
 import { Request, Response } from "express";
+import UserModel from "../models/User";
 
 class MessageController {
   async getListMessage(req: Request, res: Response) {
@@ -47,8 +48,10 @@ class MessageController {
 
       const message = [...messageSender, ...messageReceiver];
 
+      const user = await UserModel.findById({ _id: data.receiverID });
+
       // Send the message to the other client
-      io.to("").emit("message", data);
+      io.to(`${user?.socketID}`).emit("message", message);
       // io.emit("message", message);
 
       // res.status(201).json(message);

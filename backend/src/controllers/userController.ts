@@ -32,7 +32,7 @@ class userController {
 
   async update(req: Request, res: Response) {
     try {
-      await UserModel.findById(
+      await UserModel.findOneAndUpdate(
         { _id: req.body.params },
         {
           username: req.body.username,
