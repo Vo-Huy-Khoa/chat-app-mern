@@ -5,6 +5,7 @@ import Image from "../Image";
 import { useContext } from "react";
 import { MessageContext, UserContext } from "../../providers";
 import { IMessage } from "../../types";
+import socket from "../../socket";
 
 const cx = classNames.bind(styles);
 
@@ -37,12 +38,34 @@ const AccountItem = ({ ...rest }) => {
       Date.parse(a.createdAt) - Date.parse(b.createdAt)
   );
 
-  const handleSubmit = () => {
+  const handleSubmit = (receiverID: any) => {
+    if (currentMessage === null || currentMessage.length === 0) {
+      const data = {
+        senderID: senderID,
+        receiverID: receiverID,
+        message: "",
+      };
+      socket.emit("message", data);
+
+      socket.on("message", (data) => {
+        const listMessage = data;
+        listMessage.sort(
+          (a: IMessage, b: IMessage) =>
+            Date.parse(a.createdAt) - Date.parse(b.createdAt)
+        );
+        console.log(listMessage);
+
+        getSelectMessage(listMessage);
+      });
+    }
     getSelectMessage(currentMessage);
   };
 
   return (
-    <div className={cx("account-item")} onClick={handleSubmit}>
+    <div
+      className={cx("account-item")}
+      onClick={() => handleSubmit(searchUser?._id)}
+    >
       <Image src={searchUser?.avatar} />
       <div className={cx("content")}>
         <span className={cx("username")}>{searchUser?.username}</span>

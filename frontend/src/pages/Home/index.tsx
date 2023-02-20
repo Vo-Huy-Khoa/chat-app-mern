@@ -16,19 +16,12 @@ import {
   faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext, MessageContext } from "../../providers";
 import { createMessage } from "../../services";
 import { IMessage } from "../../types";
 
 const cx = classNames.bind(styles);
-
-// useEffect(() => {
-//   // Handle incoming messages
-//   socket.on('message', (data) => {
-//     setMessages((messages) => [...messages, data]);
-//   });
-// }, []);
 
 const Home = () => {
   const currentUser = useContext(UserContext);
@@ -39,20 +32,13 @@ const Home = () => {
   const ReceiverUser = selectMessage.find((message) => {
     return message?.senderID?._id === currentSenderID;
   });
+
   const currentReceiverID = ReceiverUser?.receiverID?._id;
+  console.log(currentReceiverID);
+
   const handleCreateMessage = (event: any) => {
     event.preventDefault();
     const message = messageRef.current?.value || "";
-    // createMessage(currentSenderID, currentReceiverID, message).then(
-    //   (response) => {
-    //     const listMessage = response.data;
-    //     listMessage.sort(
-    //       (a: IMessage, b: IMessage) =>
-    //         Date.parse(a.createdAt) - Date.parse(b.createdAt)
-    //     );
-    //     getSelectMessage(listMessage);
-    //   }
-    // );
     const data = {
       senderID: currentSenderID,
       receiverID: currentReceiverID,
@@ -69,7 +55,6 @@ const Home = () => {
   useEffect(() => {
     // Handle incoming messages
     socket.on("message", (data) => {
-      console.log(data);
       const listMessage = data;
       listMessage.sort(
         (a: IMessage, b: IMessage) =>
