@@ -15,15 +15,15 @@ const io = new Server(server);
 
 const PORT = process.env.PORT || "3001";
 
-const allowedOrigins = "*";
-const options: cors.CorsOptions = {
-  origin: allowedOrigins,
-  credentials: true,
-};
-app.use(cors(options));
+// const allowedOrigins = "*";
+// const options: cors.CorsOptions = {
+//   origin: allowedOrigins,
+//   credentials: true,
+// };
+// app.use(cors(options));
 
-app.use(function (req: Request, res: Response, next: NextFunction) {
-  res.setHeader("Access-Control-Allow-Origin", req.headers.origin || "*");
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
@@ -36,6 +36,7 @@ app.use(function (req: Request, res: Response, next: NextFunction) {
 
   next();
 });
+
 
 dotenv.config();
 app.use(express.json());
