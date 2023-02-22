@@ -1,6 +1,8 @@
-##Live Demo: <a href="https://mern-vo-huy-khoa.vercel.app/"><h1>Chat App</h1></a>
+<h1>Chat App MERN</h1>
+## <a href="https://mern-vo-huy-khoa.vercel.app/">Live Demo</a>
 
-##Run local:
+## Run local:
+
 You’ll need to have Node >= 14.
 
 Run Backend:
