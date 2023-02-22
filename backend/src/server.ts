@@ -15,12 +15,12 @@ const io = new Server(server);
 
 const PORT = process.env.PORT || "3001";
 
-// const allowedOrigins = "*";
-// const options: cors.CorsOptions = {
-//   origin: allowedOrigins,
-//   credentials: true,
-// };
-app.use(cors());
+const allowedOrigins = "https://mern-df9t62dfp-vo-huy-khoa.vercel.app";
+const options: cors.CorsOptions = {
+  origin: allowedOrigins,
+  credentials: true,
+};
+app.use(cors(options));
 
 
 
