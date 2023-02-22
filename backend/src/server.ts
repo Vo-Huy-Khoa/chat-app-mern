@@ -15,7 +15,7 @@ const io = new Server(server);
 
 const PORT = process.env.PORT || "3001";
 
-const allowedOrigins = ["http://localhost:3000"];
+const allowedOrigins = ["https://mern-ecru-three.vercel.app"];
 const options: cors.CorsOptions = {
   origin: allowedOrigins,
   credentials: true,
