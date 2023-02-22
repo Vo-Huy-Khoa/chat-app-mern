@@ -15,7 +15,7 @@ const io = new Server(server);
 
 const PORT = process.env.PORT || "3001";
 
-const allowedOrigins = ['http://localhost:3000', 'https://mern-4cz7s5w87-vo-huy-khoa.vercel.app', 'https://'];
+const allowedOrigins = ['http://localhost:3000', 'https://mern-vo-huy-khoa.vercel.app'];
 
 const corsOptions: cors.CorsOptions = {
   origin: allowedOrigins,
