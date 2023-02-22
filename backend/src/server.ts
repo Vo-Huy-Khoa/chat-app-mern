@@ -1,4 +1,4 @@
-import express from "express";
+import express, {Request, Response, Next} from "express";
 import cors from "cors";
 import connect from "./configs/db";
 import dotenv from "dotenv";
@@ -22,7 +22,7 @@ const options: cors.CorsOptions = {
 };
 app.use(cors(options));
 
-app.use(function(req, res, next) {
+app.use(function(req: Request, res: Response, next: Next) {
   res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
