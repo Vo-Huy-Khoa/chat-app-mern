@@ -18,7 +18,7 @@ const getRefreshToken = async () => {
 };
 
 const instanceAxios = axios.create({
-  baseURL: "http://localhost:3001/api",
+  baseURL: "https://chat-backend-7jgs.onrender.com/api",
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
