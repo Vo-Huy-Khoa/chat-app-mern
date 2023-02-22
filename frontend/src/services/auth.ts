@@ -24,8 +24,6 @@ const handleLogin = async (body: any) => {
       sessionStorage.setItem("token", response.data.token);
       sessionStorage.setItem("refreshToken", response.data.refreshToken);
       sessionStorage.setItem("user", JSON.stringify(response.data.user));
-      console.log(response.data.user);
-
       socket.emit("login", response.data.user.id);
     });
   return response;

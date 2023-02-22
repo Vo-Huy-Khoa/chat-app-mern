@@ -16,9 +16,8 @@ import {
   faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { UserContext, MessageContext } from "../../providers";
-import { createMessage } from "../../services";
 import { IMessage } from "../../types";
 
 const cx = classNames.bind(styles);
@@ -34,7 +33,6 @@ const Home = () => {
   });
 
   const currentReceiverID = ReceiverUser?.receiverID?._id;
-  console.log(currentReceiverID);
 
   const handleCreateMessage = (event: any) => {
     event.preventDefault();
