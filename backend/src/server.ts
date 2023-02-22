@@ -15,14 +15,14 @@ const io = new Server(server);
 
 const PORT = process.env.PORT || "3001";
 
-const allowedOrigins = "https://mern-df9t62dfp-vo-huy-khoa.vercel.app";
-const options: cors.CorsOptions = {
-  origin: allowedOrigins,
-  credentials: true,
-};
-app.use(cors(options));
+// const allowedOrigins = "https://mern-df9t62dfp-vo-huy-khoa.vercel.app";
+// const options: cors.CorsOptions = {
+//   origin: allowedOrigins,
+//   credentials: true,
+// };
+// app.use(cors(options));
 
-
+app.use(cors({ origin: '*' }));
 
 
 dotenv.config();
