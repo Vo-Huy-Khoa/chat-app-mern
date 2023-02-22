@@ -1,5 +1,5 @@
 <h1>Chat App MERN</h1>
-<a href="https://mern-vo-huy-khoa.vercel.app/"><h2>Live Demo</h2></a>
+<h2><a href="https://mern-vo-huy-khoa.vercel.app/">Live Demo</a></h2>
 
 ## Run local:
 
