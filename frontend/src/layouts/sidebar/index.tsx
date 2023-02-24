@@ -130,10 +130,21 @@ const Sidebar = () => {
             />
           </div>
           {/* <div className={cx("status__content")}>
-            <span className={cx("status__content--title", "text-white")}>Favorites</span>
+            <span className={cx("status__content--title", "text-white")}>
+              Favorites
+            </span>
             <div className={cx("status__list")}>
-              {listUserSearch.map((user, key) => {
-                return <AccountItem key={key} data={user} />;
+              {listUserSearch.map((user, index) => {
+                return (
+                  <AccountItem
+                    onClick={() => {
+                      alert("hello!");
+                    }}
+                    key={index}
+                    listMessage={uniMessageCurrentUser}
+                    searchUser={user}
+                  />
+                );
               })}
             </div>
           </div> */}

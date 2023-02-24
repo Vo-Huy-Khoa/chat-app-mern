@@ -1,4 +1,4 @@
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 1025px) {
   .wrapper {
     padding: 20px;
     width: 100%;
@@ -43,6 +43,133 @@
           position: absolute;
           display: block;
           top: -15px;
+          right: -5px;
+          border-radius: 50%;
+          width: 3rem;
+          height: 3rem;
+          background-color: var(--blue);
+          text-align: center;
+          line-height: 3rem;
+          font-size: 2rem;
+          color: var(--black);
+        }
+      }
+    }
+
+    .status {
+      &__search {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        background-color: var(--black);
+        border-radius: 25px;
+        width: 100%;
+        height: 40px;
+
+        input {
+          width: 50%;
+          background-color: transparent;
+          border: none;
+          color: var(--white);
+          font-size: 1.5rem;
+          font-weight: 600;
+        }
+
+        svg {
+          width: 25px;
+          height: 25px;
+        }
+        &--icon-search:hover {
+          cursor: pointer;
+        }
+        &--icon-search {
+          color: var(--white);
+        }
+
+        &--icon-delete {
+          color: rgb(37, 84, 146);
+        }
+        &--icon-delete:hover {
+          cursor: pointer;
+        }
+      }
+
+      .status__content {
+        margin-top: 10px;
+        &--title {
+          font-size: 2rem;
+        }
+
+        .status__list {
+          margin-top: 10px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          gap: 10px;
+          overflow-x: scroll;
+        }
+      }
+    }
+
+    .message__list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      height: 100%;
+      overflow-y: scroll;
+      padding: 0 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 769px) {
+  .wrapper {
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 100px;
+
+      &__content {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        width: 80%;
+
+        &--title {
+          font-size: 2rem;
+          font-weight: 600;
+          color: var(--gray);
+        }
+      }
+
+      &__notification:hover {
+        cursor: pointer;
+      }
+      &__notification {
+        position: relative;
+
+        svg {
+          width: 45px;
+          height: 45px;
+          background-color: var(--gray);
+          border-radius: 50%;
+          padding: 10px;
+          fill: var(--white);
+        }
+
+        span {
+          position: absolute;
+          display: block;
+          top: -5px;
           right: -5px;
           border-radius: 50%;
           width: 3rem;

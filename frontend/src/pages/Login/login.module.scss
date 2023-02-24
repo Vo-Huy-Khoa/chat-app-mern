@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 950px;
+  height: 100vh;
   background-color: var(--primary);
   font-size: 1.5rem;
   color: var(--white);
@@ -25,12 +25,12 @@
   .login {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 30px;
     padding: 40px;
     border-radius: 20px;
     background-color: var(--black);
     width: 500px;
-    height: 800px;
+    height: 700px;
 
     &__heading {
       text-align: center;
@@ -67,7 +67,7 @@
     &__signup {
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      gap: 20px;
       text-align: center;
       &__icon {
         display: flex;
