@@ -4,7 +4,7 @@
   gap: 15px;
   color: var(--black);
   padding: 20px;
-  width: 300px;
+  width: 250px;
   height: 500px;
   background: var(--black);
   box-shadow: rgb(0 0 0 / 12%) 0px 2px 12px;
@@ -17,4 +17,18 @@
     height: 40px;
   }
   overflow-y: scroll;
+}
+@media only screen and (min-width: 1025px) {
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 769px) {
+  .wrapper {
+    width: 200px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .wrapper {
+    width: 150px;
+  }
 }
