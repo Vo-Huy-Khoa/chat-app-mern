@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { IUser, MessageContextValue, selectMessageType } from "../types";
 import { getProfile } from "../services";
 
@@ -48,6 +48,27 @@ function MessageProvider({ children }: any) {
     <MessageContext.Provider value={{ selectMessage, getSelectMessage }}>
       <div>{children}</div>
     </MessageContext.Provider>
+  );
+}
+
+export const VisibilityContext = createContext({
+  isVisible: "sidebar",
+  toggleVisibility: (prop: any) => {},
+});
+
+export function VisibilityProvider({ children }: any) {
+  const [isVisible, setIsVisible] = useState("sidebar");
+
+  function toggleVisibility(prop: any) {
+    setIsVisible(prop);
+  }
+
+  const value = { isVisible, toggleVisibility };
+
+  return (
+    <VisibilityContext.Provider value={value}>
+      {children}
+    </VisibilityContext.Provider>
   );
 }
 

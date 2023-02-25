@@ -4,6 +4,7 @@ import classNames from "classnames/bind";
 import Image from "../../components/Image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faArrowLeft,
   faBookmark,
   faCircleInfo,
   faCircleQuestion,
@@ -17,13 +18,20 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { useContext, useEffect, useRef } from "react";
-import { UserContext, MessageContext } from "../../providers";
+import {
+  UserContext,
+  MessageContext,
+  VisibilityContext,
+} from "../../providers";
 import { IMessage } from "../../types";
 
 const cx = classNames.bind(styles);
 
 const Home = () => {
   const currentUser = useContext(UserContext);
+  const { isVisible } = useContext(VisibilityContext);
+  const { toggleVisibility } = useContext(VisibilityContext);
+
   const { selectMessage, getSelectMessage } = useContext(MessageContext);
   const countMessage = selectMessage.length > 0 ? selectMessage.length : null;
   const messageRef = useRef<HTMLInputElement>(null);
@@ -50,6 +58,14 @@ const Home = () => {
     }
   };
 
+  const handleBackSidebar = () => {
+    toggleVisibility("sidebar");
+  };
+
+  const handleNotification = () => {
+    toggleVisibility("notification");
+  };
+
   useEffect(() => {
     // Handle incoming messages
     socket.on("message", (data) => {
@@ -65,6 +81,13 @@ const Home = () => {
   return (
     <div className={cx("wrapper")}>
       <div className={cx("header", "fixed")}>
+        {isVisible === "home" && (
+          <FontAwesomeIcon
+            onClick={handleBackSidebar}
+            icon={faArrowLeft}
+            className={cx("icon-back")}
+          />
+        )}
         {countMessage !== null && (
           <div className={cx("header__content")}>
             <Image
@@ -77,6 +100,14 @@ const Home = () => {
               <p>{ReceiverUser?.receiverID.fullname}</p>
             </div>
           </div>
+        )}
+
+        {isVisible === "home" && (
+          <FontAwesomeIcon
+            onClick={handleNotification}
+            icon={faCircleInfo}
+            className={cx("icon-back")}
+          />
         )}
       </div>
       <div className={cx("content")}>
