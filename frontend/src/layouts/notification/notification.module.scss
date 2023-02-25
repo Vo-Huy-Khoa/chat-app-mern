@@ -1,3 +1,6 @@
+.icon-back {
+  display: none;
+}
 @media only screen and (min-width: 1025px) {
   .popper {
     font-size: 2rem;
@@ -605,7 +608,7 @@
   }
 }
 
-@media only screen and (max-width: 426px) {
+@media only screen and (max-width: 425px) {
   .popper {
     font-size: 2rem;
     display: flex;
@@ -628,15 +631,33 @@
   }
 
   .wrapper {
-    padding: 20px 40px;
+    padding: 20px;
     height: 100%;
 
+    .settings {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .icon-back {
+      font-size: 3rem;
+      display: block;
+      color: var(--white);
+    }
+
+    .icon-back:hover {
+      cursor: pointer;
+    }
     .profile {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 10px;
+      gap: 5px;
+      img {
+        width: 100px;
+        height: 100px;
+      }
       h1 {
         color: var(--white);
         font-size: 3rem;
@@ -652,11 +673,11 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
-        gap: 5px;
+        gap: 20px;
 
         svg {
-          width: 25px;
-          height: 25px;
+          width: 30px;
+          height: 30px;
         }
       }
     }
@@ -667,15 +688,16 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 30px;
+      gap: 20px;
       height: 50px;
 
       &__item {
-        width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
+        gap: 20px;
+        width: 100%;
         font-size: 1rem;
         color: var(--white);
 
@@ -749,14 +771,15 @@
           margin-top: 10px;
           display: flex;
           flex-direction: row;
-          justify-content: space-around;
-          width: 100%;
+          justify-content: center;
           align-items: center;
+          gap: 20px;
+          width: 100%;
 
           img {
             border-radius: 5px;
-            width: 70px;
-            height: 70px;
+            width: 50px;
+            height: 50px;
             object-fit: cover;
           }
         }
@@ -781,20 +804,21 @@
             gap: 20px;
 
             img {
-              width: 60px;
-              height: 60px;
+              border-radius: 5px;
+              width: 50px;
+              height: 50px;
               object-fit: cover;
             }
 
             &__text {
               span {
                 color: var(--white);
-                font-size: 1.3rem;
+                font-size: 2rem;
               }
 
               p {
                 color: var(--gray);
-                font-size: 1.2rem;
+                font-size: 1.5rem;
               }
             }
           }

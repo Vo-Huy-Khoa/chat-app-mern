@@ -1,3 +1,6 @@
+.icon-back {
+  display: none;
+}
 @media only screen and (min-width: 1025px) {
   .wrapper {
     .header {
@@ -658,7 +661,7 @@
   }
 }
 
-@media only screen and (min-width: 425px) {
+@media only screen and (max-width: 425px) {
   .wrapper {
     .header {
       top: 0;
@@ -671,8 +674,14 @@
       border-radius: 0 0 5px 5px;
 
       .icon-back {
+        display: block;
         font-size: 3rem;
       }
+
+      .icon-back:hover {
+        cursor: pointer;
+      }
+
       &__content {
         display: flex;
         flex-direction: row;

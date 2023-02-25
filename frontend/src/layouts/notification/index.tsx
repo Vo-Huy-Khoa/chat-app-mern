@@ -3,6 +3,8 @@ import classNames from "classnames/bind";
 import HeadlessTippy from "@tippyjs/react/headless";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faArrowLeft,
+  faBars,
   faBell,
   faToggleOff,
   // faToggleOn,
@@ -11,7 +13,7 @@ import Image from "../../components/Image";
 import { MoreIcon, PhoneIcon, UserAddIcon } from "../../components/Icon";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../../providers";
+import { UserContext, VisibilityContext } from "../../providers";
 import { Wrapper as PopperWrapper } from "../../components/Popper";
 import { handleLogout } from "../../services/auth";
 const cx = classNames.bind(styles);
@@ -19,8 +21,26 @@ const cx = classNames.bind(styles);
 const Notification = () => {
   const currentUser = useContext(UserContext);
   const navigate = useNavigate();
+  const { isVisible } = useContext(VisibilityContext);
+  const { toggleVisibility } = useContext(VisibilityContext);
+
+  const handleHome = () => {
+    toggleVisibility("home");
+  };
   return (
     <div className={cx("wrapper")}>
+      <div className={cx("settings")}>
+        {isVisible === "notification" && (
+          <FontAwesomeIcon
+            icon={faArrowLeft}
+            onClick={handleHome}
+            className={cx("icon-back")}
+          />
+        )}
+        {isVisible === "notification" && (
+          <FontAwesomeIcon icon={faBars} className={cx("icon-back")} />
+        )}
+      </div>
       <div className={cx("profile")}>
         <HeadlessTippy
           trigger="click"
@@ -91,6 +111,8 @@ const Notification = () => {
             <NavLink to="">View all</NavLink>
           </div>
           <div className={cx("content__media__item")}>
+            <Image src={currentUser.avatar} />
+            <Image src={currentUser.avatar} />
             <Image src={currentUser.avatar} />
             <Image src={currentUser.avatar} />
             <Image src={currentUser.avatar} />
