@@ -52,7 +52,7 @@ const Register = () => {
           }}
           placeholder="URL avatar"
         />
-        <img src={avatar} alt="" />
+        <img className={cx("avatar__image")} src={avatar} alt="" />
       </div>
       <div className={cx("register")}>
         <div className={cx("register__heading")}>

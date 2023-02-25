@@ -3,7 +3,11 @@ import styles from "./account.module.scss";
 import classNames from "classnames/bind";
 import Image from "../Image";
 import { useContext } from "react";
-import { MessageContext, UserContext } from "../../providers";
+import {
+  MessageContext,
+  UserContext,
+  VisibilityContext,
+} from "../../providers";
 import { IMessage } from "../../types";
 import socket from "../../socket";
 
@@ -12,6 +16,7 @@ const cx = classNames.bind(styles);
 const AccountItem = ({ ...rest }) => {
   const { listMessage, searchUser } = rest;
   const { getSelectMessage } = useContext(MessageContext);
+  const { toggleVisibility } = useContext(VisibilityContext);
   const currentUser = useContext(UserContext);
 
   const receiverID = searchUser?._id;
@@ -39,6 +44,7 @@ const AccountItem = ({ ...rest }) => {
   );
 
   const handleSubmit = (receiverID: any) => {
+    toggleVisibility("home");
     if (currentMessage === null || currentMessage.length === 0) {
       const data = {
         senderID: senderID,
@@ -76,6 +82,7 @@ const AccountItem = ({ ...rest }) => {
 };
 
 const AccountMessage = ({ ...rest }) => {
+  const { toggleVisibility } = useContext(VisibilityContext);
   const { getSelectMessage } = useContext(MessageContext);
   const { listMessage, message } = rest;
 
@@ -105,6 +112,7 @@ const AccountMessage = ({ ...rest }) => {
 
   const handleSubmit = () => {
     getSelectMessage(currentMessage);
+    toggleVisibility("home");
   };
 
   return (

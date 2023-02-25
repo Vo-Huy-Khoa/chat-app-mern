@@ -91,7 +91,14 @@
   }
 }
 
-@media only screen and (max-width: 426px) {
+@media only screen and (max-width: 425px) {
+  .show {
+    display: block !important;
+  }
+
+  .hide {
+    display: none !important;
+  }
   .container {
     width: 100%;
     height: 100%;
@@ -108,9 +115,8 @@
   }
 
   .content {
-    left: 25%;
     background-color: var(--black);
-    width: 50%;
+    width: 100%;
     height: 100%;
     display: none;
   }
@@ -120,7 +126,7 @@
     background-color: var(--primary);
     right: 0;
     top: 0;
-    width: 25%;
+    width: 100%;
     height: 100%;
   }
 }
