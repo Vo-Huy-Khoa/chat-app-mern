@@ -89,7 +89,7 @@ const Sidebar = () => {
         placement="bottom"
         render={(attrs) => (
           <div className={cx("search-result")} tabIndex={1} {...attrs}>
-            <PopperWrapper>
+            <PopperWrapper className={cx("popper-search")}>
               <h4 className={cx("search-title")}>accounts</h4>
               {listUserSearch.map((user, index) => {
                 return (
@@ -158,6 +158,7 @@ const Sidebar = () => {
               key={index}
               listMessage={uniMessageCurrentUser}
               message={message}
+              searchUser={message.receiverID}
             />
           );
         })}

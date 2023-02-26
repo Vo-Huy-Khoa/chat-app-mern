@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { IUser, MessageContextValue, selectMessageType } from "../types";
 import { getProfile } from "../services";
 
@@ -33,6 +33,36 @@ function UserProvider({ children }: any) {
     <UserContext.Provider value={currentUser}>
       <div>{children}</div>
     </UserContext.Provider>
+  );
+}
+
+const ReceiverContext = createContext({
+  currentReceiver: {
+    _id: "",
+    avatar: "",
+    fullname: "",
+    username: "",
+    email: "",
+  },
+  setCurrentReceiver: (prop: any) => {},
+});
+
+function ReceiverProvider({ children }: any) {
+  const [currentReceiver, setReceiver] = useState({
+    _id: "",
+    avatar: "",
+    fullname: "",
+    username: "",
+    email: "",
+  });
+  function setCurrentReceiver(prop: any) {
+    setReceiver(prop);
+  }
+  const value = { currentReceiver, setCurrentReceiver };
+  return (
+    <ReceiverContext.Provider value={value}>
+      <div>{children}</div>
+    </ReceiverContext.Provider>
   );
 }
 
@@ -72,4 +102,11 @@ export function VisibilityProvider({ children }: any) {
   );
 }
 
-export { UserContext, UserProvider, MessageContext, MessageProvider };
+export {
+  UserContext,
+  UserProvider,
+  ReceiverContext,
+  ReceiverProvider,
+  MessageContext,
+  MessageProvider,
+};
