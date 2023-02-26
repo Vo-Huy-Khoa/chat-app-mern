@@ -83,6 +83,7 @@ const Sidebar = () => {
         </div>
       </div>
       <HeadlessTippy
+        trigger="click"
         appendTo={document.body}
         placement="bottom"
         render={(attrs) => (
