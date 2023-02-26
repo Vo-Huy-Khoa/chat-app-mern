@@ -10,7 +10,6 @@ import {
   VisibilityContext,
 } from "../../providers";
 import { IMessage } from "../../types";
-import socket from "../../socket";
 
 const cx = classNames.bind(styles);
 
@@ -47,22 +46,6 @@ const AccountItem = ({ ...rest }) => {
 
   const handleSubmit = () => {
     toggleVisibility("home");
-    if (currentMessage === null || currentMessage.length === 0) {
-      const data = {
-        senderID: senderID,
-        receiverID: receiverID,
-        message: "",
-      };
-      socket.emit("message", data);
-
-      socket.on("message", (data) => {
-        listMessage.sort(
-          (a: IMessage, b: IMessage) =>
-            Date.parse(a.createdAt) - Date.parse(b.createdAt)
-        );
-        getSelectMessage(data);
-      });
-    }
     setCurrentReceiver(searchUser);
     getSelectMessage(currentMessage);
   };
@@ -116,10 +99,20 @@ const AccountMessage = ({ ...rest }) => {
 
   return (
     <div className={cx("account-message")} onClick={handleSubmit}>
-      <Image width="60px" height="60px" src={message?.receiverID?.avatar} />
+      <Image
+        width="60px"
+        height="60px"
+        src={
+          message.receiverID === searchUser
+            ? message?.receiverID?.avatar
+            : message?.senderID?.avatar
+        }
+      />
       <div className={cx("content")}>
         <h2 className={cx("name", "text-white")}>
-          {message?.receiverID?.username}
+          {message.receiverID === searchUser
+            ? message?.receiverID?.username
+            : message?.senderID?.username}
         </h2>
         <span className={cx("react", "text-white")}>{message?.react}</span>
         <p className={cx("message", "text-gray")}>{message?.message}</p>
