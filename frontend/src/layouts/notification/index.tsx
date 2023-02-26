@@ -43,6 +43,7 @@ const Notification = () => {
       </div>
       <div className={cx("profile")}>
         <HeadlessTippy
+          trigger="click"
           appendTo={document.body}
           placement="bottom"
           render={(attrs) => (
