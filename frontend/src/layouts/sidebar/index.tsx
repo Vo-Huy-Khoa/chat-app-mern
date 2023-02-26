@@ -83,9 +83,7 @@ const Sidebar = () => {
         </div>
       </div>
       <HeadlessTippy
-        trigger="click"
         appendTo={document.body}
-        interactive
         placement="bottom"
         render={(attrs) => (
           <div className={cx("search-result")} tabIndex={1} {...attrs}>
@@ -94,9 +92,6 @@ const Sidebar = () => {
               {listUserSearch.map((user, index) => {
                 return (
                   <AccountItem
-                    onClick={() => {
-                      alert("hello!");
-                    }}
                     key={index}
                     listMessage={uniMessageCurrentUser}
                     searchUser={user}

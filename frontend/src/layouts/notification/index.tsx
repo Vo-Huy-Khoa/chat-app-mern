@@ -43,9 +43,7 @@ const Notification = () => {
       </div>
       <div className={cx("profile")}>
         <HeadlessTippy
-          trigger="click"
           appendTo={document.body}
-          interactive
           placement="bottom"
           render={(attrs) => (
             <div className={cx("popper")} tabIndex={1} {...attrs}>
