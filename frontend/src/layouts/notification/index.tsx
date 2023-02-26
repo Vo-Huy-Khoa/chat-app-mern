@@ -46,6 +46,7 @@ const Notification = () => {
           trigger="click"
           appendTo={document.body}
           placement="bottom"
+          interactive
           render={(attrs) => (
             <div className={cx("popper")} tabIndex={1} {...attrs}>
               <PopperWrapper className={cx("popper--wrapper")}>
