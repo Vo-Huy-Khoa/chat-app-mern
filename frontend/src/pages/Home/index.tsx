@@ -22,6 +22,7 @@ import {
   UserContext,
   MessageContext,
   VisibilityContext,
+  ReceiverContext,
 } from "../../providers";
 import { IMessage } from "../../types";
 
@@ -29,18 +30,15 @@ const cx = classNames.bind(styles);
 
 const Home = () => {
   const currentUser = useContext(UserContext);
+  const { currentReceiver } = useContext(ReceiverContext);
   const { isVisible } = useContext(VisibilityContext);
   const { toggleVisibility } = useContext(VisibilityContext);
-
   const { selectMessage, getSelectMessage } = useContext(MessageContext);
+
   const countMessage = selectMessage.length > 0 ? selectMessage.length : null;
   const messageRef = useRef<HTMLInputElement>(null);
   const currentSenderID = currentUser?._id;
-  const ReceiverUser = selectMessage.find((message) => {
-    return message?.senderID?._id === currentSenderID;
-  });
-
-  const currentReceiverID = ReceiverUser?.receiverID?._id;
+  const currentReceiverID = currentReceiver?._id;
 
   const handleCreateMessage = (event: any) => {
     event.preventDefault();
@@ -90,14 +88,10 @@ const Home = () => {
         )}
         {countMessage !== null && (
           <div className={cx("header__content")}>
-            <Image
-              src={ReceiverUser?.receiverID.avatar}
-              width="60px"
-              height="60px"
-            />
+            <Image src={currentReceiver?.avatar} width="60px" height="60px" />
             <div className={cx("header__content__text")}>
-              <span>{ReceiverUser?.receiverID.username}</span>
-              <p>{ReceiverUser?.receiverID.fullname}</p>
+              <span>{currentReceiver?.username}</span>
+              <p>{currentReceiver?.fullname}</p>
             </div>
           </div>
         )}

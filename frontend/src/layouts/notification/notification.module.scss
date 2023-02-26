@@ -10,7 +10,8 @@
   }
 
   .popper--wrapper {
-    height: 150px;
+    width: 200px !important;
+    height: 150px !important;
     display: flex;
     align-items: center;
     ul {

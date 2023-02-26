@@ -5,6 +5,7 @@ import Image from "../Image";
 import { useContext } from "react";
 import {
   MessageContext,
+  ReceiverContext,
   UserContext,
   VisibilityContext,
 } from "../../providers";
@@ -16,6 +17,7 @@ const cx = classNames.bind(styles);
 const AccountItem = ({ ...rest }) => {
   const { listMessage, searchUser } = rest;
   const { getSelectMessage } = useContext(MessageContext);
+  const { setCurrentReceiver } = useContext(ReceiverContext);
   const { toggleVisibility } = useContext(VisibilityContext);
   const currentUser = useContext(UserContext);
 
@@ -43,7 +45,7 @@ const AccountItem = ({ ...rest }) => {
       Date.parse(a.createdAt) - Date.parse(b.createdAt)
   );
 
-  const handleSubmit = (receiverID: any) => {
+  const handleSubmit = () => {
     toggleVisibility("home");
     if (currentMessage === null || currentMessage.length === 0) {
       const data = {
@@ -64,14 +66,12 @@ const AccountItem = ({ ...rest }) => {
         getSelectMessage(listMessage);
       });
     }
+    setCurrentReceiver(searchUser);
     getSelectMessage(currentMessage);
   };
 
   return (
-    <div
-      className={cx("account-item")}
-      onClick={() => handleSubmit(searchUser?._id)}
-    >
+    <div className={cx("account-item")} onClick={() => handleSubmit()}>
       <Image src={searchUser?.avatar} />
       <div className={cx("content")}>
         <span className={cx("username")}>{searchUser?.username}</span>
@@ -82,9 +82,10 @@ const AccountItem = ({ ...rest }) => {
 };
 
 const AccountMessage = ({ ...rest }) => {
+  const { setCurrentReceiver } = useContext(ReceiverContext);
   const { toggleVisibility } = useContext(VisibilityContext);
   const { getSelectMessage } = useContext(MessageContext);
-  const { listMessage, message } = rest;
+  const { listMessage, message, searchUser } = rest;
 
   const receiverID = message?.receiverID?._id;
   const senderID = message?.senderID?._id;
@@ -111,6 +112,7 @@ const AccountMessage = ({ ...rest }) => {
   );
 
   const handleSubmit = () => {
+    setCurrentReceiver(searchUser);
     getSelectMessage(currentMessage);
     toggleVisibility("home");
   };
