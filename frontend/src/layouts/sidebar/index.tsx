@@ -68,6 +68,18 @@ const Sidebar = () => {
       });
   }, []);
 
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
+
+  useEffect(() => {
+    function handleResize() {
+      setIsLargeScreen(window.innerWidth > 425);
+    }
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <div className={cx("wrapper")}>
       <div className={cx("header")}>
@@ -83,9 +95,10 @@ const Sidebar = () => {
         </div>
       </div>
       <HeadlessTippy
-        trigger="click"
+        trigger={isLargeScreen ? "click" : "mouseenter click"}
         appendTo={document.body}
         placement="bottom"
+        interactive
         render={(attrs) => (
           <div className={cx("search-result")} tabIndex={1} {...attrs}>
             <PopperWrapper className={cx("popper-search")}>

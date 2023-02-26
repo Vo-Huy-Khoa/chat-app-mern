@@ -56,14 +56,11 @@ const AccountItem = ({ ...rest }) => {
       socket.emit("message", data);
 
       socket.on("message", (data) => {
-        const listMessage = data;
         listMessage.sort(
           (a: IMessage, b: IMessage) =>
             Date.parse(a.createdAt) - Date.parse(b.createdAt)
         );
-        console.log(listMessage);
-
-        getSelectMessage(listMessage);
+        getSelectMessage(data);
       });
     }
     setCurrentReceiver(searchUser);
