@@ -13,6 +13,7 @@ import { useContext } from "react";
 import { UserContext } from "../../providers";
 import { handleSearch, getListMessage } from "../../services";
 import { IMessage } from "../../types";
+import messages from "../../store/reducers/messageReducer";
 
 const cx = classNames.bind(styles);
 
@@ -23,27 +24,17 @@ const Sidebar = () => {
   const [listUserSearch, setListSearch] = useState([]);
   const [listMessage, setListMessage] = useState([]);
 
-  const receiverID = listMessage.filter((message: IMessage) => {
-    return message.receiverID?._id === currentUser?._id;
-  });
-  const senderID = listMessage.filter((message: IMessage) => {
-    return message?.senderID?._id === currentUser?._id;
-  });
-
-  const uniMessageCurrentUser = [...receiverID, ...senderID];
-
-  let uniqueListMessage = Array.from(
+  const uniqueSender = Array.from(
     new Map(
-      uniMessageCurrentUser.map((message: IMessage) => [
-        message?.receiverID?._id,
-        message,
-      ])
+      listMessage.map((message: IMessage) => [message?.senderID?._id, message])
     ).values()
   );
 
-  const uniqueListMessage2 = uniqueListMessage.filter((message: IMessage) => {
-    return message?.receiverID?._id !== currentUser?._id;
-  });
+  const uniqueMessage = uniqueSender.filter(
+    (message) => message.senderID._id !== currentUser._id
+  );
+
+  console.log(uniqueMessage);
 
   useEffect(() => {
     if (!debounceValue.trim()) {
@@ -68,18 +59,6 @@ const Sidebar = () => {
       });
   }, []);
 
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
-
-  useEffect(() => {
-    function handleResize() {
-      setIsLargeScreen(window.innerWidth > 425);
-    }
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
   return (
     <div className={cx("wrapper")}>
       <div className={cx("header")}>
@@ -95,7 +74,7 @@ const Sidebar = () => {
         </div>
       </div>
       <HeadlessTippy
-        trigger={isLargeScreen ? "click" : "mouseenter click"}
+        trigger="click"
         appendTo={document.body}
         placement="bottom"
         interactive
@@ -107,7 +86,7 @@ const Sidebar = () => {
                 return (
                   <AccountItem
                     key={index}
-                    listMessage={uniMessageCurrentUser}
+                    listMessage={listMessage}
                     searchUser={user}
                   />
                 );
@@ -160,14 +139,18 @@ const Sidebar = () => {
         </div>
       </HeadlessTippy>
       <div className={cx("message__list")}>
-        {uniqueListMessage2.map((message: IMessage, index) => {
+        {uniqueMessage.map((message: IMessage, index) => {
           return (
             <AccountMessage
               className={cx("message-item")}
               key={index}
-              listMessage={uniMessageCurrentUser}
+              listMessage={listMessage}
               message={message}
-              searchUser={message.receiverID}
+              searchUser={
+                message.senderID === currentUser
+                  ? message.receiverID
+                  : message.senderID
+              }
             />
           );
         })}
