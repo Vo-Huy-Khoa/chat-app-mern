@@ -1,4 +1,4 @@
-import styles from "./register.module.scss";
+import styles from "../../assets/scss/register.module.scss";
 import classNames from "classnames/bind";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
@@ -6,7 +6,7 @@ import { handleRegister } from "../../services/auth";
 
 const cx = classNames.bind(styles);
 
-const Register = () => {
+export const Register = () => {
   const navigate = useNavigate();
   const fullNameRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);

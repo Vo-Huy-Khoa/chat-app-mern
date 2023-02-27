@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { IUser, MessageContextValue, selectMessageType } from "../types";
-import { getProfile } from "../services";
+import { getProfile } from "../services/handleAPI";
 
 const UserContext = createContext({
   _id: "",

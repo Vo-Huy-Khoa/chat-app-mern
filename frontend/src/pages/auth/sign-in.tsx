@@ -1,13 +1,13 @@
 import classNames from "classnames/bind";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
-import { FacebookIcon, GoogleIcon, GithubIcon } from "../../components/Icon";
-import styles from "./login.module.scss";
+import { FacebookIcon, GoogleIcon, GithubIcon } from "../../components";
+import styles from "../../assets/scss/login.module.scss";
 import { handleLogin } from "../../services/auth";
 
 const cx = classNames.bind(styles);
 
-const Login = () => {
+export const Login = () => {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token") || "";
   const userRef = useRef<HTMLInputElement>(null);

@@ -1,5 +1,5 @@
-import './GlobalStyle.scss';
-import React from 'react';
+import "../assets/scss/GlobalStyle.scss";
+import React from "react";
 type Props = {
   children: JSX.Element;
 };

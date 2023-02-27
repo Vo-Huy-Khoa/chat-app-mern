@@ -1,4 +1,4 @@
-import styles from "./notification.module.scss";
+import styles from "../../assets/scss/notification.module.scss";
 import classNames from "classnames/bind";
 import HeadlessTippy from "@tippyjs/react/headless";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,16 +9,16 @@ import {
   faToggleOff,
   // faToggleOn,
 } from "@fortawesome/free-solid-svg-icons";
-import Image from "../../components/Image";
-import { MoreIcon, PhoneIcon, UserAddIcon } from "../../components/Icon";
+import { Image } from "../../components/Image";
+import { MoreIcon, PhoneIcon, UserAddIcon } from "../../components";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext, VisibilityContext } from "../../providers";
-import { Wrapper as PopperWrapper } from "../../components/Popper";
+import { Wrapper as PopperWrapper } from "../../components";
 import { handleLogout } from "../../services/auth";
 const cx = classNames.bind(styles);
 
-const Notification = () => {
+export const Notification = () => {
   const currentUser = useContext(UserContext);
   const navigate = useNavigate();
   const { isVisible } = useContext(VisibilityContext);
@@ -151,5 +151,3 @@ const Notification = () => {
     </div>
   );
 };
-
-export default Notification;

@@ -1,37 +1,21 @@
-import config from "../configs";
-import Message from '../pages/Message';
-import Profile from "../pages/Profile";
-import Home from "../pages/Home";
-import DefaultLayout from "../layouts/DefaultLayout";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-
-const configRoutes = config.routes;
+import { Home } from "../pages/dashboard";
+import { DefaultLayout } from "../layouts";
+import Login from "../pages/auth/sign-in";
+import Register from "../pages/auth/sign-up";
 
 const publicRoutes = [
   {
-    path: configRoutes.home,
+    path: "/",
     component: Home,
     layout: DefaultLayout,
   },
   {
-    path: configRoutes.message,
-    component: Message,
-    layout: DefaultLayout,
-  },
-  {
-    path: configRoutes.profile,
-    component: Profile,
-    layout: null,
-  },
-  
-  {
-    path: configRoutes.login,
+    path: "/login",
     component: Login,
     layout: null,
   },
   {
-    path: configRoutes.register,
+    path: "/register",
     component: Register,
     layout: null,
   },
@@ -39,10 +23,10 @@ const publicRoutes = [
 
 const privateRoutes = [
   {
-    path: configRoutes.message,
+    path: "/message",
     component: null,
     layout: null,
-  }
+  },
 ];
 
 export { publicRoutes, privateRoutes };
