@@ -195,5 +195,5 @@ export {
   NotificationIcon,
   PhoneIcon,
   UserAddIcon,
-  MoreIcon
+  MoreIcon,
 };

@@ -1,15 +1,14 @@
 import classNames from "classnames/bind";
-import styles from "./DefaultLayout.module.scss";
-import Sidebar from "../sidebar";
-import Notification from "../notification";
+import styles from "../assets/scss/DefaultLayout.module.scss";
+import { Sidebar, Notification } from "../pages/dashboard";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ReceiverProvider,
   UserProvider,
   VisibilityContext,
-} from "../../providers";
-import { MessageProvider } from "../../providers";
+} from "../providers";
+import { MessageProvider } from "../providers";
 
 const cx = classNames.bind(styles);
 
@@ -17,7 +16,7 @@ type Props = {
   children: JSX.Element;
 };
 
-const DefaultLayout: React.FC<Props> = ({ children }): any => {
+export const DefaultLayout: React.FC<Props> = ({ children }): any => {
   const navigate = useNavigate();
   const { isVisible } = useContext(VisibilityContext);
   const [isLargeScreen, setIsLargeScreen] = useState(false);
@@ -76,5 +75,3 @@ const DefaultLayout: React.FC<Props> = ({ children }): any => {
     </UserProvider>
   );
 };
-
-export default DefaultLayout;

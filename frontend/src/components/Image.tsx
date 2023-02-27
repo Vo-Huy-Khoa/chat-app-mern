@@ -1,8 +1,8 @@
-import styles from "./Image.module.scss";
+import styles from "../assets/scss/Image.module.scss";
 import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
-const Image = ({ src, width = "32px", height = "32px" }: any) => {
+export const Image = ({ src, width = "32px", height = "32px" }: any) => {
   return (
     <img
       className={cx("image")}
@@ -13,5 +13,3 @@ const Image = ({ src, width = "32px", height = "32px" }: any) => {
     />
   );
 };
-
-export default Image;

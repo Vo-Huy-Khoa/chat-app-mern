@@ -1,50 +1,68 @@
-import instanceAxios from "./AxiosClient";
+import axios from "axios";
 
-const getProfile = async () => {
-  let id: null = null;
-  const user = sessionStorage.getItem("user") || "";
-  if (user !== "") {
-    id = JSON.parse(user).id;
+const getRefreshToken = async () => {
+  const id = JSON.parse(sessionStorage.getItem("user") || "")?.id;
+  const token = sessionStorage.getItem("refreshToken") || "";
+
+  const body = {
+    id,
+    token,
+  };
+  return await instanceAxios
+    .post("refreshToken", JSON.stringify(body))
+    .then((response) => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("refreshToken");
+      sessionStorage.setItem("token", response.data.token);
+    });
+};
+
+const instanceAxios = axios.create({
+  baseURL: "https://chat-backend-7jgs.onrender.com/api",
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  },
+});
+
+// Add a request interceptor
+instanceAxios.interceptors.request.use(
+  function (config) {
+    // Do something before request is sent
+    config.withCredentials = true;
+    const token = sessionStorage.getItem("token") || "";
+    if (token !== "") {
+      config.headers = {
+        ...config.headers,
+        Authorization: `Bearer ${token}`,
+      };
+    }
+    return config;
+  },
+  function (error) {
+    // Do something with request error
+    return Promise.reject(error);
   }
+);
 
-  const response = await instanceAxios.get(`user/profile/${id}`);
-  return response;
-};
+// Add a response interceptor
+instanceAxios.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  async function (error) {
+    const originalRequest = error.config;
+    if (error.response.status === 403 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const access_token = await getRefreshToken();
+      instanceAxios.defaults.headers.common["Authorization"] =
+        "Bearer " + access_token;
+      return instanceAxios(originalRequest);
+    }
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    return Promise.reject(error);
+  }
+);
 
-const handleSearch = async (username: string) => {
-  const response = await instanceAxios.post(
-    `user/search`,
-    JSON.stringify({ username: username })
-  );
-  return response;
-};
-
-const getListMessage = async () => {
-  let userId: null = null;
-  const user = sessionStorage.getItem("user") || "";
-  if (user !== "") userId = JSON.parse(user).id;
-
-  const response = await instanceAxios.post(
-    `listMessage`,
-    JSON.stringify({ senderID: userId, receiverID: userId })
-  );
-  return response;
-};
-
-const getMessage = async (senderID: any, receiverID: any) => {
-  const response = await instanceAxios.post(
-    `message`,
-    JSON.stringify({ senderID, receiverID })
-  );
-  return response;
-};
-
-const createMessage = async (senderID: any, receiverID: any, message: any) => {
-  const response = await instanceAxios.post(
-    `createMessage`,
-    JSON.stringify({ senderID, receiverID, message })
-  );
-  return response;
-};
-
-export { getProfile, handleSearch, getListMessage, getMessage, createMessage };
+export default instanceAxios;

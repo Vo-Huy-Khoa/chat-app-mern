@@ -1,7 +1,7 @@
-import styles from "./home.module.scss";
+import styles from "../../assets/scss/home.module.scss";
 import socket from "../../socket";
 import classNames from "classnames/bind";
-import Image from "../../components/Image";
+import { Image } from "../../components/Image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowLeft,
@@ -28,14 +28,14 @@ import { IMessage } from "../../types";
 
 const cx = classNames.bind(styles);
 
-const Home = () => {
+export const Home = () => {
   const currentUser = useContext(UserContext);
   const { currentReceiver } = useContext(ReceiverContext);
   const { isVisible } = useContext(VisibilityContext);
   const { toggleVisibility } = useContext(VisibilityContext);
   const { selectMessage, getSelectMessage } = useContext(MessageContext);
 
-  const countMessage = selectMessage.length > 0 ? selectMessage.length : null;
+  const countMessage = currentReceiver._id.length ? 1 : null;
   const messageRef = useRef<HTMLInputElement>(null);
   const currentSenderID = currentUser?._id;
   const currentReceiverID = currentReceiver?._id;
@@ -168,5 +168,3 @@ const Home = () => {
     </div>
   );
 };
-
-export default Home;

@@ -1,15 +1,15 @@
 import moment from "moment";
-import styles from "./account.module.scss";
+import styles from "../assets/scss/account.module.scss";
 import classNames from "classnames/bind";
-import Image from "../Image";
+import { Image } from "./Image";
 import { useContext } from "react";
 import {
   MessageContext,
   ReceiverContext,
   UserContext,
   VisibilityContext,
-} from "../../providers";
-import { IMessage } from "../../types";
+} from "../providers";
+import { IMessage } from "../types";
 
 const cx = classNames.bind(styles);
 

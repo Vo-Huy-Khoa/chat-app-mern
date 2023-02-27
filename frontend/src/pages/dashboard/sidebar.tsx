@@ -1,23 +1,22 @@
-import styles from "./sidebar.module.scss";
+import styles from "../../assets/scss/sidebar.module.scss";
 import classNames from "classnames/bind";
-import Image from "../../components/Image";
+import { Image } from "../../components/Image";
 import HeadlessTippy from "@tippyjs/react/headless";
-import { NotificationIcon } from "../../components/Icon";
-import { AccountItem, AccountMessage } from "../../components/AccountItem";
+import { NotificationIcon } from "../../components";
+import { AccountItem, AccountMessage } from "../../components/Account";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDeleteLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useDebounce } from "../../hooks";
-import { Wrapper as PopperWrapper } from "../../components/Popper";
+import { Wrapper as PopperWrapper } from "../../components";
 import { useContext } from "react";
 import { UserContext } from "../../providers";
-import { handleSearch, getListMessage } from "../../services";
+import { handleSearch, getListMessage } from "../../services/handleAPI";
 import { IMessage } from "../../types";
-import messages from "../../store/reducers/messageReducer";
 
 const cx = classNames.bind(styles);
 
-const Sidebar = () => {
+export const Sidebar = () => {
   const currentUser = useContext(UserContext);
   const [valueSearch, setValueSearch] = useState("");
   const debounceValue = useDebounce(valueSearch, 500);
@@ -33,8 +32,6 @@ const Sidebar = () => {
   const uniqueMessage = uniqueSender.filter(
     (message) => message.senderID._id !== currentUser._id
   );
-
-  console.log(uniqueMessage);
 
   useEffect(() => {
     if (!debounceValue.trim()) {
@@ -158,5 +155,3 @@ const Sidebar = () => {
     </div>
   );
 };
-
-export default Sidebar;
