@@ -11,12 +11,11 @@ import { useDebounce } from "../../hooks";
 import { Wrapper as PopperWrapper } from "../../components";
 import { useContext } from "react";
 import { UserContext } from "../../providers";
-import { handleSearch, getListMessage } from "../../services/handleAPI";
+import { handleSearch, getListMessage } from "../../services/dashboard";
 import { IMessage } from "../../types";
 
 const cx = classNames.bind(styles);
-
-export const Sidebar = () => {
+const Sidebar = () => {
   const currentUser = useContext(UserContext);
   const [valueSearch, setValueSearch] = useState("");
   const debounceValue = useDebounce(valueSearch, 500);
@@ -155,3 +154,5 @@ export const Sidebar = () => {
     </div>
   );
 };
+
+export { Sidebar };

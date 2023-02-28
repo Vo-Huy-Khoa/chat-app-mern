@@ -1,5 +1,5 @@
 import socket from "../socket";
-import instanceAxios from ".";
+import { instanceAxios } from "./instance";
 
 const refreshToken = () => {
   const userID = JSON.parse(sessionStorage.getItem("user") || "")?.id;

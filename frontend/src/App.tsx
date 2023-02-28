@@ -1,39 +1,12 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Fragment } from "react";
-import { publicRoutes } from "./routes";
-import { DefaultLayout } from "./layouts";
-import { VisibilityProvider } from "./providers";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { Auth, Dashboard } from "./layouts";
 function App() {
   return (
-    <VisibilityProvider>
-      <Router>
-        <div className="App">
-          <Routes>
-            {publicRoutes.map((routes, index) => {
-              const Page = routes.component;
-              let Layout = DefaultLayout;
-              if (routes.layout) {
-                Layout = routes.layout;
-              } else if (routes.layout === null) {
-                Layout = Fragment;
-              }
-
-              return (
-                <Route
-                  key={index}
-                  path={routes.path}
-                  element={
-                    <Layout>
-                      <Page />
-                    </Layout>
-                  }
-                />
-              );
-            })}
-          </Routes>
-        </div>
-      </Router>
-    </VisibilityProvider>
+    <Routes>
+      <Route path="/dashboard/*" element={<Dashboard />} />
+      <Route path="/auth/*" element={<Auth />} />
+      <Route path="*" element={<Navigate to="/dashboard/home" replace />} />
+    </Routes>
   );
 }
 

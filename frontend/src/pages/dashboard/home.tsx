@@ -27,8 +27,7 @@ import {
 import { IMessage } from "../../types";
 
 const cx = classNames.bind(styles);
-
-export const Home = () => {
+const Home = () => {
   const currentUser = useContext(UserContext);
   const { currentReceiver } = useContext(ReceiverContext);
   const { isVisible } = useContext(VisibilityContext);
@@ -168,3 +167,5 @@ export const Home = () => {
     </div>
   );
 };
+
+export { Home };

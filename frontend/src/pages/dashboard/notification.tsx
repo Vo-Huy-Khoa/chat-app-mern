@@ -17,8 +17,7 @@ import { UserContext, VisibilityContext } from "../../providers";
 import { Wrapper as PopperWrapper } from "../../components";
 import { handleLogout } from "../../services/auth";
 const cx = classNames.bind(styles);
-
-export const Notification = () => {
+const Notification = () => {
   const currentUser = useContext(UserContext);
   const navigate = useNavigate();
   const { isVisible } = useContext(VisibilityContext);
@@ -151,3 +150,5 @@ export const Notification = () => {
     </div>
   );
 };
+
+export { Notification };
