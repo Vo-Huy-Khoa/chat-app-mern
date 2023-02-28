@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import GlobalStyle from "./components/globalStyle";
 import {
+  AuthProvider,
   MessageProvider,
   ReceiverProvider,
   UserProvider,
@@ -18,13 +19,15 @@ root.render(
     <GlobalStyle>
       <BrowserRouter>
         <VisibilityProvider>
-          <UserProvider>
-            <ReceiverProvider>
-              <MessageProvider>
-                <App />
-              </MessageProvider>
-            </ReceiverProvider>
-          </UserProvider>
+          <AuthProvider>
+            <UserProvider>
+              <ReceiverProvider>
+                <MessageProvider>
+                  <App />
+                </MessageProvider>
+              </ReceiverProvider>
+            </UserProvider>
+          </AuthProvider>
         </VisibilityProvider>
       </BrowserRouter>
     </GlobalStyle>

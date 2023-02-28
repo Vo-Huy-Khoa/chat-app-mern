@@ -1,3 +1,4 @@
+export * from "./auth";
 export * from "./message";
 export * from "./receiver";
 export * from "./user";
