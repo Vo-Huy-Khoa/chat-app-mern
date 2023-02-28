@@ -1,4 +1,4 @@
-import instanceAxios from ".";
+import { instanceAxios } from "./instance";
 
 const getProfile = async () => {
   let id: null = null;

@@ -6,17 +6,13 @@ import { handleRegister } from "../../services/auth";
 
 const cx = classNames.bind(styles);
 
-export const Register = () => {
+const Register = () => {
   const navigate = useNavigate();
   const fullNameRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [avatar, setAvatar] = useState("");
-
-  // const handleChangeImage = (e: any) => {
-  //   return setAvatar(URL.createObjectURL(e.target.files[0]));
-  // };
 
   async function handleSubmit(e: any) {
     const body = {
@@ -106,4 +102,4 @@ export const Register = () => {
   );
 };
 
-export default Register;
+export { Register };

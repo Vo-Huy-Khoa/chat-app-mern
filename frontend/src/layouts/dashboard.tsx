@@ -2,31 +2,15 @@ import classNames from "classnames/bind";
 import styles from "../assets/scss/DefaultLayout.module.scss";
 import { Sidebar, Notification } from "../pages/dashboard";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import {
-  ReceiverProvider,
-  UserProvider,
-  VisibilityContext,
-} from "../providers";
-import { MessageProvider } from "../providers";
+import { Route, Routes } from "react-router-dom";
+import { VisibilityContext } from "../providers";
 
+import { routes } from "../routes";
 const cx = classNames.bind(styles);
 
-type Props = {
-  children: JSX.Element;
-};
-
-export const DefaultLayout: React.FC<Props> = ({ children }): any => {
-  const navigate = useNavigate();
+const Dashboard = () => {
   const { isVisible } = useContext(VisibilityContext);
   const [isLargeScreen, setIsLargeScreen] = useState(false);
-  const token = sessionStorage.getItem("token") || "";
-  useEffect(() => {
-    if (token === "") {
-      navigate("/login");
-    }
-  }, [token]);
-
   useEffect(() => {
     function handleResize() {
       setIsLargeScreen(window.innerWidth > 425);
@@ -38,40 +22,58 @@ export const DefaultLayout: React.FC<Props> = ({ children }): any => {
     };
   }, []);
   return (
-    <UserProvider>
-      <ReceiverProvider>
-        <MessageProvider>
-          {isLargeScreen && (
-            <div className={cx("container")}>
-              <div className={cx("sidebar", "fixed")}>
-                <Sidebar />
-              </div>
-              <div className={cx("content", "fixed")}>{children}</div>
-              <div className={cx("notification", "fixed")}>
-                <Notification />
-              </div>
+    <div>
+      {isLargeScreen && (
+        <div className={cx("container")}>
+          <div className={cx("sidebar", "fixed")}>
+            <Sidebar />
+          </div>
+          <div className={cx("content", "fixed")}>
+            <Routes>
+              {routes.map(
+                ({ layout, pages }) =>
+                  layout === "dashboard" &&
+                  pages.map(({ path, element }) => (
+                    <Route path={path} element={element} />
+                  ))
+              )}
+            </Routes>
+          </div>
+          <div className={cx("notification", "fixed")}>
+            <Notification />
+          </div>
+        </div>
+      )}
+      {!isLargeScreen && (
+        <div className={cx("container")}>
+          {isVisible === "sidebar" && (
+            <div className={cx("sidebar", "fixed")}>
+              <Sidebar />
             </div>
           )}
-          {!isLargeScreen && (
-            <div className={cx("container")}>
-              {isVisible === "sidebar" && (
-                <div className={cx("sidebar", "fixed")}>
-                  <Sidebar />
-                </div>
-              )}
 
-              {isVisible === "home" && (
-                <div className={cx("content", "fixed")}>{children}</div>
-              )}
-              {isVisible === "notification" && (
-                <div className={cx("notification", "fixed")}>
-                  <Notification />
-                </div>
-              )}
+          {isVisible === "home" && (
+            <div className={cx("content", "fixed")}>
+              <Routes>
+                {routes.map(
+                  ({ layout, pages }) =>
+                    layout === "dashboard" &&
+                    pages.map(({ path, element }) => (
+                      <Route path={path} element={element} />
+                    ))
+                )}
+              </Routes>
             </div>
           )}
-        </MessageProvider>
-      </ReceiverProvider>
-    </UserProvider>
+          {isVisible === "notification" && (
+            <div className={cx("notification", "fixed")}>
+              <Notification />
+            </div>
+          )}
+        </div>
+      )}
+    </div>
   );
 };
+
+export { Dashboard };

@@ -1,23 +1,16 @@
 import classNames from "classnames/bind";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { FacebookIcon, GoogleIcon, GithubIcon } from "../../components";
 import styles from "../../assets/scss/login.module.scss";
 import { handleLogin } from "../../services/auth";
 
 const cx = classNames.bind(styles);
-
-export const Login = () => {
+const Login = () => {
   const navigate = useNavigate();
-  const token = sessionStorage.getItem("token") || "";
   const userRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (token !== "") {
-      navigate("/");
-    }
-  }, [token]);
   const handleSubmit = (e: any) => {
     const body = {
       username: userRef.current?.value,
@@ -30,7 +23,6 @@ export const Login = () => {
           navigate("/");
         })
         .catch((error) => {
-          console.log(error);
           alert("Login Fail!");
         });
     } catch (err) {
@@ -83,4 +75,4 @@ export const Login = () => {
   );
 };
 
-export default Login;
+export { Login };
