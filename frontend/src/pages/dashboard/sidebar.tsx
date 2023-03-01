@@ -9,14 +9,14 @@ import { faDeleteLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useDebounce } from "../../hooks";
 import { Wrapper as PopperWrapper } from "../../components";
-import { useContext } from "react";
-import { UserContext } from "../../providers";
 import { handleSearch, getListMessage } from "../../services/dashboard";
 import { IMessage } from "../../types";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/reducers/rootReducer";
 
 const cx = classNames.bind(styles);
 const Sidebar = () => {
-  const currentUser = useContext(UserContext);
+  const currentUser = useSelector((state: RootState) => state.currentUser);
   const [valueSearch, setValueSearch] = useState("");
   const debounceValue = useDebounce(valueSearch, 500);
   const [listUserSearch, setListSearch] = useState([]);

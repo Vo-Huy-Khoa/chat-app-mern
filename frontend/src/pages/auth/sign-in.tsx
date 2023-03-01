@@ -8,8 +8,8 @@ import { AuthContext } from "../../providers";
 
 const cx = classNames.bind(styles);
 const Login = () => {
-  const { handleAuth } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { setIsAuthenticated } = useContext(AuthContext);
   const userRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -23,7 +23,7 @@ const Login = () => {
       handleLogin(body)
         .then(() => {
           navigate("/dashboard/home");
-          handleAuth(true);
+          setIsAuthenticated(true);
         })
         .catch((error) => {
           alert("Login Fail!");
@@ -71,7 +71,7 @@ const Login = () => {
             <GoogleIcon />
             <GithubIcon />
           </div>
-          <NavLink to="/register">Or sign up</NavLink>
+          <NavLink to="/auth/sign-up">Or sign up</NavLink>
         </div>
       </div>
     </div>

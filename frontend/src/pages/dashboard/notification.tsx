@@ -13,16 +13,18 @@ import { Image } from "../../components/Image";
 import { MoreIcon, PhoneIcon, UserAddIcon } from "../../components";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext, VisibilityContext } from "../../providers";
+import { VisibilityContext } from "../../providers";
 import { Wrapper as PopperWrapper } from "../../components";
 import { handleLogout } from "../../services/auth";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/reducers/rootReducer";
 const cx = classNames.bind(styles);
 const Notification = () => {
-  const currentUser = useContext(UserContext);
   const navigate = useNavigate();
+  const currentUser = useSelector((state: RootState) => state.currentUser);
+
   const { isVisible } = useContext(VisibilityContext);
   const { toggleVisibility } = useContext(VisibilityContext);
-
   const handleHome = () => {
     toggleVisibility("home");
   };
@@ -58,7 +60,7 @@ const Notification = () => {
                       try {
                         handleLogout().then(() => {
                           sessionStorage.clear();
-                          navigate("/login");
+                          navigate("/auth/sign-in");
                         });
                       } catch (error) {
                         console.log(error);

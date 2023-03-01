@@ -39,4 +39,9 @@ const handleLogout = async () => {
   return await instanceAxios.post("logout", JSON.stringify(body));
 };
 
-export { refreshToken, handleLogout, handleLogin, handleRegister };
+const getToken = () => {
+  const token = sessionStorage.getItem("token") || null;
+  return token;
+};
+
+export { getToken, refreshToken, handleLogout, handleLogin, handleRegister };
