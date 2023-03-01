@@ -21,9 +21,9 @@ import { useContext, useEffect, useRef } from "react";
 import { VisibilityContext, ReceiverContext } from "../../providers";
 import { IMessage } from "../../types";
 import { getProfile } from "../../services";
-import { setCurrentUser, setSelectMessage } from "../../store/actions";
+import { setCurrentUser, setSelectMessage } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/reducers/rootReducer";
+import { RootState } from "../../redux/reducers/rootReducer";
 
 const cx = classNames.bind(styles);
 const Home = () => {

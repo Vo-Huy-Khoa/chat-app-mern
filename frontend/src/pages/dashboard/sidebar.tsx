@@ -12,7 +12,7 @@ import { Wrapper as PopperWrapper } from "../../components";
 import { handleSearch, getListMessage } from "../../services/dashboard";
 import { IMessage } from "../../types";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/reducers/rootReducer";
+import { RootState } from "../../redux/reducers/rootReducer";
 
 const cx = classNames.bind(styles);
 const Sidebar = () => {

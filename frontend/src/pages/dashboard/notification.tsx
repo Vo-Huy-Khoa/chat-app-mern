@@ -17,7 +17,7 @@ import { VisibilityContext } from "../../providers";
 import { Wrapper as PopperWrapper } from "../../components";
 import { handleLogout } from "../../services/auth";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/reducers/rootReducer";
+import { RootState } from "../../redux/reducers/rootReducer";
 const cx = classNames.bind(styles);
 const Notification = () => {
   const navigate = useNavigate();
