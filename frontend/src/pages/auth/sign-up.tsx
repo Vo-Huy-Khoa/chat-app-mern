@@ -95,7 +95,7 @@ const Register = () => {
           <button type="submit">Register</button>
         </form>
         <div className={cx("register__link")}>
-          <NavLink to="/login">or Login?</NavLink>
+          <NavLink to="/auth/sign-in">or Login?</NavLink>
         </div>
       </div>
     </div>

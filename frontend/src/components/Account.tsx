@@ -3,22 +3,20 @@ import styles from "../assets/scss/account.module.scss";
 import classNames from "classnames/bind";
 import { Image } from "./Image";
 import { useContext } from "react";
-import {
-  MessageContext,
-  ReceiverContext,
-  UserContext,
-  VisibilityContext,
-} from "../providers";
+import { ReceiverContext, VisibilityContext } from "../providers";
 import { IMessage } from "../types";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/reducers/rootReducer";
+import { setSelectMessage } from "../store/actions";
 
 const cx = classNames.bind(styles);
 
 const AccountItem = ({ ...rest }) => {
+  const dispatch = useDispatch();
   const { listMessage, searchUser } = rest;
-  const { getSelectMessage } = useContext(MessageContext);
   const { setCurrentReceiver } = useContext(ReceiverContext);
   const { toggleVisibility } = useContext(VisibilityContext);
-  const currentUser = useContext(UserContext);
+  const currentUser = useSelector((state: RootState) => state.currentUser);
 
   const receiverID = searchUser?._id;
   const senderID = currentUser?._id;
@@ -47,7 +45,7 @@ const AccountItem = ({ ...rest }) => {
   const handleSubmit = () => {
     toggleVisibility("home");
     setCurrentReceiver(searchUser);
-    getSelectMessage(currentMessage);
+    dispatch(setSelectMessage(currentMessage));
   };
 
   return (
@@ -62,9 +60,10 @@ const AccountItem = ({ ...rest }) => {
 };
 
 const AccountMessage = ({ ...rest }) => {
+  const dispatch = useDispatch();
   const { setCurrentReceiver } = useContext(ReceiverContext);
   const { toggleVisibility } = useContext(VisibilityContext);
-  const { getSelectMessage } = useContext(MessageContext);
+
   const { listMessage, message, searchUser } = rest;
 
   const receiverID = message?.receiverID?._id;
@@ -93,7 +92,7 @@ const AccountMessage = ({ ...rest }) => {
 
   const handleSubmit = () => {
     setCurrentReceiver(searchUser);
-    getSelectMessage(currentMessage);
+    dispatch(setSelectMessage(currentMessage));
     toggleVisibility("home");
   };
 
