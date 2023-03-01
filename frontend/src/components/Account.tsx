@@ -6,8 +6,8 @@ import { useContext } from "react";
 import { ReceiverContext, VisibilityContext } from "../providers";
 import { IMessage } from "../types";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store/reducers/rootReducer";
-import { setSelectMessage } from "../store/actions";
+import { RootState } from "../redux/reducers/rootReducer";
+import { setSelectMessage } from "../redux/actions";
 
 const cx = classNames.bind(styles);
 
