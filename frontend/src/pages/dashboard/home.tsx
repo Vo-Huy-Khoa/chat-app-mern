@@ -18,10 +18,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { useContext, useEffect, useRef } from "react";
-import { VisibilityContext, ReceiverContext } from "../../providers";
+import { ReceiverContext } from "../../providers";
 import { IMessage } from "../../types";
 import { getProfile } from "../../services";
-import { setCurrentUser, setSelectMessage } from "../../redux/actions";
+import {
+  setCurrentUser,
+  setSelectMessage,
+  setVisibility,
+} from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
 
@@ -31,8 +35,7 @@ const Home = () => {
   const currentUser = useSelector((state: RootState) => state.currentUser);
   const selectMessage = useSelector((state: RootState) => state.currentMessage);
   const { currentReceiver } = useContext(ReceiverContext);
-  const { isVisible } = useContext(VisibilityContext);
-  const { toggleVisibility } = useContext(VisibilityContext);
+  const isVisible = useSelector((state: RootState) => state.currentVisibility);
 
   const countMessage = currentReceiver._id.length ? 1 : null;
   const messageRef = useRef<HTMLInputElement>(null);
@@ -55,11 +58,11 @@ const Home = () => {
   };
 
   const handleBackSidebar = () => {
-    toggleVisibility("sidebar");
+    dispatch(setVisibility("sidebar"));
   };
 
   const handleNotification = () => {
-    toggleVisibility("notification");
+    dispatch(setVisibility("notification"));
   };
 
   useEffect(() => {
@@ -72,7 +75,7 @@ const Home = () => {
       );
       dispatch(setSelectMessage(listMessage));
     });
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     getProfile()
@@ -82,7 +85,7 @@ const Home = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={cx("wrapper")}>

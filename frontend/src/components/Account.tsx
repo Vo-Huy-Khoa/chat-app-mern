@@ -3,21 +3,19 @@ import styles from "../assets/scss/account.module.scss";
 import classNames from "classnames/bind";
 import { Image } from "./Image";
 import { useContext } from "react";
-import { ReceiverContext, VisibilityContext } from "../providers";
+import { ReceiverContext } from "../providers";
 import { IMessage } from "../types";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/reducers/rootReducer";
-import { setSelectMessage } from "../redux/actions";
+import { setSelectMessage, setVisibility } from "../redux/actions";
 
 const cx = classNames.bind(styles);
 
 const AccountItem = ({ ...rest }) => {
   const dispatch = useDispatch();
+  const currentUser = useSelector((state: RootState) => state.currentUser);
   const { listMessage, searchUser } = rest;
   const { setCurrentReceiver } = useContext(ReceiverContext);
-  const { toggleVisibility } = useContext(VisibilityContext);
-  const currentUser = useSelector((state: RootState) => state.currentUser);
-
   const receiverID = searchUser?._id;
   const senderID = currentUser?._id;
 
@@ -43,7 +41,7 @@ const AccountItem = ({ ...rest }) => {
   );
 
   const handleSubmit = () => {
-    toggleVisibility("home");
+    dispatch(setVisibility("home"));
     setCurrentReceiver(searchUser);
     dispatch(setSelectMessage(currentMessage));
   };
@@ -62,8 +60,6 @@ const AccountItem = ({ ...rest }) => {
 const AccountMessage = ({ ...rest }) => {
   const dispatch = useDispatch();
   const { setCurrentReceiver } = useContext(ReceiverContext);
-  const { toggleVisibility } = useContext(VisibilityContext);
-
   const { listMessage, message, searchUser } = rest;
 
   const receiverID = message?.receiverID?._id;
@@ -92,8 +88,8 @@ const AccountMessage = ({ ...rest }) => {
 
   const handleSubmit = () => {
     setCurrentReceiver(searchUser);
+    dispatch(setVisibility("home"));
     dispatch(setSelectMessage(currentMessage));
-    toggleVisibility("home");
   };
 
   return (

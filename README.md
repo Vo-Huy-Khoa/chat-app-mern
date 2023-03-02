@@ -1,77 +1,79 @@
 <h1>Chat App MERN</h1>
-[![Dependency Status](https://www.versioneye.com/user/projects/57d746d1df40d0004a4a9e21/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57d746d1df40d0004a4a9e21)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/OmarElGabry/chat.io/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/OmarElGabry/chat.io/?branch=master)
-[![Code Climate](https://codeclimate.com/github/OmarElGabry/chat.io/badges/gpa.svg)](https://codeclimate.com/github/OmarElGabry/chat.io)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOmarElGabry%2Fchat.io.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FOmarElGabry%2Fchat.io?ref=badge_shield)
-
 A Real Time Chat Application built using Node.js, React,js Express, Typescript, Mongoose, Socket.io.
 
 ## Index
-+ [Demo](#demo)
-+ [Features](#features)
-+ [Installation](#installation)
-+ [How It Works](#how-it-works)
-+ [Structure](#structure)
+
+- [Demo](#demo)
+- [Features](#features)
+- [Installation](#installation)
+- [How It Works](#how-it-works)
+- [Structure](#structure)
 
 ## Demo
-<h2 name="demo"><a href="https://mern-vo-huy-khoa.vercel.app/">Live Demo</a></h2>
+
+<h3 name="demo">Live <a href="https://mern-vo-huy-khoa.vercel.app/">Demo</a></h3>
 
 ## Features<a name="features"></a>
-+ Uses Express as the application Framework.
-+ Manages Sessions using [express-session](https://github.com/expressjs/session) package.
-+ Authenticates via username and password using [Passport](https://github.com/jaredhanson/passport).
-+ Real-time communication between a client and a server using [Socket.io](https://github.com/socketio/socket.io).
-+ Uses [MongoDB](https://github.com/mongodb/mongo), [Mongoose](https://github.com/Automattic/mongoose) for storing and querying data.
-+ Stores session in a [MongoDB](https://github.com/mongodb/mongo) using [connect-mongo](https://github.com/kcbanner/connect-mongo); a MongoDB-based session store.
 
+- Uses Express as the application Framework.
+- Authenticates via username and password.
+- Real-time communication between a client and a server using [Socket.io](https://github.com/socketio/socket.io).
+- Uses [MongoDB](https://github.com/mongodb/mongo), [Mongoose](https://github.com/Automattic/mongoose) for storing and querying data.
 
 ## Installation<a name="installation"></a>
+
 ### Running Locally
+
 Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
-1. Clone or Download the repository
 
-	```
-	$ git clone https://github.com/Vo-Huy-Khoa/Chat_App_MERN.git
-	$ cd Chat_App_MERN
-	```
-    Run Backend:
+1. Clone repository:
 
-    ```bash
-    cd backend
-    npm install
-    npm run dev
-    ```
+   ```
+   $ git clone https://github.com/Vo-Huy-Khoa/Chat_App_MERN.git
+   $ cd Chat_App_MERN
+   ```
 
-    Run Frontend:
+   Run Backend:
 
-    ```bash
-    cd frontend
-    npm install
-    npm run start
-    ```
+   ```bash
+   cd backend
+   npm install
+   npm run dev
+   ```
+
+   Run Frontend:
+
+   ```bash
+   cd frontend
+   npm install
+   npm run start
+   ```
+
 ## How It Works<a name="how-it-works"></a>
 
 #### MongoDB
-You need to create a database on MongoLab, then create a database user, get the `MongoDB URI`, and assign it to `dbURI`.
+
+You need to create a database on MongoDB, then create a database user, get the `MongoDB URI`, and assign it to `dbURI`.
 
 ### Database<a name="database"></a>
-Mongoose is used to interact with a MongoDB that's hosted by MongoLab. 
+
+Mongoose is used to interact with a MongoDB.
 
 #### Schemas
-There are two schemas; users and rooms. 
 
-Each user has a username, passowrd, social Id, and picture. If the user is logged via username and password, then social Id has to be null, and the if logged in via a social account, then the password will be null.
+There are two schemas; users and rooms.
 
-Each room has a title, and array of connections. Each item in the connections array represents a user connected through a unique socket; object composed of _{userId + socketId}_. Both of them together are unique.
+Each user has a username, password,and picture. If the user is logged via username and password, and the if logged in via a social account, then the password will be null.
 
 ### Models<a name="models"></a>
-Each model wraps Mongoose Model object, overrides and provides some methods. There are two models; User and Room.
+
+Each model wraps Mongoose Model object, overrides and provides some methods.
 
 ### Sockets<a name="sockets"></a>
+
 Having an active connection opened between the client and the server so client can send and receive data. This allows real-time communication using TCP sockets. This is made possible by [Socket.io](https://github.com/socketio/socket.io).
 
-The client starts by connecting to the server through a socket(maybe also assigned to a specific namespace). Once connections is successful, client and server can emit and listen to events. 
-
+The client starts by connecting to the server through a socket (maybe also assigned to a specific namespace) . Once connections is successful, client and server can emit and listen to events.
 
 ## Structure of the project: <a name='structure'></a>
 
@@ -106,32 +108,47 @@ src
 ```text
 src
 ├── assets
-│   └── ...
-├── configs
-│   └── ...
+|   └── images
+│   └── scss
 ├── components
-│   └── ui
-│       └── Button
-│           └── button.tsx
-│           └── actions.module.scss
-|       └── ...
-│   └── layout
-│       └── header
-│           └── header.tsx
-│           └── header.module.scss
-|       └── ...
+│   └── Account.tsx
+│   └── Image.tsx
+│   └── index.ts
 ├── hooks
-│   └── ...
+│   └── useDebounce
+│   └── index
+├── layouts
+│   └── auth.tsx
+│   └── dashboard.tsx
+│   └── index.ts
 ├── pages
-│   └── ...
-├── routes
-│   └── ...
+│   └── auth
+│       └── sign-in.tsx
+│       └── sign-up.tsx
+│       └── index.ts
+│   └── dashboard
+│       └── home.tsx
+│       └── notification.tsx
+│       └── sidebar.tsx
+│       └── index.ts
+├── provider
+│   └── auth.tsx
+|   └── index.ts
+├── redux
+│   └── actions
+│       └── sign-in.tsx
+│       └── index.ts
+│   └── reducers
+│       └── visibility.ts
+│       └── rootReducer.ts
+│   └── initState.ts
+│   └── store.ts
 ├── services
-│   └── ...
-├── utils
-│   └── ...
-├── pages
-│   └── ...
+│   └── auth.ts
+│   └── dashboard.ts
+│   └── index.ts
+├── socket.tsx
+├── route.tsx
 ├── App.tsx
 └── index.tsx
 

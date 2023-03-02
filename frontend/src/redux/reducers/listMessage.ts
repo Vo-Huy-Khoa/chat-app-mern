@@ -10,7 +10,7 @@ const currentMessageReducer = (
 ) => {
   switch (action.type) {
     case SelectMessageActionTypes.SET_MESSAGE:
-      return [...state, ...action.payload];
+      return [...action.payload];
     case SelectMessageActionTypes.CLEAR_MESSAGE:
       return [...initMessage];
     default:

@@ -1,15 +1,16 @@
 import classNames from "classnames/bind";
+import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import { routes } from "../routes";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/reducers/rootReducer";
 import styles from "../assets/scss/DefaultLayout.module.scss";
 import { Sidebar, Notification } from "../pages/dashboard";
-import { useContext, useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import { VisibilityContext } from "../providers";
-
-import { routes } from "../routes";
 const cx = classNames.bind(styles);
 
 const Dashboard = () => {
-  const { isVisible } = useContext(VisibilityContext);
+  const isVisible = useSelector((state: RootState) => state.currentVisibility);
+
   const [isLargeScreen, setIsLargeScreen] = useState(false);
   useEffect(() => {
     function handleResize() {
