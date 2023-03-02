@@ -65,13 +65,13 @@ const Login = () => {
           </form>
         </div>
         <div className={cx("login__signup")}>
-          <span>Or sign up using</span>
+          {/* <span>Or sign up using</span> */}
           <div className={cx("login__signup__icon")}>
-            <FacebookIcon />
+            {/* <FacebookIcon />
             <GoogleIcon />
-            <GithubIcon />
+            <GithubIcon /> */}
           </div>
-          <NavLink to="/auth/sign-up">Or sign up</NavLink>
+          <NavLink to="/auth/sign-up">Sign Up</NavLink>
         </div>
       </div>
     </div>
