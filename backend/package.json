@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx nodemon",
     "build": "rimraf ./build && tsc",
-    "start": "npm run build && node ./build/server.js"
+    "start": "npm run build && node ./build/server.js",
+    "product": "node ./build/server.js"
   },
   "keywords": [],
   "author": "",
