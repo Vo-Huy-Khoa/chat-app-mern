@@ -1,5 +1,5 @@
 <h1>Chat App MERN</h1>
-A Real Time Chat Application built using Node.js, React.js Express, Typescript, Mongoose, Socket.io.
+A Real Time Chat Application built using Node.js, React,js Express, Typescript, Mongoose, Socket.io.
 
 ## Index
 
@@ -16,67 +16,64 @@ A Real Time Chat Application built using Node.js, React.js Express, Typescript, 
 ## Features<a name="features"></a>
 
 - Uses Express as the application Framework.
-- Manages Sessions using [express-session](https://github.com/expressjs/session) package.
-- Authenticates via username and password using [Passport](https://github.com/jaredhanson/passport).
+- Authenticates via username and password.
 - Real-time communication between a client and a server using [Socket.io](https://github.com/socketio/socket.io).
-- Uses [MongoDB](https://github.com/mongodb/mongo), [Mongoose](https://github.com/Automattic/mongoose) for storing and
-  querying data.
+- Uses [MongoDB](https://github.com/mongodb/mongo), [Mongoose](https://github.com/Automattic/mongoose) for storing and querying data.
 
 ## Installation<a name="installation"></a>
 
+### Running Locally
+
 Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
 
-Clone repository:
+1. Clone repository:
 
-```
-$ git clone https://github.com/Vo-Huy-Khoa/Chat_App_MERN.git
-$ cd Chat_App_MERN
-```
+   ```
+   $ git clone https://github.com/Vo-Huy-Khoa/Chat_App_MERN.git
+   $ cd Chat_App_MERN
+   ```
 
-Run Backend:
+   Run Backend:
 
-```bash
-cd backend
-npm install
-npm run dev
-```
+   ```bash
+   cd backend
+   npm install
+   npm run dev
+   ```
 
-Run Frontend:
+   Run Frontend:
 
-```bash
-cd frontend
-npm install
-npm run start
-```
+   ```bash
+   cd frontend
+   npm install
+   npm run start
+   ```
 
 ## How It Works<a name="how-it-works"></a>
 
 #### MongoDB
 
-You need to create a database on MongoLab, then create a database user, get the `MongoDB URI`, and assign it to `dbURI`.
+You need to create a database on MongoDB, then create a database user, get the `MongoDB URI`, and assign it to `dbURI`.
 
 ### Database<a name="database"></a>
 
-Mongoose is used to interact with a MongoDB that's hosted by MongoLab.
+Mongoose is used to interact with a MongoDB.
 
 #### Schemas
 
 There are two schemas; users and rooms.
 
-Each user has a username, passowrd, social Id, and picture. If the user is logged via username and password, then social
-Id has to be null, and the if logged in via a social account, then the password will be null.
+Each user has a username, password,and picture. If the user is logged via username and password, and the if logged in via a social account, then the password will be null.
 
 ### Models<a name="models"></a>
 
-Each model wraps Mongoose Model object, overrides and provides some methods. There are two models; User and Room.
+Each model wraps Mongoose Model object, overrides and provides some methods.
 
 ### Sockets<a name="sockets"></a>
 
-Having an active connection opened between the client and the server so client can send and receive data. This allows
-real-time communication using TCP sockets. This is made possible by [Socket.io](https://github.com/socketio/socket.io).
+Having an active connection opened between the client and the server so client can send and receive data. This allows real-time communication using TCP sockets. This is made possible by [Socket.io](https://github.com/socketio/socket.io).
 
-The client starts by connecting to the server through a socket(maybe also assigned to a specific namespace). Once
-connections is successful, client and server can emit and listen to events.
+The client starts by connecting to the server through a socket (maybe also assigned to a specific namespace) . Once connections is successful, client and server can emit and listen to events.
 
 ## Structure of the project: <a name='structure'></a>
 
@@ -111,32 +108,47 @@ src
 ```text
 src
 ├── assets
-│ └── ...
-├── configs
-│ └── ...
+|   └── images
+│   └── scss
 ├── components
-│ └── ui
-│ └── Button
-│ └── button.tsx
-│ └── actions.module.scss
-| └── ...
-│ └── layout
-│ └── header
-│ └── header.tsx
-│ └── header.module.scss
-| └── ...
+│   └── Account.tsx
+│   └── Image.tsx
+│   └── index.ts
 ├── hooks
-│ └── ...
+│   └── useDebounce
+│   └── index
+├── layouts
+│   └── auth.tsx
+│   └── dashboard.tsx
+│   └── index.ts
 ├── pages
-│ └── ...
-├── routes
-│ └── ...
+│   └── auth
+│       └── sign-in.tsx
+│       └── sign-up.tsx
+│       └── index.ts
+│   └── dashboard
+│       └── home.tsx
+│       └── notification.tsx
+│       └── sidebar.tsx
+│       └── index.ts
+├── provider
+│   └── auth.tsx
+|   └── index.ts
+├── redux
+│   └── actions
+│       └── sign-in.tsx
+│       └── index.ts
+│   └── reducers
+│       └── visibility.ts
+│       └── rootReducer.ts
+│   └── initState.ts
+│   └── store.ts
 ├── services
-│ └── ...
-├── utils
-│ └── ...
-├── pages
-│ └── ...
+│   └── auth.ts
+│   └── dashboard.ts
+│   └── index.ts
+├── socket.tsx
+├── route.tsx
 ├── App.tsx
 └── index.tsx
 

@@ -12,21 +12,20 @@ import {
 import { Image } from "../../components/Image";
 import { MoreIcon, PhoneIcon, UserAddIcon } from "../../components";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { VisibilityContext } from "../../providers";
 import { Wrapper as PopperWrapper } from "../../components";
 import { handleLogout } from "../../services/auth";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
+import { setVisibility } from "../../redux/actions";
 const cx = classNames.bind(styles);
 const Notification = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const currentUser = useSelector((state: RootState) => state.currentUser);
+  const isVisible = useSelector((state: RootState) => state.currentVisibility);
 
-  const { isVisible } = useContext(VisibilityContext);
-  const { toggleVisibility } = useContext(VisibilityContext);
   const handleHome = () => {
-    toggleVisibility("home");
+    dispatch(setVisibility("home"));
   };
   return (
     <div className={cx("wrapper")}>
