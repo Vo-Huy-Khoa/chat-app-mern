@@ -4,94 +4,65 @@ import UserModel from "../models/User";
 class userController {
   async getAll(req: Request, res: Response) {
     try {
-      await UserModel.find()
-        .then((userList) => {
-          res.status(200).json(userList);
-        })
-        .catch((error) => {
-          res.status(400).json(error);
-        });
+      const userList = await UserModel.find();
+      res.status(200).json(userList);
     } catch (error) {
-      console.log(error);
+      res.status(400).json(error);
     }
   }
 
   async profile(req: Request, res: Response) {
     try {
-      await UserModel.findById({ _id: req.params.id })
-        .then((user) => {
-          res.status(200).json(user);
-        })
-        .catch((error) => {
-          res.status(400).json(error);
-        });
+      const user = await UserModel.findById(req.params.id);
+      res.status(200).json(user);
     } catch (error) {
-      console.log(error);
+      res.status(400).json(error);
     }
   }
 
   async update(req: Request, res: Response) {
     try {
-      await UserModel.findOneAndUpdate(
+      const updatedUser = await UserModel.findOneAndUpdate(
         { _id: req.body.params },
         {
           username: req.body.username,
           email: req.body.email,
           password: req.body.password,
-        }
-      )
-        .then((user) => {
-          res.status(200).json(user);
-        })
-        .catch((error) => {
-          res.status(400).json(error);
-        });
+        },
+        { new: true } // return the updated document
+      );
+      res.status(200).json(updatedUser);
     } catch (error) {
-      console.log(error);
+      res.status(400).json(error);
     }
   }
 
   async search(req: Request, res: Response) {
     try {
-      await UserModel.find({
+      const user = await UserModel.findOne({
         username: new RegExp("^" + req.body.username + "$", "i"),
-      })
-        .then((user) => {
-          res.status(200).json(user);
-        })
-        .catch((error) => {
-          res.status(400).json(error);
-        });
+      });
+      res.status(200).json(user);
     } catch (error) {
-      console.log(error);
+      res.status(400).json(error);
     }
   }
 
   async destroy(req: Request, res: Response) {
     try {
-      await UserModel.deleteOne({ _id: req.body.params })
-        .then((user) => {
-          res.status(200).json(user);
-        })
-        .catch((error) => {
-          res.status(400).json(error);
-        });
+      const user = await UserModel.deleteOne({ _id: req.body.params });
+      res.status(200).json(user);
     } catch (error) {
-      console.log(error);
+      res.status(400).json(error);
     }
   }
 
   async destroyAll(req: Request, res: Response) {
     try {
-      await UserModel.deleteMany({})
-        .then((user) => {
-          res.status(200).json(user);
-        })
-        .catch((error) => {
-          res.status(400).json(error);
-        });
+      const deletedUser = await UserModel.deleteMany({});
+      res.status(200).json(deletedUser);
     } catch (error) {
-      console.log(error);
+      res.status(400).json(error);
     }
   }
 }

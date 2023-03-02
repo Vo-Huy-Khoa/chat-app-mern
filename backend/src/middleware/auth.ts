@@ -1,11 +1,8 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import UserModel from "../models/User";
 import bcrypt from "bcrypt";
 import * as Token from "./token";
 import jwt from "jsonwebtoken";
-
-//authorization: uy quyen truy cap
-//authentication: xac thuc thong tin dang nhap
 
 const Register = async (req: Request, res: Response) => {
   const password = req.body.password;
