@@ -39,7 +39,7 @@ class userController {
 
   async search(req: Request, res: Response) {
     try {
-      const user = await UserModel.findOne({
+      const user = await UserModel.find({
         username: new RegExp("^" + req.body.username + "$", "i"),
       });
       res.status(200).json(user);

@@ -1,12 +1,23 @@
-@media only screen and (min-width: 1025px) {
-  .container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-  }
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
 
+.sidebar {
+  background-color: var(--primary);
+}
+
+.content {
+  background-color: var(--black);
+}
+
+.notification {
+  background-color: var(--primary);
+}
+
+@media only screen and (min-width: 1025px) {
   .sidebar {
-    background-color: var(--primary);
     width: 20%;
     height: 100%;
     left: 0;
@@ -15,13 +26,11 @@
 
   .content {
     left: 20%;
-    background-color: var(--black);
     width: 60%;
     height: 100%;
   }
 
   .notification {
-    background-color: var(--primary);
     right: 0;
     top: 0;
     width: 20%;
@@ -30,14 +39,7 @@
 }
 
 @media only screen and (max-width: 1024px) and (min-width: 769px) {
-  .container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-  }
-
   .sidebar {
-    background-color: var(--primary);
     width: 25%;
     height: 100%;
     left: 0;
@@ -46,13 +48,11 @@
 
   .content {
     left: 25%;
-    background-color: var(--black);
     width: 50%;
     height: 100%;
   }
 
   .notification {
-    background-color: var(--primary);
     right: 0;
     top: 0;
     width: 25%;
@@ -61,14 +61,7 @@
 }
 
 @media only screen and (max-width: 768px) and (min-width: 426px) {
-  .container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-  }
-
   .sidebar {
-    background-color: var(--primary);
     width: 25%;
     height: 100%;
     left: 0;
@@ -77,13 +70,11 @@
 
   .content {
     left: 25%;
-    background-color: var(--black);
     width: 50%;
     height: 100%;
   }
 
   .notification {
-    background-color: var(--primary);
     right: 0;
     top: 0;
     width: 25%;
@@ -92,14 +83,7 @@
 }
 
 @media only screen and (max-width: 425px) {
-  .container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-  }
-
   .sidebar {
-    background-color: var(--primary);
     width: 25%;
     height: 100%;
     left: 0;
@@ -108,13 +92,11 @@
   }
 
   .content {
-    background-color: var(--black);
     width: 100%;
     height: 100%;
   }
 
   .notification {
-    background-color: var(--primary);
     right: 0;
     top: 0;
     width: 100%;

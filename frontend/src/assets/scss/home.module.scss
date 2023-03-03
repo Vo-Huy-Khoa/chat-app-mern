@@ -1,28 +1,166 @@
 .icon-back {
   display: none;
 }
+.wrapper {
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary);
+    border-radius: 0 0 5px 5px;
+
+    &__content {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+    }
+  }
+
+  .content {
+    background-color: #17151c;
+
+    &__message {
+      display: flex;
+      flex-direction: column;
+      overflow-y: scroll;
+      &__item {
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+
+        img {
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        &__chat {
+          display: flex;
+          align-items: flex-end;
+          border-radius: 15px;
+        }
+      }
+    }
+
+    .item-right {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+
+    .item-left {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .your {
+      position: relative;
+      flex-direction: row;
+      background-color: var(--primary);
+      color: var(--white);
+    }
+
+    .your::after {
+      position: absolute;
+      left: -15px;
+      bottom: 0;
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-bottom: 15px solid var(--primary);
+      border-right: 15px solid var(--primary);
+    }
+
+    .me {
+      background-color: var(--blue);
+      flex-direction: row-reverse;
+    }
+
+    .me::after {
+      position: absolute;
+      right: 46px;
+      bottom: 0;
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 15px solid var(--blue);
+      border-bottom: 15px solid var(--blue);
+      border-right: 15px solid transparent;
+    }
+  }
+
+  .message {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--primary);
+    border-radius: 10px;
+
+    &__heading {
+      display: flex;
+      justify-content: space-between;
+
+      &__content {
+        display: flex;
+        flex-direction: row;
+
+        a {
+          text-transform: uppercase;
+          color: var(--white);
+        }
+      }
+    }
+
+    input {
+      color: var(--white);
+      background-color: transparent;
+      font-weight: bold;
+      border: none;
+    }
+
+    &__more {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      &__file {
+        display: flex;
+        flex-direction: row;
+      }
+
+      &__action {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        button {
+          background-color: var(--blue);
+          color: var(--black);
+        }
+        button:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
 @media only screen and (min-width: 1025px) {
   .wrapper {
     .header {
       top: 0;
       left: 20%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       width: 60%;
       height: 80px;
-      background-color: var(--primary);
       border-radius: 0 0 5px 5px;
 
       &__content {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
         gap: 20px;
         width: 50%;
         height: 100%;
-        background-color: transparent;
 
         &__text {
           span {
@@ -41,22 +179,16 @@
     .content {
       width: 100%;
       height: 100vh;
-      background-color: #17151c;
 
       &__message {
         margin-top: 80px;
         padding: 40px;
         width: 100%;
         height: 65%;
-        display: flex;
-        flex-direction: column;
         gap: 20px;
         overflow-y: scroll;
         &__item {
           width: 100%;
-          position: relative;
-          display: flex;
-          align-items: flex-end;
           gap: 10px;
 
           img {
@@ -71,62 +203,10 @@
             max-width: 60%;
             height: 100%;
             font-size: 2rem;
-            display: flex;
-            align-items: flex-end;
             gap: 20px;
             border-radius: 15px;
           }
         }
-      }
-
-      .item-right {
-        width: 100%;
-        display: flex;
-        flex-direction: row-reverse;
-      }
-
-      .item-left {
-        position: relative;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-      }
-
-      .your {
-        position: relative;
-        flex-direction: row;
-        background-color: var(--primary);
-        color: var(--white);
-      }
-
-      .your::after {
-        position: absolute;
-        left: -15px;
-        bottom: 0;
-        content: "";
-        width: 0;
-        height: 0;
-        border-left: 15px solid transparent;
-        border-bottom: 15px solid var(--primary);
-        border-right: 15px solid var(--primary);
-      }
-
-      .me {
-        background-color: var(--blue);
-        flex-direction: row-reverse;
-      }
-
-      .me::after {
-        position: absolute;
-        right: 46px;
-        bottom: 0;
-        content: "";
-        width: 0;
-        height: 0;
-
-        border-left: 15px solid var(--blue);
-        border-bottom: 15px solid var(--blue);
-        border-right: 15px solid transparent;
       }
     }
 
@@ -136,23 +216,14 @@
       width: 60%;
       left: 20%;
       height: 23%;
-      background-color: var(--primary);
       border-radius: 10px;
       padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
 
       &__heading {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
         width: 100%;
         font-size: 1.5rem;
 
         &__content {
-          display: flex;
-          flex-direction: row;
           gap: 20px;
 
           a {
@@ -171,8 +242,6 @@
       input {
         width: 100%;
         height: 60%;
-        color: var(--white);
-        background-color: transparent;
         font-size: 3rem;
         font-weight: bold;
         border: none;
@@ -180,10 +249,6 @@
 
       &__more {
         width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
 
         svg {
           width: 25px;
@@ -198,9 +263,6 @@
         }
 
         &__action {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
           gap: 15px;
 
           button {
@@ -226,23 +288,14 @@
     .header {
       top: 0;
       left: 25%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       width: 50%;
       height: 80px;
-      background-color: var(--primary);
       border-radius: 0 0 5px 5px;
 
       &__content {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
         gap: 20px;
         width: 50%;
         height: 100%;
-        background-color: transparent;
 
         &__text {
           span {
@@ -261,22 +314,15 @@
     .content {
       width: 100%;
       height: 100vh;
-      background-color: #17151c;
 
       &__message {
         margin-top: 80px;
         padding: 40px;
         width: 100%;
         height: 65%;
-        display: flex;
-        flex-direction: column;
         gap: 20px;
-        overflow-y: scroll;
         &__item {
           width: 100%;
-          position: relative;
-          display: flex;
-          align-items: flex-end;
           gap: 10px;
 
           img {
@@ -291,62 +337,10 @@
             max-width: 60%;
             height: 100%;
             font-size: 2rem;
-            display: flex;
-            align-items: flex-end;
             gap: 20px;
             border-radius: 15px;
           }
         }
-      }
-
-      .item-right {
-        width: 100%;
-        display: flex;
-        flex-direction: row-reverse;
-      }
-
-      .item-left {
-        position: relative;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-      }
-
-      .your {
-        position: relative;
-        flex-direction: row;
-        background-color: var(--primary);
-        color: var(--white);
-      }
-
-      .your::after {
-        position: absolute;
-        left: -15px;
-        bottom: 0;
-        content: "";
-        width: 0;
-        height: 0;
-        border-left: 15px solid transparent;
-        border-bottom: 15px solid var(--primary);
-        border-right: 15px solid var(--primary);
-      }
-
-      .me {
-        background-color: var(--blue);
-        flex-direction: row-reverse;
-      }
-
-      .me::after {
-        position: absolute;
-        right: 46px;
-        bottom: 0;
-        content: "";
-        width: 0;
-        height: 0;
-
-        border-left: 15px solid var(--blue);
-        border-bottom: 15px solid var(--blue);
-        border-right: 15px solid transparent;
       }
     }
 
@@ -446,23 +440,14 @@
     .header {
       top: 0;
       left: 20%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       width: 60%;
       height: 80px;
-      background-color: var(--primary);
       border-radius: 0 0 5px 5px;
 
       &__content {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
         gap: 20px;
         width: 50%;
         height: 100%;
-        background-color: transparent;
 
         &__text {
           span {
@@ -481,29 +466,20 @@
     .content {
       width: 100%;
       height: 100vh;
-      background-color: #17151c;
 
       &__message {
         margin-top: 80px;
         padding: 15px;
         width: 100%;
         height: 65%;
-        display: flex;
-        flex-direction: column;
         gap: 20px;
-        overflow-y: scroll;
         &__item {
           width: 100%;
-          position: relative;
-          display: flex;
-          align-items: flex-end;
           gap: 10px;
 
           img {
             width: 50px;
             height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
           }
 
           &__chat {
@@ -511,82 +487,22 @@
             max-width: 60%;
             height: 100%;
             font-size: 2rem;
-            display: flex;
-            align-items: flex-end;
             gap: 20px;
             border-radius: 15px;
           }
         }
       }
-
-      .item-right {
-        width: 100%;
-        display: flex;
-        flex-direction: row-reverse;
-      }
-
-      .item-left {
-        position: relative;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-      }
-
-      .your {
-        position: relative;
-        flex-direction: row;
-        background-color: var(--primary);
-        color: var(--white);
-      }
-
-      .your::after {
-        position: absolute;
-        left: -15px;
-        bottom: 0;
-        content: "";
-        width: 0;
-        height: 0;
-        border-left: 15px solid transparent;
-        border-bottom: 15px solid var(--primary);
-        border-right: 15px solid var(--primary);
-      }
-
-      .me {
-        background-color: var(--blue);
-        flex-direction: row-reverse;
-      }
-
-      .me::after {
-        position: absolute;
-        right: 46px;
-        bottom: 0;
-        content: "";
-        width: 0;
-        height: 0;
-
-        border-left: 15px solid var(--blue);
-        border-bottom: 15px solid var(--blue);
-        border-right: 15px solid transparent;
-      }
     }
 
     .message {
-      position: fixed;
       bottom: 0%;
       width: 50%;
       left: 25%;
       height: 23%;
-      background-color: var(--primary);
       border-radius: 10px;
       padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
 
       &__heading {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
         width: 100%;
         font-size: 1.5rem;
 
@@ -611,8 +527,6 @@
       input {
         width: 100%;
         height: 60%;
-        color: var(--white);
-        background-color: transparent;
         font-size: 3rem;
         font-weight: bold;
         border: none;
@@ -620,10 +534,6 @@
 
       &__more {
         width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
 
         svg {
           width: 15px;
@@ -647,8 +557,6 @@
             width: 100px;
             height: 35px;
             border-radius: 20px;
-            background-color: var(--blue);
-            color: var(--black);
             font-weight: 600;
             font-size: 1.5rem;
           }
@@ -665,12 +573,8 @@
   .wrapper {
     .header {
       top: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       width: 100%;
       height: 80px;
-      background-color: var(--primary);
       border-radius: 0 0 5px 5px;
 
       .icon-back {
@@ -683,14 +587,9 @@
       }
 
       &__content {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
         gap: 20px;
         width: 70%;
         height: 100%;
-        background-color: transparent;
 
         &__text {
           span {
@@ -709,22 +608,15 @@
     .content {
       width: 100%;
       height: 120vh;
-      background-color: #17151c;
 
       &__message {
         margin-top: 80px;
         padding: 15px;
         width: 100%;
         height: 63%;
-        display: flex;
-        flex-direction: column;
         gap: 20px;
-        overflow-y: scroll;
         &__item {
           width: 100%;
-          position: relative;
-          display: flex;
-          align-items: flex-end;
           gap: 10px;
 
           img {
@@ -739,25 +631,10 @@
             max-width: 60%;
             height: 100%;
             font-size: 2rem;
-            display: flex;
-            align-items: flex-end;
             gap: 20px;
             border-radius: 15px;
           }
         }
-      }
-
-      .item-right {
-        width: 100%;
-        display: flex;
-        flex-direction: row-reverse;
-      }
-
-      .item-left {
-        position: relative;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
       }
 
       .your {
@@ -766,48 +643,13 @@
         background-color: var(--primary);
         color: var(--white);
       }
-
-      .your::after {
-        position: absolute;
-        left: -15px;
-        bottom: 0;
-        content: "";
-        width: 0;
-        height: 0;
-        border-left: 15px solid transparent;
-        border-bottom: 15px solid var(--primary);
-        border-right: 15px solid var(--primary);
-      }
-
-      .me {
-        background-color: var(--blue);
-        flex-direction: row-reverse;
-      }
-
-      .me::after {
-        position: absolute;
-        right: 46px;
-        bottom: 0;
-        content: "";
-        width: 0;
-        height: 0;
-
-        border-left: 15px solid var(--blue);
-        border-bottom: 15px solid var(--blue);
-        border-right: 15px solid transparent;
-      }
     }
 
     .message {
-      position: fixed;
       bottom: 0%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
       box-sizing: border-box;
       width: 100%;
       height: 15%;
-      background-color: var(--primary);
       border-radius: 10px;
       padding: 15px;
 
@@ -839,8 +681,6 @@
       input {
         width: 100%;
         height: 30%;
-        color: var(--white);
-        background-color: transparent;
         font-size: 1.5rem;
         font-weight: bold;
         border: none;
@@ -848,10 +688,6 @@
 
       &__more {
         width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
 
         svg {
           width: 15px;
