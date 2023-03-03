@@ -1,7 +1,5 @@
-import {
-  SelectMessageAction,
-  SelectMessageActionTypes,
-} from "../actions/listMessage";
+import { SelectMessageAction } from "../../types";
+import { SelectMessageActionTypes } from "../actions/listMessage";
 import { initMessage } from "../initState";
 
 const currentMessageReducer = (

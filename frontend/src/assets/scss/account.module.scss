@@ -4,21 +4,21 @@
   align-items: center;
   gap: 10px;
   color: var(--white);
-  .account-item:hover {
-    cursor: pointer;
-    background-color: #3c3844;
-    border-radius: 20px;
-  }
-  .account-message:hover {
-    cursor: pointer;
-  }
-  .account_message:hover {
-    cursor: pointer;
-    background-color: #3c3844;
-  }
-  .account_message:active {
-    background-color: #3c3844;
-  }
+}
+.account-item:hover {
+  cursor: pointer;
+  background-color: #3c3844;
+  border-radius: 20px;
+}
+.account-message:hover {
+  cursor: pointer;
+}
+.account_message:hover {
+  cursor: pointer;
+  background-color: #3c3844;
+}
+.account_message:active {
+  background-color: #3c3844;
 }
 .account-message {
   display: flex;
