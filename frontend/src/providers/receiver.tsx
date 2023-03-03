@@ -6,7 +6,6 @@ const ReceiverContext = createContext({
     avatar: "",
     fullname: "",
     username: "",
-    email: "",
   },
   setCurrentReceiver: (prop: any) => {},
 });
@@ -17,7 +16,6 @@ function ReceiverProvider({ children }: any) {
     avatar: "",
     fullname: "",
     username: "",
-    email: "",
   });
   function setCurrentReceiver(prop: any) {
     setReceiver(prop);

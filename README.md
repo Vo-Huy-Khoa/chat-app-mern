@@ -15,7 +15,8 @@ A Real Time Chat Application built using Node.js, React,js Express, Typescript, 
 
 ## Features<a name="features"></a>
 
-- Uses Express as the application Framework.
+- Use Express to build the backend.
+- Use React to build the frontend.
 - Authenticates via username and password.
 - Real-time communication between a client and a server using [Socket.io](https://github.com/socketio/socket.io).
 - Uses [MongoDB](https://github.com/mongodb/mongo), [Mongoose](https://github.com/Automattic/mongoose) for storing and querying data.
@@ -71,7 +72,7 @@ Each model wraps Mongoose Model object, overrides and provides some methods.
 
 ### Sockets<a name="sockets"></a>
 
-Having an active connection opened between the client and the server so client can send and receive data. This allows real-time communication using TCP sockets. This is made possible by [Socket.io](https://github.com/socketio/socket.io).
+Having an active connection opened between the client and the server so client can send and receive data. This allows real-time communication using sockets. This is made possible by [Socket.io](https://github.com/socketio/socket.io).
 
 The client starts by connecting to the server through a socket (maybe also assigned to a specific namespace) . Once connections is successful, client and server can emit and listen to events.
 

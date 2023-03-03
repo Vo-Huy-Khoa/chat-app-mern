@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useRef } from "react";
-import styles from "../../assets/scss/login.module.scss";
+import styles from "../../assets/scss/sign-in.module.scss";
 import { handleLogin } from "../../services/auth";
 
 const cx = classNames.bind(styles);

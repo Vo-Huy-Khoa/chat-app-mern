@@ -6,6 +6,5 @@ export const initialState: IUser = {
   avatar: "",
   fullname: "",
   username: "",
-  email: "",
 };
 export const initMessage: selectMessageType = [];

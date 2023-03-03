@@ -10,7 +10,7 @@ import {
   // faToggleOn,
 } from "@fortawesome/free-solid-svg-icons";
 import { Image } from "../../components/Image";
-import { MoreIcon, PhoneIcon, UserAddIcon } from "../../components";
+import { MoreIcon, PhoneIcon, UserAddIcon } from "../../assets/icons";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Wrapper as PopperWrapper } from "../../components";
 import { handleLogout } from "../../services/auth";
