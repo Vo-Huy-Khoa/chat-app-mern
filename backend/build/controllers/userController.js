@@ -55,7 +55,7 @@ class userController {
     search(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const user = yield User_1.default.findOne({
+                const user = yield User_1.default.find({
                     username: new RegExp("^" + req.body.username + "$", "i"),
                 });
                 res.status(200).json(user);

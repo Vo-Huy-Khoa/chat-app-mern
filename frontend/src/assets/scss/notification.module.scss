@@ -1,27 +1,153 @@
 .icon-back {
   display: none;
 }
+
+.popper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popper--wrapper {
+  display: flex;
+  align-items: center;
+  ul {
+    list-style-type: none;
+
+    li:hover {
+      cursor: pointer;
+    }
+  }
+  color: var(--white) !important;
+}
+
+.wrapper {
+  .profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      color: var(--white);
+    }
+
+    h2 {
+      color: var(--gray);
+    }
+
+    &__more {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+  }
+
+  .notification {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--white);
+
+      svg {
+        color: var(--gray);
+      }
+
+      button {
+        background-color: var(--gray);
+        color: var(--white);
+      }
+    }
+  }
+
+  .content__heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    span {
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    a {
+      color: #6890d8;
+    }
+  }
+  .content__heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    span {
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    a {
+      color: #6890d8;
+    }
+  }
+
+  .content {
+    &__media {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &__item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+      }
+    }
+
+    &__file {
+      width: 100%;
+
+      &__content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        &__item {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          &__text {
+            span {
+              color: var(--white);
+            }
+
+            p {
+              color: var(--gray);
+            }
+          }
+        }
+
+        &__item:hover {
+          background-color: #3c3844;
+        }
+      }
+    }
+  }
+}
 @media only screen and (min-width: 1025px) {
   .popper {
     font-size: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   .popper--wrapper {
     width: 200px !important;
     height: 150px !important;
-    display: flex;
-    align-items: center;
-    ul {
-      list-style-type: none;
-
-      li:hover {
-        cursor: pointer;
-      }
-    }
-    color: var(--white) !important;
   }
 
   .wrapper {
@@ -29,13 +155,8 @@
     height: 100%;
 
     .profile {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       gap: 10px;
       h1 {
-        color: var(--white);
         font-size: 2rem;
       }
 
@@ -59,21 +180,14 @@
 
     .notification {
       margin-top: 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+
       gap: 15px;
       height: 50px;
 
       &__item {
         width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+
         font-size: 1.3rem;
-        color: var(--white);
 
         svg {
           width: 30px;
@@ -84,8 +198,6 @@
         button {
           width: 30px;
           height: 30px;
-          background-color: var(--gray);
-          color: var(--white);
           font-weight: 600;
           border-radius: 50%;
         }
@@ -93,9 +205,6 @@
     }
 
     .content__heading {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
       width: 100%;
 
       span,
@@ -104,7 +213,6 @@
       }
 
       span {
-        color: var(--white);
         text-transform: uppercase;
       }
 
@@ -113,9 +221,6 @@
       }
     }
     .content__heading {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
       width: 100%;
 
       span,
@@ -124,7 +229,6 @@
       }
 
       span {
-        color: var(--white);
         text-transform: uppercase;
       }
 
@@ -137,15 +241,9 @@
       margin-top: 30px;
 
       &__media {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
         &__item {
           margin-top: 10px;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
+
           width: 80%;
           align-items: center;
 
@@ -165,15 +263,12 @@
         &__content {
           margin-top: 10px;
           width: 100%;
-          display: flex;
-          flex-direction: column;
+
           gap: 10px;
 
           &__item {
             width: 100%;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
+
             gap: 20px;
 
             img {
@@ -184,12 +279,10 @@
 
             &__text {
               span {
-                color: var(--white);
                 font-size: 2rem;
               }
 
               p {
-                color: var(--gray);
                 font-size: 1.5rem;
               }
             }
@@ -207,23 +300,10 @@
 @media only screen and (max-width: 1024px) and (min-width: 769px) {
   .popper {
     font-size: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   .popper--wrapper {
     height: 150px;
-    display: flex;
-    align-items: center;
-    ul {
-      list-style-type: none;
-
-      li:hover {
-        cursor: pointer;
-      }
-    }
-    color: var(--white) !important;
   }
 
   .wrapper {
@@ -231,18 +311,12 @@
     height: 100%;
 
     .profile {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       gap: 10px;
       h1 {
-        color: var(--white);
         font-size: 2rem;
       }
 
       h2 {
-        color: var(--gray);
         font-size: 2rem;
       }
 
@@ -261,33 +335,23 @@
 
     .notification {
       margin-top: 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+
       gap: 10px;
       height: 50px;
 
       &__item {
         width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+
         font-size: 1rem;
-        color: var(--white);
 
         svg {
           width: 30px;
           height: 30px;
-          color: var(--gray);
         }
 
         button {
           width: 30px;
           height: 30px;
-          background-color: var(--gray);
-          color: var(--white);
           font-weight: 600;
           border-radius: 50%;
         }
@@ -295,9 +359,6 @@
     }
 
     .content__heading {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
       width: 100%;
 
       span,
@@ -306,7 +367,6 @@
       }
 
       span {
-        color: var(--white);
         text-transform: uppercase;
       }
 
@@ -315,9 +375,6 @@
       }
     }
     .content__heading {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
       width: 100%;
 
       span,
@@ -326,7 +383,6 @@
       }
 
       span {
-        color: var(--white);
         text-transform: uppercase;
       }
 
@@ -339,15 +395,9 @@
       margin-top: 30px;
 
       &__media {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
         &__item {
           margin-top: 10px;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
+
           width: 100%;
           align-items: center;
 
@@ -367,15 +417,12 @@
         &__content {
           margin-top: 10px;
           width: 100%;
-          display: flex;
-          flex-direction: column;
+
           gap: 10px;
 
           &__item {
             width: 100%;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
+
             gap: 10px;
 
             img {
@@ -386,12 +433,10 @@
 
             &__text {
               span {
-                color: var(--white);
                 font-size: 1.5rem;
               }
 
               p {
-                color: var(--gray);
                 font-size: 1.5rem;
               }
             }
@@ -409,23 +454,10 @@
 @media only screen and (max-width: 768px) and (min-width: 426px) {
   .popper {
     font-size: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   .popper--wrapper {
     height: 150px;
-    display: flex;
-    align-items: center;
-    ul {
-      list-style-type: none;
-
-      li:hover {
-        cursor: pointer;
-      }
-    }
-    color: var(--white) !important;
   }
 
   .wrapper {
@@ -433,18 +465,12 @@
     height: 100%;
 
     .profile {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       gap: 10px;
       h1 {
-        color: var(--white);
         font-size: 2rem;
       }
 
       h2 {
-        color: var(--gray);
         font-size: 1.5rem;
       }
 
@@ -464,21 +490,14 @@
 
     .notification {
       margin-top: 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+
       gap: 30px;
       height: 50px;
 
       &__item {
         width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+
         font-size: 1rem;
-        color: var(--white);
 
         svg {
           width: 30px;
@@ -490,7 +509,6 @@
           width: 30px;
           height: 30px;
           background-color: var(--gray);
-          color: var(--white);
           font-weight: 600;
           border-radius: 50%;
         }
@@ -498,9 +516,6 @@
     }
 
     .content__heading {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
       width: 100%;
 
       span,
@@ -509,7 +524,6 @@
       }
 
       span {
-        color: var(--white);
         text-transform: uppercase;
       }
 
@@ -518,9 +532,6 @@
       }
     }
     .content__heading {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
       width: 100%;
 
       span,
@@ -529,7 +540,6 @@
       }
 
       span {
-        color: var(--white);
         text-transform: uppercase;
       }
 
@@ -542,15 +552,9 @@
       margin-top: 40px;
 
       &__media {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
         &__item {
           margin-top: 10px;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
+
           width: 100%;
           align-items: center;
 
@@ -570,15 +574,12 @@
         &__content {
           margin-top: 10px;
           width: 100%;
-          display: flex;
-          flex-direction: column;
+
           gap: 20px;
 
           &__item {
             width: 100%;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
+
             gap: 20px;
 
             img {
@@ -589,7 +590,6 @@
 
             &__text {
               span {
-                color: var(--white);
                 font-size: 1.3rem;
               }
 
@@ -612,23 +612,10 @@
 @media only screen and (max-width: 425px) {
   .popper {
     font-size: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   .popper--wrapper {
     height: 150px;
-    display: flex;
-    align-items: center;
-    ul {
-      list-style-type: none;
-
-      li:hover {
-        cursor: pointer;
-      }
-    }
-    color: var(--white) !important;
   }
 
   .wrapper {
@@ -650,17 +637,12 @@
       cursor: pointer;
     }
     .profile {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       gap: 5px;
       img {
         width: 100px;
         height: 100px;
       }
       h1 {
-        color: var(--white);
         font-size: 3rem;
       }
 
@@ -685,10 +667,7 @@
 
     .notification {
       margin-top: 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+
       gap: 20px;
       height: 50px;
 
@@ -700,19 +679,16 @@
         gap: 20px;
         width: 100%;
         font-size: 1rem;
-        color: var(--white);
 
         svg {
           width: 30px;
           height: 30px;
-          color: var(--gray);
         }
 
         button {
           width: 30px;
           height: 30px;
           background-color: var(--gray);
-          color: var(--white);
           font-weight: 600;
           border-radius: 50%;
         }
@@ -720,9 +696,6 @@
     }
 
     .content__heading {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
       width: 100%;
 
       span,
@@ -731,7 +704,6 @@
       }
 
       span {
-        color: var(--white);
         text-transform: uppercase;
       }
 
@@ -740,9 +712,6 @@
       }
     }
     .content__heading {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
       width: 100%;
 
       span,
@@ -751,7 +720,6 @@
       }
 
       span {
-        color: var(--white);
         text-transform: uppercase;
       }
 
@@ -764,10 +732,6 @@
       margin-top: 40px;
 
       &__media {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
         &__item {
           margin-top: 10px;
           display: flex;
@@ -793,15 +757,11 @@
         &__content {
           margin-top: 10px;
           width: 100%;
-          display: flex;
-          flex-direction: column;
           gap: 20px;
 
           &__item {
             width: 100%;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
+
             gap: 20px;
 
             img {
@@ -813,7 +773,6 @@
 
             &__text {
               span {
-                color: var(--white);
                 font-size: 2rem;
               }
 
