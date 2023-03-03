@@ -24,7 +24,6 @@ Content-Type: application/json
 
 {
     "username": "khoavh",
-    "email": "khoavh@gmail.com",
     "password": "1",
     "avatar": "https://cdn.diemnhangroup.com/seoulcenter/2022/11/gai-xinh-2.jpg"
 }

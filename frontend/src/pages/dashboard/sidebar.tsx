@@ -2,7 +2,7 @@ import styles from "../../assets/scss/sidebar.module.scss";
 import classNames from "classnames/bind";
 import { Image } from "../../components/Image";
 import HeadlessTippy from "@tippyjs/react/headless";
-import { NotificationIcon } from "../../components";
+import { NotificationIcon } from "../../assets/icons";
 import { AccountItem, AccountMessage } from "../../components/Account";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDeleteLeft, faSearch } from "@fortawesome/free-solid-svg-icons";

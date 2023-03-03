@@ -26,7 +26,6 @@ class userController {
         { _id: req.body.params },
         {
           username: req.body.username,
-          email: req.body.email,
           password: req.body.password,
         },
         { new: true } // return the updated document

@@ -255,9 +255,9 @@
 
 @media only screen and (max-width: 768px) and (min-width: 426px) {
   img {
-    width: 4.5rem !important;
-    height: 4.5rem !important;
-    object-fit: cover !important;
+    width: 4.5rem;
+    height: 4.5rem;
+    object-fit: cover;
   }
   .wrapper {
     padding: 20px 10px;

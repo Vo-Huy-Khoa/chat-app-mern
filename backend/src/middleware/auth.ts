@@ -9,7 +9,6 @@ const Register = async (req: Request, res: Response) => {
   const createUser = new UserModel({
     fullname: req.body.fullname,
     username: req.body.username,
-    email: req.body.email,
     avatar: req.body.avatar,
     password: bcrypt.hashSync(password, bcrypt.genSaltSync(10)),
   });
