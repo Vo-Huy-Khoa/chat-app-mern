@@ -1,15 +1,12 @@
 import classNames from "classnames/bind";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useContext, useRef } from "react";
-import { FacebookIcon, GoogleIcon, GithubIcon } from "../../components";
+import { useRef } from "react";
 import styles from "../../assets/scss/login.module.scss";
 import { handleLogin } from "../../services/auth";
-import { AuthContext } from "../../providers";
 
 const cx = classNames.bind(styles);
 const Login = () => {
   const navigate = useNavigate();
-  const { setIsAuthenticated } = useContext(AuthContext);
   const userRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -23,7 +20,6 @@ const Login = () => {
       handleLogin(body)
         .then(() => {
           navigate("/dashboard/home");
-          setIsAuthenticated(true);
         })
         .catch((error) => {
           alert("Login Fail!");

@@ -10,7 +10,6 @@ const cx = classNames.bind(styles);
 
 const Dashboard = () => {
   const isVisible = useSelector((state: RootState) => state.currentVisibility);
-
   const [isLargeScreen, setIsLargeScreen] = useState(false);
   useEffect(() => {
     function handleResize() {

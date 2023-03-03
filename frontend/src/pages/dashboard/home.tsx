@@ -34,13 +34,14 @@ const Home = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state: RootState) => state.currentUser);
   const selectMessage = useSelector((state: RootState) => state.currentMessage);
-  const { currentReceiver } = useContext(ReceiverContext);
   const isVisible = useSelector((state: RootState) => state.currentVisibility);
+  const { currentReceiver } = useContext(ReceiverContext);
 
   const countMessage = currentReceiver._id.length ? 1 : null;
   const messageRef = useRef<HTMLInputElement>(null);
   const currentSenderID = currentUser?._id;
   const currentReceiverID = currentReceiver?._id;
+
   const handleCreateMessage = (event: any) => {
     event.preventDefault();
     const message = messageRef.current?.value || "";
@@ -50,7 +51,6 @@ const Home = () => {
       message: message,
     };
     socket.emit("message", data);
-
     messageRef.current?.focus();
     if (messageRef.current) {
       messageRef.current.value = "";
@@ -66,7 +66,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    // Handle incoming messages
     socket.on("message", (data) => {
       const listMessage = data;
       listMessage.sort(

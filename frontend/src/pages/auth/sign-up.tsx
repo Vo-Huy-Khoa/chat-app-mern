@@ -23,8 +23,6 @@ const Register = () => {
       avatar: avatar,
     };
     e.preventDefault();
-    console.table(body);
-
     try {
       handleRegister(body)
         .then(() => {

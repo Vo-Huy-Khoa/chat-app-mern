@@ -1,9 +1,6 @@
 import { initialState } from "../initState";
-import {
-  CurrentUserAction,
-  CurrentUserActionTypes,
-} from "../actions/currentUser";
-import { IUser } from "../../types";
+import { CurrentUserActionTypes } from "../actions/currentUser";
+import { CurrentUserAction, IUser } from "../../types";
 
 const currentUserReducer = (
   state = initialState,

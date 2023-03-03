@@ -1,7 +1,5 @@
-import {
-  SelectVisibilityAction,
-  VisibilityActionTypes,
-} from "../actions/visibility";
+import { SelectVisibilityAction } from "../../types";
+import { VisibilityActionTypes } from "../actions/visibility";
 import { Visibility } from "../initState";
 
 const currentVisibilityReducer = (
