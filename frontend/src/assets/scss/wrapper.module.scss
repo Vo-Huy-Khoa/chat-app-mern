@@ -1,22 +1,21 @@
 .wrapper {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 15px;
+  box-shadow: rgb(0 0 0 / 12%) 0px 2px 12px;
+  background: var(--black);
   color: var(--black);
   padding: 20px;
   width: 300px;
-  height: 500px;
-  background: var(--black);
-  box-shadow: rgb(0 0 0 / 12%) 0px 2px 12px;
   border-radius: 8px;
   padding-top: 8px;
-  box-sizing: border-box;
+  overflow-y: scroll;
 
   img {
     width: 40px;
     height: 40px;
   }
-  overflow-y: scroll;
 }
 
 @media only screen and (max-width: 1024px) and (min-width: 769px) {

@@ -9,7 +9,11 @@ import { faDeleteLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useDebounce } from "../../hooks";
 import { Wrapper as PopperWrapper } from "../../components";
-import { handleSearch, getListMessage } from "../../services/dashboard";
+import {
+  handleSearch,
+  getListMessage,
+  getListUser,
+} from "../../services/dashboard";
 import { IMessage } from "../../types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
@@ -20,7 +24,9 @@ const Sidebar = () => {
   const [valueSearch, setValueSearch] = useState("");
   const debounceValue = useDebounce(valueSearch, 500);
   const [listUserSearch, setListSearch] = useState([]);
+  const [listUser, setListUser] = useState([]);
   const [listMessage, setListMessage] = useState([]);
+  console.log(listUser);
 
   const uniqueSender = Array.from(
     new Map(
@@ -53,6 +59,14 @@ const Sidebar = () => {
       .catch((error) => {
         console.log(error);
       });
+
+    getListUser()
+      .then((response) => {
+        setListUser(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   return (
@@ -69,29 +83,29 @@ const Sidebar = () => {
           <span>1</span>
         </div>
       </div>
-      <HeadlessTippy
-        trigger="click"
-        appendTo={document.body}
-        placement="bottom"
-        interactive
-        render={(attrs) => (
-          <div className={cx("search-result")} tabIndex={1} {...attrs}>
-            <PopperWrapper className={cx("popper-search")}>
-              <h4 className={cx("search-title")}>accounts</h4>
-              {listUserSearch.map((user, index) => {
-                return (
-                  <AccountItem
-                    key={index}
-                    listMessage={listMessage}
-                    searchUser={user}
-                  />
-                );
-              })}
-            </PopperWrapper>
-          </div>
-        )}
-      >
-        <div className={cx("status")}>
+      <div className={cx("status")}>
+        <HeadlessTippy
+          trigger="click"
+          appendTo={document.body}
+          placement="bottom"
+          interactive
+          render={(attrs) => (
+            <div className={cx("search-result")} tabIndex={1} {...attrs}>
+              <PopperWrapper className={cx("popper-search")}>
+                <h4 className={cx("search-title")}>accounts</h4>
+                {listUserSearch.map((user, index) => {
+                  return (
+                    <AccountItem
+                      key={index}
+                      listMessage={listMessage}
+                      searchUser={user}
+                    />
+                  );
+                })}
+              </PopperWrapper>
+            </div>
+          )}
+        >
           <div className={cx("status__search")}>
             <FontAwesomeIcon
               className={cx("status__search--icon-search")}
@@ -113,27 +127,24 @@ const Sidebar = () => {
               }}
             />
           </div>
-          {/* <div className={cx("status__content")}>
-            <span className={cx("status__content--title", "text-white")}>
-              Favorites
-            </span>
-            <div className={cx("status__list")}>
-              {listUserSearch.map((user, index) => {
-                return (
-                  <AccountItem
-                    onClick={() => {
-                      alert("hello!");
-                    }}
-                    key={index}
-                    listMessage={uniMessageCurrentUser}
-                    searchUser={user}
-                  />
-                );
-              })}
-            </div>
-          </div> */}
+        </HeadlessTippy>
+        <div className={cx("status__content")}>
+          <span className={cx("status__content--title", "text-white")}>
+            All User
+          </span>
+          <div className={cx("status__list")}>
+            {listUser.map((user, index) => {
+              return (
+                <AccountItem
+                  key={index}
+                  listMessage={listMessage}
+                  searchUser={user}
+                />
+              );
+            })}
+          </div>
         </div>
-      </HeadlessTippy>
+      </div>
       <div className={cx("message__list")}>
         {uniqueMessage.map((message: IMessage, index) => {
           return (
