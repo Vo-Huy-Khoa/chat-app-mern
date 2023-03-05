@@ -41,7 +41,6 @@ class userController {
             try {
                 const updatedUser = yield User_1.default.findOneAndUpdate({ _id: req.body.params }, {
                     username: req.body.username,
-                    email: req.body.email,
                     password: req.body.password,
                 }, { new: true } // return the updated document
                 );
@@ -55,8 +54,9 @@ class userController {
     search(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                const regex = new RegExp(req.body.username, "i");
                 const user = yield User_1.default.find({
-                    username: new RegExp("^" + req.body.username + "$", "i"),
+                    username: regex,
                 });
                 res.status(200).json(user);
             }

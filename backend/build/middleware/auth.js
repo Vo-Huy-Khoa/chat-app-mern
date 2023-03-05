@@ -45,7 +45,6 @@ const Register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const createUser = new User_1.default({
         fullname: req.body.fullname,
         username: req.body.username,
-        email: req.body.email,
         avatar: req.body.avatar,
         password: bcrypt_1.default.hashSync(password, bcrypt_1.default.genSaltSync(10)),
     });

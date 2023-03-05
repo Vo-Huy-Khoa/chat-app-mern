@@ -19,6 +19,11 @@ const handleSearch = async (username: string) => {
   return response;
 };
 
+const getListUser = async () => {
+  const response = await instanceAxios.get(`users`);
+  return response;
+};
+
 const getListMessage = async () => {
   let userId: null = null;
   const user = sessionStorage.getItem("user") || "";
@@ -47,4 +52,11 @@ const createMessage = async (senderID: any, receiverID: any, message: any) => {
   return response;
 };
 
-export { getProfile, handleSearch, getListMessage, getMessage, createMessage };
+export {
+  getProfile,
+  handleSearch,
+  getListMessage,
+  getMessage,
+  createMessage,
+  getListUser,
+};
