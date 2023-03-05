@@ -3,7 +3,11 @@ import classNames from "classnames/bind";
 import { Image } from "../../components/Image";
 import HeadlessTippy from "@tippyjs/react/headless";
 import { NotificationIcon } from "../../assets/icons";
-import { AccountItem, AccountMessage } from "../../components/Account";
+import {
+  AccountItem,
+  AccountMessage,
+  AccountStatus,
+} from "../../components/Account";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDeleteLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
@@ -14,7 +18,7 @@ import {
   getListMessage,
   getListUser,
 } from "../../services/dashboard";
-import { IMessage } from "../../types";
+import { IMessage, IUser } from "../../types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
 
@@ -26,7 +30,6 @@ const Sidebar = () => {
   const [listUserSearch, setListSearch] = useState([]);
   const [listUser, setListUser] = useState([]);
   const [listMessage, setListMessage] = useState([]);
-  console.log(listUser);
 
   const uniqueSender = Array.from(
     new Map(
@@ -133,9 +136,9 @@ const Sidebar = () => {
             All User
           </span>
           <div className={cx("status__list")}>
-            {listUser.map((user, index) => {
+            {listUser.map((user: IUser, index) => {
               return (
-                <AccountItem
+                <AccountStatus
                   key={index}
                   listMessage={listMessage}
                   searchUser={user}

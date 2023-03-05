@@ -26,21 +26,42 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.status__content_account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  .status__content--avatar {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .status__content--username {
+    font-size: 1.5rem;
+    color: var(--white);
+  }
+}
+
+.status__content_account:hover {
+  cursor: pointer;
+}
 @media only screen and (min-width: 992px) {
   .account-item {
     img {
-      width: 60px;
-      height: 60px;
+      width: 40px;
+      height: 40px;
       object-fit: cover;
     }
     .content {
       display: flex;
       flex-direction: column;
       .username {
-        font-size: 2rem;
+        font-size: 1.8rem;
       }
       .fullname {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
       }
     }
   }
