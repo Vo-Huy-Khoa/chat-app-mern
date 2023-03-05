@@ -122,4 +122,56 @@ const AccountMessage = ({ ...rest }) => {
   );
 };
 
-export { AccountItem, AccountMessage };
+const AccountStatus = ({ ...rest }) => {
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state: RootState) => state.currentUser);
+  const { listMessage, searchUser } = rest;
+  const { setCurrentReceiver } = useContext(ReceiverContext);
+  const receiverID = searchUser?._id;
+  const senderID = currentUser?._id;
+
+  const listSenderID = listMessage.filter((message: IMessage) => {
+    return (
+      message?.senderID?._id === senderID &&
+      message?.receiverID?._id === receiverID
+    );
+  });
+
+  const listReceiverID = listMessage.filter((message: IMessage) => {
+    return (
+      message?.senderID?._id === receiverID &&
+      message?.receiverID?._id === senderID
+    );
+  });
+
+  const currentMessage = [...listSenderID, ...listReceiverID];
+
+  currentMessage.sort(
+    (a: IMessage, b: IMessage) =>
+      Date.parse(a.createdAt) - Date.parse(b.createdAt)
+  );
+
+  const handleSubmit = () => {
+    dispatch(setVisibility("home"));
+    setCurrentReceiver(searchUser);
+    dispatch(setSelectMessage(currentMessage));
+  };
+
+  return (
+    <div
+      className={cx("status__content_account")}
+      onClick={() => handleSubmit()}
+    >
+      <img
+        className={cx("status__content--avatar")}
+        src={searchUser?.avatar}
+        alt={searchUser?.fullname}
+      />
+      <h1 className={cx("status__content--username")}>
+        {searchUser?.username}
+      </h1>
+    </div>
+  );
+};
+
+export { AccountItem, AccountMessage, AccountStatus };

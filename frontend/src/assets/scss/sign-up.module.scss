@@ -1,3 +1,7 @@
+input {
+  border: none;
+}
+
 @media only screen and (min-width: 426px) {
   .container {
     width: 100%;
@@ -9,9 +13,10 @@
     font-size: 2rem;
 
     input {
-      height: 45px;
       border-radius: 20px;
+      border: none;
       padding: 8px;
+      height: 45px;
     }
     input:focus {
       outline: none;
