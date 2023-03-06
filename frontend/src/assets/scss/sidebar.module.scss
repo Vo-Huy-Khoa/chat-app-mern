@@ -1,3 +1,21 @@
+.popper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popper--wrapper {
+  display: flex;
+  align-items: center;
+  ul {
+    list-style-type: none;
+
+    li:hover {
+      cursor: pointer;
+    }
+  }
+  color: var(--white) !important;
+}
 .wrapper {
   width: 100%;
   height: 100%;
@@ -86,6 +104,14 @@
 }
 
 @media only screen and (min-width: 1025px) {
+  .popper {
+    font-size: 2rem;
+  }
+
+  .popper--wrapper {
+    max-width: 285px !important;
+    height: 150px !important;
+  }
   .wrapper {
     padding: 20px;
     width: 100%;
@@ -163,6 +189,13 @@
 }
 
 @media only screen and (max-width: 1024px) and (min-width: 769px) {
+  .popper {
+    font-size: 2rem;
+  }
+
+  .popper--wrapper {
+    height: 150px;
+  }
   .wrapper {
     padding: 20px;
     width: 100%;
@@ -253,6 +286,13 @@
 }
 
 @media only screen and (max-width: 768px) and (min-width: 426px) {
+  .popper {
+    font-size: 2rem;
+  }
+
+  .popper--wrapper {
+    height: 150px;
+  }
   img {
     width: 4.5rem;
     height: 4.5rem;
@@ -347,6 +387,14 @@
 }
 
 @media only screen and (max-width: 425px) {
+  .popper {
+    font-size: 1.5rem;
+  }
+
+  .popper--wrapper {
+    width: 350px;
+    height: 120px;
+  }
   img {
     width: 40px;
     height: 40px;

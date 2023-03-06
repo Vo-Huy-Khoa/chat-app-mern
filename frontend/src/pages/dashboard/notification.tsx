@@ -1,6 +1,5 @@
 import styles from "../../assets/scss/notification.module.scss";
 import classNames from "classnames/bind";
-import HeadlessTippy from "@tippyjs/react/headless";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowLeft,
@@ -11,17 +10,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Image } from "../../components/Image";
 import { MoreIcon, PhoneIcon, UserAddIcon } from "../../assets/icons";
-import { NavLink, useNavigate } from "react-router-dom";
-import { Wrapper as PopperWrapper } from "../../components";
-import { handleLogout } from "../../services/auth";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
 import { setVisibility } from "../../redux/actions";
 const cx = classNames.bind(styles);
 const Notification = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const currentUser = useSelector((state: RootState) => state.currentUser);
+  const currentReceiver = useSelector(
+    (state: RootState) => state.currentReceiver
+  );
   const isVisible = useSelector((state: RootState) => state.currentVisibility);
 
   const handleHome = () => {
@@ -42,48 +40,16 @@ const Notification = () => {
         )}
       </div>
       <div className={cx("profile")}>
-        <HeadlessTippy
-          trigger="click"
-          appendTo={document.body}
-          placement="bottom"
-          interactive
-          render={(attrs) => (
-            <div className={cx("popper")} tabIndex={1} {...attrs}>
-              <PopperWrapper className={cx("popper--wrapper")}>
-                <ul>
-                  <li>Profile</li>
-                  <li>Settings</li>
-                  <li>Report</li>
-                  <li
-                    onClick={() => {
-                      try {
-                        handleLogout().then(() => {
-                          sessionStorage.clear();
-                          navigate("/auth/sign-in");
-                        });
-                      } catch (error) {
-                        console.log(error);
-                      }
-                    }}
-                  >
-                    Logout
-                  </li>
-                </ul>
-              </PopperWrapper>
-            </div>
-          )}
-        >
-          <div>
-            <Image
-              className={cx("profile__avatar")}
-              src={currentUser.avatar}
-              width="70px"
-              height="70px"
-            />
-          </div>
-        </HeadlessTippy>
-        <h1>{currentUser.username}</h1>
-        <h2>{currentUser.fullname}</h2>
+        <div>
+          <Image
+            className={cx("profile__avatar")}
+            src={currentReceiver.avatar}
+            width="70px"
+            height="70px"
+          />
+        </div>
+        <h1>{currentReceiver.username}</h1>
+        <h2>{currentReceiver.fullname}</h2>
         <div className={cx("profile__more")}>
           <PhoneIcon />
           <UserAddIcon />
@@ -111,11 +77,11 @@ const Notification = () => {
             <NavLink to="">View all</NavLink>
           </div>
           <div className={cx("content__media__item")}>
-            <Image src={currentUser.avatar} />
-            <Image src={currentUser.avatar} />
-            <Image src={currentUser.avatar} />
-            <Image src={currentUser.avatar} />
-            <Image src={currentUser.avatar} />
+            <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyDMHegIuD-AOAtcpNGPSdAkWK0FMIU7qNTw&usqp=CAU" />
+            <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyDMHegIuD-AOAtcpNGPSdAkWK0FMIU7qNTw&usqp=CAU" />
+            <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyDMHegIuD-AOAtcpNGPSdAkWK0FMIU7qNTw&usqp=CAU" />
+            <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyDMHegIuD-AOAtcpNGPSdAkWK0FMIU7qNTw&usqp=CAU" />
+            <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyDMHegIuD-AOAtcpNGPSdAkWK0FMIU7qNTw&usqp=CAU" />
           </div>
         </div>
         <div className={cx("content__file")}>
@@ -125,24 +91,43 @@ const Notification = () => {
           </div>
           <div className={cx("content__file__content")}>
             <div className={cx("content__file__content__item")}>
-              <img src={currentUser.avatar} alt="" />
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-k-5EjtwnDbrOsipvcwsU37OIJO38Etp7v5enr9dEw9RJkT7BismQoYmsWXHgqw47a14&usqp=CAU"
+                alt=""
+              />
               <div className={cx("content__file__content__item__text")}>
-                <span>{currentUser.fullname}</span>
-                <p>{currentUser.username}</p>
+                <span>File Name</span>
+                <p>File Description</p>
               </div>
             </div>
             <div className={cx("content__file__content__item")}>
-              <img src={currentUser.avatar} alt="" />
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-k-5EjtwnDbrOsipvcwsU37OIJO38Etp7v5enr9dEw9RJkT7BismQoYmsWXHgqw47a14&usqp=CAU"
+                alt=""
+              />
               <div className={cx("content__file__content__item__text")}>
-                <span>{currentUser.fullname}</span>
-                <p>{currentUser.username}</p>
+                <span>File Name</span>
+                <p>File Description</p>
               </div>
-            </div>
+            </div>{" "}
             <div className={cx("content__file__content__item")}>
-              <img src={currentUser.avatar} alt="" />
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-k-5EjtwnDbrOsipvcwsU37OIJO38Etp7v5enr9dEw9RJkT7BismQoYmsWXHgqw47a14&usqp=CAU"
+                alt=""
+              />
               <div className={cx("content__file__content__item__text")}>
-                <span>{currentUser.fullname}</span>
-                <p>{currentUser.username}</p>
+                <span>File Name</span>
+                <p>File Description</p>
+              </div>
+            </div>{" "}
+            <div className={cx("content__file__content__item")}>
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-k-5EjtwnDbrOsipvcwsU37OIJO38Etp7v5enr9dEw9RJkT7BismQoYmsWXHgqw47a14&usqp=CAU"
+                alt=""
+              />
+              <div className={cx("content__file__content__item__text")}>
+                <span>File Name</span>
+                <p>File Description</p>
               </div>
             </div>
           </div>

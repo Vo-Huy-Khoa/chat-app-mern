@@ -1,6 +1,6 @@
 import { initialState } from "../initState";
 import { CurrentUserActionTypes } from "../actions/currentUser";
-import { CurrentUserAction, IUser } from "../../types";
+import { CurrentReceiverAction, CurrentUserAction, IUser } from "../../types";
 
 const currentUserReducer = (
   state = initialState,
@@ -21,4 +21,23 @@ const currentUserReducer = (
   }
 };
 
-export default currentUserReducer;
+const currentReceiverReducer = (
+  state = initialState,
+  action: CurrentReceiverAction
+): IUser => {
+  switch (action.type) {
+    case CurrentUserActionTypes.SET_CURRENT_RECEIVER:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case CurrentUserActionTypes.CLEAR_CURRENT_RECEIVER:
+      return {
+        ...initialState,
+      };
+    default:
+      return state;
+  }
+};
+
+export { currentUserReducer, currentReceiverReducer };
