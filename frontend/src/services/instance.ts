@@ -1,5 +1,8 @@
 import axios from "axios";
 
+const url = "https://chat-backend-7jgs.onrender.com/api";
+// const url = "http://localhost:3001/api";
+
 const getRefreshToken = async () => {
   const id = JSON.parse(sessionStorage.getItem("user") || "")?.id;
   const token = sessionStorage.getItem("refreshToken") || "";
@@ -18,7 +21,7 @@ const getRefreshToken = async () => {
 };
 
 const instanceAxios = axios.create({
-  baseURL: "https://chat-backend-7jgs.onrender.com/api",
+  baseURL: url,
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",

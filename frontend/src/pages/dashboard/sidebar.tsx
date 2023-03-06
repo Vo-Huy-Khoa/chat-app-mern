@@ -37,15 +37,21 @@ const Sidebar = () => {
   const [listUser, setListUser] = useState([]);
   const [listMessage, setListMessage] = useState<selectMessageType>([]);
 
-  const uniqueSender = Array.from(
-    new Map(
-      listMessage.map((message: IMessage) => [message?.senderID?._id, message])
-    ).values()
-  );
+  function handleFilterMessage(listMessage: selectMessageType) {
+    const uniqueSender = Array.from(
+      new Map(
+        listMessage.map((message: IMessage) => [
+          message?.senderID?._id,
+          message,
+        ])
+      ).values()
+    );
+    const uniqueMessage = uniqueSender.filter(
+      (message) => message.senderID._id !== currentUser._id
+    );
 
-  const uniqueMessage = uniqueSender.filter(
-    (message) => message.senderID._id !== currentUser._id
-  );
+    return uniqueMessage;
+  }
 
   const handleLogout = async () => {
     try {
@@ -73,7 +79,7 @@ const Sidebar = () => {
   useEffect(() => {
     getListMessage()
       .then((response) => {
-        setListMessage(response.data);
+        setListMessage(handleFilterMessage(response.data));
       })
       .catch((error) => {
         console.log(error);
@@ -190,12 +196,11 @@ const Sidebar = () => {
         </div>
       </div>
       <div className={cx("message__list")}>
-        {uniqueMessage.map((message: IMessage, index) => {
+        {listMessage.map((message: IMessage, index) => {
           return (
             <AccountMessage
               className={cx("message-item")}
               key={index}
-              listMessage={listMessage}
               message={message}
               searchUser={
                 message.senderID === currentUser

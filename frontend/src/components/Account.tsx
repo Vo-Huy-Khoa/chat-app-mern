@@ -2,57 +2,29 @@ import moment from "moment";
 import styles from "../assets/scss/account.module.scss";
 import classNames from "classnames/bind";
 import { Image } from "./Image";
-import { IMessage, selectMessageType } from "../types";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/reducers/rootReducer";
-import {
-  setCurrentReceiver,
-  setSelectMessage,
-  setVisibility,
-} from "../redux/actions";
+import { setCurrentReceiver, setVisibility } from "../redux/actions";
 import { useEffect, useRef, useState } from "react";
+import socket from "../socket";
 
 const cx = classNames.bind(styles);
 
-function getCurrentMessage(
-  senderID: string,
-  receiverID: string,
-  listMessage: selectMessageType
-) {
-  const listSenderID = listMessage.filter((message: IMessage) => {
-    return (
-      message?.senderID?._id === senderID &&
-      message?.receiverID?._id === receiverID
-    );
-  });
-
-  const listReceiverID = listMessage.filter((message: IMessage) => {
-    return (
-      message?.senderID?._id === receiverID &&
-      message?.receiverID?._id === senderID
-    );
-  });
-
-  const currentMessage = [...listSenderID, ...listReceiverID];
-  currentMessage.sort(
-    (a: IMessage, b: IMessage) =>
-      Date.parse(a.createdAt) - Date.parse(b.createdAt)
-  );
-  return currentMessage;
-}
 const AccountItem = ({ ...rest }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state: RootState) => state.currentUser);
-  const { listMessage, searchUser } = rest;
+  const { searchUser } = rest;
   const receiverID = searchUser?._id;
   const senderID = currentUser?._id;
-
-  const currentMessage = getCurrentMessage(senderID, receiverID, listMessage);
 
   const handleSubmit = () => {
     dispatch(setVisibility("home"));
     dispatch(setCurrentReceiver(searchUser));
-    dispatch(setSelectMessage(currentMessage));
+    const data = {
+      senderID: receiverID,
+      receiverID: senderID,
+    };
+    socket.emit("get-message", data);
   };
 
   return (
@@ -68,13 +40,12 @@ const AccountItem = ({ ...rest }) => {
 
 const AccountMessage = ({ ...rest }) => {
   const dispatch = useDispatch();
-  const { listMessage, message, searchUser } = rest;
-  const senderID = message?.senderID?._id;
-  const receiverID = message?.receiverID?._id;
+  const { message, searchUser } = rest;
   const divRef = useRef<HTMLDivElement>(null);
   const [isLargeScreen, setIsLargeScreen] = useState(false);
-  const currentMessage = getCurrentMessage(senderID, receiverID, listMessage);
-
+  const currentUser = useSelector((state: RootState) => state.currentUser);
+  const receiverID = searchUser?._id;
+  const senderID = currentUser?._id;
   useEffect(() => {
     function handleResize() {
       setIsLargeScreen(window.innerWidth > 425);
@@ -99,7 +70,11 @@ const AccountMessage = ({ ...rest }) => {
   const handleSubmit = () => {
     dispatch(setCurrentReceiver(searchUser));
     dispatch(setVisibility("home"));
-    dispatch(setSelectMessage(currentMessage));
+    const data = {
+      senderID: receiverID,
+      receiverID: senderID,
+    };
+    socket.emit("get-message", data);
   };
 
   return (
@@ -134,16 +109,18 @@ const AccountMessage = ({ ...rest }) => {
 
 const AccountStatus = ({ ...rest }) => {
   const dispatch = useDispatch();
+  const { searchUser } = rest;
   const currentUser = useSelector((state: RootState) => state.currentUser);
-  const { listMessage, searchUser } = rest;
   const receiverID = searchUser?._id;
   const senderID = currentUser?._id;
-  const currentMessage = getCurrentMessage(senderID, receiverID, listMessage);
-
   const handleSubmit = () => {
     dispatch(setVisibility("home"));
     dispatch(setCurrentReceiver(searchUser));
-    dispatch(setSelectMessage(currentMessage));
+    const data = {
+      senderID: receiverID,
+      receiverID: senderID,
+    };
+    socket.emit("get-message", data);
   };
 
   return (
