@@ -17,8 +17,7 @@ import {
   faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
-import { useContext, useEffect, useRef } from "react";
-import { ReceiverContext } from "../../providers";
+import { useEffect, useRef } from "react";
 import { IMessage } from "../../types";
 import { getProfile } from "../../services";
 import {
@@ -33,9 +32,11 @@ const cx = classNames.bind(styles);
 const Home = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state: RootState) => state.currentUser);
+  const currentReceiver = useSelector(
+    (state: RootState) => state.currentReceiver
+  );
   const selectMessage = useSelector((state: RootState) => state.currentMessage);
   const isVisible = useSelector((state: RootState) => state.currentVisibility);
-  const { currentReceiver } = useContext(ReceiverContext);
 
   const countMessage = currentReceiver._id.length ? 1 : null;
   const messageRef = useRef<HTMLInputElement>(null);

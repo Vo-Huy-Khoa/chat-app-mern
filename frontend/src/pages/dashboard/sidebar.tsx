@@ -21,9 +21,12 @@ import {
 import { IMessage, IUser } from "../../types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
+import { handleLogout } from "../../services";
+import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 const Sidebar = () => {
+  const navigate = useNavigate();
   const currentUser = useSelector((state: RootState) => state.currentUser);
   const [valueSearch, setValueSearch] = useState("");
   const debounceValue = useDebounce(valueSearch, 500);
@@ -40,6 +43,7 @@ const Sidebar = () => {
   const uniqueMessage = uniqueSender.filter(
     (message) => message.senderID._id !== currentUser._id
   );
+  console.log(uniqueMessage);
 
   useEffect(() => {
     if (!debounceValue.trim()) {
@@ -76,7 +80,41 @@ const Sidebar = () => {
     <div className={cx("wrapper")}>
       <div className={cx("header")}>
         <div className={cx("header__content")}>
-          <Image width="50px" height="50px" src={currentUser.avatar} />
+          <HeadlessTippy
+            trigger="click"
+            appendTo={document.body}
+            placement="bottom"
+            interactive
+            render={(attrs) => (
+              <div className={cx("popper")} tabIndex={1} {...attrs}>
+                <PopperWrapper className={cx("popper--wrapper")}>
+                  <ul>
+                    <li>Profile</li>
+                    <li>Settings</li>
+                    <li>Report</li>
+                    <li
+                      onClick={() => {
+                        try {
+                          handleLogout().then(() => {
+                            sessionStorage.clear();
+                            navigate("/auth/sign-in");
+                          });
+                        } catch (error) {
+                          console.log(error);
+                        }
+                      }}
+                    >
+                      Logout
+                    </li>
+                  </ul>
+                </PopperWrapper>
+              </div>
+            )}
+          >
+            <div>
+              <Image width="50px" height="50px" src={currentUser.avatar} />
+            </div>
+          </HeadlessTippy>
           <h1 className={cx("header__content--title")}>
             {currentUser.username}
           </h1>

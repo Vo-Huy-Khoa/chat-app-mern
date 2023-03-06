@@ -42,7 +42,20 @@ export interface ClearCurrentUserAction {
   type: CurrentUserActionTypes.CLEAR_CURRENT_USER;
 }
 
+export interface SetCurrentReceiverAction {
+  type: CurrentUserActionTypes.SET_CURRENT_RECEIVER;
+  payload: IUser;
+}
+
+export interface ClearCurrentReceiverAction {
+  type: CurrentUserActionTypes.CLEAR_CURRENT_RECEIVER;
+}
+
 export type CurrentUserAction = SetCurrentUserAction | ClearCurrentUserAction;
+
+export type CurrentReceiverAction =
+  | SetCurrentReceiverAction
+  | ClearCurrentReceiverAction;
 
 export interface SetSelectMessageAction {
   type: SelectMessageActionTypes.SET_MESSAGE;
