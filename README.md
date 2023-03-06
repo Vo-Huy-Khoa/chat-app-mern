@@ -78,7 +78,7 @@ The client starts by connecting to the server through a socket (maybe also assig
 
 
 ### DESGIN DATABASE
-
+```text
 |─────────────|       |─────────────|            
 |   USER      |       |   MESSAGE   |
 ├─────────────|       ├─────────────|
@@ -89,7 +89,8 @@ The client starts by connecting to the server through a socket (maybe also assig
 │ avatar      |       ├─────────────|
 │refreshToken |       
 │ socketID    |      
-├─────────────|      
+├─────────────|    
+```  
 
 
 ## Structure of the project: <a name='structure'></a>
