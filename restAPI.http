@@ -1,11 +1,15 @@
-@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRoYW5odGh1eSIsImlhdCI6MTY3NDcyNTI2MX0.WttXYRfnVlQuZTPqlE9JSdpwsu91t_xYvdYOyQzI7wo
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjkzYTdhNGIxYWRmMWU2OWI1NzQyZCIsInVzZXJuYW1lIjoiYW5odGh5IiwiZW1haWwiOiJhbmh0aHlAZ21haWwuY29tIiwiaWF0IjoxNjc2MDk2Njg4LCJleHAiOjE2NzYwOTY4MDh9.kRWaC_2Kqdki66XN-L4E6-Tn6pNZj7iuMh5J6UiCtLI
 
-@url  = http://localhost:3001
+# url localhost
+# @url  = http://localhost:3001/api
+# url product
+@url  = https://chat-backend-7jgs.onrender.com/api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjkzYTdhNGIxYWRmMWU2OWI1NzQyZCIsInVzZXJuYW1lIjoiYW5odGh5IiwiZW1haWwiOiJhbmh0aHlAZ21haWwuY29tIiwiaWF0IjoxNjc2MDk2Njg4LCJleHAiOjE2NzYwOTY4MDh9.kRWaC_2Kqdki66XN-L4E6-Tn6pNZj7iuMh5J6UiCtLI
+@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRoYW5odGh1eSIsImlhdCI6MTY3NDcyNTI2MX0.WttXYRfnVlQuZTPqlE9JSdpwsu91t_xYvdYOyQzI7wo
+
 # =============AUTH================== 
 
 ### Register
-POST http://localhost:3001/api/register
+POST {{url}}/register
 Content-Type: application/json
 
 {
@@ -15,7 +19,7 @@ Content-Type: application/json
 }
 
 ### Login
-POST http://localhost:3001/api/login
+POST {{url}}/login
 Content-Type: application/json
 
 {
@@ -24,7 +28,7 @@ Content-Type: application/json
 }
 
 ### Logout
-POST http://localhost:3001/api/logout
+POST {{url}}/logout
 Content-Type: application/json
 
 {
@@ -32,7 +36,7 @@ Content-Type: application/json
 }
 
 ### refreshToken
-POST http://localhost:3001/api/refreshToken
+POST {{url}}/refreshToken
 Content-Type: application/json
 
 {
@@ -43,11 +47,11 @@ Content-Type: application/json
 # ==================USER=========================
 
 ### List All USer
-GET http://localhost:3001/api/users
+GET {{url}}/api/users
 Authorization: Beaer {{token}}
 
 ### search
-POST http://localhost:3001/api/user/search
+POST {{url}}/user/search
 Authorization: Beaer {{token}}
 Content-Type: application/json
 
@@ -56,22 +60,22 @@ Content-Type: application/json
 }
 
 ### Destroy All
-DELETE http://localhost:3001/api/user/destroy
+DELETE {{url}}/user/destroy
 Authorization: Beaer {{token}}
 
 ### profile
-GET http://localhost:3001/api/user/profile/63b673f6f878cb9c68675fe6
+GET {{url}}/user/profile/63b673f6f878cb9c68675fe6
 Authorization: Beaer {{token}}
 
 ###  delete a users
-DELETE http://localhost:3001/api/users/delete/63baa329b593996a69735666
+DELETE {{url}}/users/delete/63baa329b593996a69735666
 Authorization: Beaer {{token}}
 
 
 # ======================MESSAGE=========================
 
 ### List All Message
-POST http://localhost:3001/api/listMessage
+POST {{url}}/listMessage
 Authorization: Beaer {{token}}
 Content-Type: application/json
 
@@ -80,7 +84,7 @@ Content-Type: application/json
 }
 
 ###  Message
-POST http://localhost:3001/api/message
+POST {{url}}/message
 Authorization: Beaer {{token}}
 Content-Type: application/json
 
@@ -90,7 +94,7 @@ Content-Type: application/json
 }
 
 ###  Create Message Thy
-POST http://localhost:3001/api/createMessage
+POST {{url}}/createMessage
 Authorization: Beaer {{token}}
 Content-Type: application/json
 
