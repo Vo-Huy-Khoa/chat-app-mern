@@ -11,10 +11,10 @@ A Real Time Chat Application built using Node.js, React,js Express, Typescript, 
 
 ## Demo
 
-<h3 name="demo">Live <a href="https://mern-vo-huy-khoa.vercel.app/">Demo</a></h3>
+<h3 name="demo">Live <a href="https://mern-vo-huy-khoa.vercel.app/">Chat App</a></h3>
 <!-- https://ezgif.com/ -->
 <br>
-<img src="https://user-images.githubusercontent.com/78124749/223079377-2d9426ef-b157-4b80-a6b7-facceff67f79.gif" width="700" alt="chat app" />
+<img src="https://user-images.githubusercontent.com/78124749/223079377-2d9426ef-b157-4b80-a6b7-facceff67f79.gif" width="100%" height="550" alt="chat app" />
 <br>
 
 ## Features<a name="features"></a>
