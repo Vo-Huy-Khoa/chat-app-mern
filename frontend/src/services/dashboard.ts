@@ -36,7 +36,7 @@ const getListMessage = async () => {
   return response;
 };
 
-const getMessage = async (senderID: any, receiverID: any) => {
+const getMessage = async (senderID: string, receiverID: string) => {
   const response = await instanceAxios.post(
     `message`,
     JSON.stringify({ senderID, receiverID })
@@ -44,7 +44,11 @@ const getMessage = async (senderID: any, receiverID: any) => {
   return response;
 };
 
-const createMessage = async (senderID: any, receiverID: any, message: any) => {
+const createMessage = async (
+  senderID: string,
+  receiverID: string,
+  message: string
+) => {
   const response = await instanceAxios.post(
     `createMessage`,
     JSON.stringify({ senderID, receiverID, message })

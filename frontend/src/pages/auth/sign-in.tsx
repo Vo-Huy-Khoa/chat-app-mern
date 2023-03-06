@@ -10,7 +10,7 @@ const Login = () => {
   const userRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const body = {
       username: userRef.current?.value,
       password: passwordRef.current?.value,

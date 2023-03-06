@@ -2,7 +2,7 @@ import moment from "moment";
 import styles from "../assets/scss/account.module.scss";
 import classNames from "classnames/bind";
 import { Image } from "./Image";
-import { IMessage } from "../types";
+import { IMessage, selectMessageType } from "../types";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/reducers/rootReducer";
 import {
@@ -10,17 +10,15 @@ import {
   setSelectMessage,
   setVisibility,
 } from "../redux/actions";
+import { useEffect, useRef, useState } from "react";
 
 const cx = classNames.bind(styles);
 
-const AccountItem = ({ ...rest }) => {
-  const dispatch = useDispatch();
-  const currentUser = useSelector((state: RootState) => state.currentUser);
-
-  const { listMessage, searchUser } = rest;
-  const receiverID = searchUser?._id;
-  const senderID = currentUser?._id;
-
+function getCurrentMessage(
+  senderID: string,
+  receiverID: string,
+  listMessage: selectMessageType
+) {
   const listSenderID = listMessage.filter((message: IMessage) => {
     return (
       message?.senderID?._id === senderID &&
@@ -36,11 +34,20 @@ const AccountItem = ({ ...rest }) => {
   });
 
   const currentMessage = [...listSenderID, ...listReceiverID];
-
   currentMessage.sort(
     (a: IMessage, b: IMessage) =>
       Date.parse(a.createdAt) - Date.parse(b.createdAt)
   );
+  return currentMessage;
+}
+const AccountItem = ({ ...rest }) => {
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state: RootState) => state.currentUser);
+  const { listMessage, searchUser } = rest;
+  const receiverID = searchUser?._id;
+  const senderID = currentUser?._id;
+
+  const currentMessage = getCurrentMessage(senderID, receiverID, listMessage);
 
   const handleSubmit = () => {
     dispatch(setVisibility("home"));
@@ -62,30 +69,32 @@ const AccountItem = ({ ...rest }) => {
 const AccountMessage = ({ ...rest }) => {
   const dispatch = useDispatch();
   const { listMessage, message, searchUser } = rest;
-
-  const receiverID = message?.receiverID?._id;
   const senderID = message?.senderID?._id;
+  const receiverID = message?.receiverID?._id;
+  const divRef = useRef<HTMLDivElement>(null);
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
+  const currentMessage = getCurrentMessage(senderID, receiverID, listMessage);
 
-  const listSenderID = listMessage.filter((message: IMessage) => {
-    return (
-      message?.senderID?._id === senderID &&
-      message?.receiverID?._id === receiverID
-    );
-  });
+  useEffect(() => {
+    function handleResize() {
+      setIsLargeScreen(window.innerWidth > 425);
+    }
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
-  const listReceiverID = listMessage.filter((message: IMessage) => {
-    return (
-      message?.senderID?._id === receiverID &&
-      message?.receiverID?._id === senderID
-    );
-  });
-
-  const currentMessage = [...listSenderID, ...listReceiverID];
-
-  currentMessage.sort(
-    (a: IMessage, b: IMessage) =>
-      Date.parse(a.createdAt) - Date.parse(b.createdAt)
-  );
+  useEffect(() => {
+    if (
+      divRef.current &&
+      divRef.current.parentElement?.children[0] === divRef.current &&
+      isLargeScreen
+    ) {
+      divRef.current.click();
+    }
+  }, [isLargeScreen]);
 
   const handleSubmit = () => {
     dispatch(setCurrentReceiver(searchUser));
@@ -94,7 +103,7 @@ const AccountMessage = ({ ...rest }) => {
   };
 
   return (
-    <div className={cx("account-message")} onClick={handleSubmit}>
+    <div className={cx("account-message")} onClick={handleSubmit} ref={divRef}>
       <Image
         width="60px"
         height="60px"
@@ -116,7 +125,7 @@ const AccountMessage = ({ ...rest }) => {
       <div className={cx("more")}>
         <span className={cx("text-gray")}>
           {/* {moment(data?.updateAt).format("YYYY-MM-DD HH:mm:ss")} */}
-          {moment(message?.updateAt).format("HH:mm")}
+          {moment(message?.createdAt).format("HH:mm")}
         </span>
       </div>
     </div>
@@ -129,27 +138,7 @@ const AccountStatus = ({ ...rest }) => {
   const { listMessage, searchUser } = rest;
   const receiverID = searchUser?._id;
   const senderID = currentUser?._id;
-
-  const listSenderID = listMessage.filter((message: IMessage) => {
-    return (
-      message?.senderID?._id === senderID &&
-      message?.receiverID?._id === receiverID
-    );
-  });
-
-  const listReceiverID = listMessage.filter((message: IMessage) => {
-    return (
-      message?.senderID?._id === receiverID &&
-      message?.receiverID?._id === senderID
-    );
-  });
-
-  const currentMessage = [...listSenderID, ...listReceiverID];
-
-  currentMessage.sort(
-    (a: IMessage, b: IMessage) =>
-      Date.parse(a.createdAt) - Date.parse(b.createdAt)
-  );
+  const currentMessage = getCurrentMessage(senderID, receiverID, listMessage);
 
   const handleSubmit = () => {
     dispatch(setVisibility("home"));
