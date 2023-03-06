@@ -22,11 +22,23 @@
   display: flex;
   flex-direction: column;
   .header {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-
+    &--icon {
+      position: absolute;
+      left: 30px;
+      bottom: 5px;
+      width: 10px;
+      height: 10px;
+      color: var(--white);
+      background-color: var(--gray);
+      border-radius: 50%;
+      padding: 5px;
+      box-sizing: border-box;
+    }
     &__content {
       display: flex;
       flex-direction: row;
@@ -104,14 +116,6 @@
 }
 
 @media only screen and (min-width: 1025px) {
-  .popper {
-    font-size: 2rem;
-  }
-
-  .popper--wrapper {
-    max-width: 285px !important;
-    height: 150px !important;
-  }
   .wrapper {
     padding: 20px;
     width: 100%;
@@ -125,14 +129,16 @@
         width: 80%;
 
         &--title {
-          font-size: 3rem;
+          font-size: 2rem;
           font-weight: 600;
-          color: var(--gray);
+          color: var(--white);
         }
       }
 
       &__notification {
         svg {
+          width: 40px;
+          height: 40px;
           border-radius: 50%;
           padding: 10px;
         }
@@ -141,10 +147,10 @@
           top: -15px;
           right: -5px;
           border-radius: 50%;
-          width: 3rem;
-          height: 3rem;
-          line-height: 3rem;
-          font-size: 2rem;
+          width: 2.5rem;
+          height: 2.5rem;
+          line-height: 2.5rem;
+          font-size: 1.5rem;
         }
       }
     }
@@ -183,19 +189,11 @@
     .message__list {
       gap: 10px;
       height: 100%;
-      padding: 0 10px;
     }
   }
 }
 
 @media only screen and (max-width: 1024px) and (min-width: 769px) {
-  .popper {
-    font-size: 2rem;
-  }
-
-  .popper--wrapper {
-    height: 150px;
-  }
   .wrapper {
     padding: 20px;
     width: 100%;
@@ -212,7 +210,7 @@
         &--title {
           font-size: 2rem;
           font-weight: 600;
-          color: var(--gray);
+          color: var(--white);
         }
       }
 
@@ -279,20 +277,11 @@
     .message__list {
       gap: 20px;
       height: 100%;
-
-      padding: 0 10px;
     }
   }
 }
 
 @media only screen and (max-width: 768px) and (min-width: 426px) {
-  .popper {
-    font-size: 2rem;
-  }
-
-  .popper--wrapper {
-    height: 150px;
-  }
   img {
     width: 4.5rem;
     height: 4.5rem;
@@ -379,22 +368,12 @@
     .message__list {
       gap: 10px;
       height: 100%;
-
       padding: 0;
-      padding-left: 10px;
     }
   }
 }
 
 @media only screen and (max-width: 425px) {
-  .popper {
-    font-size: 1.5rem;
-  }
-
-  .popper--wrapper {
-    width: 350px;
-    height: 120px;
-  }
   img {
     width: 40px;
     height: 40px;
@@ -407,7 +386,18 @@
     gap: 20px;
     .header {
       height: 70px;
-
+      &--icon {
+        position: absolute;
+        left: 22px;
+        bottom: 5px;
+        width: 10px;
+        height: 10px;
+        color: var(--white);
+        background-color: var(--gray);
+        border-radius: 50%;
+        padding: 5px;
+        box-sizing: border-box;
+      }
       &__content {
         gap: 10px;
         width: 80%;
@@ -423,9 +413,9 @@
         position: relative;
 
         svg {
-          width: 30px;
-          height: 30px;
-          padding: 5px;
+          width: 40px;
+          height: 40px;
+          padding: 10px;
           background-color: var(--gray);
           border-radius: 50%;
           fill: var(--white);
@@ -434,15 +424,16 @@
         span {
           position: absolute;
           display: block;
-          top: -5px;
+          top: -8px;
           right: 0px;
           border-radius: 50%;
-          width: 20px;
-          height: 20px;
+          width: 22px;
+          height: 22px;
           background-color: var(--blue);
           text-align: center;
           line-height: 2rem;
-          font-size: 1.5rem;
+          font-size: 1.4rem;
+          font-weight: 500;
           color: var(--black);
         }
       }
@@ -482,9 +473,7 @@
     .message__list {
       gap: 10px;
       height: 100%;
-
       padding: 0;
-      padding-left: 10px;
     }
   }
 }

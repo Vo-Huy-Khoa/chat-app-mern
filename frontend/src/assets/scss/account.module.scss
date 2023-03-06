@@ -50,8 +50,8 @@
 @media only screen and (min-width: 992px) {
   .account-item {
     img {
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
       object-fit: cover;
     }
     .content {
@@ -66,23 +66,28 @@
     }
   }
   .account-message {
+    img {
+      width: 45px;
+      height: 45px;
+      object-fit: cover;
+    }
     .content {
       width: 60%;
       display: flex;
       flex-direction: column;
       padding-left: 10px;
       .name {
-        font-size: 2rem;
+        font-size: 1.6rem;
       }
       .react {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
       }
       .message {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
       }
     }
     .more {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
   }
 }

@@ -132,9 +132,6 @@ src
 │       └── notification.tsx
 │       └── sidebar.tsx
 │       └── index.ts
-├── provider
-│   └── auth.tsx
-|   └── index.ts
 ├── redux
 │   └── actions
 │       └── sign-in.tsx

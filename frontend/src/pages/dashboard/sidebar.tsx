@@ -9,7 +9,11 @@ import {
   AccountStatus,
 } from "../../components/Account";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDeleteLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronDown,
+  faDeleteLeft,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useDebounce } from "../../hooks";
 import { Wrapper as PopperWrapper } from "../../components";
@@ -18,10 +22,9 @@ import {
   getListMessage,
   getListUser,
 } from "../../services/dashboard";
-import { IMessage, IUser } from "../../types";
+import { IMessage, IUser, selectMessageType } from "../../types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
-import { handleLogout } from "../../services";
 import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
@@ -32,7 +35,7 @@ const Sidebar = () => {
   const debounceValue = useDebounce(valueSearch, 500);
   const [listUserSearch, setListSearch] = useState([]);
   const [listUser, setListUser] = useState([]);
-  const [listMessage, setListMessage] = useState([]);
+  const [listMessage, setListMessage] = useState<selectMessageType>([]);
 
   const uniqueSender = Array.from(
     new Map(
@@ -43,7 +46,16 @@ const Sidebar = () => {
   const uniqueMessage = uniqueSender.filter(
     (message) => message.senderID._id !== currentUser._id
   );
-  console.log(uniqueMessage);
+
+  const handleLogout = async () => {
+    try {
+      await handleLogout();
+      sessionStorage.clear();
+      navigate("/auth/sign-in");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (!debounceValue.trim()) {
@@ -92,26 +104,17 @@ const Sidebar = () => {
                     <li>Profile</li>
                     <li>Settings</li>
                     <li>Report</li>
-                    <li
-                      onClick={() => {
-                        try {
-                          handleLogout().then(() => {
-                            sessionStorage.clear();
-                            navigate("/auth/sign-in");
-                          });
-                        } catch (error) {
-                          console.log(error);
-                        }
-                      }}
-                    >
-                      Logout
-                    </li>
+                    <li onClick={handleLogout}>Logout</li>
                   </ul>
                 </PopperWrapper>
               </div>
             )}
           >
             <div>
+              <FontAwesomeIcon
+                icon={faChevronDown}
+                className={cx("header--icon")}
+              />
               <Image width="50px" height="50px" src={currentUser.avatar} />
             </div>
           </HeadlessTippy>
