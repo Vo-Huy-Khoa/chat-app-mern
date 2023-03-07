@@ -2,6 +2,10 @@ input {
   border: none;
 }
 
+.btn-submit:hover {
+  cursor: pointer;
+}
+
 @media only screen and (min-width: 426px) {
   .container {
     width: 100%;

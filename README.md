@@ -1,3 +1,10 @@
+![Typescript](https://img.shields.io/badge/-TypeScript-007acc?logo=typescript&logoColor=white&style=for-the-badge)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Node.js](https://img.shields.io/badge/node.js-339933.svg?style=for-the-badge&logo=Node%2Ejs&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248.svg?style=for-the-badge&logo=MongoDB&logoColor=white)
+![Socket.io](https://img.shields.io/badge/socket.io-010101.svg?style=for-the-badge&logo=Socket%2Eio&logoColor=white)
+
 <h1>Chat App MERN</h1>
 A Real Time Chat Application built using Node.js, React,js Express, Typescript, Mongoose, Socket.io.
 
@@ -80,10 +87,10 @@ Having an active connection opened between the client and the server so client c
 
 The client starts by connecting to the server through a socket (maybe also assigned to a specific namespace) . Once connections is successful, client and server can emit and listen to events.
 
-
 ### DESGIN DATABASE
+
 ```text
-|─────────────|       |─────────────|            
+|─────────────|       |─────────────|
 |   USER      |       |   MESSAGE   |
 ├─────────────|       ├─────────────|
 | id          |       | id          |
@@ -91,11 +98,10 @@ The client starts by connecting to the server through a socket (maybe also assig
 | username    |       | receiverID  |
 | password    |       | message     |
 │ avatar      |       ├─────────────|
-│refreshToken |       
-│ socketID    |      
-├─────────────|    
-```  
-
+│refreshToken |
+│ socketID    |
+├─────────────|
+```
 
 ## Structure of the project: <a name='structure'></a>
 

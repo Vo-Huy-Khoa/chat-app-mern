@@ -14,8 +14,8 @@ const AccountItem = ({ ...rest }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state: RootState) => state.currentUser);
   const { searchUser } = rest;
-  const receiverID = searchUser?._id;
   const senderID = currentUser?._id;
+  const receiverID = searchUser?._id;
 
   const handleSubmit = () => {
     dispatch(setVisibility("home"));
@@ -74,7 +74,6 @@ const AccountMessage = ({ ...rest }) => {
       senderID: senderID,
       receiverID: receiverID,
     };
-    console.log(data);
     socket.emit("get-message", data);
   };
 
