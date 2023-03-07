@@ -78,13 +78,9 @@ const Home = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    getProfile()
-      .then((res) => {
-        dispatch(setCurrentUser(res.data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    getProfile().then((res) => {
+      dispatch(setCurrentUser(res.data));
+    });
   }, [dispatch]);
 
   return (

@@ -1,4 +1,4 @@
-import express, {Request, Response, NextFunction} from "express";
+import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import connect from "./configs/db";
 import dotenv from "dotenv";
@@ -15,15 +15,17 @@ const io = new Server(server);
 
 const PORT = process.env.PORT || "3001";
 
-const allowedOrigins = ['http://localhost:3000', 'https://mern-vo-huy-khoa.vercel.app'];
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://mern-vo-huy-khoa.vercel.app",
+];
 
 const corsOptions: cors.CorsOptions = {
   origin: allowedOrigins,
-  credentials: true
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
-
 
 dotenv.config();
 app.use(express.json());
@@ -40,34 +42,32 @@ io.on("connection", (socket) => {
   socket.on("login", async (userId) => {
     listSocketID.push(socket.id);
     console.log(`User ${userId} logged in with socket id ${socket.id}`);
-    // Store the socket ID for the user in the database
     await UserModel.findOneAndUpdate(
       { _id: userId },
       {
         socketID: socket.id,
       }
     );
-
-    // Notify the user that they have successfully logged in
     socket.emit("login_success", { userId, socketId: socket.id });
   });
   socket.on("logout", async (userId) => {
     listSocketID.pop(socket.id);
     console.log(`User ${userId} logged in with socket id ${socket.id}`);
-    // Store the socket ID for the user in the database
     await UserModel.findOneAndUpdate(
       { _id: userId },
       {
         socketID: "",
       }
     );
-
-    // Notify the user that they have successfully logged in
     socket.emit("logout_success", { userId, socketId: socket.id });
   });
   // Handle incoming messages
   socket.on("message", async (data) => {
     await messageController.createMessage(data, io, socket, listSocketID);
+  });
+
+  socket.on("get-message", async (data) => {
+    await messageController.getMessage(data, io, socket, listSocketID);
   });
 });
 server.listen(PORT, () => {

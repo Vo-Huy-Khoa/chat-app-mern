@@ -38,33 +38,48 @@ class MessageController {
       if (user?.socketID && listSocketID.includes(user.socketID)) {
         io.to(user.socketID).emit("message", messages);
       }
+
       socket.emit("message", messages);
+      const listMessage = await MessageModel.find({
+        $or: [{ senderID: senderID }, { receiverID: senderID }],
+      })
+        .populate("senderID")
+        .populate("receiverID");
+      socket.emit("listMessage", listMessage);
     } catch (error) {
       // res.status(400).json(error);
     }
   }
 
-  async getMessage(req: Request, res: Response) {
-    try {
-      const message = await MessageModel.find(
-        {
-          senderID: req.body.senderID,
-          receiverID: req.body.receiverID,
-        },
-        {
-          _id: false,
-        }
-      );
+  async getMessage(data: any, io: any, socket: any, listSocketID: any) {
+    const { senderID, receiverID } = data;
 
-      if (message.length === 0) {
-        return res.status(404).json({
-          error: "No message found for the given sender and receiver IDs",
-        });
+    try {
+      const [messageSender, messageReceiver, user] = await Promise.all([
+        MessageModel.find({ senderID, receiverID })
+          .populate("senderID")
+          .populate("receiverID"),
+        MessageModel.find({ senderID: receiverID, receiverID: senderID })
+          .populate("senderID")
+          .populate("receiverID"),
+        UserModel.findById(receiverID),
+      ]);
+
+      const messages = [...messageSender, ...messageReceiver];
+
+      if (user?.socketID && listSocketID.includes(user.socketID)) {
+        io.to(user.socketID).emit("message", messages);
       }
 
-      res.status(200).json(message);
+      socket.emit("message", messages);
+      const listMessage = await MessageModel.find({
+        $or: [{ senderID: senderID }, { receiverID: senderID }],
+      })
+        .populate("senderID")
+        .populate("receiverID");
+      socket.emit("listMessage", listMessage);
     } catch (error) {
-      res.status(400).json(error);
+      // res.status(400).json(error);
     }
   }
 }
