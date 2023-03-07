@@ -38,19 +38,24 @@ const Sidebar = () => {
   const [listMessage, setListMessage] = useState<selectMessageType>([]);
 
   function handleFilterMessage(listMessage: selectMessageType) {
-    const uniqueSender = Array.from(
+    const uniqueMessage = Array.from(
       new Map(
         listMessage.map((message: IMessage) => [
           message?.senderID?._id,
           message,
-        ])
+        ]) &&
+          listMessage.map((message: IMessage) => [
+            message?.receiverID?._id,
+            message,
+          ])
       ).values()
     );
-    const uniqueMessage = uniqueSender.filter(
-      (message) => message.senderID._id !== currentUser._id
-    );
 
-    return uniqueMessage;
+    const filterArray = uniqueMessage.filter((message) => {
+      return message.receiverID._id !== currentUser._id;
+    });
+
+    return filterArray;
   }
 
   const handleLogout = async () => {
@@ -67,31 +72,19 @@ const Sidebar = () => {
     if (!debounceValue.trim()) {
       return;
     }
-    handleSearch(debounceValue)
-      .then((response) => {
-        setListSearch(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    handleSearch(debounceValue).then((response) => {
+      setListSearch(response.data);
+    });
   }, [debounceValue]);
 
   useEffect(() => {
-    getListMessage()
-      .then((response) => {
-        setListMessage(handleFilterMessage(response.data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    getListUser()
-      .then((response) => {
-        setListUser(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    getListMessage().then((response) => {
+      const listMessage = handleFilterMessage(response.data);
+      setListMessage(listMessage);
+    });
+    getListUser().then((response) => {
+      setListUser(response.data);
+    });
   }, []);
 
   return (
@@ -201,11 +194,11 @@ const Sidebar = () => {
             <AccountMessage
               className={cx("message-item")}
               key={index}
-              message={message}
+              currentMessage={message}
               searchUser={
                 message.senderID === currentUser
-                  ? message.receiverID
-                  : message.senderID
+                  ? message.senderID
+                  : message.receiverID
               }
             />
           );

@@ -27,10 +27,13 @@ const server = http_1.default.createServer(app);
 const io = new socket_io_1.Server(server);
 exports.io = io;
 const PORT = process.env.PORT || "3001";
-const allowedOrigins = ['http://localhost:3000', 'https://mern-vo-huy-khoa.vercel.app'];
+const allowedOrigins = [
+    "http://localhost:3000",
+    "https://mern-vo-huy-khoa.vercel.app",
+];
 const corsOptions = {
     origin: allowedOrigins,
-    credentials: true
+    credentials: true,
 };
 app.use((0, cors_1.default)(corsOptions));
 dotenv_1.default.config();
@@ -45,26 +48,25 @@ io.on("connection", (socket) => {
     socket.on("login", (userId) => __awaiter(void 0, void 0, void 0, function* () {
         listSocketID.push(socket.id);
         console.log(`User ${userId} logged in with socket id ${socket.id}`);
-        // Store the socket ID for the user in the database
         yield User_1.default.findOneAndUpdate({ _id: userId }, {
             socketID: socket.id,
         });
-        // Notify the user that they have successfully logged in
         socket.emit("login_success", { userId, socketId: socket.id });
     }));
     socket.on("logout", (userId) => __awaiter(void 0, void 0, void 0, function* () {
         listSocketID.pop(socket.id);
         console.log(`User ${userId} logged in with socket id ${socket.id}`);
-        // Store the socket ID for the user in the database
         yield User_1.default.findOneAndUpdate({ _id: userId }, {
             socketID: "",
         });
-        // Notify the user that they have successfully logged in
         socket.emit("logout_success", { userId, socketId: socket.id });
     }));
     // Handle incoming messages
     socket.on("message", (data) => __awaiter(void 0, void 0, void 0, function* () {
         yield messageController_1.default.createMessage(data, io, socket, listSocketID);
+    }));
+    socket.on("get-message", (data) => __awaiter(void 0, void 0, void 0, function* () {
+        yield messageController_1.default.getMessage(data, io, socket, listSocketID);
     }));
 });
 server.listen(PORT, () => {

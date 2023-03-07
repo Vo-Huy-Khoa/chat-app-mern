@@ -40,12 +40,12 @@ const AccountItem = ({ ...rest }) => {
 
 const AccountMessage = ({ ...rest }) => {
   const dispatch = useDispatch();
-  const { message, searchUser } = rest;
+  const { currentMessage, searchUser } = rest;
   const divRef = useRef<HTMLDivElement>(null);
   const [isLargeScreen, setIsLargeScreen] = useState(false);
   const currentUser = useSelector((state: RootState) => state.currentUser);
-  const receiverID = searchUser?._id;
   const senderID = currentUser?._id;
+  const receiverID = searchUser?._id;
   useEffect(() => {
     function handleResize() {
       setIsLargeScreen(window.innerWidth > 425);
@@ -71,9 +71,10 @@ const AccountMessage = ({ ...rest }) => {
     dispatch(setCurrentReceiver(searchUser));
     dispatch(setVisibility("home"));
     const data = {
-      senderID: receiverID,
-      receiverID: senderID,
+      senderID: senderID,
+      receiverID: receiverID,
     };
+    console.log(data);
     socket.emit("get-message", data);
   };
 
@@ -83,24 +84,26 @@ const AccountMessage = ({ ...rest }) => {
         width="60px"
         height="60px"
         src={
-          message.receiverID === searchUser
-            ? message?.receiverID?.avatar
-            : message?.senderID?.avatar
+          currentMessage.senderID === currentUser
+            ? currentMessage?.senderID?.avatar
+            : currentMessage?.receiverID?.avatar
         }
       />
       <div className={cx("content")}>
         <h2 className={cx("name", "text-white")}>
-          {message.receiverID === searchUser
-            ? message?.receiverID?.username
-            : message?.senderID?.username}
+          {currentMessage.senderID === currentUser
+            ? currentMessage?.senderID?.username
+            : currentMessage?.receiverID?.username}
         </h2>
-        <span className={cx("react", "text-white")}>{message?.react}</span>
-        <p className={cx("message", "text-gray")}>{message?.message}</p>
+        <span className={cx("react", "text-white")}>
+          {currentMessage?.react}
+        </span>
+        <p className={cx("message", "text-gray")}>{currentMessage?.message}</p>
       </div>
       <div className={cx("more")}>
         <span className={cx("text-gray")}>
           {/* {moment(data?.updateAt).format("YYYY-MM-DD HH:mm:ss")} */}
-          {moment(message?.createdAt).format("HH:mm")}
+          {moment(currentMessage?.createdAt).format("HH:mm")}
         </span>
       </div>
     </div>

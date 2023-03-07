@@ -51,30 +51,45 @@ class MessageController {
                     io.to(user.socketID).emit("message", messages);
                 }
                 socket.emit("message", messages);
+                const listMessage = yield Message_1.default.find({
+                    $or: [{ senderID: senderID }, { receiverID: senderID }],
+                })
+                    .populate("senderID")
+                    .populate("receiverID");
+                socket.emit("listMessage", listMessage);
             }
             catch (error) {
                 // res.status(400).json(error);
             }
         });
     }
-    getMessage(req, res) {
+    getMessage(data, io, socket, listSocketID) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { senderID, receiverID } = data;
             try {
-                const message = yield Message_1.default.find({
-                    senderID: req.body.senderID,
-                    receiverID: req.body.receiverID,
-                }, {
-                    _id: false,
-                });
-                if (message.length === 0) {
-                    return res.status(404).json({
-                        error: "No message found for the given sender and receiver IDs",
-                    });
+                const [messageSender, messageReceiver, user] = yield Promise.all([
+                    Message_1.default.find({ senderID, receiverID })
+                        .populate("senderID")
+                        .populate("receiverID"),
+                    Message_1.default.find({ senderID: receiverID, receiverID: senderID })
+                        .populate("senderID")
+                        .populate("receiverID"),
+                    User_1.default.findById(receiverID),
+                ]);
+                const messages = [...messageSender, ...messageReceiver];
+                if ((user === null || user === void 0 ? void 0 : user.socketID) && listSocketID.includes(user.socketID)) {
+                    io.to(user.socketID).emit("message", messages);
                 }
-                res.status(200).json(message);
+                socket.emit("message", messages);
+                const listMessage = yield Message_1.default.find({
+                    $or: [{ senderID: senderID }, { receiverID: senderID }],
+                })
+                    .populate("senderID")
+                    .populate("receiverID");
+                socket.emit("listMessage", listMessage);
             }
             catch (error) {
-                res.status(400).json(error);
+                // res.status(400).json(error);
             }
         });
     }
