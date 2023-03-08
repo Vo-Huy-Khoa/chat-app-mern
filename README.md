@@ -6,7 +6,7 @@
 ![Socket.io](https://img.shields.io/badge/socket.io-010101.svg?style=for-the-badge&logo=Socket%2Eio&logoColor=white)
 
 <h1>Chat App MERN</h1>
-A Real Time Chat Application built using Node.js, React,js Express, Typescript, Mongoose, Socket.io.
+A Real Time Chat Application built using Typescript, React, Express, Mongoose, Socket.io.
 
 ## Index
 
@@ -111,23 +111,18 @@ The client starts by connecting to the server through a socket (maybe also assig
 src
 |
 ├── configs
-| ├── index.ts
-│ └── ...
+|   └── db.ts
 ├── controllers
-| ├── UserController.ts
-│ └── ...
+|   └── UserController.ts
+│   └── MessageController.ts
+├── middleware
+|   └── auth.ts
+│   └── token.ts
 ├── models
-| ├── User.ts
-│ └── ...
+|   └── User.ts
+|   └──Message.ts
 ├── routes
-| ├── index.ts
-│ └── ...
-├── services
-| ├── index.ts
-│ └── ...
-├── utils
-| ├── index.ts
-│ └── ...
+|   └── index.ts
 └── server.ts
 ```
 
@@ -136,7 +131,7 @@ src
 ```text
 src
 ├── assets
-|   └── images
+|   └── icons
 │   └── scss
 ├── components
 │   └── Account.tsx
