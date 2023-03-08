@@ -44,6 +44,9 @@ const AccountMessage = ({ ...rest }) => {
   const divRef = useRef<HTMLDivElement>(null);
   const [isLargeScreen, setIsLargeScreen] = useState(false);
   const currentUser = useSelector((state: RootState) => state.currentUser);
+  const currentReceiver = useSelector(
+    (state: RootState) => state.currentReceiver
+  );
   const senderID = currentUser?._id;
   const receiverID = searchUser?._id;
   useEffect(() => {
@@ -78,7 +81,16 @@ const AccountMessage = ({ ...rest }) => {
   };
 
   return (
-    <div className={cx("account-message")} onClick={handleSubmit} ref={divRef}>
+    <div
+      className={cx(
+        "account-message",
+        isLargeScreen &&
+          currentReceiver._id === searchUser?._id &&
+          "account-current"
+      )}
+      onClick={handleSubmit}
+      ref={divRef}
+    >
       <Image
         width="60px"
         height="60px"

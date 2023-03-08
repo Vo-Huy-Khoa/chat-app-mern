@@ -5,18 +5,11 @@ import { Image } from "../../components/Image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowLeft,
-  faBookmark,
   faCircleInfo,
-  faCircleQuestion,
   faCopy,
   faFileImage,
-  faFileUpload,
-  faItalic,
-  faLocation,
   faMicrophone,
-  faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
-import { NavLink } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { IMessage } from "../../types";
 import { getProfile } from "../../services";
@@ -67,14 +60,19 @@ const Home = () => {
   };
 
   useEffect(() => {
-    socket.on("message", (data) => {
-      const listMessage = data;
-      listMessage.sort(
+    function handleNewMessage(data: any) {
+      const sortedMessages = data.sort(
         (a: IMessage, b: IMessage) =>
           Date.parse(a.createdAt) - Date.parse(b.createdAt)
       );
-      dispatch(setSelectMessage(listMessage));
-    });
+      dispatch(setSelectMessage(sortedMessages));
+    }
+
+    socket.on("message", handleNewMessage);
+
+    return () => {
+      socket.off("message", handleNewMessage);
+    };
   }, [dispatch]);
 
   useEffect(() => {
@@ -145,27 +143,14 @@ const Home = () => {
       (
       {countMessage !== null && (
         <div className={cx("message", "fixed")}>
-          <div className={cx("message__heading")}>
-            <div className={cx("message__heading__content")}>
-              <NavLink to="">reply</NavLink>
-              <NavLink to="">note</NavLink>
-            </div>
-            <FontAwesomeIcon icon={faCircleQuestion} />
-          </div>
-          <input ref={messageRef} type="text" />
           <div className={cx("message__more")}>
             <div className={cx("message__more__file")}>
               <FontAwesomeIcon icon={faFileImage} />
-              <FontAwesomeIcon icon={faBookmark} />
               <FontAwesomeIcon icon={faCopy} />
-              <FontAwesomeIcon icon={faCircleInfo} />
-              <FontAwesomeIcon icon={faItalic} />
-              <FontAwesomeIcon icon={faLocation} />
-              <FontAwesomeIcon icon={faStarHalfStroke} />
-            </div>
-            <div className={cx("message__more__action")}>
-              <FontAwesomeIcon icon={faFileUpload} />
               <FontAwesomeIcon icon={faMicrophone} />
+            </div>
+            <input ref={messageRef} type="text" />
+            <div className={cx("message__more__action")}>
               <button onClick={handleCreateMessage}>Send</button>
             </div>
           </div>

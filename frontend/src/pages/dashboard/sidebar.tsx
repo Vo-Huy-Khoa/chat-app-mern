@@ -78,13 +78,20 @@ const Sidebar = () => {
   }, [debounceValue]);
 
   useEffect(() => {
-    getListMessage().then((response) => {
-      const listMessage = handleFilterMessage(response.data);
-      setListMessage(listMessage);
-    });
-    getListUser().then((response) => {
-      setListUser(response.data);
-    });
+    async function fetchMessagesAndUsers() {
+      try {
+        const messageResponse = await getListMessage();
+        const listMessage = handleFilterMessage(messageResponse.data);
+        setListMessage(listMessage);
+
+        const userResponse = await getListUser();
+        setListUser(userResponse.data);
+      } catch (error) {
+        // Handle errors
+      }
+    }
+
+    fetchMessagesAndUsers();
   }, []);
 
   return (
