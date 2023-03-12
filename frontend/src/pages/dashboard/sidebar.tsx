@@ -105,7 +105,7 @@ const Sidebar = () => {
             interactive
             render={(attrs) => (
               <div className={cx("popper")} tabIndex={1} {...attrs}>
-                <PopperWrapper className={cx("popper--wrapper")}>
+                <PopperWrapper className="search">
                   <ul>
                     <li>Profile</li>
                     <li>Settings</li>
@@ -141,8 +141,7 @@ const Sidebar = () => {
           interactive
           render={(attrs) => (
             <div className={cx("search-result")} tabIndex={1} {...attrs}>
-              <PopperWrapper className={cx("popper-search")}>
-                <h4 className={cx("search-title")}>accounts</h4>
+              <PopperWrapper>
                 {listUserSearch.map((user, index) => {
                   return (
                     <AccountItem

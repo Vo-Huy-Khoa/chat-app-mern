@@ -1,21 +1,3 @@
-.popper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.popper--wrapper {
-  display: flex;
-  align-items: center;
-  ul {
-    list-style-type: none;
-
-    li:hover {
-      cursor: pointer;
-    }
-  }
-  color: var(--white) !important;
-}
 .wrapper {
   width: 100%;
   height: 100%;
