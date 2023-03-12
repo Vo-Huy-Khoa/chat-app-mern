@@ -5,10 +5,8 @@
   justify-content: center;
   box-shadow: rgb(0 0 0 / 12%) 0px 2px 12px;
   background: var(--black);
-  color: var(--black);
+  color: var(--white);
   padding: 20px;
-  width: 200px;
-  height: 150px;
   border-radius: 8px;
   padding-top: 8px;
   overflow-y: scroll;
@@ -16,7 +14,7 @@
   ul {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    align-items: center;
   }
   img {
     width: 40px;
@@ -24,27 +22,62 @@
   }
 }
 
-@media only screen and (max-width: 768px) and (min-width: 426px) {
+ul {
+  list-style-type: none;
+  li:hover {
+    cursor: pointer;
+  }
+}
+
+@media only screen and (min-width: 992px) {
   .wrapper {
-    max-width: 150px;
+    width: 350px;
     font-size: 1.5rem;
+    gap: 10px;
     ul {
-      display: flex;
-      flex-direction: column;
       gap: 5px;
     }
+  }
+  .search {
+    width: 200px;
+  }
+}
+
+@media only screen and (max-width: 768px) and (min-width: 426px) {
+  .wrapper {
+    width: 350px;
+    font-size: 1.5rem;
+    ul {
+      gap: 5px;
+    }
+  }
+  .search {
+    width: 200px;
+  }
+}
+
+@media only screen and (max-width: 768px) and (min-width: 426px) {
+  .wrapper {
+    width: 350px;
+    font-size: 1.5rem;
+    ul {
+      gap: 5px;
+    }
+  }
+  .search {
+    width: 200px;
   }
 }
 
 @media only screen and (max-width: 425px) {
   .wrapper {
-    width: 250px;
-    height: 150px;
+    width: 350px;
     font-size: 1.5rem;
     ul {
-      display: flex;
-      flex-direction: column;
       gap: 5px;
     }
+  }
+  .search {
+    width: 200px;
   }
 }
