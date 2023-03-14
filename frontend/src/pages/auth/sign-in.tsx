@@ -64,7 +64,7 @@ const Login = () => {
             <GoogleIcon />
             <GithubIcon /> */}
           </div>
-          <NavLink to="/auth/sign-up">Sign Up</NavLink>
+          <NavLink to="/auth/sign-up">Sign Up?</NavLink>
         </div>
       </div>
     </div>

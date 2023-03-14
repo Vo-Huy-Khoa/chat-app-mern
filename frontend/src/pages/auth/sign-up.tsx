@@ -82,7 +82,7 @@ const Register = () => {
           </button>
         </form>
         <div className={cx("register__link")}>
-          <NavLink to="/auth/sign-in">or Login?</NavLink>
+          <NavLink to="/auth/sign-in">Sign In?</NavLink>
         </div>
       </div>
     </div>

@@ -2,7 +2,6 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   box-shadow: rgb(0 0 0 / 12%) 0px 2px 12px;
   background: var(--black);
   color: var(--white);
@@ -12,9 +11,21 @@
   overflow-y: scroll;
   font-size: 1.5rem;
   ul {
+    list-style-type: none;
     display: flex;
     flex-direction: column;
     align-items: center;
+    li {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding-left: 15px;
+    }
+    li:hover {
+      cursor: pointer;
+      background-color: #3c3844;
+      border-radius: 20px;
+    }
   }
   img {
     width: 40px;
@@ -22,50 +33,44 @@
   }
 }
 
-ul {
-  list-style-type: none;
-  li:hover {
-    cursor: pointer;
+@media only screen and (min-width: 992px) {
+  .wrapper {
+    width: 35vh;
+    font-size: 1.5rem;
+    gap: 10px;
+    ul {
+      margin-top: 20px;
+      gap: 5px;
+      li {
+        width: 100%;
+        height: 40px;
+        gap: 10px;
+      }
+    }
+  }
+  .search {
+    width: 35vh;
+    height: 100vh;
   }
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (max-width: 992px) and (min-width: 426px) {
   .wrapper {
-    width: 350px;
+    width: 40vh;
     font-size: 1.5rem;
     gap: 10px;
     ul {
       gap: 5px;
+      li {
+        width: 100%;
+        height: 40px;
+        gap: 10px;
+      }
     }
   }
   .search {
-    width: 200px;
-  }
-}
-
-@media only screen and (max-width: 768px) and (min-width: 426px) {
-  .wrapper {
-    width: 350px;
-    font-size: 1.5rem;
-    ul {
-      gap: 5px;
-    }
-  }
-  .search {
-    width: 200px;
-  }
-}
-
-@media only screen and (max-width: 768px) and (min-width: 426px) {
-  .wrapper {
-    width: 350px;
-    font-size: 1.5rem;
-    ul {
-      gap: 5px;
-    }
-  }
-  .search {
-    width: 200px;
+    width: 40vh;
+    height: 100vh;
   }
 }
 
@@ -75,9 +80,15 @@ ul {
     font-size: 1.5rem;
     ul {
       gap: 5px;
+      li {
+        width: 100%;
+        height: 40px;
+        gap: 10px;
+      }
     }
   }
   .search {
-    width: 200px;
+    width: 270px;
+    height: 100vh;
   }
 }
