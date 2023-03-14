@@ -17,7 +17,8 @@ const PORT = process.env.PORT || "3001";
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://chatapp-vo-huy-khoa.vercel.app/",
+  "https://chatapp-vo-huy-khoa.vercel.app",
+  "https://chatapp-vo-huy-khoa.vercel.app/"
 ];
 
 const corsOptions: cors.CorsOptions = {
