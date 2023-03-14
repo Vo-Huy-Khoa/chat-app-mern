@@ -10,22 +10,18 @@ const Login = () => {
   const userRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     const body = {
       username: userRef.current?.value,
       password: passwordRef.current?.value,
     };
     e.preventDefault();
     try {
-      handleLogin(body)
-        .then(() => {
-          navigate("/dashboard/home");
-        })
-        .catch((error) => {
-          alert("Login Fail!");
-        });
-    } catch (err) {
-      alert(err);
+      await handleLogin(body);
+      navigate("/dashboard/home");
+    } catch (error) {
+      console.error(error);
+      alert("Login failed!");
     }
   };
 
@@ -55,9 +51,9 @@ const Login = () => {
                 placeholder="Type your password..."
               />
             </div>
-            <NavLink className={cx("login__content__main__forget")} to="">
+            {/* <NavLink className={cx("login__content__main__forget")} to="">
               <span>Forget password?</span>
-            </NavLink>
+            </NavLink> */}
             <button>Login</button>
           </form>
         </div>
