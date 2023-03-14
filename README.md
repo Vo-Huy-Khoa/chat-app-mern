@@ -49,7 +49,7 @@ Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.co
 
    ```bash
    cd backend
-   npm install
+   npm i
    npm run dev
    ```
 
@@ -57,7 +57,7 @@ Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.co
 
    ```bash
    cd frontend
-   npm install
+   npm i
    npm run start
    ```
 
