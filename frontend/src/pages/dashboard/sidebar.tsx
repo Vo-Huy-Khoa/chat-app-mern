@@ -10,9 +10,13 @@ import {
 } from "../../components/Account";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faBug,
   faChevronDown,
   faDeleteLeft,
+  faGear,
+  faRightFromBracket,
   faSearch,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useCallback, useEffect, useState } from "react";
 import { useDebounce } from "../../hooks";
@@ -110,10 +114,34 @@ const Sidebar = () => {
               <div className={cx("popper")} tabIndex={1} {...attrs}>
                 <PopperWrapper className="search">
                   <ul>
-                    <li>Profile</li>
-                    <li>Settings</li>
-                    <li>Report</li>
-                    <li onClick={handleLogout}>Logout</li>
+                    <li>
+                      <FontAwesomeIcon
+                        icon={faUser}
+                        className={cx("header--icon")}
+                      />
+                      Profile
+                    </li>
+                    <li>
+                      <FontAwesomeIcon
+                        icon={faGear}
+                        className={cx("header--icon")}
+                      />
+                      Settings
+                    </li>
+                    <li>
+                      <FontAwesomeIcon
+                        icon={faBug}
+                        className={cx("header--icon")}
+                      />
+                      Report
+                    </li>
+                    <li onClick={handleLogout}>
+                      <FontAwesomeIcon
+                        icon={faRightFromBracket}
+                        className={cx("header--icon")}
+                      />
+                      Logout
+                    </li>
                   </ul>
                 </PopperWrapper>
               </div>
