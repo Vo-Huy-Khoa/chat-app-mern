@@ -24,15 +24,11 @@ const Register = () => {
     };
     e.preventDefault();
     try {
-      handleRegister(body)
-        .then(() => {
-          navigate("/login");
-        })
-        .catch(() => {
-          alert("Register Fail!");
-        });
+      await handleRegister(body);
+      navigate("/login");
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      alert("Register failed!");
     }
   }
 

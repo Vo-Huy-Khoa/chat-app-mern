@@ -44,6 +44,7 @@ const Dashboard = () => {
           </div>
         </div>
       )}
+      {/* Visible is width screen > 450 */}
       {!isLargeScreen && (
         <div className={cx("container")}>
           {isVisible === "sidebar" && (

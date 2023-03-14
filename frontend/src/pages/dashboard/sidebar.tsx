@@ -14,7 +14,7 @@ import {
   faDeleteLeft,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDebounce } from "../../hooks";
 import { Wrapper as PopperWrapper } from "../../components";
 import {
@@ -37,26 +37,29 @@ const Sidebar = () => {
   const [listUser, setListUser] = useState([]);
   const [listMessage, setListMessage] = useState<selectMessageType>([]);
 
-  function handleFilterMessage(listMessage: selectMessageType) {
-    const uniqueMessage = Array.from(
-      new Map(
-        listMessage.map((message: IMessage) => [
-          message?.senderID?._id,
-          message,
-        ]) &&
+  const handleFilterMessage = useCallback(
+    (listMessage: selectMessageType) => {
+      const uniqueMessage = Array.from(
+        new Map(
           listMessage.map((message: IMessage) => [
-            message?.receiverID?._id,
+            message?.senderID?._id,
             message,
-          ])
-      ).values()
-    );
+          ]) &&
+            listMessage.map((message: IMessage) => [
+              message?.receiverID?._id,
+              message,
+            ])
+        ).values()
+      );
 
-    const filterArray = uniqueMessage.filter((message) => {
-      return message.receiverID._id !== currentUser._id;
-    });
+      const filterArray = uniqueMessage.filter((message) => {
+        return message.receiverID._id !== currentUser._id;
+      });
 
-    return filterArray;
-  }
+      return filterArray;
+    },
+    [currentUser._id]
+  );
 
   const handleLogout = async () => {
     try {
@@ -92,7 +95,7 @@ const Sidebar = () => {
     }
 
     fetchMessagesAndUsers();
-  }, []);
+  }, [handleFilterMessage]);
 
   return (
     <div className={cx("wrapper")}>
