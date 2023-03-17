@@ -41,66 +41,70 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const Token = __importStar(require("./token"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const Register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const password = req.body.password;
-    const createUser = new User_1.default({
-        fullname: req.body.fullname,
-        username: req.body.username,
-        avatar: req.body.avatar,
-        password: bcrypt_1.default.hashSync(password, bcrypt_1.default.genSaltSync(10)),
-    });
     try {
-        yield createUser.save();
-        res.status(201).json(createUser);
+        const { fullname, username, avatar, password } = req.body;
+        const hashedPassword = bcrypt_1.default.hashSync(password, bcrypt_1.default.genSaltSync(10));
+        const newUser = new User_1.default({
+            fullname,
+            username,
+            avatar,
+            password: hashedPassword,
+        });
+        yield newUser.save();
+        res.status(201).json(newUser);
     }
     catch (error) {
-        res.status(400).json(error);
+        console.error(error);
+        res.status(400).json({ error: "Failed to register user" });
     }
 });
 exports.Register = Register;
 const Login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const password = req.body.password;
-    const user = yield User_1.default.findOne({
-        username: req.body.username,
-    });
-    if (!user || !bcrypt_1.default.compareSync(password, user.password)) {
-        res.status(400).json("Login Fail!");
-    }
-    else {
+    try {
+        const { username, password } = req.body;
+        const user = yield User_1.default.findOne({ username });
+        if (!user || !bcrypt_1.default.compareSync(password, user.password)) {
+            return res.status(400).json("Login Fail!");
+        }
         const token = Token.createToken(user) || "";
         const refreshToken = Token.refreshToken(user, token);
-        yield User_1.default.updateOne({
-            username: user.username,
-        }, {
-            refreshToken: refreshToken,
-        }).then(() => {
-            res.status(200).json({
-                user: {
-                    id: user.id,
-                },
-                token,
-                refreshToken,
-            });
+        yield User_1.default.updateOne({ username }, { refreshToken });
+        return res.status(200).json({
+            user: { id: user.id },
+            token,
+            refreshToken,
         });
+    }
+    catch (err) {
+        console.error(err);
+        return res.status(500).json("Internal Server Error");
     }
 });
 exports.Login = Login;
 const RefreshToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || "";
     const JWT_SECRET = process.env.JWT_SECRET || "";
-    const refreshToken = req.body.token;
-    const userId = req.body.id;
-    if (!refreshToken || !userId)
-        res.sendStatus(401);
-    yield User_1.default.findById({ _id: userId }).then((data) => {
-        if (!(data === null || data === void 0 ? void 0 : data.refreshToken) === refreshToken)
-            res.sendStatus(403);
-        jsonwebtoken_1.default.verify(refreshToken, REFRESH_TOKEN_SECRET, (err, data) => {
-            if (err)
-                res.sendStatus(403);
-            const accessToken = jsonwebtoken_1.default.sign({ id: userId, username: data.username }, JWT_SECRET, { expiresIn: "3600s" });
-            res.status(201).json({ token: accessToken });
+    const { token: refreshToken, id: userId } = req.body;
+    if (!refreshToken || !userId) {
+        return res.sendStatus(401);
+    }
+    try {
+        const user = yield User_1.default.findById(userId);
+        if (!user || user.refreshToken !== refreshToken) {
+            return res.sendStatus(403);
+        }
+        jsonwebtoken_1.default.verify(refreshToken, REFRESH_TOKEN_SECRET, (err, decoded) => {
+            if (err) {
+                return res.sendStatus(403);
+            }
+            const accessToken = jsonwebtoken_1.default.sign({ id: userId, username: decoded.username }, JWT_SECRET, { expiresIn: "3600s" });
+            return res.status(201).json({ token: accessToken });
         });
-    });
+    }
+    catch (error) {
+        console.error(error);
+        return res.sendStatus(500);
+    }
 });
 exports.RefreshToken = RefreshToken;
 const Logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
