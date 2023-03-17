@@ -3,12 +3,12 @@ import { Request, Response, NextFunction } from "express";
 
 const createToken = (user: any) => {
   const JWT_SECRET = process.env.JWT_SECRET || "";
-  let payload = { id: user.id, username: user.username };
+  const payload = { id: user.id, username: user.username };
   let token = null;
   try {
     token = jwt.sign(payload, JWT_SECRET, { expiresIn: "120s" });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 
   return token;

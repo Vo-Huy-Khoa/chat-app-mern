@@ -5,7 +5,7 @@ import messageController from "../controllers/messageController";
 import * as Auth from "../middleware/auth";
 import * as Token from "../middleware/token";
 const router = Router();
-const initRoute = (app: express.Application) => {
+const routers = (app: express.Application) => {
   router.get("/users", Token.authToken, userController.getAll);
   router.post("/login", Auth.Login);
   router.post("/logout", Auth.Logout);
@@ -31,4 +31,4 @@ const initRoute = (app: express.Application) => {
   return app.use("/api", router);
 };
 
-export default initRoute;
+export default routers;

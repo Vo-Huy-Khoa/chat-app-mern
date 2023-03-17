@@ -32,7 +32,7 @@ const messageController_1 = __importDefault(require("../controllers/messageContr
 const Auth = __importStar(require("../middleware/auth"));
 const Token = __importStar(require("../middleware/token"));
 const router = (0, express_1.default)();
-const initRoute = (app) => {
+const routers = (app) => {
     router.get("/users", Token.authToken, userController_1.default.getAll);
     router.post("/login", Auth.Login);
     router.post("/logout", Auth.Logout);
@@ -48,4 +48,4 @@ const initRoute = (app) => {
     router.post("/createMessage", Token.authToken, messageController_1.default.createMessage);
     return app.use("/api", router);
 };
-exports.default = initRoute;
+exports.default = routers;

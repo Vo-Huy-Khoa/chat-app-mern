@@ -42,33 +42,42 @@ app.use(express_1.default.urlencoded({ extended: true }));
 (0, routes_1.default)(app);
 (0, db_1.default)();
 const listSocketID = [];
+const handleLogin = (socket, userId) => __awaiter(void 0, void 0, void 0, function* () {
+    listSocketID.push(socket.id);
+    console.log(`User ${userId} logged in with socket id ${socket.id}`);
+    yield User_1.default.findOneAndUpdate({ _id: userId }, { socketID: socket.id });
+    socket.emit("login_success", { userId, socketId: socket.id });
+});
+const handleLogout = (socket, userId) => __awaiter(void 0, void 0, void 0, function* () {
+    const index = listSocketID.indexOf(socket.id);
+    if (index !== -1) {
+        listSocketID.splice(index, 1);
+    }
+    console.log(`User ${userId} logged out with socket id ${socket.id}`);
+    yield User_1.default.findOneAndUpdate({ _id: userId }, { socketID: "" });
+    socket.emit("logout_success", { userId, socketId: socket.id });
+});
+const handleMessage = (socket, data) => __awaiter(void 0, void 0, void 0, function* () {
+    yield messageController_1.default.createMessage(data, io, socket, listSocketID);
+});
+const handleGetMessage = (socket, data) => __awaiter(void 0, void 0, void 0, function* () {
+    yield messageController_1.default.getMessage(data, io, socket, listSocketID);
+});
 io.on("connection", (socket) => {
     console.log(`Client connected with socket id ${socket.id}`);
-    // Handle user login
     socket.on("login", (userId) => __awaiter(void 0, void 0, void 0, function* () {
-        listSocketID.push(socket.id);
-        console.log(`User ${userId} logged in with socket id ${socket.id}`);
-        yield User_1.default.findOneAndUpdate({ _id: userId }, {
-            socketID: socket.id,
-        });
-        socket.emit("login_success", { userId, socketId: socket.id });
+        yield handleLogin(socket, userId);
     }));
     socket.on("logout", (userId) => __awaiter(void 0, void 0, void 0, function* () {
-        listSocketID.pop(socket.id);
-        console.log(`User ${userId} logged in with socket id ${socket.id}`);
-        yield User_1.default.findOneAndUpdate({ _id: userId }, {
-            socketID: "",
-        });
-        socket.emit("logout_success", { userId, socketId: socket.id });
+        yield handleLogout(socket, userId);
     }));
-    // Handle incoming messages
     socket.on("message", (data) => __awaiter(void 0, void 0, void 0, function* () {
-        yield messageController_1.default.createMessage(data, io, socket, listSocketID);
+        yield handleMessage(socket, data);
     }));
     socket.on("get-message", (data) => __awaiter(void 0, void 0, void 0, function* () {
-        yield messageController_1.default.getMessage(data, io, socket, listSocketID);
+        yield handleGetMessage(socket, data);
     }));
 });
 server.listen(PORT, () => {
-    console.log(`Server listing at port: ${PORT}`);
+    console.log(`Server listening at port: ${PORT}`);
 });

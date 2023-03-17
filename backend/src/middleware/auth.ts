@@ -5,70 +5,75 @@ import * as Token from "./token";
 import jwt from "jsonwebtoken";
 
 const Register = async (req: Request, res: Response) => {
-  const password = req.body.password;
-  const createUser = new UserModel({
-    fullname: req.body.fullname,
-    username: req.body.username,
-    avatar: req.body.avatar,
-    password: bcrypt.hashSync(password, bcrypt.genSaltSync(10)),
-  });
-
   try {
-    await createUser.save();
-    res.status(201).json(createUser);
+    const { fullname, username, avatar, password } = req.body;
+    const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+    const newUser = new UserModel({
+      fullname,
+      username,
+      avatar,
+      password: hashedPassword,
+    });
+    await newUser.save();
+    res.status(201).json(newUser);
   } catch (error) {
-    res.status(400).json(error);
+    console.error(error);
+    res.status(400).json({ error: "Failed to register user" });
   }
 };
 
 const Login = async (req: Request, res: Response) => {
-  const password = req.body.password;
-  const user = await UserModel.findOne({
-    username: req.body.username,
-  });
+  try {
+    const { username, password } = req.body;
+    const user = await UserModel.findOne({ username });
 
-  if (!user || !bcrypt.compareSync(password, user.password)) {
-    res.status(400).json("Login Fail!");
-  } else {
+    if (!user || !bcrypt.compareSync(password, user.password)) {
+      return res.status(400).json("Login Fail!");
+    }
+
     const token = Token.createToken(user) || "";
     const refreshToken = Token.refreshToken(user, token);
-    await UserModel.updateOne(
-      {
-        username: user.username,
-      },
-      {
-        refreshToken: refreshToken,
-      }
-    ).then(() => {
-      res.status(200).json({
-        user: {
-          id: user.id,
-        },
-        token,
-        refreshToken,
-      });
+
+    await UserModel.updateOne({ username }, { refreshToken });
+
+    return res.status(200).json({
+      user: { id: user.id },
+      token,
+      refreshToken,
     });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json("Internal Server Error");
   }
 };
 
 const RefreshToken = async (req: Request, res: Response) => {
   const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || "";
   const JWT_SECRET = process.env.JWT_SECRET || "";
-  const refreshToken = req.body.token;
-  const userId = req.body.id;
-  if (!refreshToken || !userId) res.sendStatus(401);
-  await UserModel.findById({ _id: userId }).then((data) => {
-    if (!data?.refreshToken === refreshToken) res.sendStatus(403);
-    jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (err: any, data: any) => {
-      if (err) res.sendStatus(403);
+  const { token: refreshToken, id: userId } = req.body;
+  if (!refreshToken || !userId) {
+    return res.sendStatus(401);
+  }
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user || user.refreshToken !== refreshToken) {
+      return res.sendStatus(403);
+    }
+    jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (err: any, decoded: any) => {
+      if (err) {
+        return res.sendStatus(403);
+      }
       const accessToken = jwt.sign(
-        { id: userId, username: data.username },
+        { id: userId, username: decoded.username },
         JWT_SECRET,
         { expiresIn: "3600s" }
       );
-      res.status(201).json({ token: accessToken });
+      return res.status(201).json({ token: accessToken });
     });
-  });
+  } catch (error) {
+    console.error(error);
+    return res.sendStatus(500);
+  }
 };
 
 const Logout = async (req: Request, res: Response) => {

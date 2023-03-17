@@ -7,13 +7,13 @@ exports.refreshToken = exports.authToken = exports.createToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const createToken = (user) => {
     const JWT_SECRET = process.env.JWT_SECRET || "";
-    let payload = { id: user.id, username: user.username };
+    const payload = { id: user.id, username: user.username };
     let token = null;
     try {
         token = jsonwebtoken_1.default.sign(payload, JWT_SECRET, { expiresIn: "120s" });
     }
     catch (error) {
-        console.log(error);
+        console.error(error);
     }
     return token;
 };
