@@ -16,35 +16,38 @@ class MessageController {
       res.status(400).json(error);
     }
   }
-
   async createMessage(data: any, io: any, socket: any, listSocketID: any) {
     const { senderID, receiverID, message } = data;
-    const createMessage = new MessageModel({ senderID, receiverID, message });
+    const newMessage = new MessageModel({ senderID, receiverID, message });
 
     try {
-      await createMessage.save();
-      const [messageSender, messageReceiver, user] = await Promise.all([
-        MessageModel.find({ senderID, receiverID })
-          .populate("senderID")
-          .populate("receiverID"),
-        MessageModel.find({ senderID: receiverID, receiverID: senderID })
-          .populate("senderID")
-          .populate("receiverID"),
-        UserModel.findById(receiverID),
-      ]);
+      await newMessage.save();
 
-      const messages = [...messageSender, ...messageReceiver];
+      const [messagesFromSender, messagesFromReceiver, receiver] =
+        await Promise.all([
+          MessageModel.find({ senderID, receiverID })
+            .populate("senderID")
+            .populate("receiverID"),
+          MessageModel.find({ senderID: receiverID, receiverID: senderID })
+            .populate("senderID")
+            .populate("receiverID"),
+          UserModel.findById(receiverID),
+        ]);
 
-      if (user?.socketID && listSocketID.includes(user.socketID)) {
-        io.to(user.socketID).emit("message", messages);
+      const messages = [...messagesFromSender, ...messagesFromReceiver];
+
+      if (receiver?.socketID && listSocketID.includes(receiver.socketID)) {
+        io.to(receiver.socketID).emit("message", messages);
       }
 
       socket.emit("message", messages);
+
       const listMessage = await MessageModel.find({
         $or: [{ senderID: senderID }, { receiverID: senderID }],
       })
         .populate("senderID")
         .populate("receiverID");
+
       socket.emit("listMessage", listMessage);
     } catch (error) {
       // res.status(400).json(error);
