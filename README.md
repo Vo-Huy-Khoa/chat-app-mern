@@ -87,22 +87,6 @@ Having an active connection opened between the client and the server so client c
 
 The client starts by connecting to the server through a socket (maybe also assigned to a specific namespace) . Once connections is successful, client and server can emit and listen to events.
 
-### DESGIN DATABASE
-
-```text
-|─────────────|       |─────────────|
-|   USER      |       |   MESSAGE   |
-├─────────────|       ├─────────────|
-| id          |       | id          |
-│ fullname    |       │ senderID    |
-| username    |       | receiverID  |
-| password    |       | message     |
-│ avatar      |       ├─────────────|
-│refreshToken |
-│ socketID    |
-├─────────────|
-```
-
 ## Structure of the project: <a name='structure'></a>
 
 ### BackEnd
