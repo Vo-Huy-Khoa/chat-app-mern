@@ -40,7 +40,7 @@ const Login = () => {
                 id="username"
                 type="text"
                 placeholder="Type your username..."
-                value="khoavh"
+                defaultValue="khoavh"
               />
             </div>
             <div className={cx("login__content__main__item")}>
@@ -50,7 +50,7 @@ const Login = () => {
                 id="password"
                 type="password"
                 placeholder="Type your password..."
-                value="1"
+                defaultValue="1"
               />
             </div>
             {/* <NavLink className={cx("login__content__main__forget")} to="">
