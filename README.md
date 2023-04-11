@@ -5,7 +5,7 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248.svg?style=for-the-badge&logo=MongoDB&logoColor=white)
 ![Socket.io](https://img.shields.io/badge/socket.io-010101.svg?style=for-the-badge&logo=Socket%2Eio&logoColor=white)
 
-<h1>Chat App MERN</h1>
+# Chat App MERN
 A Real Time Chat Application built using Typescript, React, Express, Mongoose, Socket.io.
 
 ## Index
