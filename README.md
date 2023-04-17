@@ -6,7 +6,7 @@
 ![Socket.io](https://img.shields.io/badge/socket.io-010101.svg?style=for-the-badge&logo=Socket%2Eio&logoColor=white)
 
 # Chat App MERN
-A Real Time Chat Application built using Typescript, React, Express, Mongoose, Socket.io.
+The Real Time Chat Application is a messaging platform that enables users to communicate with each other in real-time. It is built using Typescript, React, Express, Mongoose, and Socket.io, which are all modern technologies for developing web applications.
 
 ## Index
 
