@@ -2,7 +2,7 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/reducers/rootReducer";
 import { setCurrentReceiver, setVisibility } from "../redux/actions";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import socket from "../socket";
 
 const AccountItem = ({ ...rest }) => {
@@ -44,33 +44,21 @@ const AccountMessage = ({ ...rest }) => {
   const dispatch = useDispatch();
   const { currentMessage, searchUser } = rest;
   const divRef = useRef<HTMLDivElement>(null);
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
   const currentUser = useSelector((state: RootState) => state.currentUser);
   const currentReceiver = useSelector(
     (state: RootState) => state.currentReceiver
   );
   const senderID = currentUser?._id;
   const receiverID = searchUser?._id;
-  useEffect(() => {
-    function handleResize() {
-      setIsLargeScreen(window.innerWidth > 425);
-    }
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   useEffect(() => {
     if (
       divRef.current &&
-      divRef.current.parentElement?.children[0] === divRef.current &&
-      isLargeScreen
+      divRef.current.parentElement?.children[0] === divRef.current
     ) {
       divRef.current.click();
     }
-  }, [isLargeScreen]);
+  }, []);
 
   const handleSubmit = () => {
     dispatch(setCurrentReceiver(searchUser));
@@ -139,7 +127,7 @@ const AccountStatus = ({ ...rest }) => {
       onClick={() => handleSubmit()}
     >
       <img
-        className="w-20 h-20 rounded-full object-cover"
+        className="w-20 h-20 rounded-full object-cover cursor-pointer"
         src={searchUser?.avatar}
         alt={searchUser?.fullname}
       />
