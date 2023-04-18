@@ -16,61 +16,28 @@ import {
   faSearch,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDebounce } from "../../hooks";
 import { Wrapper as PopperWrapper } from "../../components";
 import {
   handleSearch,
   getListMessage,
   getListUser,
+  handleFilterMessage,
 } from "../../services/dashboard";
 import { IMessage, IUser, selectMessageType } from "../../types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
-import { useNavigate } from "react-router-dom";
+import { handleLogout } from "../../services";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
-  const navigate = useNavigate();
   const currentUser = useSelector((state: RootState) => state.currentUser);
   const [valueSearch, setValueSearch] = useState("");
   const debounceValue = useDebounce(valueSearch, 500);
   const [listUserSearch, setListSearch] = useState([]);
   const [listUser, setListUser] = useState([]);
   const [listMessage, setListMessage] = useState<selectMessageType>([]);
-
-  const handleFilterMessage = useCallback(
-    (listMessage: selectMessageType) => {
-      const uniqueMessage = Array.from(
-        new Map(
-          listMessage.map((message: IMessage) => [
-            message?.senderID?._id,
-            message,
-          ]) &&
-            listMessage.map((message: IMessage) => [
-              message?.receiverID?._id,
-              message,
-            ])
-        ).values()
-      );
-
-      const filterArray = uniqueMessage.filter((message) => {
-        return message.receiverID._id !== currentUser._id;
-      });
-
-      return filterArray;
-    },
-    [currentUser._id]
-  );
-
-  const handleLogout = async () => {
-    try {
-      await handleLogout();
-      sessionStorage.clear();
-      navigate("/auth/sign-in");
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
     if (!debounceValue.trim()) {
@@ -85,7 +52,10 @@ const Sidebar = () => {
     async function fetchMessagesAndUsers() {
       try {
         const messageResponse = await getListMessage();
-        const listMessage = handleFilterMessage(messageResponse.data);
+        const listMessage = handleFilterMessage(
+          messageResponse.data,
+          currentUser
+        );
         setListMessage(listMessage);
 
         const userResponse = await getListUser();
@@ -96,7 +66,7 @@ const Sidebar = () => {
     }
 
     fetchMessagesAndUsers();
-  }, [handleFilterMessage]);
+  }, [currentUser]);
 
   return (
     <div className="flex flex-col gap-12 p-6">
@@ -124,8 +94,13 @@ const Sidebar = () => {
                       Report
                     </li>
                     <li onClick={handleLogout}>
-                      <FontAwesomeIcon icon={faRightFromBracket} />
-                      Logout
+                      <NavLink
+                        to="/auth/sign-in"
+                        className="text-white flex flex-row gap-2"
+                      >
+                        <FontAwesomeIcon icon={faRightFromBracket} />
+                        Logout
+                      </NavLink>
                     </li>
                   </ul>
                 </PopperWrapper>

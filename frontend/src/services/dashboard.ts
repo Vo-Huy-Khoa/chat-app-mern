@@ -1,3 +1,5 @@
+import { API } from "../routes";
+import { IMessage, IUser, selectMessageType } from "../types";
 import { instanceAxios } from "./instance";
 
 const getProfile = async () => {
@@ -7,20 +9,20 @@ const getProfile = async () => {
     id = JSON.parse(user).id;
   }
 
-  const response = await instanceAxios.get(`user/profile/${id}`);
+  const response = await instanceAxios.get(`${API.PROFILE}${id}`);
   return response;
 };
 
 const handleSearch = async (username: string) => {
   const response = await instanceAxios.post(
-    `user/search`,
+    API.SEARCH,
     JSON.stringify({ username: username })
   );
   return response;
 };
 
 const getListUser = async () => {
-  const response = await instanceAxios.get(`users`);
+  const response = await instanceAxios.get(API.USER);
   return response;
 };
 
@@ -30,7 +32,7 @@ const getListMessage = async () => {
   if (user !== "") userId = JSON.parse(user).id;
 
   const response = await instanceAxios.post(
-    `listMessage`,
+    API.MESSAGES,
     JSON.stringify({ senderID: userId, receiverID: userId })
   );
   return response;
@@ -38,7 +40,7 @@ const getListMessage = async () => {
 
 const getMessage = async (senderID: string, receiverID: string) => {
   const response = await instanceAxios.post(
-    `message`,
+    API.MESSAGE,
     JSON.stringify({ senderID, receiverID })
   );
   return response;
@@ -50,10 +52,34 @@ const createMessage = async (
   message: string
 ) => {
   const response = await instanceAxios.post(
-    `createMessage`,
+    API.CREATE_MESSAGE,
     JSON.stringify({ senderID, receiverID, message })
   );
   return response;
+};
+
+const handleFilterMessage = (
+  listMessage: selectMessageType,
+  currentUser: IUser
+): selectMessageType => {
+  const uniqueMessage = Array.from(
+    new Map(
+      listMessage.map((message: IMessage) => [
+        message?.senderID?._id,
+        message,
+      ]) &&
+        listMessage.map((message: IMessage) => [
+          message?.receiverID?._id,
+          message,
+        ])
+    ).values()
+  );
+
+  const filterArray = uniqueMessage.filter((message) => {
+    return message.receiverID._id !== currentUser._id;
+  });
+
+  return filterArray;
 };
 
 export {
@@ -63,4 +89,5 @@ export {
   getMessage,
   createMessage,
   getListUser,
+  handleFilterMessage,
 };
