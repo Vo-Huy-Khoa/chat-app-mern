@@ -1,14 +1,9 @@
 import moment from "moment";
-import styles from "../assets/scss/account.module.scss";
-import classNames from "classnames/bind";
-import { Image } from "./Image";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/reducers/rootReducer";
 import { setCurrentReceiver, setVisibility } from "../redux/actions";
 import { useEffect, useRef, useState } from "react";
 import socket from "../socket";
-
-const cx = classNames.bind(styles);
 
 const AccountItem = ({ ...rest }) => {
   const dispatch = useDispatch();
@@ -28,11 +23,18 @@ const AccountItem = ({ ...rest }) => {
   };
 
   return (
-    <div className={cx("account-item")} onClick={() => handleSubmit()}>
-      <Image src={searchUser?.avatar} />
-      <div className={cx("content")}>
-        <span className={cx("username")}>{searchUser?.username}</span>
-        <span className={cx("fullname")}>{searchUser?.fullname}</span>
+    <div
+      className="flex flex-row gap-4 items-center"
+      onClick={() => handleSubmit()}
+    >
+      <img
+        src={searchUser?.avatar}
+        className="w-20 h-20 rounded-full object-cover"
+        alt=""
+      />
+      <div className="flex flex-col">
+        <span className="text-3xl">{searchUser?.username}</span>
+        <span className="text-gray">{searchUser?.fullname}</span>
       </div>
     </div>
   );
@@ -82,38 +84,32 @@ const AccountMessage = ({ ...rest }) => {
 
   return (
     <div
-      className={cx(
-        "account-message",
-        isLargeScreen &&
-          currentReceiver._id === searchUser?._id &&
-          "account-current"
-      )}
+      className={`flex flex-row items-center gap-4 p-2 cursor-pointer ${
+        currentReceiver._id === searchUser?._id && "bg-dark rounded-2xl"
+      }`}
       onClick={handleSubmit}
       ref={divRef}
     >
-      <Image
-        width="60px"
-        height="60px"
+      <img
+        className="w-20 h-20 rounded-full object-cover"
         src={
           currentMessage.senderID === currentUser
             ? currentMessage?.senderID?.avatar
             : currentMessage?.receiverID?.avatar
         }
+        alt=""
       />
-      <div className={cx("content")}>
-        <h2 className={cx("name", "text-white")}>
+      <div className="flex flex-col gap-1 w-3/5">
+        <h2 className="text-white text-3xl">
           {currentMessage.senderID === currentUser
             ? currentMessage?.senderID?.username
             : currentMessage?.receiverID?.username}
         </h2>
-        <span className={cx("react", "text-white")}>
-          {currentMessage?.react}
-        </span>
-        <p className={cx("message", "text-gray")}>{currentMessage?.message}</p>
+        <span className="text-white">{currentMessage?.react}</span>
+        <p className="text-gray text-2xl">{currentMessage?.message}</p>
       </div>
-      <div className={cx("more")}>
-        <span className={cx("text-gray")}>
-          {/* {moment(data?.updateAt).format("YYYY-MM-DD HH:mm:ss")} */}
+      <div>
+        <span className="text-gray text-2xl">
           {moment(currentMessage?.createdAt).format("HH:mm")}
         </span>
       </div>
@@ -139,17 +135,15 @@ const AccountStatus = ({ ...rest }) => {
 
   return (
     <div
-      className={cx("status__content_account")}
+      className="flex flex-col items-center gap-2"
       onClick={() => handleSubmit()}
     >
       <img
-        className={cx("status__content--avatar")}
+        className="w-20 h-20 rounded-full object-cover"
         src={searchUser?.avatar}
         alt={searchUser?.fullname}
       />
-      <h1 className={cx("status__content--username")}>
-        {searchUser?.username}
-      </h1>
+      <h1 className="text-white text-2xl">{searchUser?.username}</h1>
     </div>
   );
 };

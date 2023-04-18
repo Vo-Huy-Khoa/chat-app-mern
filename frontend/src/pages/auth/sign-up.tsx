@@ -1,10 +1,6 @@
-import classNames from "classnames/bind";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { handleRegister } from "../../services/auth";
-import styles from "../../assets/scss/sign-up.module.scss";
-
-const cx = classNames.bind(styles);
 
 const Register = () => {
   const navigate = useNavigate();
@@ -33,56 +29,72 @@ const Register = () => {
   }
 
   return (
-    <div className={cx("container")}>
-      <div className={cx("register")}>
-        <div className={cx("register__heading")}>
-          <h1>Register</h1>
-        </div>
-        <form className={cx("register__form")} onSubmit={handleSubmit}>
-          <div className={cx("register__form__item")}>
-            <img className={cx("avatar__image")} src={avatar} alt="" />
+    <div className="flex justify-center items-center h-screen bg-primary text-white text-base w-full">
+      <div className="bg-black rounded-3xl p-10 flex flex-col gap-12  sm:gap-4 w-1/3 sm:w-full h-5/7 md:w-3/5">
+        <h1 className="text-center text-6xl font-bold">Register</h1>
+        <form className="flex flex-col gap-12 md:gap-8" onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-10">
+            <img
+              className="w-40 rounded-full m-auto"
+              src={avatar}
+              alt="avatar"
+            />
             <input
               type="text"
               onChange={(e) => {
                 setAvatar(e.currentTarget.value);
               }}
               placeholder="URL avatar"
+              className="h-16 px-4 border-none rounded-2xl border-b-1 border-gray-400 text-black text-2xl"
             />
           </div>
-          <div className={cx("register__form__item")}>
-            <label htmlFor="">Full Name</label>
+          <div className="flex flex-col gap-4">
+            <label htmlFor="" className="text-2xl">
+              Full Name
+            </label>
             <input
               ref={fullNameRef}
               type="text"
               id="fullname"
               placeholder="Enter your name"
+              className="h-16 px-4 border-none rounded-2xl border-b-1 border-gray-400 text-black text-2xl"
             />
           </div>
-          <div className={cx("register__form__item")}>
-            <label htmlFor="">User Name</label>
+          <div className="flex flex-col gap-4">
+            <label htmlFor="" className="text-2xl">
+              User Name
+            </label>
             <input
               ref={usernameRef}
               type="text"
               id="username"
               placeholder="Enter your user name"
+              className="h-16 px-4 border-none rounded-2xl border-b-1 border-gray-400 text-black text-2xl"
             />
           </div>
-          <div className={cx("register__form__item")}>
-            <label htmlFor="">Password</label>
+          <div className="flex flex-col gap-4">
+            <label htmlFor="" className="text-2xl">
+              Password
+            </label>
             <input
               ref={passwordRef}
               type="password"
               id="password"
               placeholder="Enter your password"
+              className="h-16 px-4 border-none rounded-2xl border-b-1 border-gray-400 text-black text-2xl"
             />
           </div>
-
-          <button className={cx("btn-submit")} type="submit">
+          <button
+            className="rounded-2xl h-16 bg-blue text-white text-2xl font-semibold uppercase"
+            type="submit"
+          >
             Register
           </button>
         </form>
-        <div className={cx("register__link")}>
-          <NavLink to="/auth/sign-in">Sign In?</NavLink>
+        <div className="flex justify-center gap-4">
+          <NavLink to="/auth/sign-in" className="text-white text-2xl">
+            Sign In?
+          </NavLink>
         </div>
       </div>
     </div>

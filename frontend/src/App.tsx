@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import { Auth, Dashboard } from "./layouts";
+import "./style.css";
 
 function App() {
   return (

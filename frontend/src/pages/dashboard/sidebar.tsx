@@ -1,8 +1,5 @@
-import styles from "../../assets/scss/sidebar.module.scss";
-import classNames from "classnames/bind";
 import { Image } from "../../components/Image";
 import HeadlessTippy from "@tippyjs/react/headless";
-import { NotificationIcon } from "../../assets/icons";
 import {
   AccountItem,
   AccountMessage,
@@ -10,6 +7,7 @@ import {
 } from "../../components/Account";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faBell,
   faBug,
   faChevronDown,
   faDeleteLeft,
@@ -31,7 +29,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
 import { useNavigate } from "react-router-dom";
 
-const cx = classNames.bind(styles);
 const Sidebar = () => {
   const navigate = useNavigate();
   const currentUser = useSelector((state: RootState) => state.currentUser);
@@ -102,44 +99,32 @@ const Sidebar = () => {
   }, [handleFilterMessage]);
 
   return (
-    <div className={cx("wrapper")}>
-      <div className={cx("header")}>
-        <div className={cx("header__content")}>
+    <div className="flex flex-col gap-12 p-6">
+      <div className="flex flex-row justify-between items-center">
+        <div className="flex flex-row gap-4  items-center relative">
           <HeadlessTippy
             trigger="click"
             appendTo={document.body}
             placement="bottom"
             interactive
             render={(attrs) => (
-              <div className={cx("popper")} tabIndex={1} {...attrs}>
-                <PopperWrapper className="search">
+              <div tabIndex={1} {...attrs}>
+                <PopperWrapper>
                   <ul>
                     <li>
-                      <FontAwesomeIcon
-                        icon={faUser}
-                        className={cx("header--icon")}
-                      />
+                      <FontAwesomeIcon icon={faUser} />
                       Profile
                     </li>
                     <li>
-                      <FontAwesomeIcon
-                        icon={faGear}
-                        className={cx("header--icon")}
-                      />
+                      <FontAwesomeIcon icon={faGear} />
                       Settings
                     </li>
                     <li>
-                      <FontAwesomeIcon
-                        icon={faBug}
-                        className={cx("header--icon")}
-                      />
+                      <FontAwesomeIcon icon={faBug} />
                       Report
                     </li>
                     <li onClick={handleLogout}>
-                      <FontAwesomeIcon
-                        icon={faRightFromBracket}
-                        className={cx("header--icon")}
-                      />
+                      <FontAwesomeIcon icon={faRightFromBracket} />
                       Logout
                     </li>
                   </ul>
@@ -150,28 +135,31 @@ const Sidebar = () => {
             <div>
               <FontAwesomeIcon
                 icon={faChevronDown}
-                className={cx("header--icon")}
+                className="text-white bg-gray w-4 h-4 p-3 rounded-full absolute bottom-0 left-14 cursor-pointer"
               />
-              <Image width="50px" height="50px" src={currentUser.avatar} />
+              <Image src={currentUser.avatar} />
             </div>
           </HeadlessTippy>
-          <h1 className={cx("header__content--title")}>
-            {currentUser.username}
-          </h1>
+          <h1 className="text-white text-4xl ">{currentUser.username}</h1>
         </div>
-        <div className={cx("header__notification")}>
-          <NotificationIcon width="45px" height="45px" />
-          <span>1</span>
+        <div className="relative text-white">
+          <FontAwesomeIcon
+            icon={faBell}
+            className="w-10 h-10 p-4 text-white bg-gray rounded-full"
+          />
+          <span className="text-white text-2xl item-center bg-blue w-10 h-10 rounded-full absolute top-0 right-0 text-center ">
+            1
+          </span>
         </div>
       </div>
-      <div className={cx("status")}>
+      <div className="flex flex-col gap-6">
         <HeadlessTippy
           trigger="click"
           appendTo={document.body}
           placement="bottom"
           interactive
           render={(attrs) => (
-            <div className={cx("search-result")} tabIndex={1} {...attrs}>
+            <div tabIndex={1} {...attrs}>
               <PopperWrapper>
                 {listUserSearch.map((user, index) => {
                   return (
@@ -186,9 +174,9 @@ const Sidebar = () => {
             </div>
           )}
         >
-          <div className={cx("status__search")}>
+          <div className="relative">
             <FontAwesomeIcon
-              className={cx("status__search--icon-search")}
+              className="absolute top-0 bottom-0 left-5 transform translate-y-1/2 text-white text-3xl"
               icon={faSearch}
             />
             <input
@@ -198,9 +186,10 @@ const Sidebar = () => {
               value={valueSearch}
               type="text"
               placeholder="Search"
+              className="w-full h-14 bg-black rounded-3xl text-white p-8 pl-14 text-2xl"
             />
             <FontAwesomeIcon
-              className={cx("status__search--icon-delete")}
+              className="absolute top-0 bottom-0 right-5 transform translate-y-1/2 text-white text-3xl"
               icon={faDeleteLeft}
               onClick={() => {
                 setValueSearch("");
@@ -208,11 +197,9 @@ const Sidebar = () => {
             />
           </div>
         </HeadlessTippy>
-        <div className={cx("status__content")}>
-          <span className={cx("status__content--title", "text-white")}>
-            All User
-          </span>
-          <div className={cx("status__list")}>
+        <div className="flex flex-col gap-8">
+          <h3 className="text-white text-3xl">All User</h3>
+          <div className="flex row gap-5 overflow-x-auto">
             {listUser.map((user: IUser, index) => {
               return (
                 <AccountStatus
@@ -225,11 +212,10 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-      <div className={cx("message__list")}>
+      <div className="flex flex-col gap-4">
         {listMessage.map((message: IMessage, index) => {
           return (
             <AccountMessage
-              className={cx("message-item")}
               key={index}
               currentMessage={message}
               searchUser={
