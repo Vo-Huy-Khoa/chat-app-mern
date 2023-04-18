@@ -1,10 +1,7 @@
-import classNames from "classnames/bind";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useRef } from "react";
-import styles from "../../assets/scss/sign-in.module.scss";
 import { handleLogin } from "../../services/auth";
 
-const cx = classNames.bind(styles);
 const Login = () => {
   const navigate = useNavigate();
   const userRef = useRef<HTMLInputElement>(null);
@@ -26,47 +23,45 @@ const Login = () => {
   };
 
   return (
-    <div className={cx("container")}>
-      <div className={cx("login")}>
-        <div className={cx("login__heading")}>
-          <h1>Login</h1>
-        </div>
-        <div className={cx("login__content")}>
-          <form className={cx("login__content__main")} onSubmit={handleSubmit}>
-            <div className={cx("login__content__main__item")}>
-              <label htmlFor="username">username</label>
-              <input
-                ref={userRef}
-                id="username"
-                type="text"
-                placeholder="Type your username..."
-                defaultValue="khoavh"
-              />
-            </div>
-            <div className={cx("login__content__main__item")}>
-              <label htmlFor="password">password</label>
-              <input
-                ref={passwordRef}
-                id="password"
-                type="password"
-                placeholder="Type your password..."
-                defaultValue="1"
-              />
-            </div>
-            {/* <NavLink className={cx("login__content__main__forget")} to="">
-              <span>Forget password?</span>
-            </NavLink> */}
-            <button>Login</button>
-          </form>
-        </div>
-        <div className={cx("login__signup")}>
-          {/* <span>Or sign up using</span> */}
-          <div className={cx("login__signup__icon")}>
-            {/* <FacebookIcon />
-            <GoogleIcon />
-            <GithubIcon /> */}
+    <div className="flex justify-center items-center h-screen bg-primary sm:bg-black text-white text-base w-full">
+      <div className=" bg-black rounded-3xl p-10 flex flex-col gap-16 w-1/3 md:w-2/3 sm:w-full xl:h-4/6 md:h-4/6 lg:h-3/5 ">
+        <h1 className="text-center text-6xl font-bold">Login</h1>
+        <form className="flex flex-col gap-12" onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-4">
+            <label htmlFor="username" className="text-2xl">
+              User name
+            </label>
+            <input
+              ref={userRef}
+              id="username"
+              type="text"
+              placeholder="Type your username..."
+              defaultValue="khoavh"
+              className="h-16 px-4 border-none rounded-2xl border-b-1 border-gray-400 text-black text-2xl"
+            />
           </div>
-          <NavLink to="/auth/sign-up">Sign Up?</NavLink>
+          <div className=" flex flex-col gap-4">
+            <label htmlFor="password" className="text-2xl">
+              password
+            </label>
+            <input
+              ref={passwordRef}
+              id="password"
+              type="password"
+              placeholder="Type your password..."
+              defaultValue="1"
+              className="h-16 px-4 border-none rounded-2xl border-b-1 border-gray-400 text-black text-2xl"
+            />
+          </div>
+          <button className="rounded-2xl h-16 bg-blue text-white text-2xl font-semibold uppercase">
+            Login
+          </button>
+        </form>
+        <div className=" flex flex-col gap-4 text-center">
+          <div className=" flex justify-center gap-4"></div>
+          <NavLink to="/auth/sign-up" className="text-white text-2xl">
+            Sign Up?
+          </NavLink>
         </div>
       </div>
     </div>

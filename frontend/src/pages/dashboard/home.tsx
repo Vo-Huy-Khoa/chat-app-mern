@@ -1,6 +1,4 @@
-import styles from "../../assets/scss/home.module.scss";
 import socket from "../../socket";
-import classNames from "classnames/bind";
 import { Image } from "../../components/Image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -21,7 +19,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
 
-const cx = classNames.bind(styles);
 const Home = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state: RootState) => state.currentUser);
@@ -29,7 +26,6 @@ const Home = () => {
     (state: RootState) => state.currentReceiver
   );
   const selectMessage = useSelector((state: RootState) => state.currentMessage);
-  const isVisible = useSelector((state: RootState) => state.currentVisibility);
 
   const countMessage = currentReceiver._id.length ? 1 : null;
   const messageRef = useRef<HTMLInputElement>(null);
@@ -82,44 +78,41 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <div className={cx("wrapper")}>
-      <div className={cx("header", "fixed")}>
-        {isVisible === "home" && (
-          <FontAwesomeIcon
-            onClick={handleBackSidebar}
-            icon={faArrowLeft}
-            className={cx("icon-back")}
-          />
-        )}
+    <div className="h-full">
+      <div className="fixed top-0 w-3/5 sm:w-full h-32 bg-primary flex flex-row 2xl:justify-center 2xl:items-center xl:justify-center xl:items-center sm:justify-around sm:items-center">
+        <FontAwesomeIcon
+          onClick={handleBackSidebar}
+          icon={faArrowLeft}
+          className="w-12 h-12 text-white hidden sm:block"
+        />
         {countMessage !== null && (
-          <div className={cx("header__content")}>
-            <Image src={currentReceiver?.avatar} width="60px" height="60px" />
-            <div className={cx("header__content__text")}>
-              <span>{currentReceiver?.username}</span>
-              <p>{currentReceiver?.fullname}</p>
+          <div className="flex flex-row gap-8">
+            <Image src={currentReceiver?.avatar} width="50px" height="50px" />
+            <div className="text-white flex flex-col gap-4">
+              <span className=" text-5xl">{currentReceiver?.username}</span>
+              <p className="text-3xl text-gray">{currentReceiver?.fullname}</p>
             </div>
           </div>
         )}
 
-        {isVisible === "home" && (
-          <FontAwesomeIcon
-            onClick={handleNotification}
-            icon={faCircleInfo}
-            className={cx("icon-back")}
-          />
-        )}
+        <FontAwesomeIcon
+          onClick={handleNotification}
+          icon={faCircleInfo}
+          className="w-12 h-12 text-white hidden sm:block"
+        />
       </div>
-      <div className={cx("content")}>
-        <div className={cx("content__message")}>
+      <div className="bg-black py-32 h-full">
+        <div className="flex flex-col overflow-y-auto h-full p-8 gap-8">
           {selectMessage.map((message, index) => {
             if (message.senderID._id !== currentUser._id) {
               return (
-                <div
-                  key={index}
-                  className={cx("content__message__item", "item-left")}
-                >
-                  <Image src={message.senderID.avatar} />
-                  <div className={cx("your", "content__message__item__chat")}>
+                <div key={index} className="relative flex flex-row gap-4">
+                  <img
+                    src={message.senderID.avatar}
+                    className="w-20 h-20 rounded-full object-cover"
+                    alt=""
+                  />
+                  <div className="bg-primary  h-full rounded-3xl text-white text-3xl p-4 leading-10">
                     <p>{message.message}</p>
                   </div>
                 </div>
@@ -128,10 +121,14 @@ const Home = () => {
               return (
                 <div
                   key={index}
-                  className={cx("content__message__item", "item-right")}
+                  className="relative flex flex-row-reverse gap-4"
                 >
-                  <Image src={message.senderID.avatar} />
-                  <div className={cx("me", "content__message__item__chat")}>
+                  <img
+                    src={message.senderID.avatar}
+                    className="w-20 h-20 rounded-full object-cover"
+                    alt=""
+                  />
+                  <div className="bg-blue  h-full rounded-3xl text-black text-3xl p-4 leading-10">
                     <p>{message.message}</p>
                   </div>
                 </div>
@@ -142,17 +139,33 @@ const Home = () => {
       </div>
       (
       {countMessage !== null && (
-        <div className={cx("message", "fixed")}>
-          <div className={cx("message__more")}>
-            <div className={cx("message__more__file")}>
-              <FontAwesomeIcon icon={faFileImage} />
-              <FontAwesomeIcon icon={faCopy} />
-              <FontAwesomeIcon icon={faMicrophone} />
+        <div className="fixed bottom-0 w-3/5 sm:w-full h-28 bg-primary flex flex-col justify-center">
+          <div className="flex flex-row justify-between gap-6 sm:gap-4 sm:px-4">
+            <div className="flex flex-row gap-2 items-center">
+              <FontAwesomeIcon
+                icon={faFileImage}
+                className="w-10 h-10 sm:w-8 sm:h-8 text-blue"
+              />
+              <FontAwesomeIcon
+                icon={faCopy}
+                className="w-10 h-10 sm:w-8 sm:h-8 text-blue"
+              />
+              <FontAwesomeIcon
+                icon={faMicrophone}
+                className="w-10 h-10 sm:w-8 sm:h-8 text-blue"
+              />
             </div>
-            <input ref={messageRef} type="text" />
-            <div className={cx("message__more__action")}>
-              <button onClick={handleCreateMessage}>Send</button>
-            </div>
+            <input
+              ref={messageRef}
+              type="text"
+              className="w-full h-16 rounded-3xl text-2xl pl-4 bg-gray text-white font-semibold"
+            />
+            <button
+              onClick={handleCreateMessage}
+              className="bg-blue w-28 h-14 rounded-xl text-black text-2xl font-bold"
+            >
+              Send
+            </button>
           </div>
         </div>
       )}
