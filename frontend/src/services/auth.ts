@@ -1,3 +1,4 @@
+import { API } from "../routes";
 import socket from "../socket";
 import { instanceAxios } from "./instance";
 
@@ -13,13 +14,13 @@ const refreshToken = () => {
 };
 
 const handleRegister = async (body: any) => {
-  const response = await instanceAxios.post(`register`, JSON.stringify(body));
+  const response = await instanceAxios.post(API.SIGN_UP, JSON.stringify(body));
   return response;
 };
 
 const handleLogin = async (body: any) => {
   const response = await instanceAxios
-    .post(`login`, JSON.stringify(body))
+    .post(API.SIGN_IN, JSON.stringify(body))
     .then((response) => {
       sessionStorage.setItem("token", response.data.token);
       sessionStorage.setItem("refreshToken", response.data.refreshToken);
@@ -30,13 +31,17 @@ const handleLogin = async (body: any) => {
 };
 
 const handleLogout = async () => {
-  const userID = JSON.parse(sessionStorage.getItem("user") || "")?.id;
-  const body = {
-    id: userID,
-  };
-  socket.emit("logout", userID);
-
-  return await instanceAxios.post("logout", JSON.stringify(body));
+  try {
+    const userID = JSON.parse(sessionStorage.getItem("user") || "")?.id;
+    const body = {
+      id: userID,
+    };
+    socket.emit(API.LOGOUT, userID);
+    sessionStorage.clear();
+    await instanceAxios.post(API.LOGOUT, JSON.stringify(body));
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const getToken = () => {

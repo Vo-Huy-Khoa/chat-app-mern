@@ -25,3 +25,15 @@ export const routes = [
     ],
   },
 ];
+
+export const API = {
+  SIGN_IN: "login",
+  SIGN_UP: "register",
+  LOGOUT: "logout",
+  PROFILE: "user/profile/",
+  SEARCH: "user/search",
+  USER: "users",
+  MESSAGES: "listMessage",
+  MESSAGE: "message",
+  CREATE_MESSAGE: "createMessage",
+};
