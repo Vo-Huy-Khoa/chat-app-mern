@@ -41,8 +41,8 @@ Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.co
 1. Clone repository:
 
    ```
-   $ git clone https://github.com/Vo-Huy-Khoa/Chat_App_MERN.git
-   $ cd Chat_App_MERN
+   $ git clone https://github.com/Vo-Huy-Khoa/chat-app-mern.git
+   $ cd chat-app-mern
    ```
 
    Run Backend:
@@ -114,9 +114,6 @@ src
 
 ```text
 src
-├── assets
-|   └── icons
-│   └── scss
 ├── components
 │   └── Account.tsx
 │   └── Image.tsx
