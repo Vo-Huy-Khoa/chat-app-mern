@@ -11,11 +11,7 @@ import {
 import { useEffect, useRef } from "react";
 import { IMessage } from "../../types";
 import { getProfile } from "../../services";
-import {
-  setCurrentUser,
-  setSelectMessage,
-  setVisibility,
-} from "../../redux/actions";
+import { setCurrentUser, setSelectMessage } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
 
@@ -47,14 +43,6 @@ const Home = () => {
     }
   };
 
-  const handleBackSidebar = () => {
-    dispatch(setVisibility("sidebar"));
-  };
-
-  const handleNotification = () => {
-    dispatch(setVisibility("notification"));
-  };
-
   useEffect(() => {
     function handleNewMessage(data: any) {
       const sortedMessages = data.sort(
@@ -81,7 +69,6 @@ const Home = () => {
     <div className="h-full">
       <div className="fixed top-0 w-3/5 sm:w-full h-32 bg-primary flex flex-row 2xl:justify-center 2xl:items-center xl:justify-center xl:items-center sm:justify-around sm:items-center">
         <FontAwesomeIcon
-          onClick={handleBackSidebar}
           icon={faArrowLeft}
           className="w-12 h-12 text-white hidden sm:block"
         />
@@ -96,7 +83,6 @@ const Home = () => {
         )}
 
         <FontAwesomeIcon
-          onClick={handleNotification}
           icon={faCircleInfo}
           className="w-12 h-12 text-white hidden sm:block"
         />
