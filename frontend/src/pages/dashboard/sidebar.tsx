@@ -96,7 +96,7 @@ const Sidebar = () => {
                     <li onClick={handleLogout}>
                       <NavLink
                         to="/auth/sign-in"
-                        className="text-white flex flex-row gap-2"
+                        className="text-white flex flex-row gap-2 w-full"
                       >
                         <FontAwesomeIcon icon={faRightFromBracket} />
                         Logout

@@ -61,14 +61,14 @@ const Register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.Register = Register;
 const Login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { username, password } = req.body;
-        const user = yield User_1.default.findOne({ username });
+        const { email, password } = req.body;
+        const user = yield User_1.default.findOne({ email });
         if (!user || !bcrypt_1.default.compareSync(password, user.password)) {
             return res.status(400).json("Login Fail!");
         }
         const token = Token.createToken(user) || "";
         const refreshToken = Token.refreshToken(user, token);
-        yield User_1.default.updateOne({ username }, { refreshToken });
+        yield User_1.default.updateOne({ email }, { refreshToken });
         return res.status(200).json({
             user: { id: user.id },
             token,
