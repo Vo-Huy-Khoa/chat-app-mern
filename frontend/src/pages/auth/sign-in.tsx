@@ -4,12 +4,12 @@ import { handleLogin } from "../../services/auth";
 
 const Login = () => {
   const navigate = useNavigate();
-  const userRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     const body = {
-      username: userRef.current?.value,
+      email: emailRef.current?.value,
       password: passwordRef.current?.value,
     };
     e.preventDefault();
@@ -28,15 +28,15 @@ const Login = () => {
         <h1 className="text-center text-6xl font-bold">Login</h1>
         <form className="flex flex-col gap-12" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4">
-            <label htmlFor="username" className="text-2xl">
-              User name
+            <label htmlFor="email" className="text-2xl">
+              Email
             </label>
             <input
-              ref={userRef}
-              id="username"
-              type="text"
-              placeholder="Type your username..."
-              defaultValue="khoavh"
+              ref={emailRef}
+              id="email"
+              type="email"
+              placeholder="Type your email..."
+              defaultValue="khoavh@gmail.com"
               className="h-16 px-4 border-none rounded-2xl border-b-1 border-gray-400 text-black text-2xl"
             />
           </div>

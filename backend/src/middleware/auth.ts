@@ -24,8 +24,8 @@ const Register = async (req: Request, res: Response) => {
 
 const Login = async (req: Request, res: Response) => {
   try {
-    const { username, password } = req.body;
-    const user = await UserModel.findOne({ username });
+    const { email, password } = req.body;
+    const user = await UserModel.findOne({ email });
 
     if (!user || !bcrypt.compareSync(password, user.password)) {
       return res.status(400).json("Login Fail!");
@@ -34,7 +34,7 @@ const Login = async (req: Request, res: Response) => {
     const token = Token.createToken(user) || "";
     const refreshToken = Token.refreshToken(user, token);
 
-    await UserModel.updateOne({ username }, { refreshToken });
+    await UserModel.updateOne({ email }, { refreshToken });
 
     return res.status(200).json({
       user: { id: user.id },
