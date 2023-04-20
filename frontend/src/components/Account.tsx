@@ -4,6 +4,8 @@ import { RootState } from "../redux/reducers/rootReducer";
 import { setCurrentReceiver, setVisibility } from "../redux/actions";
 import { useEffect, useRef } from "react";
 import socket from "../socket";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
 const AccountItem = ({ ...rest }) => {
   const dispatch = useDispatch();
@@ -94,7 +96,14 @@ const AccountMessage = ({ ...rest }) => {
             : currentMessage?.receiverID?.username}
         </h2>
         <span className="text-white">{currentMessage?.react}</span>
-        <p className="text-gray text-2xl">{currentMessage?.message}</p>
+        {currentMessage?.message !== ":like" ? (
+          <p className="text-gray text-2xl">{currentMessage?.message}</p>
+        ) : (
+          <FontAwesomeIcon
+            icon={faThumbsUp}
+            className="w-10 h-10 sm:w-8 sm:h-8 text-white"
+          />
+        )}
       </div>
       <div>
         <span className="text-gray text-2xl">

@@ -7,8 +7,9 @@ import {
   faCopy,
   faFileImage,
   faMicrophone,
+  faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { IMessage } from "../../types";
 import { getProfile } from "../../services";
 import { setCurrentUser, setSelectMessage } from "../../redux/actions";
@@ -24,23 +25,33 @@ const Home = () => {
   const selectMessage = useSelector((state: RootState) => state.currentMessage);
 
   const countMessage = currentReceiver._id.length ? 1 : null;
-  const messageRef = useRef<HTMLInputElement>(null);
+
+  const [valueMessage, setValueMessage] = useState("");
   const currentSenderID = currentUser?._id;
   const currentReceiverID = currentReceiver?._id;
 
   const handleCreateMessage = (event: any) => {
     event.preventDefault();
-    const message = messageRef.current?.value || "";
+
     const data = {
       senderID: currentSenderID,
       receiverID: currentReceiverID,
-      message: message,
+      message: valueMessage,
     };
     socket.emit("message", data);
-    messageRef.current?.focus();
-    if (messageRef.current) {
-      messageRef.current.value = "";
-    }
+    setValueMessage("");
+  };
+
+  const handleCreateLike = (event: any) => {
+    event.preventDefault();
+
+    const data = {
+      senderID: currentSenderID,
+      receiverID: currentReceiverID,
+      message: ":like",
+    };
+    socket.emit("message", data);
+    setValueMessage("");
   };
 
   useEffect(() => {
@@ -96,11 +107,20 @@ const Home = () => {
                   <img
                     src={message.senderID.avatar}
                     className="w-20 h-20 rounded-full object-cover"
-                    alt=""
+                    alt="sender"
                   />
-                  <div className="bg-primary  h-full rounded-3xl text-white text-3xl p-4 leading-10">
-                    <p>{message.message}</p>
-                  </div>
+                  {message.message !== ":like" ? (
+                    <div className="bg-primary  h-full rounded-3xl text-white text-3xl p-4 leading-10">
+                      <p>{message.message}</p>
+                    </div>
+                  ) : (
+                    <div className="bg-primary  h-full rounded-3xl text-white text-3xl p-4 leading-10">
+                      <FontAwesomeIcon
+                        icon={faThumbsUp}
+                        className="w-10 h-10 sm:w-8 sm:h-8 text-white"
+                      />
+                    </div>
+                  )}
                 </div>
               );
             } else {
@@ -112,11 +132,20 @@ const Home = () => {
                   <img
                     src={message.senderID.avatar}
                     className="w-20 h-20 rounded-full object-cover"
-                    alt=""
+                    alt="sender"
                   />
-                  <div className="bg-blue  h-full rounded-3xl text-black text-3xl p-4 leading-10">
-                    <p>{message.message}</p>
-                  </div>
+                  {message.message !== ":like" ? (
+                    <div className="bg-blue  h-full rounded-3xl text-black text-3xl p-4 leading-10">
+                      <p>{message.message}</p>
+                    </div>
+                  ) : (
+                    <div className="bg-blue  h-full rounded-3xl text-black text-3xl p-4 leading-10">
+                      <FontAwesomeIcon
+                        icon={faThumbsUp}
+                        className="w-10 h-10 sm:w-8 sm:h-8 text-white"
+                      />
+                    </div>
+                  )}
                 </div>
               );
             }
@@ -142,16 +171,31 @@ const Home = () => {
               />
             </div>
             <input
-              ref={messageRef}
               type="text"
               className="w-full h-16 rounded-3xl text-2xl pl-4 bg-gray text-white font-semibold"
+              onChange={(event) => {
+                setValueMessage(event.target.value);
+              }}
             />
-            <button
-              onClick={handleCreateMessage}
-              className="bg-blue w-28 h-14 rounded-xl text-black text-2xl font-bold"
-            >
-              Send
-            </button>
+
+            {valueMessage !== "" ? (
+              <button
+                onClick={handleCreateMessage}
+                className="bg-blue w-28 h-14 rounded-xl text-black text-2xl font-bold"
+              >
+                Send
+              </button>
+            ) : (
+              <button
+                onClick={handleCreateLike}
+                className="bg-blue w-28 h-14 rounded-xl text-black text-2xl font-bold"
+              >
+                <FontAwesomeIcon
+                  icon={faThumbsUp}
+                  className="w-10 h-10 sm:w-8 sm:h-8 text-white"
+                />
+              </button>
+            )}
           </div>
         </div>
       )}
