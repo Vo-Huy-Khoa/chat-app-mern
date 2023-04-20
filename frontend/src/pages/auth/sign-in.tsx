@@ -1,11 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { handleLogin } from "../../services/auth";
 
 const Login = () => {
   const navigate = useNavigate();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const [validate, setValidate] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     const body = {
@@ -18,7 +19,7 @@ const Login = () => {
       navigate("/dashboard/home");
     } catch (error) {
       console.error(error);
-      alert("Login failed!");
+      setValidate(true);
     }
   };
 
@@ -38,9 +39,10 @@ const Login = () => {
               placeholder="Type your email..."
               defaultValue="khoavh@gmail.com"
               className="h-16 px-4 border-none rounded-2xl border-b-1 border-gray-400 text-black text-2xl"
+              required
             />
           </div>
-          <div className=" flex flex-col gap-4">
+          <div className=" flex flex-col gap-4 relative">
             <label htmlFor="password" className="text-2xl">
               password
             </label>
@@ -51,18 +53,21 @@ const Login = () => {
               placeholder="Type your password..."
               defaultValue="1"
               className="h-16 px-4 border-none rounded-2xl border-b-1 border-gray-400 text-black text-2xl"
+              required
             />
           </div>
+          {validate && (
+            <div className="h-16 bg-red text-white text-center rounded-2xl flex items-center justify-center text-2xl">
+              Invalid email or password
+            </div>
+          )}
           <button className="rounded-2xl h-16 bg-blue text-white text-2xl font-semibold uppercase">
             Login
           </button>
         </form>
-        <div className=" flex flex-col gap-4 text-center">
-          <div className=" flex justify-center gap-4"></div>
-          <NavLink to="/auth/sign-up" className="text-white text-2xl">
-            Sign Up?
-          </NavLink>
-        </div>
+        <NavLink to="/auth/sign-up" className="text-white text-2xl text-center">
+          Sign Up?
+        </NavLink>
       </div>
     </div>
   );

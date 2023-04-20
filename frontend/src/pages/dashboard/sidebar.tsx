@@ -117,7 +117,7 @@ const Sidebar = () => {
           </HeadlessTippy>
           <h1 className="text-white text-4xl ">{currentUser.username}</h1>
         </div>
-        <div className="relative text-white">
+        <div className="relative text-white cursor-pointer">
           <FontAwesomeIcon
             icon={faBell}
             className="w-10 h-10 p-4 text-white bg-gray rounded-full"
@@ -151,7 +151,7 @@ const Sidebar = () => {
         >
           <div className="relative">
             <FontAwesomeIcon
-              className="absolute top-0 bottom-0 left-5 transform translate-y-1/2 text-white text-3xl"
+              className="absolute top-0 bottom-0 left-5 transform translate-y-1/2 text-white text-3xl cursor-pointer"
               icon={faSearch}
             />
             <input
@@ -164,7 +164,7 @@ const Sidebar = () => {
               className="w-full h-14 bg-black rounded-3xl text-white p-8 pl-14 text-2xl"
             />
             <FontAwesomeIcon
-              className="absolute top-0 bottom-0 right-5 transform translate-y-1/2 text-white text-3xl"
+              className="absolute top-0 bottom-0 right-5 transform translate-y-1/2 text-white text-3xl cursor-pointer"
               icon={faDeleteLeft}
               onClick={() => {
                 setValueSearch("");
