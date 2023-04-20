@@ -18,50 +18,45 @@ import { RootState } from "../../redux/reducers/rootReducer";
 
 const Home = () => {
   const dispatch = useDispatch();
+
   const currentUser = useSelector((state: RootState) => state.currentUser);
   const currentReceiver = useSelector(
     (state: RootState) => state.currentReceiver
   );
   const selectMessage = useSelector((state: RootState) => state.currentMessage);
-
-  const countMessage = currentReceiver._id.length ? 1 : null;
-
   const [valueMessage, setValueMessage] = useState("");
   const currentSenderID = currentUser?._id;
   const currentReceiverID = currentReceiver?._id;
+  const countMessage = currentReceiver._id.length ? 1 : null;
 
-  const handleCreateMessage = (event: any) => {
-    event.preventDefault();
-
+  const emitMessage = (message: string) => {
     const data = {
       senderID: currentSenderID,
       receiverID: currentReceiverID,
-      message: valueMessage,
+      message: message,
     };
     socket.emit("message", data);
     setValueMessage("");
+  };
+
+  const handleCreateMessage = (event: any) => {
+    event.preventDefault();
+    emitMessage(valueMessage);
   };
 
   const handleCreateLike = (event: any) => {
     event.preventDefault();
-
-    const data = {
-      senderID: currentSenderID,
-      receiverID: currentReceiverID,
-      message: ":like",
-    };
-    socket.emit("message", data);
-    setValueMessage("");
+    emitMessage(":like");
   };
 
   useEffect(() => {
-    function handleNewMessage(data: any) {
+    const handleNewMessage = (data: any = []) => {
       const sortedMessages = data.sort(
         (a: IMessage, b: IMessage) =>
           Date.parse(a.createdAt) - Date.parse(b.createdAt)
       );
       dispatch(setSelectMessage(sortedMessages));
-    }
+    };
 
     socket.on("message", handleNewMessage);
 
