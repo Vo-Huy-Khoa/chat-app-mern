@@ -31,7 +31,7 @@ const AccountItem = ({ ...rest }) => {
     >
       <img
         src={searchUser?.avatar}
-        className="w-20 h-20 rounded-full object-cover"
+        className="w-20 h-20 rounded-full object-cover max-w-none"
         alt=""
       />
       <div className="flex flex-col">
@@ -81,7 +81,7 @@ const AccountMessage = ({ ...rest }) => {
       ref={divRef}
     >
       <img
-        className="w-20 h-20 rounded-full object-cover"
+        className="w-20 h-20 rounded-full object-cover max-w-none"
         src={
           currentMessage.senderID === currentUser
             ? currentMessage?.senderID?.avatar
@@ -136,7 +136,7 @@ const AccountStatus = ({ ...rest }) => {
       onClick={() => handleSubmit()}
     >
       <img
-        className="w-20 h-20 rounded-full object-cover cursor-pointer"
+        className="w-20 h-20 rounded-full object-cover cursor-pointer max-w-none"
         src={searchUser?.avatar}
         alt={searchUser?.fullname}
       />

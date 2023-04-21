@@ -150,7 +150,7 @@ const Home = () => {
       (
       {countMessage !== null && (
         <div className="fixed bottom-0 w-3/5 sm:w-full h-28 bg-primary flex flex-col justify-center">
-          <div className="flex flex-row justify-between gap-6 sm:gap-4 sm:px-4">
+          <div className="flex flex-row justify-between items-center gap-6 sm:gap-4 sm:px-4">
             <div className="flex flex-row gap-2 items-center">
               <FontAwesomeIcon
                 icon={faFileImage}
@@ -183,7 +183,7 @@ const Home = () => {
             ) : (
               <button
                 onClick={handleCreateLike}
-                className="bg-blue w-28 h-14 rounded-xl text-black text-2xl font-bold"
+                className="bg-blue w-16 h-14 rounded-xl text-black text-2xl font-bold"
               >
                 <FontAwesomeIcon
                   icon={faThumbsUp}
