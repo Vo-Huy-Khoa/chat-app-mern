@@ -3,9 +3,6 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-
-
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -48,13 +45,6 @@
     height: 20px;
 }
 
-.text-white {
-    color: var(--white);
-}
-
-.text-gray {
-    color: var(--gray);
-}
 
 html {
     font-size: 62.5%;
@@ -72,19 +62,6 @@ input:focus {
     outline: none;
 }
 
-.fixed {
-    position: fixed;
-}
-
-button {
-    border: none;
-    outline: none;
-}
-
-a {
-    text-decoration: none;
-    color: black;
-}
 
 .content {
     position: fixed;
