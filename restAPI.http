@@ -2,7 +2,7 @@
 # url localhost
 # @url  = http://localhost:3001/api
 # url product
-@url  = https://chat-backend-7jgs.onrender.com/api
+@url  = http://ec2-43-207-219-177.ap-northeast-1.compute.amazonaws.com:3001/api
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjkzYTdhNGIxYWRmMWU2OWI1NzQyZCIsInVzZXJuYW1lIjoiYW5odGh5IiwiZW1haWwiOiJhbmh0aHlAZ21haWwuY29tIiwiaWF0IjoxNjc2MDk2Njg4LCJleHAiOjE2NzYwOTY4MDh9.kRWaC_2Kqdki66XN-L4E6-Tn6pNZj7iuMh5J6UiCtLI
 @refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRoYW5odGh1eSIsImlhdCI6MTY3NDcyNTI2MX0.WttXYRfnVlQuZTPqlE9JSdpwsu91t_xYvdYOyQzI7wo
 
@@ -23,7 +23,7 @@ POST {{url}}/login
 Content-Type: application/json
 
 {
-    "username": "anhthy",
+    "email": "khoavh@gmail.com",
     "password": "1"
 }
 
@@ -47,7 +47,7 @@ Content-Type: application/json
 # ==================USER=========================
 
 ### List All USer
-GET {{url}}/api/users
+GET {{url}}/users
 Authorization: Beaer {{token}}
 
 ### search
