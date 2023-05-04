@@ -4,7 +4,6 @@ import { handleRegister } from "../../services/auth";
 
 const Register = () => {
   const navigate = useNavigate();
-  const userNameRef = useRef<HTMLInputElement>(null);
   const fullNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -13,14 +12,14 @@ const Register = () => {
   );
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
     const body = {
-      username: userNameRef?.current?.value,
       fullname: fullNameRef?.current?.value,
       email: emailRef?.current?.value,
       password: passwordRef?.current?.value,
       avatar: avatar,
     };
-    e.preventDefault();
     try {
       await handleRegister(body);
       navigate("/login");
@@ -52,16 +51,6 @@ const Register = () => {
             />
           </div>
           <div className="flex flex-col gap-4">
-            <label className="text-2xl">User Name</label>
-            <input
-              ref={userNameRef}
-              type="text"
-              placeholder="Enter your user name..."
-              className="h-16 px-4 border-none rounded-2xl border-b-1 border-gray-400 text-black text-2xl"
-              required
-            />
-          </div>
-          <div className="flex flex-col gap-4">
             <label className="text-2xl">Full Name</label>
             <input
               ref={fullNameRef}
@@ -75,7 +64,7 @@ const Register = () => {
             <label className="text-2xl">Email</label>
             <input
               ref={emailRef}
-              type="text"
+              type="email"
               placeholder="Enter your email..."
               className="h-16 px-4 border-none rounded-2xl border-b-1 border-gray-400 text-black text-2xl"
               required

@@ -6,10 +6,10 @@ const Dashboard = () => {
   return (
     <div>
       <div className="flex w-full h-full">
-        <div className="fixed bg-primary h-full w-1/5 sm:hidden">
+        <div className="fixed bg-primary h-full custom-w-sidebar sm:hidden">
           <Sidebar />
         </div>
-        <div className="bg-black w-3/5 h-full content sm:w-full sm:left-0">
+        <div className="fixed bg-black h-full custom-w-home sm:w-full sm:left-0">
           <Routes>
             {routes.map(
               ({ layout, pages }) =>
@@ -20,7 +20,7 @@ const Dashboard = () => {
             )}
           </Routes>
         </div>
-        <div className="fixed right-0 w-1/5 h-full bg-primary sm:hidden">
+        <div className="fixed right-0 custom-w-notification h-full bg-primary sm:hidden">
           <Notification />
         </div>
       </div>

@@ -5,11 +5,11 @@ import { setCurrentReceiver, setVisibility } from "../redux/actions";
 import { useEffect, useRef } from "react";
 import socket from "../socket";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import {  faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
 const AccountItem = ({ ...rest }) => {
-  const dispatch = useDispatch();
   const currentUser = useSelector((state: RootState) => state.currentUser);
+  const dispatch = useDispatch();
   const { searchUser } = rest;
   const senderID = currentUser?._id;
   const receiverID = searchUser?._id;
@@ -34,10 +34,7 @@ const AccountItem = ({ ...rest }) => {
         className="w-20 h-20 rounded-full object-cover max-w-none"
         alt=""
       />
-      <div className="flex flex-col">
-        <span className="text-3xl">{searchUser?.username}</span>
-        <span className="text-gray">{searchUser?.fullname}</span>
-      </div>
+        <span className="text-white text-2xl">{searchUser?.fullname}</span>
     </div>
   );
 };
@@ -72,32 +69,38 @@ const AccountMessage = ({ ...rest }) => {
     socket.emit("get-message", data);
   };
 
+
   return (
     <div
-      className={`flex flex-row items-center gap-4 p-2 cursor-pointer ${
+      className={`relative flex flex-row items-center gap-4 p-2 cursor-pointer ${
         currentReceiver._id === searchUser?._id && "bg-dark rounded-2xl"
       }`}
       onClick={handleSubmit}
       ref={divRef}
     >
       <img
-        className="w-20 h-20 rounded-full object-cover max-w-none"
+        className="w-24 h-24 rounded-full object-cover max-w-none"
         src={
           currentMessage.senderID === currentUser
             ? currentMessage?.senderID?.avatar
             : currentMessage?.receiverID?.avatar
         }
-        alt=""
+        alt="avatar"
       />
-      <div className="flex flex-col gap-1 w-3/5">
+      <span className="absolute left-16 bottom-2 w-8 h-8 bg-green rounded-full" />
+      <div className="flex flex-col gap-1">
         <h2 className="text-white text-3xl">
           {currentMessage.senderID === currentUser
-            ? currentMessage?.senderID?.username
-            : currentMessage?.receiverID?.username}
+            ? currentMessage?.senderID?.fullname
+            : currentMessage?.receiverID?.fullname}
         </h2>
-        <span className="text-white">{currentMessage?.react}</span>
         {currentMessage?.message !== ":like" ? (
+          <div className="flex flex-row gap-4 w-full">
           <p className="text-gray text-2xl">{currentMessage?.message}</p>
+          <span className="text-gray text-2xl">
+          {moment(currentMessage?.createdAt).format("HH:mm")}
+        </span>
+        </div>
         ) : (
           <FontAwesomeIcon
             icon={faThumbsUp}
@@ -105,11 +108,7 @@ const AccountMessage = ({ ...rest }) => {
           />
         )}
       </div>
-      <div>
-        <span className="text-gray text-2xl">
-          {moment(currentMessage?.createdAt).format("HH:mm")}
-        </span>
-      </div>
+
     </div>
   );
 };
@@ -140,7 +139,7 @@ const AccountStatus = ({ ...rest }) => {
         src={searchUser?.avatar}
         alt={searchUser?.fullname}
       />
-      <h1 className="text-white text-2xl">{searchUser?.username}</h1>
+      <h1 className="text-white text-2xl w-24 text-center">{searchUser?.fullname}</h1>
     </div>
   );
 };

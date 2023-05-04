@@ -63,11 +63,40 @@ input:focus {
 }
 
 
-.content {
-    position: fixed;
-    left: 20%;
-    width: 60%;
-    height: 100%;
+@media (min-width: 1024px)  {
+    .custom-w-sidebar {
+        left: 0;
+        width: 25%;
+    }
+    
+    .custom-w-home {
+        left: 25%;
+        width: 55%;
+    }
+    
+    .custom-w-notification {
+        right: 0;
+        width: 20%;
+    }
+}
+
+
+
+@media (max-width: 1024px)  {
+    .custom-w-sidebar {
+        left: 0;
+        width: 30%;
+    }
+    
+    .custom-w-home {
+        left: 30%;
+        width: 45%;
+    }
+    
+    .custom-w-notification {
+        right: 0;
+        width: 25%;
+    }
 }
 
 .wrapper {
@@ -104,10 +133,6 @@ input:focus {
     border-radius: 20px;
 }
 
-.wrapper img {
-    width: 40px;
-    height: 40px;
-}
 
 @media (min-width: 992px) {
     .wrapper {

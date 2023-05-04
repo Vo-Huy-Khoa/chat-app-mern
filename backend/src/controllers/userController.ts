@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import UserModel from "../models/User";
+import UserModel from "../models/UserModel";
 
 class userController {
-  async getAll(req: Request, res: Response) {
+  async list(req: Request, res: Response) {
     try {
       const userList = await UserModel.find();
       res.status(200).json(userList);
@@ -38,9 +38,9 @@ class userController {
 
   async search(req: Request, res: Response) {
     try {
-      const regex = new RegExp(req.body.username, "i");
+      const regex = new RegExp(req.body.fullname, "i");
       const user = await UserModel.find({
-        username: regex,
+        fullname: regex,
       });
       res.status(200).json(user);
     } catch (error) {

@@ -1,4 +1,4 @@
-import { API } from "../routes";
+import { API_URL } from "../routes";
 import { IMessage, IUser, selectMessageType } from "../types";
 import { instanceAxios } from "./instance";
 
@@ -9,20 +9,20 @@ const getProfile = async () => {
     id = JSON.parse(user).id;
   }
 
-  const response = await instanceAxios.get(`${API.PROFILE}${id}`);
+  const response = await instanceAxios.get(`${API_URL.PROFILE}${id}`);
   return response;
 };
 
-const handleSearch = async (username: string) => {
+const handleSearch = async (fullname: string) => {
   const response = await instanceAxios.post(
-    API.SEARCH,
-    JSON.stringify({ username: username })
+    API_URL.SEARCH,
+    JSON.stringify({ fullname: fullname })
   );
   return response;
 };
 
 const getListUser = async () => {
-  const response = await instanceAxios.get(API.USER);
+  const response = await instanceAxios.get(API_URL.USER);
   return response;
 };
 
@@ -32,7 +32,7 @@ const getListMessage = async () => {
   if (user !== "") userId = JSON.parse(user).id;
 
   const response = await instanceAxios.post(
-    API.MESSAGES,
+    API_URL.MESSAGES,
     JSON.stringify({ senderID: userId, receiverID: userId })
   );
   return response;
@@ -40,7 +40,7 @@ const getListMessage = async () => {
 
 const getMessage = async (senderID: string, receiverID: string) => {
   const response = await instanceAxios.post(
-    API.MESSAGE,
+    API_URL.MESSAGE,
     JSON.stringify({ senderID, receiverID })
   );
   return response;
@@ -52,7 +52,7 @@ const createMessage = async (
   message: string
 ) => {
   const response = await instanceAxios.post(
-    API.CREATE_MESSAGE,
+    API_URL.CREATE_MESSAGE,
     JSON.stringify({ senderID, receiverID, message })
   );
   return response;

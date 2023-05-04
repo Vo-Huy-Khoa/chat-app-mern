@@ -7,7 +7,9 @@ import {
   faCopy,
   faFileImage,
   faMicrophone,
+  faPhone,
   faThumbsUp,
+  faVideoCamera,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { IMessage } from "../../types";
@@ -72,26 +74,32 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <div className="h-full">
-      <div className="fixed top-0 w-3/5 sm:w-full h-32 bg-primary flex flex-row 2xl:justify-center 2xl:items-center xl:justify-center xl:items-center sm:justify-around sm:items-center">
-        <FontAwesomeIcon
-          icon={faArrowLeft}
-          className="w-12 h-12 text-white hidden sm:block"
-        />
-        {countMessage !== null && (
-          <div className="flex flex-row gap-8">
-            <Image src={currentReceiver?.avatar} width="50px" height="50px" />
-            <div className="text-white flex flex-col gap-4">
-              <span className=" text-5xl">{currentReceiver?.username}</span>
-              <p className="text-3xl text-gray">{currentReceiver?.fullname}</p>
-            </div>
-          </div>
-        )}
+    <div className="h-full w-full">
+      <div className="fixed top-0 custom-w-home sm:w-full h-32 bg-primary flex flex-row items-center justify-around">
+        <div className=" w-3/5 flex flex-row 2xl:justify-end 2xl:items-end xl:justify-end xl:items-center sm:justify-around sm:items-center">
+                  <FontAwesomeIcon
+                    icon={faArrowLeft}
+                    className="w-12 h-12 text-white hidden sm:block"
+                  />
+                  {countMessage !== null && (
+                    <div className="flex flex-row gap-8 items-center">
+                      <Image src={currentReceiver?.avatar} width="50px" height="50px" />
+                        <p className=" text-white text-4xl">{currentReceiver?.fullname}</p>
+                    </div>
+                  )}
+          
+                  <FontAwesomeIcon
+                    icon={faCircleInfo}
+                    className="w-12 h-12 text-white hidden sm:block"
+                  />
+        </div>
 
-        <FontAwesomeIcon
-          icon={faCircleInfo}
-          className="w-12 h-12 text-white hidden sm:block"
-        />
+        <div className="w-2/5 flex flex-row justify-end gap-10  text-blue">
+              <FontAwesomeIcon icon={faPhone} className="w-10 h-10 cursor-pointer" />
+              <FontAwesomeIcon icon={faVideoCamera} className="w-10 h-10 cursor-pointer" />
+              <FontAwesomeIcon icon={faCircleInfo} className="w-10 h-10 cursor-pointer" />
+          </div>
+
       </div>
       <div className="bg-black py-32 h-full">
         <div className="flex flex-col overflow-y-auto h-full p-8 gap-8">
@@ -149,7 +157,7 @@ const Home = () => {
       </div>
       (
       {countMessage !== null && (
-        <div className="fixed bottom-0 w-3/5 sm:w-full h-28 bg-primary flex flex-col justify-center">
+        <div className="fixed bottom-0 custom-w-home sm:w-full h-28 bg-primary flex flex-col justify-center">
           <div className="flex flex-row justify-between items-center gap-6 sm:gap-4 sm:px-4">
             <div className="flex flex-row gap-2 items-center">
               <FontAwesomeIcon

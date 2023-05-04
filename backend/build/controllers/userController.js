@@ -12,12 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const User_1 = __importDefault(require("../models/User"));
+const UserModel_1 = __importDefault(require("../models/UserModel"));
 class userController {
-    getAll(req, res) {
+    list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const userList = yield User_1.default.find();
+                const userList = yield UserModel_1.default.find();
                 res.status(200).json(userList);
             }
             catch (error) {
@@ -28,7 +28,7 @@ class userController {
     profile(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const user = yield User_1.default.findById(req.params.id);
+                const user = yield UserModel_1.default.findById(req.params.id);
                 res.status(200).json(user);
             }
             catch (error) {
@@ -39,7 +39,7 @@ class userController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const updatedUser = yield User_1.default.findOneAndUpdate({ _id: req.body.params }, {
+                const updatedUser = yield UserModel_1.default.findOneAndUpdate({ _id: req.body.params }, {
                     username: req.body.username,
                     password: req.body.password,
                 }, { new: true } // return the updated document
@@ -54,9 +54,9 @@ class userController {
     search(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const regex = new RegExp(req.body.username, "i");
-                const user = yield User_1.default.find({
-                    username: regex,
+                const regex = new RegExp(req.body.fullname, "i");
+                const user = yield UserModel_1.default.find({
+                    fullname: regex,
                 });
                 res.status(200).json(user);
             }
@@ -68,7 +68,7 @@ class userController {
     destroy(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const user = yield User_1.default.deleteOne({ _id: req.body.params });
+                const user = yield UserModel_1.default.deleteOne({ _id: req.body.params });
                 res.status(200).json(user);
             }
             catch (error) {
@@ -79,7 +79,7 @@ class userController {
     destroyAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const deletedUser = yield User_1.default.deleteMany({});
+                const deletedUser = yield UserModel_1.default.deleteMany({});
                 res.status(200).json(deletedUser);
             }
             catch (error) {
