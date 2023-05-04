@@ -42,9 +42,10 @@ const Token = __importStar(require("./token"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const Register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { fullname, username, avatar, password } = req.body;
+        const { email, fullname, username, avatar, password } = req.body;
         const hashedPassword = bcrypt_1.default.hashSync(password, bcrypt_1.default.genSaltSync(10));
         const newUser = new User_1.default({
+            email,
             fullname,
             username,
             avatar,
