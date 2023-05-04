@@ -10,14 +10,11 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const routes_1 = __importDefault(require("./routes"));
 const http_1 = __importDefault(require("http"));
 const socket_1 = require("./socket");
+const types_1 = require("./utils/types");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const server = http_1.default.createServer(app);
-const PORT = process.env.PORT || "3001";
-const allowedOrigins = [
-    "http://localhost:3000",
-    "https://chatapp-vo-huy-khoa.vercel.app",
-];
+const allowedOrigins = [types_1.URL_LOCALHOST, types_1.URL_PRODUCTION];
 const corsOptions = {
     origin: allowedOrigins,
     credentials: true,
@@ -28,6 +25,6 @@ app.use(express_1.default.urlencoded({ extended: true }));
 (0, routes_1.default)(app);
 (0, db_1.default)();
 (0, socket_1.handleSocket)(server);
-server.listen(PORT, () => {
-    console.log(`Server listing at port: ${PORT}`);
+server.listen(types_1.PORT, () => {
+    console.log(`Server listing at port: ${types_1.PORT}`);
 });

@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 
 interface IUser {
   fullname: string;
-  username: string;
+  email: string;
   password: string;
   avatar: string;
   refreshToken: string;
@@ -13,7 +13,7 @@ interface IUser {
 const userSchema = new Schema<IUser>(
   {
     fullname: { type: String },
-    username: { type: String },
+    email: { type: String },
     password: { type: String },
     avatar: { type: String },
     refreshToken: { type: String },

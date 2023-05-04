@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import MessageModel from "../models/Message";
-import UserModel from "../models/User";
+import MessageModel from "../models/MessageModel";
+import UserModel from "../models/UserModel";
 
 class MessageController {
-  async getListMessage(req: Request, res: Response) {
+  async list(req: Request, res: Response) {
     const { senderID, receiverID } = req.body;
     try {
       const listMessage = await MessageModel.find({
@@ -16,7 +16,7 @@ class MessageController {
       res.status(400).json(error);
     }
   }
-  async createMessage(data: any, io: any, socket: any, listSocketID: any) {
+  async create(data: any, io: any, socket: any, listSocketID: any) {
     const { senderID, receiverID, message } = data;
     const newMessage = new MessageModel({ senderID, receiverID, message });
 
@@ -54,7 +54,7 @@ class MessageController {
     }
   }
 
-  async getMessage(data: any, io: any, socket: any, listSocketID: any) {
+  async find(data: any, io: any, socket: any, listSocketID: any) {
     const { senderID, receiverID } = data;
 
     try {

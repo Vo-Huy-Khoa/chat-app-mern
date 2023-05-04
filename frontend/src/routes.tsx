@@ -26,14 +26,15 @@ export const routes = [
   },
 ];
 
-export const API = {
-  SIGN_IN: "login",
-  SIGN_UP: "register",
-  LOGOUT: "logout",
+export const API_URL = {
+  SIGN_IN: "auth/login",
+  SIGN_UP: "auth/register",
+  LOGOUT: "auth/logout",
+  REFRESH_TOKEN: "auth/refreshToken",
   PROFILE: "user/profile/",
   SEARCH: "user/search",
-  USER: "users",
-  MESSAGES: "listMessage",
-  MESSAGE: "message",
-  CREATE_MESSAGE: "createMessage",
+  USER: "user/",
+  MESSAGES: "message/list",
+  MESSAGE: "message/find",
+  CREATE_MESSAGE: "message/create",
 };

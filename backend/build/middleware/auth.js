@@ -36,18 +36,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Logout = exports.RefreshToken = exports.Login = exports.Register = void 0;
-const User_1 = __importDefault(require("../models/User"));
+const UserModel_1 = __importDefault(require("../models/UserModel"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const Token = __importStar(require("./token"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const Register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { email, fullname, username, avatar, password } = req.body;
+        const { email, fullname, avatar, password } = req.body;
         const hashedPassword = bcrypt_1.default.hashSync(password, bcrypt_1.default.genSaltSync(10));
-        const newUser = new User_1.default({
+        const newUser = new UserModel_1.default({
             email,
             fullname,
-            username,
             avatar,
             password: hashedPassword,
         });
@@ -63,13 +62,13 @@ exports.Register = Register;
 const Login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
-        const user = yield User_1.default.findOne({ email });
+        const user = yield UserModel_1.default.findOne({ email });
         if (!user || !bcrypt_1.default.compareSync(password, user.password)) {
             return res.status(400).json("Login Fail!");
         }
         const token = Token.createToken(user) || "";
         const refreshToken = Token.refreshToken(user, token);
-        yield User_1.default.updateOne({ email }, { refreshToken });
+        yield UserModel_1.default.updateOne({ email }, { refreshToken });
         return res.status(200).json({
             user: { id: user.id },
             token,
@@ -90,7 +89,7 @@ const RefreshToken = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         return res.sendStatus(401);
     }
     try {
-        const user = yield User_1.default.findById(userId);
+        const user = yield UserModel_1.default.findById(userId);
         if (!user || user.refreshToken !== refreshToken) {
             return res.sendStatus(403);
         }
@@ -110,7 +109,7 @@ const RefreshToken = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.RefreshToken = RefreshToken;
 const Logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.body.id;
-    yield User_1.default.updateOne({ _id: userId }, { refreshToken: "" }).then(() => {
+    yield UserModel_1.default.updateOne({ _id: userId }, { refreshToken: "" }).then(() => {
         res.sendStatus(200);
     });
 });

@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import routes from "./routes";
 import http from "http";
 import { handleSocket } from "./socket";
+import { PORT, URL_LOCALHOST, URL_PRODUCTION } from "./utils/types";
 
 dotenv.config();
 
@@ -12,12 +13,7 @@ const app = express();
 
 const server = http.createServer(app);
 
-const PORT = process.env.PORT || "3001";
-
-const allowedOrigins: string[] = [
-  "http://localhost:3000",
-  "https://chatapp-vo-huy-khoa.vercel.app",
-];
+const allowedOrigins: string[] = [URL_LOCALHOST, URL_PRODUCTION];
 
 const corsOptions: cors.CorsOptions = {
   origin: allowedOrigins,

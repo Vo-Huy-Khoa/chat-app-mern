@@ -14,12 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handleSocket = void 0;
 const socket_io_1 = require("socket.io");
-const User_1 = __importDefault(require("./models/User"));
+const UserModel_1 = __importDefault(require("./models/UserModel"));
 const messageController_1 = __importDefault(require("./controllers/messageController"));
+const types_1 = require("./utils/types");
 const listSocketID = [];
 const handleLogin = (socket, userId) => __awaiter(void 0, void 0, void 0, function* () {
     listSocketID.push(socket.id);
-    yield User_1.default.findOneAndUpdate({ _id: userId }, { socketID: socket.id });
+    yield UserModel_1.default.findOneAndUpdate({ _id: userId }, { socketID: socket.id });
     socket.emit("login_success", { userId, socketId: socket.id });
 });
 const handleLogout = (socket, userId) => __awaiter(void 0, void 0, void 0, function* () {
@@ -27,22 +28,19 @@ const handleLogout = (socket, userId) => __awaiter(void 0, void 0, void 0, funct
     if (index !== -1) {
         listSocketID.splice(index, 1);
     }
-    yield User_1.default.findOneAndUpdate({ _id: userId }, { socketID: "" });
+    yield UserModel_1.default.findOneAndUpdate({ _id: userId }, { socketID: "" });
     socket.emit("logout_success", { userId, socketId: socket.id });
 });
 const handleMessage = (socket, io, data) => __awaiter(void 0, void 0, void 0, function* () {
-    yield messageController_1.default.createMessage(data, io, socket, listSocketID);
+    yield messageController_1.default.create(data, io, socket, listSocketID);
 });
 const handleGetMessage = (socket, io, data) => __awaiter(void 0, void 0, void 0, function* () {
-    yield messageController_1.default.getMessage(data, io, socket, listSocketID);
+    yield messageController_1.default.find(data, io, socket, listSocketID);
 });
 const handleSocket = (server) => {
     const io = new socket_io_1.Server(server, {
         cors: {
-            origin: [
-                "http://localhost:3000",
-                "https://chatapp-vo-huy-khoa.vercel.app",
-            ],
+            origin: [types_1.URL_LOCALHOST, types_1.URL_PRODUCTION],
             credentials: true,
         },
     });

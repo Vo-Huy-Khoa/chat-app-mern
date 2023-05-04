@@ -1,6 +1,7 @@
 import axios from "axios";
+import { API_URL } from "../routes";
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const API_URLUrl = process.env.REACT_APP_API_URL;
 
 const getRefreshToken = async () => {
   const id = JSON.parse(sessionStorage.getItem("user") || "")?.id;
@@ -11,7 +12,7 @@ const getRefreshToken = async () => {
     token,
   };
   return await instanceAxios
-    .post("refreshToken", JSON.stringify(body))
+    .post(API_URL.REFRESH_TOKEN, JSON.stringify(body))
     .then((response) => {
       localStorage.removeItem("token");
       localStorage.removeItem("refreshToken");
@@ -21,7 +22,7 @@ const getRefreshToken = async () => {
 
 
 const instanceAxios = axios.create({
-  baseURL: apiUrl,
+  baseURL: API_URLUrl,
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",

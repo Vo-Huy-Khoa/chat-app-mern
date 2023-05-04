@@ -1,8 +1,9 @@
 import { Server } from "socket.io";
 import http from "http";
-import UserModel from "./models/User";
+import UserModel from "./models/UserModel";
 import messageController from "./controllers/messageController";
 import { Socket } from "socket.io";
+import { URL_LOCALHOST, URL_PRODUCTION } from "./utils/types";
 
 const listSocketID: any = [];
 
@@ -22,20 +23,17 @@ const handleLogout = async (socket: Socket, userId: string) => {
 };
 
 const handleMessage = async (socket: Socket, io: any, data: any) => {
-  await messageController.createMessage(data, io, socket, listSocketID);
+  await messageController.create(data, io, socket, listSocketID);
 };
 
 const handleGetMessage = async (socket: Socket, io: any, data: any) => {
-  await messageController.getMessage(data, io, socket, listSocketID);
+  await messageController.find(data, io, socket, listSocketID);
 };
 
 export const handleSocket = (server: http.Server) => {
   const io = new Server(server, {
     cors: {
-      origin: [
-        "http://localhost:3000",
-        "https://chatapp-vo-huy-khoa.vercel.app",
-      ],
+      origin: [URL_LOCALHOST, URL_PRODUCTION],
       credentials: true,
     },
   });

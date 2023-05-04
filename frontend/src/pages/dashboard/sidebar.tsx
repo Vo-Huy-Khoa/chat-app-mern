@@ -174,7 +174,7 @@ const Sidebar = () => {
         </HeadlessTippy>
         <div className="flex flex-col gap-8">
           <h3 className="text-white text-3xl">All User</h3>
-          <div className="flex row gap-5 overflow-x-auto">
+          <div className="flex row gap-4 overflow-x-auto">
             {listUser.map((user: IUser, index) => {
               return (
                 <AccountStatus
