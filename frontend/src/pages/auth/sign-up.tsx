@@ -4,6 +4,7 @@ import { handleRegister } from "../../services/auth";
 
 const Register = () => {
   const navigate = useNavigate();
+  const userNameRef = useRef<HTMLInputElement>(null);
   const fullNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -13,7 +14,8 @@ const Register = () => {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     const body = {
-      full_name: fullNameRef?.current?.value,
+      username: userNameRef?.current?.value,
+      fullname: fullNameRef?.current?.value,
       email: emailRef?.current?.value,
       password: passwordRef?.current?.value,
       avatar: avatar,
@@ -30,10 +32,10 @@ const Register = () => {
 
   return (
     <div className="flex justify-center items-center h-screen bg-primary text-white text-base w-full">
-      <div className="bg-black rounded-3xl p-10 flex flex-col gap-12  sm:gap-4 w-1/3 sm:w-full h-5/7 md:w-3/5">
+      <div className="bg-black rounded-3xl p-10 flex flex-col gap-10  sm:gap-4 w-1/3 sm:w-full h-5/7 md:w-3/5">
         <h1 className="text-center text-6xl font-bold">Register</h1>
         <form className="flex flex-col gap-10 md:gap-8" onSubmit={handleSubmit}>
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-8">
             <img
               className="w-40 rounded-full m-auto"
               src={avatar}
@@ -44,33 +46,37 @@ const Register = () => {
               onChange={(e) => {
                 setAvatar(e.currentTarget.value);
               }}
-              placeholder="URL avatar"
+              placeholder="URL avatar..."
               className="h-16 px-4 border-none rounded-2xl border-b-1 border-gray-400 text-black text-2xl"
               required
             />
           </div>
           <div className="flex flex-col gap-4">
-            <label htmlFor="full_name" className="text-2xl">
-              Full Name
-            </label>
+            <label className="text-2xl">User Name</label>
+            <input
+              ref={userNameRef}
+              type="text"
+              placeholder="Enter your user name..."
+              className="h-16 px-4 border-none rounded-2xl border-b-1 border-gray-400 text-black text-2xl"
+              required
+            />
+          </div>
+          <div className="flex flex-col gap-4">
+            <label className="text-2xl">Full Name</label>
             <input
               ref={fullNameRef}
               type="text"
-              id="full_name"
-              placeholder="Enter your name"
+              placeholder="Enter your full name..."
               className="h-16 px-4 border-none rounded-2xl border-b-1 border-gray-400 text-black text-2xl"
               required
             />
           </div>
           <div className="flex flex-col gap-4">
-            <label htmlFor="email" className="text-2xl">
-              Email
-            </label>
+            <label className="text-2xl">Email</label>
             <input
               ref={emailRef}
               type="text"
-              id="email"
-              placeholder="Enter your user name"
+              placeholder="Enter your email..."
               className="h-16 px-4 border-none rounded-2xl border-b-1 border-gray-400 text-black text-2xl"
               required
             />
@@ -82,8 +88,7 @@ const Register = () => {
             <input
               ref={passwordRef}
               type="password"
-              id="password"
-              placeholder="Enter your password"
+              placeholder="Enter your password..."
               className="h-16 px-4 border-none rounded-2xl border-b-1 border-gray-400 text-black text-2xl"
               required
             />
