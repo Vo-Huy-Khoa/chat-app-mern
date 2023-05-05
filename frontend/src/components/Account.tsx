@@ -1,7 +1,7 @@
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/reducers/rootReducer";
-import { setCurrentReceiver, setVisibility } from "../redux/actions";
+import { setCurrentReceiver, setVisibility} from "../redux/actions";
 import { useEffect, useRef } from "react";
 import socket from "../socket";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,7 +26,7 @@ const AccountItem = ({ ...rest }) => {
 
   return (
     <div
-      className="flex flex-row gap-4 items-center"
+      className="flex flex-row gap-4 items-center cursor-pointer"
       onClick={() => handleSubmit()}
     >
       <img
@@ -60,8 +60,8 @@ const AccountMessage = ({ ...rest }) => {
   }, []);
 
   const handleSubmit = () => {
-    dispatch(setCurrentReceiver(searchUser));
     dispatch(setVisibility("home"));
+    dispatch(setCurrentReceiver(searchUser));
     const data = {
       senderID: senderID,
       receiverID: receiverID,

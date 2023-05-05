@@ -14,7 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import { IMessage } from "../../types";
 import { getProfile } from "../../services";
-import { setCurrentUser, setSelectMessage } from "../../redux/actions";
+import { setCurrentUser, setSelectMessage, setVisibility } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
 
@@ -51,6 +51,13 @@ const Home = () => {
     emitMessage(":like");
   };
 
+  const handleReturnSidebar = ()=>{
+    dispatch(setVisibility("sidebar"));
+  }
+  const handleReturnNotification = ()=>{
+    dispatch(setVisibility("notification"));
+  }
+
   useEffect(() => {
     const handleNewMessage = (data: any = []) => {
       const sortedMessages = data.sort(
@@ -75,29 +82,27 @@ const Home = () => {
 
   return (
     <div className="h-full w-full">
-      <div className="fixed top-0 custom-w-home sm:w-full h-32 bg-primary flex flex-row items-center justify-around">
-        <div className=" w-3/5 flex flex-row 2xl:justify-end 2xl:items-end xl:justify-end xl:items-center sm:justify-around sm:items-center">
+      <div className="fixed top-0 custom-w-home sm:w-full h-32 bg-primary flex flex-row items-center justify-around sm:left-0 sm:px-2 sm:gap-2">
+        <div className=" w-3/5 flex flex-row 2xl:justify-end 2xl:items-end xl:justify-end xl:items-center sm:justify-around sm:items-center sm:gap-1 sm:w-4/6 sm:text-xl">
                   <FontAwesomeIcon
                     icon={faArrowLeft}
-                    className="w-12 h-12 text-white hidden sm:block"
+                    className="w-12 h-12 text-blue hidden sm:block"
+                    onClick={handleReturnSidebar}
                   />
                   {countMessage !== null && (
-                    <div className="flex flex-row gap-8 items-center">
-                      <Image src={currentReceiver?.avatar} width="50px" height="50px" />
-                        <p className=" text-white text-4xl">{currentReceiver?.fullname}</p>
+                    <div className="flex flex-row gap-8 items-center sm:gap-2">
+                      <img src={currentReceiver?.avatar} className="w-24 h-24 rounded-full object-cover sm:w-20 sm:h-20" alt={currentReceiver?.fullname} />
+                        <p className=" text-white text-4xl sm:text-3xl">{currentReceiver?.fullname}</p>
                     </div>
                   )}
-          
-                  <FontAwesomeIcon
-                    icon={faCircleInfo}
-                    className="w-12 h-12 text-white hidden sm:block"
-                  />
         </div>
 
-        <div className="w-2/5 flex flex-row justify-end gap-10  text-blue">
-              <FontAwesomeIcon icon={faPhone} className="w-10 h-10 cursor-pointer" />
-              <FontAwesomeIcon icon={faVideoCamera} className="w-10 h-10 cursor-pointer" />
-              <FontAwesomeIcon icon={faCircleInfo} className="w-10 h-10 cursor-pointer" />
+        <div className="w-2/5 flex flex-row justify-end gap-10  text-blue sm:gap-5 sm:w-1/5">
+              <FontAwesomeIcon icon={faPhone} className="w-10 h-10 cursor-pointer sm:w-9 sm:h-9" />
+              <FontAwesomeIcon icon={faVideoCamera} className="w-10 h-10 cursor-pointer sm:w-9 sm:h-9" />
+              <FontAwesomeIcon icon={faCircleInfo} className="w-10 h-10 cursor-pointer sm:w-9 sm:h-9"
+              onClick={handleReturnNotification}
+              />
           </div>
 
       </div>
@@ -157,7 +162,7 @@ const Home = () => {
       </div>
       (
       {countMessage !== null && (
-        <div className="fixed bottom-0 custom-w-home sm:w-full h-28 bg-primary flex flex-col justify-center">
+        <div className="fixed bottom-0 custom-w-home sm:w-full h-28 bg-primary flex flex-col justify-center sm:left-0">
           <div className="flex flex-row justify-between items-center gap-6 sm:gap-4 sm:px-4">
             <div className="flex flex-row gap-2 items-center">
               <FontAwesomeIcon
