@@ -18,7 +18,7 @@ The Real Time Chat Application is a messaging platform that enables users to com
 
 ## Demo
 
-<h3 name="demo">Live <a href="https://chatapp-vo-huy-khoa.vercel.app/">Chat App</a></h3>
+<h3 name="demo">Live: <a href="https://chatapp-vo-huy-khoa.vercel.app/">Website Chat App</a></h3>
 <!-- https://ezgif.com/ -->
 <br>
 <img src="https://user-images.githubusercontent.com/78124749/223079377-2d9426ef-b157-4b80-a6b7-facceff67f79.gif" width="100%" height="550" alt="chat app" />
@@ -28,7 +28,7 @@ The Real Time Chat Application is a messaging platform that enables users to com
 
 - Use Express to build the backend.
 - Use React to build the frontend.
-- Authenticates via username and password.
+- Authenticates via email and password.
 - Real-time communication between a client and a server using [Socket.io](https://github.com/socketio/socket.io).
 - Uses [MongoDB](https://github.com/mongodb/mongo), [Mongoose](https://github.com/Automattic/mongoose) for storing and querying data.
 
