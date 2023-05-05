@@ -20,8 +20,16 @@ The Real Time Chat Application is a messaging platform that enables users to com
 
 <h3 name="demo">Live: <a href="https://chatapp-vo-huy-khoa.vercel.app/">Website Chat App</a></h3>
 <!-- https://ezgif.com/ -->
-<br>
-<img src="https://user-images.githubusercontent.com/78124749/223079377-2d9426ef-b157-4b80-a6b7-facceff67f79.gif" width="100%" height="550" alt="chat app" />
+
+### Desktop:
+<img src="https://user-images.githubusercontent.com/78124749/236507292-1af40650-77af-409d-8a06-c34f4a8b5abb.gif" width="100%" height="550" alt="chat app" />
+
+### Smart Phone:
+
+<center>
+<img src="https://user-images.githubusercontent.com/78124749/236507416-35f4c5b1-8635-4322-914c-4a253efc650b.gif" width="50%" height="800" alt="chat app" />
+</center>
+
 <br>
 
 ## Features<a name="features"></a>
