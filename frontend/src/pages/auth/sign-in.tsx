@@ -1,9 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { handleLogin } from "../../services/auth";
+import { useDispatch } from "react-redux";
+import { setVisibility } from "../../redux/actions";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [validate, setValidate] = useState(false);
@@ -16,6 +19,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await handleLogin(body);
+      dispatch(setVisibility("home"));
       navigate("/dashboard/home");
     } catch (error) {
       console.error(error);

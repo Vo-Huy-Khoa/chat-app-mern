@@ -29,11 +29,11 @@ const Notification = () => {
           <FontAwesomeIcon
             icon={faArrowLeft}
             onClick={handleHome}
-            className="text-white text-4xl"
+            className="text-blue text-4xl"
           />
         )}
         {isVisible === "notification" && (
-          <FontAwesomeIcon icon={faBars} className="text-white text-4xl" />
+          <FontAwesomeIcon icon={faBars} className="text-blue text-4xl" />
         )}
       </div>
       <div className="text-white flex flex-col items-center gap-10">
