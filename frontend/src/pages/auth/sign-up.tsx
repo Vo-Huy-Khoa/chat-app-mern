@@ -47,7 +47,6 @@ const Register = () => {
               }}
               placeholder="URL avatar..."
               className="h-16 px-4 border-none rounded-2xl border-b-1 border-gray-400 text-black text-2xl"
-              required
             />
           </div>
           <div className="flex flex-col gap-4">
